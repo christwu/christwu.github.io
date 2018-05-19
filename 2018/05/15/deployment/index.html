@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Web应用部署注意事项 | Christ Wu&#39;s Blog | 一点微小的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Web">
+    <meta name="description" content="部署Web应用是一项细活：它的配置和操作通常涉及各方面，而且要求准确无误。平时注意配置管理，工作认真负责，方可保证应用正常上线运行。">
+<meta name="keywords" content="Web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web应用部署注意事项">
+<meta property="og:url" content="https://christwu.github.io/2018/05/15/deployment/index.html">
+<meta property="og:site_name" content="Christ Wu&#39;s Blog">
+<meta property="og:description" content="部署Web应用是一项细活：它的配置和操作通常涉及各方面，而且要求准确无误。平时注意配置管理，工作认真负责，方可保证应用正常上线运行。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-05-19T12:27:20.803Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web应用部署注意事项">
+<meta name="twitter:description" content="部署Web应用是一项细活：它的配置和操作通常涉及各方面，而且要求准确无误。平时注意配置管理，工作认真负责，方可保证应用正常上线运行。">
+    
+        <link rel="alternate" type="application/atom+xml" title="Christ Wu&#39;s Blog" href="/rss.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/myavatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Christ Wu</h5>
+          <a href="mailto:" class="mail"></a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                存档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/christwu" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                GitHub
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/rss.xml" target="_blank" >
+                <i class="icon icon-lg icon-rss"></i>
+                RSS
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Web应用部署注意事项</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Web应用部署注意事项</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-05-14T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2018-05-15
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/经验/">经验</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#部署之前"><span class="post-toc-number">1.</span> <span class="post-toc-text">部署之前</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#开发时"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">开发时</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#上线前"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">上线前</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#部署中"><span class="post-toc-number">2.</span> <span class="post-toc-text">部署中</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据库"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">数据库</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#应用服务器"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">应用服务器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#负载均衡"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">负载均衡</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#部署之后"><span class="post-toc-number">3.</span> <span class="post-toc-text">部署之后</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-deployment"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Web应用部署注意事项</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-05-15 00:00:00" datetime="2018-05-14T16:00:00.000Z"  itemprop="datePublished">2018-05-15</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/经验/">经验</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>部署Web应用是一项细活：它的配置和操作通常涉及各方面，而且要求准确无误。平时注意配置管理，工作认真负责，方可保证应用正常上线运行。<br><a id="more"></a> </p>
+<h1 id="部署之前"><a href="#部署之前" class="headerlink" title="部署之前"></a>部署之前</h1><h2 id="开发时"><a href="#开发时" class="headerlink" title="开发时"></a>开发时</h2><p>早在开发阶段就应当注意整理和维护应用配置，包括但不限于：</p>
+<ol>
+<li>各数据源的配置（地址、端口、实例、用户名、密码）与涉及的配置文件；</li>
+<li>外部接口的地址（IP、端口、路径等）与涉及的配置文件；</li>
+<li>依赖的外部程序（例如ImageMagick等）；</li>
+<li>应用中开发模式/生产模式的切换开关（如果有的话）；</li>
+<li>涉及文件操作的目录路径（如果需要在应用程序目录中读写文件的话）；</li>
+<li>准确的数据库表结构（字段名、类型、长度、Nullable）、索引、序列（如使用Oracle等数据库）、触发器、存储过程、函数以及字典数据内容。在维护数据库时应注意同步数据库设计文档、开发库、测试库，系统部署时还要同步维护生产库。</li>
+</ol>
+<p>开发过程中，如无特殊需求，应避免将应用地址、端口或路径写死，否则的话，一旦需要更换地址或路径就会遇到很大的麻烦。</p>
+<h2 id="上线前"><a href="#上线前" class="headerlink" title="上线前"></a>上线前</h2><p>准备部署之前，应完整识别出开发/测试环境与生产环境配置的差异，避免疏漏。除此之外，强烈建议对各服务器资源和部署步骤进行记录，例如：</p>
+<ol>
+<li>各服务器内网IP地址、公网IP地址、操作系统、CPU、内存、硬盘空间；</li>
+<li>各服务器用途（数据库/应用节点/负载均衡等）；</li>
+<li>各服务器主要应用及版本；</li>
+<li>各服务器登录方式；</li>
+<li>应用或数据部署路径；</li>
+<li>系统设置，包括防火墙、参数设定等。</li>
+</ol>
+<p>操作生产环境之前，最好找个类似的测试环境进行测试，了解如何处理意外情况（例如断电、死机、系统慢等）。</p>
+<p>如果预计需要频繁部署，建议写部署脚本。</p>
+<h1 id="部署中"><a href="#部署中" class="headerlink" title="部署中"></a>部署中</h1><h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><p>部署数据库时应注意：</p>
+<ol>
+<li>确保数据库软件已正确安装和启动；</li>
+<li>表空间、账号密码正确；</li>
+<li>字符集配置正确；</li>
+<li>正确建立表结构、索引、序列、触发器、存储过程、函数等；对于升级，正确将旧结构修改成新结构；</li>
+<li>正确初始化字典数据；</li>
+<li>根据实际情况调整连接数和 Max open files 等设置。</li>
+</ol>
+<h2 id="应用服务器"><a href="#应用服务器" class="headerlink" title="应用服务器"></a>应用服务器</h2><p>部署应用时需要注意：</p>
+<ol>
+<li>各软件（如Apache、PHP和应用所需外部程序）已正确安装，环境变量、端口、证书（HTTPS）正确配置；</li>
+<li>程序代码或编译后文件已放到正确位置；</li>
+<li>如果应用不是以root身份启动，那么程序文件已设置正确所有者；</li>
+<li>应用程序配置、数据源已按生产环境进行修改；</li>
+<li>系统防火墙和相关外部接口已正确配置；</li>
+<li>如果系统规模较大，Max open files 数量（/etc/security/limits.conf）和 fs.file-max（/etc/sysctl.conf）已进行调整；</li>
+<li>了解如何取用后台日志。</li>
+</ol>
+<h2 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h2><ol>
+<li>注意各节点应配置好；</li>
+<li>注意负载均衡算法的选择；</li>
+<li>注意会话保持的设置。</li>
+</ol>
+<h1 id="部署之后"><a href="#部署之后" class="headerlink" title="部署之后"></a>部署之后</h1><p>部署时或部署完成后，仍然要对资源和使用情况进行整理总结，以便后续运维。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-05-19T12:27:20.803Z" itemprop="dateUpdated">2018-05-19 20:27:20</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://christwu.github.io">
+            <img src="/img/myavatar.jpg" alt="Christ Wu">
+            Christ Wu
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://christwu.github.io/2018/05/15/deployment/&title=《Web应用部署注意事项》 — Christ Wu's Blog&pic=https://christwu.github.io/img/myavatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://christwu.github.io/2018/05/15/deployment/&title=《Web应用部署注意事项》 — Christ Wu's Blog&source=部署Web应用是一项细活：它的配置和操作通常涉及各方面，而且要求准确无误。平时注意配置管理，工作认真负责，方可保证应用正常上线运行。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://christwu.github.io/2018/05/15/deployment/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Web应用部署注意事项》 — Christ Wu's Blog&url=https://christwu.github.io/2018/05/15/deployment/&via=https://christwu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://christwu.github.io/2018/05/15/deployment/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_config = function () {
+        this.page.url = 'https://christwu.github.io/2018/05/15/deployment/';
+        this.page.identifier = '/2018/05/15/deployment/';
+    };
+    var disqus_shortname = 'christ-wus-blog';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/rss.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Christ Wu &copy; 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://christwu.github.io/2018/05/15/deployment/&title=《Web应用部署注意事项》 — Christ Wu's Blog&pic=https://christwu.github.io/img/myavatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://christwu.github.io/2018/05/15/deployment/&title=《Web应用部署注意事项》 — Christ Wu's Blog&source=部署Web应用是一项细活：它的配置和操作通常涉及各方面，而且要求准确无误。平时注意配置管理，工作认真负责，方可保证应用正常上线运行。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://christwu.github.io/2018/05/15/deployment/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Web应用部署注意事项》 — Christ Wu's Blog&url=https://christwu.github.io/2018/05/15/deployment/&via=https://christwu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://christwu.github.io/2018/05/15/deployment/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://christwu.github.io/2018/05/15/deployment/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
