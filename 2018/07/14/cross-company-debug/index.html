@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>跨公司接口联调 | Christ Wu&#39;s Blog | 一点微小的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Web,内网穿透">
+    <meta name="description" content="记录一下在联调前后需要考虑的事情，以及内网穿透的操作方法。">
+<meta name="keywords" content="Web,内网穿透">
+<meta property="og:type" content="article">
+<meta property="og:title" content="跨公司接口联调">
+<meta property="og:url" content="https://christwu.github.io/2018/07/14/cross-company-debug/index.html">
+<meta property="og:site_name" content="Christ Wu&#39;s Blog">
+<meta property="og:description" content="记录一下在联调前后需要考虑的事情，以及内网穿透的操作方法。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://christwu.github.io/img/cross-company-debug/putty-tunnel.png">
+<meta property="og:updated_time" content="2018-07-14T06:27:15.823Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="跨公司接口联调">
+<meta name="twitter:description" content="记录一下在联调前后需要考虑的事情，以及内网穿透的操作方法。">
+<meta name="twitter:image" content="https://christwu.github.io/img/cross-company-debug/putty-tunnel.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Christ Wu&#39;s Blog" href="/rss.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/myavatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Christ Wu</h5>
+          <a href="mailto:" class="mail"></a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                存档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/christwu" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                GitHub
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/rss.xml" target="_blank" >
+                <i class="icon icon-lg icon-rss"></i>
+                RSS
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">跨公司接口联调</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">跨公司接口联调</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-07-13T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2018-07-14
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/经验/">经验</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#设计"><span class="post-toc-number">1.</span> <span class="post-toc-text">设计</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#执行"><span class="post-toc-number">2.</span> <span class="post-toc-text">执行</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#补充技巧：内网穿透"><span class="post-toc-number">3.</span> <span class="post-toc-text">补充技巧：内网穿透</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-cross-company-debug"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">跨公司接口联调</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-07-14 00:00:00" datetime="2018-07-13T16:00:00.000Z"  itemprop="datePublished">2018-07-14</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/经验/">经验</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>记录一下在联调前后需要考虑的事情，以及内网穿透的操作方法。<br><a id="more"></a> </p>
+<h1 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h1><ol>
+<li>确保双方对于每个函数、每个参数的理解是一致的。特别是业务系统，对方对业务场景与业务的理解可能与我们很不一样；</li>
+<li>搞清楚接口调用时机、频率，估计一下接口调用数据规模，避免因为频率不当或者数据规模太大而出问题；</li>
+<li>有异常处理机制，能够正确处理目标服务器宕机、返回404、长时间不返回等情况。接口恢复后，故障期间产生的数据能够正确消化掉；</li>
+<li>检查输入数据是否合法；</li>
+<li>对于有状态的数据，约定好重复发送请求的后果。</li>
+</ol>
+<h1 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h1><p><strong>务必要留证据！</strong>有据可查，可以尽量避免承担无谓责任，尽量避免扯皮的情况。具体而言：</p>
+<ol>
+<li>记录哪天、与哪个人、调试了什么东西、结果如何；</li>
+<li>各接口函数要输出日志，记录时间、原始数据和一些关键数据；</li>
+<li>重要内容留截图。</li>
+</ol>
+<h1 id="补充技巧：内网穿透"><a href="#补充技巧：内网穿透" class="headerlink" title="补充技巧：内网穿透"></a>补充技巧：内网穿透</h1><p>理想情况下应该建立一个双方都便于访问的开发测试区。如果没有条件或者来不及准备，而且双方公司都能访问互联网，可以通过内网穿透的方法把本地应用映射到公网上。</p>
+<p>操作之前去搞一台VPS。我个人推荐<a href="https://vultr.com" target="_blank" rel="noopener">Vultr</a>，因为国外不需要实名认证，而且Vultr按使用时间计费，可以随时买随时扔。对于内网穿透而言，最低配置的VPS足矣。</p>
+<p>以Ubuntu系统为例，使用之前先在公司Ping一下，Ping不通说明被墙了，销毁之后再买一台即可。没问题的话，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+<p>将其中的<code>GatewayPorts no</code>改成<code>yes</code>，没找到的话就在文件末尾追加一行，保存。然后</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart sshd</span><br></pre></td></tr></table></figure>
+<p>准备工作就做好了。</p>
+<p>联调时先去下载PuTTY，启动，在里面输入服务器地址和端口（默认22），并且按下图进行设置</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/cross-company-debug/putty-tunnel.png" alt="PuTTY设置" title="">
+                </div>
+                <div class="image-caption">PuTTY设置</div>
+            </figure>
+<p>不要忘记点Add按钮。假如本机是<code>http://172.18.106.3:8080</code>，服务器IP是198.13.60.108，你选择的端口是8080，那么登录成功后就可以通过<code>http://198.13.60.108:8080</code>来访问自己的应用了。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-07-14T06:27:15.823Z" itemprop="dateUpdated">2018-07-14 14:27:15</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://christwu.github.io">
+            <img src="/img/myavatar.jpg" alt="Christ Wu">
+            Christ Wu
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/内网穿透/">内网穿透</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://christwu.github.io/2018/07/14/cross-company-debug/&title=《跨公司接口联调》 — Christ Wu's Blog&pic=https://christwu.github.io/img/myavatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://christwu.github.io/2018/07/14/cross-company-debug/&title=《跨公司接口联调》 — Christ Wu's Blog&source=记录一下在联调前后需要考虑的事情，以及内网穿透的操作方法。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://christwu.github.io/2018/07/14/cross-company-debug/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《跨公司接口联调》 — Christ Wu's Blog&url=https://christwu.github.io/2018/07/14/cross-company-debug/&via=https://christwu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://christwu.github.io/2018/07/14/cross-company-debug/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/05/15/deployment/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Web应用部署注意事项</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_config = function () {
+        this.page.url = 'https://christwu.github.io/2018/07/14/cross-company-debug/';
+        this.page.identifier = '/2018/07/14/cross-company-debug/';
+    };
+    var disqus_shortname = 'christ-wus-blog';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/rss.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Christ Wu &copy; 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://christwu.github.io/2018/07/14/cross-company-debug/&title=《跨公司接口联调》 — Christ Wu's Blog&pic=https://christwu.github.io/img/myavatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://christwu.github.io/2018/07/14/cross-company-debug/&title=《跨公司接口联调》 — Christ Wu's Blog&source=记录一下在联调前后需要考虑的事情，以及内网穿透的操作方法。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://christwu.github.io/2018/07/14/cross-company-debug/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《跨公司接口联调》 — Christ Wu's Blog&url=https://christwu.github.io/2018/07/14/cross-company-debug/&via=https://christwu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://christwu.github.io/2018/07/14/cross-company-debug/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://christwu.github.io/2018/07/14/cross-company-debug/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
