@@ -129,7 +129,7 @@ theme_config:
   avatar_link: /
 
   # email
-  email: ''
+  email: 'me@plusnan.me'
 
   # 设置 Android L Chrome 浏览器状态栏颜色
   color: '#3F51B5'
