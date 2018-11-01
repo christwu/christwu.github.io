@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Weblogic踩坑记录 | InfNaN Blog | 一点微小的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Weblogic,坑">
+    <meta name="description" content="本文记录我在部署Weblogic时遇到的各种坑。其中JDK为1.6，Weblogic版本10.3.6。">
+<meta name="keywords" content="Weblogic,坑">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Weblogic踩坑记录">
+<meta property="og:url" content="https://infnan.github.io/2018/11/02/weblogic-caution/index.html">
+<meta property="og:site_name" content="InfNaN Blog">
+<meta property="og:description" content="本文记录我在部署Weblogic时遇到的各种坑。其中JDK为1.6，Weblogic版本10.3.6。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-11-01T18:41:37.031Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Weblogic踩坑记录">
+<meta name="twitter:description" content="本文记录我在部署Weblogic时遇到的各种坑。其中JDK为1.6，Weblogic版本10.3.6。">
+    
+        <link rel="alternate" type="application/atom+xml" title="InfNaN Blog" href="/rss.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/myavatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">InfNaN</h5>
+          <a href="mailto:me@plusnan.me" title="me@plusnan.me" class="mail">me@plusnan.me</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                存档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/infnan" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                GitHub
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/rss.xml" target="_blank" >
+                <i class="icon icon-lg icon-rss"></i>
+                RSS
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Weblogic踩坑记录</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Weblogic踩坑记录</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-11-01T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2018-11-02
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/经验/">经验</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#开发"><span class="post-toc-number">1.</span> <span class="post-toc-text">开发</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#保持版本一致"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">保持版本一致</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#路径"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">路径</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据源"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">数据源</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Session"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">Session</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#部署"><span class="post-toc-number">2.</span> <span class="post-toc-text">部署</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#防火墙"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">防火墙</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#修改java-security"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">修改java.security</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#无法通过控制台启动服务器"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">无法通过控制台启动服务器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#组建集群"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">组建集群</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一些报错与处理"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">一些报错与处理</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#运维"><span class="post-toc-number">3.</span> <span class="post-toc-text">运维</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#升级"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">升级</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#重启"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">重启</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#打补丁"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">打补丁</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#搬家"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">搬家</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-weblogic-caution"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Weblogic踩坑记录</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-11-02 00:00:00" datetime="2018-11-01T16:00:00.000Z"  itemprop="datePublished">2018-11-02</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/经验/">经验</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>本文记录我在部署Weblogic时遇到的各种坑。其中JDK为1.6，Weblogic版本10.3.6。<br><a id="more"></a></p>
+<style>
+#post-content table {
+    word-break: break-all;
+}
+</style>
+
+<h1 id="开发"><a href="#开发" class="headerlink" title="开发"></a>开发</h1><h2 id="保持版本一致"><a href="#保持版本一致" class="headerlink" title="保持版本一致"></a>保持版本一致</h2><p>开发环境、测试环境和生产环境的JDK与中间件版本应该保持一致，至少测试环境和生产环境要一致。开发时用某个版本JDK和Tomcat，部署到生产环境时用另一个版本的JDK和Weblogic，这样很容易遭遇意外。</p>
+<h2 id="路径"><a href="#路径" class="headerlink" title="路径"></a>路径</h2><p>假设程序部署在服务器的/home/weblogic/project中，Weblogic安装在/u01/Oracle/Middleware下面，而且程序会动态生成文件，实际上文件会放在类似于/u01/Oracle/Middleware/user_projects/domains/base_domain/servers/app_server1/stage/project的对应位置中。</p>
+<h2 id="数据源"><a href="#数据源" class="headerlink" title="数据源"></a>数据源</h2><p>假如JNDI数据源名称为dataSource，在Tomcat中运行时，需要写成java:comp/env/dataSource，但是在Weblogic中运行时要把“java:comp/env/”去掉，直接写成dataSource。</p>
+<h2 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h2><p>生产环境通常会架设集群，通过负载均衡进行访问，这样的话很可能存在串Session的问题，例如登录成功之后稍微做点操作会话就丢失了。因为平时开发不会去使用负载均衡，所以可能注意不到这个问题。</p>
+<p>部署时要注意，要么在Weblogic上面配置共享Session，要么注意负载均衡策略，同一会话时应当将流量分配到同一服务器上面。</p>
+<h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><h2 id="防火墙"><a href="#防火墙" class="headerlink" title="防火墙"></a>防火墙</h2><p>默认情况下，管理控制台的端口是7001，应用是7003，节点管理器是5556，初次部署时需要注意让防火墙放行这三个端口。</p>
+<p>为了安全，需要仔细控制防火墙的放行范围，不要让7001和5556暴露到互联网上面。另外不要把应用部署到AdminServer上面，否则封锁7001端口之后应用就无法访问了。</p>
+<h2 id="修改java-security"><a href="#修改java-security" class="headerlink" title="修改java.security"></a>修改java.security</h2><p>Java 6存在一个关于随机数的bug，如果不Hack，Weblogic建域和启动时需要等待很长时间，因此建议装完Java之后立刻去修改java.security。</p>
+<p>假设JDK安装在/opt/jdk1.6.0_145下面，则需要修改/opt/jdk1.6.0_145/jre/lib/security/java.security文件，找到</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">securerandom.source=file:/dev/urandom</span><br></pre></td></tr></table></figure>
+<p>修改成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">securerandom.source=file:/dev/./urandom</span><br></pre></td></tr></table></figure>
+<p>之后建域和起停之类操作就不需要再等待十多分钟了。</p>
+<h2 id="无法通过控制台启动服务器"><a href="#无法通过控制台启动服务器" class="headerlink" title="无法通过控制台启动服务器"></a>无法通过控制台启动服务器</h2><p>如果Weblogic各节点已正确设置，各服务器的防火墙已经开放5556端口，Nodemanager也已经启动，但是仍然无法通过控制台启动节点，提示“不兼容的状态”，而且在Nodemanager的输出中出现“javax.net.ssl.SSLKeyException: [Security:090482]BAD_CERTIFICATE alert was received from …”，那么需要在每个服务器上面设置一下证书：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">. <span class="variable">$WL_HOME</span>/server/bin/setWLSEnv.sh</span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$WL_HOME</span>/server/lib</span><br><span class="line">java utils.CertGen -keyfilepass DemoIdentityPassPhrase -certfile newcert -keyfile newkey</span><br><span class="line">java utils.ImportPrivateKey -keystore DemoIdentity.jks -storepass DemoIdentityKeyStorePassPhrase -keyfile newkey.pem -keyfilepass DemoIdentityPassPhrase -certfile newcert.pem -<span class="built_in">alias</span> demoidentity</span><br></pre></td></tr></table></figure>
+<h2 id="组建集群"><a href="#组建集群" class="headerlink" title="组建集群"></a>组建集群</h2><p>我们并不需要每一台机器都执行一遍建域之类的操作。只要在一台机器上面把Weblogic的各种参数都配置好，然后将Middleware目录打包，复制到其他各服务器上面解压就差不多了。</p>
+<p>解压完成后，前文提到的“Nodemanager证书”还是要在每台服务器上操作一遍。</p>
+<h2 id="一些报错与处理"><a href="#一些报错与处理" class="headerlink" title="一些报错与处理"></a>一些报错与处理</h2><p>以下问题可以通过修改Weblogic启动参数解决。</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>错误信息</th>
+<th>启动参数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>生成图片</td>
+<td>java.awt.HeadlessException</td>
+<td>-Djava.awt.headless=true</td>
+</tr>
+<tr>
+<td>访问HTTPS网站</td>
+<td>javax.net.ssl.SSLHandshakeException: sun.security.validator.ValidatorException: No trusted certificate found exception</td>
+<td>-DUseSunHttpHandler=true</td>
+</tr>
+<tr>
+<td>Apache CXF提供WebService服务</td>
+<td>javax.xml.ws.soap.SOAPFaultException: Cannot create a secure XMLInputFactory</td>
+<td>-Dorg.apache.cxf.stax.allowInsecureParser=1</td>
+</tr>
+</tbody>
+</table>
+<h1 id="运维"><a href="#运维" class="headerlink" title="运维"></a>运维</h1><h2 id="升级"><a href="#升级" class="headerlink" title="升级"></a>升级</h2><p>改完文件之后要在控制台的“部署”里面进行更新，否则内容不会生效。改静态文件也是。</p>
+<p>每次更新的时候，JVM会把Class信息保存到内存的永久保留区域中。如果Weblogic启动参数中的-XX:MaxPermSize比较小，那么更新几次可能就会卡死挂掉，而且应用日志会显示“java.lang.OutOfMemoryError: PermGen space”。在这种情况下，把Weblogic里面的服务器停掉然后再启动一次就好了。</p>
+<p>在开始更新到更新结束，应用会出现短暂的中断，因此要注意选择合适的时间进行操作。</p>
+<h2 id="重启"><a href="#重启" class="headerlink" title="重启"></a>重启</h2><p>在Weblogic控制台重启服务的时候不要点完“启动”就不管了，一定要等到状态显示为“RUNNING”之后再闪人。如果变成“ADMIN”，那么可能是有报错，若确认不耽误事那么在控制台点一下“恢复”就好了。</p>
+<h2 id="打补丁"><a href="#打补丁" class="headerlink" title="打补丁"></a>打补丁</h2><p>安装补丁之前，需要检查bsu.sh文件（例如/opt/Oracle/Middleware/utils/bsu/bsu.sh），将其中的最大内存Xmx改大些，例如-Xmx2048m，否则打补丁时可能会报java.lang.OutOfMemoryError，耽误时间。</p>
+<p>打补丁可以随时操作，但是打完之后需要重启Weblogic才能生效。</p>
+<h2 id="搬家"><a href="#搬家" class="headerlink" title="搬家"></a>搬家</h2><p>尽量不要搬家，因为Weblogic安装和建域之后会产生很多已经写好了路径的配置文件。即使将它们全部改成新路径，Middleware目录中还有个registry.dat，此文件记录了Weblogic的安装情况而且已经加密，如果贸然搬家会在升级等方面遇到麻烦。实在需要的话还是建立软链接比较好。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-11-01T18:41:37.031Z" itemprop="dateUpdated">2018-11-02 02:41:37</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://infnan.github.io">
+            <img src="/img/myavatar.jpg" alt="InfNaN">
+            InfNaN
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Weblogic/">Weblogic</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/坑/">坑</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://infnan.github.io/2018/11/02/weblogic-caution/&title=《Weblogic踩坑记录》 — InfNaN Blog&pic=https://infnan.github.io/img/myavatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://infnan.github.io/2018/11/02/weblogic-caution/&title=《Weblogic踩坑记录》 — InfNaN Blog&source=本文记录我在部署Weblogic时遇到的各种坑。其中JDK为1.6，Weblogic版本10.3.6。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://infnan.github.io/2018/11/02/weblogic-caution/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Weblogic踩坑记录》 — InfNaN Blog&url=https://infnan.github.io/2018/11/02/weblogic-caution/&via=https://infnan.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://infnan.github.io/2018/11/02/weblogic-caution/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/09/30/db-maintain/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Oracle维护语句记录</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_config = function () {
+        this.page.url = 'https://infnan.github.io/2018/11/02/weblogic-caution/';
+        this.page.identifier = '/2018/11/02/weblogic-caution/';
+    };
+    var disqus_shortname = 'christ-wus-blog';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/rss.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>InfNaN &copy; 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://infnan.github.io/2018/11/02/weblogic-caution/&title=《Weblogic踩坑记录》 — InfNaN Blog&pic=https://infnan.github.io/img/myavatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://infnan.github.io/2018/11/02/weblogic-caution/&title=《Weblogic踩坑记录》 — InfNaN Blog&source=本文记录我在部署Weblogic时遇到的各种坑。其中JDK为1.6，Weblogic版本10.3.6。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://infnan.github.io/2018/11/02/weblogic-caution/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Weblogic踩坑记录》 — InfNaN Blog&url=https://infnan.github.io/2018/11/02/weblogic-caution/&via=https://infnan.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://infnan.github.io/2018/11/02/weblogic-caution/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACL0lEQVR42u3ay27FMAhF0fz/T6dSR5Wq6+wDSdXg7VF1lYdXBhQwx4HX+b2OcP2+a/3L+WMdTywZMmS8lnEu1/oFn1756QkEsP79I1WGDBkbMNbhkr8mDcTrj0X2JkOGDBk8NVyTamFdhgwZMmqMTvCtlbUyZMiQwUNh5651yP7TWlyGDBkvZPTLzuf+fvB8Q4YMGS9hnOGqpYm1gBvsSoYMGaMZZCs8BPONkt/T58iQIWM2gzS/OmGXBFb+TISRIUPGUAZP7HjzK23ApcecMmTI2IGRpnTr8JeG7Ns+mQwZMkYzOslfGmTTMjX+KDJkyBjK6Df9+cFAmiySVFWGDBn7MHiY65SptUCM0lAZMmRswKi9jB921obPbkgNZciQMYLR6Vnxe4PXh6FfhgwZuzHSYjVt0t07bCFDhox9GLxY5WGxFo7JvRcZrgwZMoYySNuLN9o4Pi2bSYCWIUPGbEZa6d6V/NXCN/pwMmTIGMpIB8IIZp0a8lYauV6GDBlTGbxZz+NbZ/yCXyNDhoydGZ1tpQeZBBOPhcmQIWMcI22ipSVrrfVPWnWolJUhQ8YIRm2cgr+el7K1QH/xf0OGDBkjGHcVq2kTjbfq0tRThgwZUxmd1n9rkKs0WoFmRmTIkDGUkQ5e8KStU9wGV8qQIUMGzijT8JrmrRepoQwZMmQ0RsH6B5MXz5EhQ8YGjFoR20/s0vD6SLtNhgwZ/55ROxiojWt0tt46vJQhQ8ZbGV+nPjzihJwpfAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
