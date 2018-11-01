@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Christ Wu's Blog
+title: InfNaN Blog
 subtitle: 一点微小的博客
 description: 一点微小的博客
 keywords:
-author: Christ Wu
+author: InfNaN
 language: zh-CN
 timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://christwu.github.io
+url: https://infnan.github.io
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -116,7 +116,7 @@ theme_config:
       url: /categories
     github:
       text: GitHub
-      url: https://github.com/christwu
+      url: https://github.com/infnan
       target: _blank
     rss:
       text: RSS
@@ -181,5 +181,5 @@ theme_config:
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:christwu/christwu.github.io.git
+  repo: git@github.com:infnan/infnan.github.io.git
   branch: master
