@@ -3,8 +3,8 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: InfNaN Blog
-subtitle: 一点微小的博客
+title: 一点微小的博客
+subtitle: 走向女装之路
 description: 一点微小的博客
 keywords:
 author: InfNaN
@@ -13,7 +13,7 @@ timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://infnan.github.io
+url: https://plusnan.me
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
