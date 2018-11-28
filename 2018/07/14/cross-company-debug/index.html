@@ -14,29 +14,29 @@
     
     
     
-    <title>跨公司接口联调 | InfNaN Blog | 一点微小的博客</title>
+    <title>接口设计经验 | 一点微小的博客 | 走向女装之路</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
     <meta name="keywords" content="Web,内网穿透">
-    <meta name="description" content="记录一下在联调前后需要考虑的事情，以及内网穿透的操作方法。">
+    <meta name="description" content="不同系统之间存取数据，技术上最简单的方式就是提供接口。既然是不同系统，那么大家很可能不是同一家单位，需要留意的事情也会更多。本文记录了一些接口设计、联调前后需要考虑的事情。总体上来讲，我们既要保证准确实现功能，又要留个心眼，保护自己的利益，避免让自己吃亏。">
 <meta name="keywords" content="Web,内网穿透">
 <meta property="og:type" content="article">
-<meta property="og:title" content="跨公司接口联调">
-<meta property="og:url" content="https://infnan.github.io/2018/07/14/cross-company-debug/index.html">
-<meta property="og:site_name" content="InfNaN Blog">
-<meta property="og:description" content="记录一下在联调前后需要考虑的事情，以及内网穿透的操作方法。">
+<meta property="og:title" content="接口设计经验">
+<meta property="og:url" content="https://plusnan.me/2018/07/14/cross-company-debug/index.html">
+<meta property="og:site_name" content="一点微小的博客">
+<meta property="og:description" content="不同系统之间存取数据，技术上最简单的方式就是提供接口。既然是不同系统，那么大家很可能不是同一家单位，需要留意的事情也会更多。本文记录了一些接口设计、联调前后需要考虑的事情。总体上来讲，我们既要保证准确实现功能，又要留个心眼，保护自己的利益，避免让自己吃亏。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://infnan.github.io/img/cross-company-debug/putty-tunnel.png">
-<meta property="og:updated_time" content="2018-09-01T17:59:30.918Z">
+<meta property="og:image" content="https://plusnan.me/img/cross-company-debug/putty-tunnel.png">
+<meta property="og:updated_time" content="2018-11-28T03:52:53.998Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="跨公司接口联调">
-<meta name="twitter:description" content="记录一下在联调前后需要考虑的事情，以及内网穿透的操作方法。">
-<meta name="twitter:image" content="https://infnan.github.io/img/cross-company-debug/putty-tunnel.png">
+<meta name="twitter:title" content="接口设计经验">
+<meta name="twitter:description" content="不同系统之间存取数据，技术上最简单的方式就是提供接口。既然是不同系统，那么大家很可能不是同一家单位，需要留意的事情也会更多。本文记录了一些接口设计、联调前后需要考虑的事情。总体上来讲，我们既要保证准确实现功能，又要留个心眼，保护自己的利益，避免让自己吃亏。">
+<meta name="twitter:image" content="https://plusnan.me/img/cross-company-debug/putty-tunnel.png">
     
-        <link rel="alternate" type="application/atom+xml" title="InfNaN Blog" href="/rss.xml">
+        <link rel="alternate" type="application/atom+xml" title="一点微小的博客" href="/rss.xml">
     
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="stylesheet" href="/css/style.css?v=1.7.2">
@@ -122,7 +122,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">跨公司接口联调</div>
+        <div class="flex-col header-title ellipsis">接口设计经验</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -144,7 +144,7 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">跨公司接口联调</h1>
+        <h1 class="title">接口设计经验</h1>
         <h5 class="subtitle">
             
                 <time datetime="2018-07-13T16:00:00.000Z" itemprop="datePublished" class="page-time">
@@ -169,7 +169,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#设计"><span class="post-toc-number">1.</span> <span class="post-toc-text">设计</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#执行"><span class="post-toc-number">2.</span> <span class="post-toc-text">执行</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#补充技巧：内网穿透"><span class="post-toc-number">3.</span> <span class="post-toc-text">补充技巧：内网穿透</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#设计"><span class="post-toc-number">1.</span> <span class="post-toc-text">设计</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#联调"><span class="post-toc-number">2.</span> <span class="post-toc-text">联调</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#运行"><span class="post-toc-number">3.</span> <span class="post-toc-text">运行</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#补充技巧：内网穿透"><span class="post-toc-number">4.</span> <span class="post-toc-text">补充技巧：内网穿透</span></a></li></ol>
         </nav>
     </aside>
 
@@ -178,7 +178,7 @@
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">跨公司接口联调</h1>
+        <h1 class="post-card-title">接口设计经验</h1>
         <div class="post-meta">
             <time class="post-time" title="2018-07-14 00:00:00" datetime="2018-07-13T16:00:00.000Z"  itemprop="datePublished">2018-07-14</time>
 
@@ -191,22 +191,34 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p>记录一下在联调前后需要考虑的事情，以及内网穿透的操作方法。<br><a id="more"></a> </p>
-<h1 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h1><ol>
-<li>确保双方对于每个函数、每个参数的理解是一致的。特别是业务系统，对方对业务场景与业务的理解可能与我们很不一样；</li>
+            <p>不同系统之间存取数据，技术上最简单的方式就是提供接口。既然是不同系统，那么大家很可能不是同一家单位，需要留意的事情也会更多。本文记录了一些接口设计、联调前后需要考虑的事情。总体上来讲，我们既要保证准确实现功能，又要留个心眼，保护自己的利益，避免让自己吃亏。<br><a id="more"></a> </p>
+<h1 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h1><p>虽然接口的原理很简单，开发工作量可能也比其他开发工作少很多，但是需要留意，在业务问题上“我这样想”不代表“对方也会这样想”，并且开发时的沟通成本往往会比较高，上线之后一旦出现故障可能还会互相踢皮球，因此也不能把设计工作想象得太简单。</p>
+<ol>
+<li>约定好数据格式、字符编码和收发方式！例如“传JSON”既可能是直接HTTP POST一段JSON（application/json），也可能是调用WebService，里面参数为JSON（application/xml），前者通常是在用户浏览器上通过AJAX调用，后者可能是自己后台直接调用对方的服务器，不经过用户的界面。如果连这个都弄错，后续发现问题时有可能要整个推倒重来；</li>
+<li>确保双方对于每个函数、每个参数的理解是一致的。特别是业务系统，对方对业务场景与业务的理解可能与我们很不一样，因此要多进行确认，及时更新和完善文档；</li>
 <li>搞清楚接口调用时机、频率，估计一下接口调用数据规模，避免因为频率不当或者数据规模太大而出问题；</li>
 <li>有异常处理机制，能够正确处理目标服务器宕机、返回404、长时间不返回等情况。接口恢复后，故障期间产生的数据能够正确消化掉；</li>
-<li>检查输入数据是否合法；</li>
-<li>对于有状态的数据，约定好重复发送请求的后果。</li>
+<li>检查输入数据是否合法（格式正确、符合业务要求以及具有业务权限），例如拒绝不合规范的数据，以及避免用户改个ID就能查看或修改别人数据的情况；</li>
+<li>对于有状态的数据，约定好重复发送请求（例如用户或程序重复提交工作单）的后果；</li>
+<li>考虑专门的日志记录，例如使用专门的文件或在数据库建立接口日志表；</li>
+<li>有认证机制和访问控制机制，防止接口被无关厂商及人员冒用或恶意调用。</li>
 </ol>
-<h1 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h1><p><strong>务必要留证据！</strong>有据可查，可以尽量避免承担无谓责任，尽量避免扯皮的情况。具体而言：</p>
+<h1 id="联调"><a href="#联调" class="headerlink" title="联调"></a>联调</h1><p><strong>如果是不同公司之间进行合作，务必要留证据！</strong>具体而言：</p>
 <ol>
 <li>记录哪天、与哪个人、调试了什么东西、结果如何；</li>
 <li>各接口函数要输出日志，记录时间、原始数据和一些关键数据；</li>
 <li>重要内容留截图。</li>
 </ol>
+<p>推荐两个调试接口的软件，一个是专门测WebService的<a href="https://www.soapui.org" target="_blank" rel="noopener">SoapUI</a>，另一个是可以测各种请求的<a href="https://www.getpostman.com/apps" target="_blank" rel="noopener">Postman</a>。对我个人而言，由于我们项目经常是WebService里面套JSON，所以SoapUI用得并不舒服，不如自己抓到调用WebService的原始请求内容然后全部扔到Postman中调试：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">soap:Envelope</span> <span class="attr">xmlns:soap</span>=<span class="string">"http://schemas.xmlsoap.org/soap/envelope/"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">soap:Body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ns1:xxxxxmethod</span> <span class="attr">xmlns:ns1</span>=<span class="string">"http://service.xxx.xxxcompany.com/"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">arg0</span>&gt;</span></span><br><span class="line">                &#123;</span><br><span class="line">                    "param1": "xxx",</span><br><span class="line">                    "param2": "yyy",</span><br><span class="line">                    ...</span><br><span class="line">                &#125;</span><br><span class="line">            <span class="tag">&lt;/<span class="name">arg0</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">ns1:xxxxxmethod</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">soap:Body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">soap:Envelope</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>上线之后更要专门记录接口的调用情况，做到有据可查。清楚地了解接口调用情况、频率以及状态，在出现故障时可以尽量避免踢皮球和承担无谓责任。有必要的话还应该实行访问控制，一旦遭遇攻击或疑似攻击（例如调用频率太高等）时可以方便地进行处理。</p>
 <h1 id="补充技巧：内网穿透"><a href="#补充技巧：内网穿透" class="headerlink" title="补充技巧：内网穿透"></a>补充技巧：内网穿透</h1><p>理想情况下应该建立一个双方都便于访问的开发测试区。如果没有条件或者来不及准备，而且双方公司都能访问互联网，可以通过内网穿透的方法把本地应用映射到公网上。</p>
-<p>操作之前去搞一台VPS。我个人推荐<a href="https://vultr.com" target="_blank" rel="noopener">Vultr</a>，因为国外不需要实名认证，而且Vultr按使用时间计费，可以随时买随时扔。对于内网穿透而言，最低配置的VPS足矣。</p>
+<p>操作之前去搞一台VPS。我个人推荐<a href="https://vultr.com" target="_blank" rel="noopener">Vultr</a>，因为国外不需要实名认证，而且Vultr按使用时间计费，可以随时买随时扔。对于内网穿透而言，$5的VPS足矣。</p>
+<div class="callout callout-note">
+                <div class="callout-title">关于Vultr的VPS</div>
+                <p>部署时建议选择洛杉矶或东京节点，这两个网络相对而言比较好。除了\$5的机器外，有时能看到更便宜的\$2.5机器，但是它们没有IPv4地址，所以要慎重购买。</p>
+
+            </div>
 <p>以Ubuntu系统为例，使用之前先在公司Ping一下，Ping不通说明被墙了，销毁之后再买一台即可。没问题的话，</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
 <p>将其中的<code>GatewayPorts no</code>改成<code>yes</code>，没找到的话就在文件末尾追加一行，保存。然后</p>
@@ -229,7 +241,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-09-01T17:59:30.918Z" itemprop="dateUpdated">2018-09-02 01:59:30</time>
+    最后更新时间：<time datetime="2018-11-28T03:52:53.998Z" itemprop="dateUpdated">2018-11-28 11:52:53</time>
 </span><br>
 
 
@@ -237,7 +249,7 @@
     </div>
     
     <footer>
-        <a href="https://infnan.github.io">
+        <a href="https://plusnan.me">
             <img src="/img/myavatar.jpg" alt="InfNaN">
             InfNaN
         </a>
@@ -259,7 +271,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://infnan.github.io/2018/07/14/cross-company-debug/&title=《跨公司接口联调》 — InfNaN Blog&pic=https://infnan.github.io/img/myavatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://plusnan.me/2018/07/14/cross-company-debug/&title=《接口设计经验》 — 一点微小的博客&pic=https://plusnan.me/img/myavatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -269,22 +281,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://infnan.github.io/2018/07/14/cross-company-debug/&title=《跨公司接口联调》 — InfNaN Blog&source=记录一下在联调前后需要考虑的事情，以及内网穿透的操作方法。" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://plusnan.me/2018/07/14/cross-company-debug/&title=《接口设计经验》 — 一点微小的博客&source=不同系统之间存取数据，技术上最简单的方式就是提供接口。既然是不同系统，那么大家很可能不是同一家单位，需要留意的事情也会更多。本文记录了一些接口设计、联调前..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://infnan.github.io/2018/07/14/cross-company-debug/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://plusnan.me/2018/07/14/cross-company-debug/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《跨公司接口联调》 — InfNaN Blog&url=https://infnan.github.io/2018/07/14/cross-company-debug/&via=https://infnan.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《接口设计经验》 — 一点微小的博客&url=https://plusnan.me/2018/07/14/cross-company-debug/&via=https://plusnan.me" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://infnan.github.io/2018/07/14/cross-company-debug/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://plusnan.me/2018/07/14/cross-company-debug/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -333,7 +345,7 @@
     <div id="disqus_thread"></div>
     <script>
     var disqus_config = function () {
-        this.page.url = 'https://infnan.github.io/2018/07/14/cross-company-debug/';
+        this.page.url = 'https://plusnan.me/2018/07/14/cross-company-debug/';
         this.page.identifier = '/2018/07/14/cross-company-debug/';
     };
     var disqus_shortname = 'christ-wus-blog';
@@ -393,7 +405,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://infnan.github.io/2018/07/14/cross-company-debug/&title=《跨公司接口联调》 — InfNaN Blog&pic=https://infnan.github.io/img/myavatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://plusnan.me/2018/07/14/cross-company-debug/&title=《接口设计经验》 — 一点微小的博客&pic=https://plusnan.me/img/myavatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -403,22 +415,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://infnan.github.io/2018/07/14/cross-company-debug/&title=《跨公司接口联调》 — InfNaN Blog&source=记录一下在联调前后需要考虑的事情，以及内网穿透的操作方法。" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://plusnan.me/2018/07/14/cross-company-debug/&title=《接口设计经验》 — 一点微小的博客&source=不同系统之间存取数据，技术上最简单的方式就是提供接口。既然是不同系统，那么大家很可能不是同一家单位，需要留意的事情也会更多。本文记录了一些接口设计、联调前..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://infnan.github.io/2018/07/14/cross-company-debug/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://plusnan.me/2018/07/14/cross-company-debug/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《跨公司接口联调》 — InfNaN Blog&url=https://infnan.github.io/2018/07/14/cross-company-debug/&via=https://infnan.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《接口设计经验》 — 一点微小的博客&url=https://plusnan.me/2018/07/14/cross-company-debug/&via=https://plusnan.me" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://infnan.github.io/2018/07/14/cross-company-debug/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://plusnan.me/2018/07/14/cross-company-debug/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -429,7 +441,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJklEQVR42u3aS3KDMBAFQN//0s4BXMB7EqQKqVm5bILVXkzm9/nE1ze4zu88f9rv+58nLgwMjNcy2sOdH+X3yUff1cIuvhEDA2MDxvkh8rCY3Hn+ztHrizNjYGBgBCHyrvsxMDAw7mW0YbpNHDEwMDDaIjZhJN2w8yTy8VocAwPjhYz8EP//+pH5BgYGxqsY3/LKqXmql4fXw1NhYGAszcgD3FR5WSZ5Y+fBwMBYm5GUkfnCRL6KMTPyLNJEDAyMlzPGlkfzpa7208GFDwwMjG0YeTrYDinzRHDwPwYGBsbSjDazakNn0kprf+LDv8LAwFiUkYfUexcv2idfsDEwMDZgzDT389Fj/oR6BQQDA2MDRh7mouZXOSSYGaBiYGDsyWgDZTuGbFt1xbYIBgbGoownVh9m2mr5N2JgYOzMyJtubb8rL19nwjoGBsbajLH2WZ4OJiF4bMCAgYGxNqMtOAdHjNPDy/OfGwMDY23GTNo31kRLAn2LwcDA2IeRv9MedGbMWQwPMDAwNmC010wxPIOM5rEYGBhLM6bmCWU62DbXLn4ODAyMRRljQTZPJdu1jDxNjPY7MDAwlmDcNSXMy912kJknixgYGGsz7g2y7ZrF2FgUAwNjT8bYcDFvt92V9l2UshgYGBjlodtxZr6IVvT5MDAwtmQk6drYsdp7pgIuBgbGCxljhxhLB5PC9cFaHAMD44WMvHQcS/KSZ84MOzEwMJZm/AEBt7wqX4CgKgAAAABJRU5ErkJggg==" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKklEQVR42u3aQW7DMAxEUd//0u62RVD3DykDFfW1CozE1nMAQiPxuvC4P8bndfJN8vn7lcVDhgwZ2zLux9F5AOFx2PMdZMiQcQKDTCL91XNVJAU3eIoMGTJkhIs/vqxMX58MGTJkcEYK/qcFV4YMGVsxSIitBVryCkh4XpbFZciQsSGjM5W3P79yviFDhoytGHc4SNFMS3ltJj/uI0OGjNEMXuB480RnmdiZjwwZMqYySOkkobFTssmz/oDJkCHjGEZt6cZ/yxeRccOHDBkyRjNqFYwX5bTNgsBae4QyZMgYxEhvynnpFl4t4sqQIeMERi1w8qDbicevnLvKkCFjWwaPlMFBY0hKY60MGTKmMvhiLg26tULMF4gyZMg4gVFr/1q1jKs1cPz6P8iQIWMoI42mnWPONCTzBaIMGTLOZFwvDHJIwJs2UIiVIUPGCEa6gKu1c6X35wcGwcNkyJCxLaO2xdbf9OdXgtcqQ4aM0Yw0WKZHm53yHR82yJAhYyijtuGVBmB+DMCjbJzFZciQMYLBN8L6E+LfjwuuDBkyDmPwTTG+6cYbMoIILUOGjKGMOxy8OaNWoFv5W4YMGUMZnWLHC2g6lc7GnwwZMqYyOsu+VVE2OKTsdG3IkCFjc0Za+PqNF7VlX5DFZciQIaMUSjvtZUG3iAwZMmS8Vlj51JcVXBkyZGzFICGWN5DVtthIIZYhQ8aZjHQv67kg8seT4rv4UFOGDBn7Mb4AEwRLqQVAYEUAAAAASUVORK5CYII=" alt="微信分享二维码">
 </div>
 
 
