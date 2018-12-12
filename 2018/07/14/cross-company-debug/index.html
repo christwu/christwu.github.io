@@ -30,7 +30,7 @@
 <meta property="og:description" content="不同系统之间存取数据，技术上最简单的方式就是提供接口。既然是不同系统，那么大家很可能不是同一家单位，需要留意的事情也会更多。本文记录了一些接口设计、联调前后需要考虑的事情。总体上来讲，我们既要保证准确实现功能，又要留个心眼，保护自己的利益，避免让自己吃亏。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://plusnan.me/img/cross-company-debug/putty-tunnel.png">
-<meta property="og:updated_time" content="2018-11-28T03:52:53.998Z">
+<meta property="og:updated_time" content="2018-12-11T00:13:54.186Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="接口设计经验">
 <meta name="twitter:description" content="不同系统之间存取数据，技术上最简单的方式就是提供接口。既然是不同系统，那么大家很可能不是同一家单位，需要留意的事情也会更多。本文记录了一些接口设计、联调前后需要考虑的事情。总体上来讲，我们既要保证准确实现功能，又要留个心眼，保护自己的利益，避免让自己吃亏。">
@@ -194,7 +194,7 @@
             <p>不同系统之间存取数据，技术上最简单的方式就是提供接口。既然是不同系统，那么大家很可能不是同一家单位，需要留意的事情也会更多。本文记录了一些接口设计、联调前后需要考虑的事情。总体上来讲，我们既要保证准确实现功能，又要留个心眼，保护自己的利益，避免让自己吃亏。<br><a id="more"></a> </p>
 <h1 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h1><p>虽然接口的原理很简单，开发工作量可能也比其他开发工作少很多，但是需要留意，在业务问题上“我这样想”不代表“对方也会这样想”，并且开发时的沟通成本往往会比较高，上线之后一旦出现故障可能还会互相踢皮球，因此也不能把设计工作想象得太简单。</p>
 <ol>
-<li>约定好数据格式、字符编码和收发方式！例如“传JSON”既可能是直接HTTP POST一段JSON（application/json），也可能是调用WebService，里面参数为JSON（application/xml），前者通常是在用户浏览器上通过AJAX调用，后者可能是自己后台直接调用对方的服务器，不经过用户的界面。如果连这个都弄错，后续发现问题时有可能要整个推倒重来；</li>
+<li>约定好具体的数据格式、字符编码和收发方式！例如“传JSON”既可能是直接HTTP POST一段JSON（application/json），也可能是调用WebService，里面参数为JSON（application/xml），前者通常是在用户浏览器上通过AJAX调用，后者可能是自己后台直接调用对方的服务器，不经过用户的界面。如果连这个都弄错，后续发现问题时有可能要整个推倒重来；</li>
 <li>确保双方对于每个函数、每个参数的理解是一致的。特别是业务系统，对方对业务场景与业务的理解可能与我们很不一样，因此要多进行确认，及时更新和完善文档；</li>
 <li>搞清楚接口调用时机、频率，估计一下接口调用数据规模，避免因为频率不当或者数据规模太大而出问题；</li>
 <li>有异常处理机制，能够正确处理目标服务器宕机、返回404、长时间不返回等情况。接口恢复后，故障期间产生的数据能够正确消化掉；</li>
@@ -211,6 +211,7 @@
 </ol>
 <p>推荐两个调试接口的软件，一个是专门测WebService的<a href="https://www.soapui.org" target="_blank" rel="noopener">SoapUI</a>，另一个是可以测各种请求的<a href="https://www.getpostman.com/apps" target="_blank" rel="noopener">Postman</a>。对我个人而言，由于我们项目经常是WebService里面套JSON，所以SoapUI用得并不舒服，不如自己抓到调用WebService的原始请求内容然后全部扔到Postman中调试：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">soap:Envelope</span> <span class="attr">xmlns:soap</span>=<span class="string">"http://schemas.xmlsoap.org/soap/envelope/"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">soap:Body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ns1:xxxxxmethod</span> <span class="attr">xmlns:ns1</span>=<span class="string">"http://service.xxx.xxxcompany.com/"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">arg0</span>&gt;</span></span><br><span class="line">                &#123;</span><br><span class="line">                    "param1": "xxx",</span><br><span class="line">                    "param2": "yyy",</span><br><span class="line">                    ...</span><br><span class="line">                &#125;</span><br><span class="line">            <span class="tag">&lt;/<span class="name">arg0</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">ns1:xxxxxmethod</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">soap:Body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">soap:Envelope</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>如果主要系统已经上线了，注意不要在生产环境或使用生产库直接联调（顶多是试一试接口和主要功能通不通），而是要准备一个和生产环境架构相似的测试环境，在测试环境上进行联调。</p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>上线之后更要专门记录接口的调用情况，做到有据可查。清楚地了解接口调用情况、频率以及状态，在出现故障时可以尽量避免踢皮球和承担无谓责任。有必要的话还应该实行访问控制，一旦遭遇攻击或疑似攻击（例如调用频率太高等）时可以方便地进行处理。</p>
 <h1 id="补充技巧：内网穿透"><a href="#补充技巧：内网穿透" class="headerlink" title="补充技巧：内网穿透"></a>补充技巧：内网穿透</h1><p>理想情况下应该建立一个双方都便于访问的开发测试区。如果没有条件或者来不及准备，而且双方公司都能访问互联网，可以通过内网穿透的方法把本地应用映射到公网上。</p>
 <p>操作之前去搞一台VPS。我个人推荐<a href="https://vultr.com" target="_blank" rel="noopener">Vultr</a>，因为国外不需要实名认证，而且Vultr按使用时间计费，可以随时买随时扔。对于内网穿透而言，$5的VPS足矣。</p>
@@ -241,7 +242,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-11-28T03:52:53.998Z" itemprop="dateUpdated">2018-11-28 11:52:53</time>
+    最后更新时间：<time datetime="2018-12-11T00:13:54.186Z" itemprop="dateUpdated">2018-12-11 08:13:54</time>
 </span><br>
 
 
