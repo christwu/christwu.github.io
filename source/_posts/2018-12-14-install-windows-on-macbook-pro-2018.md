@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 在2018版MacBook Pro安装Windows 10，以及分区扩容
-category: 经验
+category: 教程
 tags: 
 - Mac
 - Bootcamp
@@ -10,21 +10,21 @@ tags:
 <!-- more -->
 
 # 坑的要点
-* 用Bootcamp创建启动盘时会提示“‘启动转换’安装失败”、“拷贝Windows安装文件时出错”、“‘启动转换助理’正在移除其创建的分区，请稍候”，因为Windows 10安装盘通常大于4GB，里面会有大于4GB的文件，FAT32格式分区装不下，所以导致失败。
+* 用Bootcamp创建启动盘时会提示“‘启动转换’安装失败”、“拷贝Windows安装文件时出错”、“‘启动转换助理’正在移除其创建的分区，请稍候”，因为Windows 10安装盘通常大于4GB，FAT32格式分区装不下，所以失败。
 * 即使找到了小于4GB的安装盘，也不要继续用Bootcamp来进行安装。虽然重启之后能进入到Windows安装程序中，也能正常地下一步下一步，但是只要到再努力一小下就会成功的时刻，安装程序就会蹦出“Windows无法更新计算机的启动配置，安装无法继续”，然后系统开始自动回滚，结果失败。
 
-因此我们不能使用Bootcamp进行安装。
+这说明Bootcamp本身有bug，我们不能使用Bootcamp进行安装。
 
 # 避免踩坑的操作步骤
 1. 做好以下准备：
     * U盘：注意文件系统要FAT32的
     * USB键盘、USB鼠标（至少要预备个鼠标）
     * USB转接线
-    * 下载Windows 10 64位安装盘（可以去[msdn.itellyou.cn](http://msdn.itellyou.cn)下载），将安装盘映像当作压缩包解压到U盘上——因为MacBook也是EFI启动，所以不需要特意去刻录
+    * 下载Windows 10 64位安装盘（可以去[msdn.itellyou.cn](http://msdn.itellyou.cn)下载），将安装盘映像当作压缩包解压到U盘上——因为MacBook也是EFI启动，所以解压就足够了，不需要特意找刻录软件去刻录
 2. 按住Command+R开机，进入Recovery模式，完成以下操作：
-    * [在磁盘工具给Windows分区、格式化](https://support.apple.com/zh-cn/guide/disk-utility/dskutl14027/mac)。注意两点，第一是记住磁盘容量以免在安装时错误地格式化，第二是尽量把容量计算好，因为在不删分区的情况下调整容量是极其麻烦的事情。
+    * [在磁盘工具给Windows分区、格式化](https://support.apple.com/zh-cn/guide/disk-utility/dskutl14027/mac)。注意两点，第一是记住磁盘容量以免在安装时错误地格式化，第二是尽量把容量计算好，因为调整容量非常麻烦，而且很可能要删分区。
     * [关闭安全启动](https://support.apple.com/zh-cn/HT208330)
-3. 回到macOS，启动Bootcamp，点击“操作”中的“下载Windows支持软件”。下载完成后相关文件会放到家目录中，把它复制到U盘根目录中。这一步不要漏掉，否则后面安装时找不到硬盘
+3. 回到macOS，启动Bootcamp，点击“操作”中的“下载Windows支持软件”。下载完成后相关文件会放到家目录中，把它复制到U盘根目录中。这一步不要漏掉，否则后面安装时找不到硬盘。
 4. 插上U盘，重启电脑，启动时按住Option键，从U盘启动。
 5. 进入Windows安装程序，把事先预备好的键盘和鼠标接上，如果能操作，那么就可以按正常步骤安装Windows了。若在选择分区时提示没有硬盘或分区，可以点击“加载驱动程序”按钮，找到事先在macOS系统里面下载的支持软件，安装SSD驱动，使Windows安装程序能够发现分区。
 6. 安装成功后，进入Windows系统，找到U盘里的支持软件，运行安装程序。安装成功后重启。
@@ -53,16 +53,18 @@ tags:
     cd "/Volumes/Macintosh HD"
     dd if=/dev/disk0s2 of=backup.img bs=1m
 5. 完成后重新进入磁盘工具，删除Windows分区，重新调整分区，不需要格式化。
-6. 从U盘启动Windows安装程序，接上鼠标，在Windows安装程序的图形界面里进行格式化，因为Windows比我们清楚要把多少空间划出来作为保留分区。
+6. 重启，从U盘启动Windows安装程序，接上鼠标，在Windows安装程序界面上进行格式化，因为Windows比我们清楚要把多少空间划出来用作系统保留分区。
 7. 回到Recovery模式，确认新分区的位置是disk几s几（例如disk0s4）。
 8. 重新进入终端，恢复映像：
     cd "/Volumes/Macintosh HD"
     dd if=backup.img of=/dev/disk0s4 bs=1m
-9. 这时候Windows应该可以重新进入了，但是dd并非那种专业Windows分区备份还原软件，所以Windows分区的容量和剩余空间还是错的，需要修正。再次用Windows安装盘启动，这次按Shift+F10进入命令提示符，然后输入diskpart，进入分区工具。
+9. 这时候Windows应该可以重新进入了，但是dd并非那种专业Windows分区备份还原软件，所以Windows分区的容量和剩余空间还是错的，需要修正。再次用Windows安装盘启动，接上键盘和鼠标，这次按Shift+F10进入命令提示符，然后输入diskpart，进入分区工具。
 10. 在diskpart里输入以下命令（注意命令中的“0”和“4”要根据实际情况填写）：
+    ```
     list disk
     sel disk 0
     list volume
     sel volume 4
     extend
+    ```
 11. 检查两个系统能否正常启动。如果没问题，删掉苹果系统里的/backup.img即可。
