@@ -50,14 +50,18 @@ tags:
 2. 按住Command+R开机，进入Recovery模式。
 3. 进入磁盘工具，确认Windows安装盘的位置（例如/dev/disk0s2）以及Mac系统盘的名称（例如Macintosh HD）。如果还是拿不准的话，可以在终端里用“diskutil info /dev/disk0s2”这种命令来确认。
 4. 退出磁盘工具，进入终端。假如Mac系统盘叫做Macintosh HD，Windows系统盘是/dev/disk0s2，那么需要输入以下命令进行备份：
+    ```
     cd "/Volumes/Macintosh HD"
     dd if=/dev/disk0s2 of=backup.img bs=1m
+    ```
 5. 完成后重新进入磁盘工具，删除Windows分区，重新调整分区，不需要格式化。
 6. 重启，从U盘启动Windows安装程序，接上鼠标，在Windows安装程序界面上进行格式化，因为Windows比我们清楚要把多少空间划出来用作系统保留分区。
 7. 回到Recovery模式，确认新分区的位置是disk几s几（例如disk0s4）。
 8. 重新进入终端，恢复映像：
+    ```
     cd "/Volumes/Macintosh HD"
     dd if=backup.img of=/dev/disk0s4 bs=1m
+    ```
 9. 这时候Windows应该可以重新进入了，但是dd并非那种专业Windows分区备份还原软件，所以Windows分区的容量和剩余空间还是错的，需要修正。再次用Windows安装盘启动，接上键盘和鼠标，这次按Shift+F10进入命令提示符，然后输入diskpart，进入分区工具。
 10. 在diskpart里输入以下命令（注意命令中的“0”和“4”要根据实际情况填写）：
     ```
