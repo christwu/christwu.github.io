@@ -20,19 +20,19 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="Mac,Bootcamp">
-    <meta name="description" content="几个月前在苹果商店购买了新版的MacBook Pro，为了玩个游戏，准备安装Windows系统，然而发现通过系统的Bootcamp（启动转换助理）进行安装根本无法成功。经过一番折腾，得出一个结论：只能手工制作安装盘，以手工方式安装Windows 10。">
-<meta name="keywords" content="Mac,Bootcamp">
+    <meta name="keywords" content="Mac,Boot Camp">
+    <meta name="description" content="几个月前在苹果商店购买了新版的MacBook Pro，为了玩个游戏，准备安装Windows系统，然而发现通过系统的Boot Camp（启动转换助理）进行安装根本无法成功。经过一番折腾，得出一个结论：只能手工制作安装盘，以手工方式安装Windows 10。">
+<meta name="keywords" content="Mac,Boot Camp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在2018版MacBook Pro安装Windows 10，以及分区扩容">
 <meta property="og:url" content="https://plusnan.me/2018/12/14/install-windows-on-macbook-pro-2018/index.html">
 <meta property="og:site_name" content="一点微小的博客">
-<meta property="og:description" content="几个月前在苹果商店购买了新版的MacBook Pro，为了玩个游戏，准备安装Windows系统，然而发现通过系统的Bootcamp（启动转换助理）进行安装根本无法成功。经过一番折腾，得出一个结论：只能手工制作安装盘，以手工方式安装Windows 10。">
+<meta property="og:description" content="几个月前在苹果商店购买了新版的MacBook Pro，为了玩个游戏，准备安装Windows系统，然而发现通过系统的Boot Camp（启动转换助理）进行安装根本无法成功。经过一番折腾，得出一个结论：只能手工制作安装盘，以手工方式安装Windows 10。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-12-14T01:13:26.583Z">
+<meta property="og:updated_time" content="2018-12-16T17:33:13.804Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在2018版MacBook Pro安装Windows 10，以及分区扩容">
-<meta name="twitter:description" content="几个月前在苹果商店购买了新版的MacBook Pro，为了玩个游戏，准备安装Windows系统，然而发现通过系统的Bootcamp（启动转换助理）进行安装根本无法成功。经过一番折腾，得出一个结论：只能手工制作安装盘，以手工方式安装Windows 10。">
+<meta name="twitter:description" content="几个月前在苹果商店购买了新版的MacBook Pro，为了玩个游戏，准备安装Windows系统，然而发现通过系统的Boot Camp（启动转换助理）进行安装根本无法成功。经过一番折腾，得出一个结论：只能手工制作安装盘，以手工方式安装Windows 10。">
     
         <link rel="alternate" type="application/atom+xml" title="一点微小的博客" href="/rss.xml">
     
@@ -189,12 +189,12 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p>几个月前在苹果商店购买了新版的MacBook Pro，为了玩个游戏，准备安装Windows系统，然而发现通过系统的Bootcamp（启动转换助理）进行安装根本无法成功。经过一番折腾，得出一个结论：只能手工制作安装盘，以手工方式安装Windows 10。<br><a id="more"></a></p>
+            <p>几个月前在苹果商店购买了新版的MacBook Pro，为了玩个游戏，准备安装Windows系统，然而发现通过系统的Boot Camp（启动转换助理）进行安装根本无法成功。经过一番折腾，得出一个结论：只能手工制作安装盘，以手工方式安装Windows 10。<br><a id="more"></a></p>
 <h1 id="坑的要点"><a href="#坑的要点" class="headerlink" title="坑的要点"></a>坑的要点</h1><ul>
-<li>用Bootcamp创建启动盘时会提示“‘启动转换’安装失败”、“拷贝Windows安装文件时出错”、“‘启动转换助理’正在移除其创建的分区，请稍候”，因为Windows 10安装盘通常大于4GB，FAT32格式分区装不下，所以失败。</li>
-<li>即使找到了小于4GB的安装盘，也不要继续用Bootcamp来进行安装。虽然重启之后能进入到Windows安装程序中，也能正常地下一步下一步，但是只要到再努力一小下就会成功的时刻，安装程序就会蹦出“Windows无法更新计算机的启动配置，安装无法继续”，然后系统开始自动回滚，结果失败。</li>
+<li>用Boot Camp创建启动盘时会提示“‘启动转换’安装失败”、“拷贝Windows安装文件时出错”、“‘启动转换助理’正在移除其创建的分区，请稍候”，因为Windows 10安装盘通常大于4GB，FAT32格式分区装不下，所以失败。</li>
+<li>即使找到了小于4GB的安装盘，也不要继续用Boot Camp来进行安装。虽然重启之后能进入到Windows安装程序中，也能正常地下一步下一步，但是只要到再努力一小下就会成功的时刻，安装程序就会蹦出“Windows无法更新计算机的启动配置，安装无法继续”，然后系统开始自动回滚，结果失败。</li>
 </ul>
-<p>这说明Bootcamp本身有bug，我们不能使用Bootcamp进行安装。</p>
+<p>这说明Boot Camp本身可能有bug，我们不能使用Boot Camp进行安装。</p>
 <h1 id="避免踩坑的操作步骤"><a href="#避免踩坑的操作步骤" class="headerlink" title="避免踩坑的操作步骤"></a>避免踩坑的操作步骤</h1><ol>
 <li>做好以下准备：<ul>
 <li>U盘：注意文件系统要FAT32的</li>
@@ -208,12 +208,12 @@
 <li><a href="https://support.apple.com/zh-cn/HT208330" target="_blank" rel="noopener">关闭安全启动</a></li>
 </ul>
 </li>
-<li>回到macOS，启动Bootcamp，点击“操作”中的“下载Windows支持软件”。下载完成后相关文件会放到家目录中，把它复制到U盘根目录中。这一步不要漏掉，否则后面安装时找不到硬盘。</li>
+<li>回到macOS，启动Boot Camp，点击“操作”中的“下载Windows支持软件”。下载完成后相关文件会放到家目录中，把它复制到U盘根目录中。这一步不要漏掉，否则后面安装时找不到硬盘。</li>
 <li>插上U盘，重启电脑，启动时按住Option键，从U盘启动。</li>
 <li>进入Windows安装程序，把事先预备好的键盘和鼠标接上，如果能操作，那么就可以按正常步骤安装Windows了。若在选择分区时提示没有硬盘或分区，可以点击“加载驱动程序”按钮，找到事先在macOS系统里面下载的支持软件，安装SSD驱动，使Windows安装程序能够发现分区。</li>
 <li>安装成功后，进入Windows系统，找到U盘里的支持软件，运行安装程序。安装成功后重启。</li>
 </ol>
-<p>以这种方式进行安装，除了有点麻烦以及不能在macOS的Bootcamp界面进行管理（即删除Windows）以外，其他基本上没什么区别。</p>
+<p>以这种方式进行安装，除了有点麻烦以及不能在macOS的Boot Camp界面进行管理（即删除Windows）以外，其他基本上没什么区别。</p>
 <h1 id="调整分区容量"><a href="#调整分区容量" class="headerlink" title="调整分区容量"></a>调整分区容量</h1><p>一旦Windows系统用起来了，调整容量将是极其麻烦的事情。如果非扩容不可，建议先备份数据，然后删掉Windows分区，全部重来。</p>
 <p>但是，如果Mac分区剩余空间比Windows系统盘大，那么还可以以一种麻烦的方式完成扩容：将Windows系统盘备份到映像，删除Windows盘并重新分区，然后恢复备份，修正分区表。如果操作成功，那么就不需要重装系统和各软件，也不需要再调系统设置了。</p>
 <div class="callout callout-error">
@@ -225,7 +225,7 @@
 <p>按以下步骤操作：</p>
 <ol>
 <li>准备工作：<ul>
-<li>Windows安装U盘，其中已经预备好Bootcamp的“Windows支持软件”。</li>
+<li>Windows安装U盘，其中已经预备好Boot Camp的“Windows支持软件”。</li>
 <li>转接线</li>
 <li>USB键盘和鼠标</li>
 </ul>
@@ -247,7 +247,7 @@
 <li><p>在diskpart里输入以下命令（注意命令中的“0”和“4”要根据实际情况填写）：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">list disk</span><br><span class="line">sel disk 0</span><br><span class="line">list volume</span><br><span class="line">sel volume 4</span><br><span class="line">extend</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>检查两个系统能否正常启动。如果没问题，删掉苹果系统里的/backup.img即可。</p>
+<li><p>检查两个系统能否正常启动。如果没问题就可以删掉苹果系统里的/backup.img了。</p>
 </li>
 </ol>
 
@@ -258,7 +258,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-12-14T01:13:26.583Z" itemprop="dateUpdated">2018-12-14 09:13:26</time>
+    最后更新时间：<time datetime="2018-12-16T17:33:13.804Z" itemprop="dateUpdated">2018-12-17 01:33:13</time>
 </span><br>
 
 
@@ -278,7 +278,7 @@
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Bootcamp/">Bootcamp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac/">Mac</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Boot-Camp/">Boot Camp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac/">Mac</a></li></ul>
 
 
             
@@ -298,7 +298,7 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://plusnan.me/2018/12/14/install-windows-on-macbook-pro-2018/&title=《在2018版MacBook Pro安装Windows 10，以及分区扩容》 — 一点微小的博客&source=几个月前在苹果商店购买了新版的MacBook Pro，为了玩个游戏，准备安装Windows系统，然而发现通过系统的Bootcamp（启动转换助理）进行安装..." data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://plusnan.me/2018/12/14/install-windows-on-macbook-pro-2018/&title=《在2018版MacBook Pro安装Windows 10，以及分区扩容》 — 一点微小的博客&source=几个月前在苹果商店购买了新版的MacBook Pro，为了玩个游戏，准备安装Windows系统，然而发现通过系统的Boot Camp（启动转换助理）进行安..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -333,7 +333,14 @@
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/12/16/project-reform/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">项目实施改造计划</h4>
+      </a>
+    </div>
   
 
   
@@ -425,7 +432,7 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://plusnan.me/2018/12/14/install-windows-on-macbook-pro-2018/&title=《在2018版MacBook Pro安装Windows 10，以及分区扩容》 — 一点微小的博客&source=几个月前在苹果商店购买了新版的MacBook Pro，为了玩个游戏，准备安装Windows系统，然而发现通过系统的Bootcamp（启动转换助理）进行安装..." data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://plusnan.me/2018/12/14/install-windows-on-macbook-pro-2018/&title=《在2018版MacBook Pro安装Windows 10，以及分区扩容》 — 一点微小的博客&source=几个月前在苹果商店购买了新版的MacBook Pro，为了玩个游戏，准备安装Windows系统，然而发现通过系统的Boot Camp（启动转换助理）进行安..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
