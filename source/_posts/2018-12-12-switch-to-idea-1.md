@@ -5,30 +5,8 @@ category: 教程
 tags: 
 - IDEA
 ---
-我们项目组之前一直使用Eclipse进行开发。对于我们项目而言，由于Eclipse存在现实的问题，我便开始研究IDEA的用法，并且试着将工作切换到IDEA上面，之后逐步地在项目组内推广使用IntelliJ IDEA。本文面向Eclipse使用者，讲述IDEA的基本操作，以便平稳地进行切换。
+本文主要介绍IDEA的操作方法。为了避免出现复杂问题，本文假设项目已经事先配置好，而且配置文件加到了版本控制中，其他人只要下载代码就可以直接用IDEA打开。
 <!--more-->
-
-备注：我们项目组采用SVN版本控制，未使用Maven、Gradle等构建工具，程序代码的字符编码是GB18030。
-
-# 切换到IDEA的理由
-下面是我向同事推荐使用IDEA（商业版）的一些理由：
-
-1. 公司版本管理软件从ClearCase切换到了SVN，这意味着开发工作不再受ClearCase拖累，开发工具也可以随意换成更好用的了。
-2. 公司电脑配置不高，而且项目文件非常多，Eclipse用起来很卡。虽然IDEA资源消耗比较高，但是用起来比Eclipse顺畅得多（备注：对于内存只有4GB的电脑，要么加条，要么换旧版IDEA，否则会很糟糕）。
-3. IDEA的搜索比Eclipse快得多，按全项目搜索的话，Eclipse要等把所有文件都过一遍，而IDEA可以一下子搜出来。
-4. IDEA的SVN支持非常好，可以很方便地检查自己修改的代码、查询同事修改、对比文件版本，虽然TortoiseSVN和Eclipse也有类似功能，但是IDEA用起来更舒服。
-
-以下也是IDEA的长处，不过有些是个人体验，或者未作为推销的内容向同事介绍：
-
-1. IDEA的工作空间对版本控制友好，只要我把项目配置好，加到版本库中，其他人就可以直接用IDEA打开项目，等IDEA把文件索引完，然后再配一下JDK和Tomcat路径就能投入开发了。Eclipse的话每次全新checkout都要从头开始配置，而且我们项目组有时也会出现因工作安排变动或电脑难用而重新搭环境甚至重装系统的情况。
-2. IDEA集成了数据库插件，代码提示比其他数据库软件好一些。另外修改数据时PL/SQL Developer需要附上FOR UPDATE，Toad需要用EDIT语句，SQL Developer需要自己写UPDATE语句，而IDEA可以直接在查询结果上面改。
-3. IDEA对代码风格方面的提示和警告比Eclipse丰富，例如IDEA可以检测出哪些代码是一模一样的，或者哪些类与函数根本没有人使用。
-4. IDEA自带反编译工具，可以方便地反编译代码，以分析一些jar包的原理。
-
-当然，Eclipse的用户和插件也不少，如果能配置好，实际上也不会太难用。
-
-# 差异
-Eclipse和IDEA的界面与操作方法有些区别。概念上的重大差异主要是“Project Structure”，即项目文件结构的管理，不过如果有人把项目配置好并提交版本控制之后，其他成员反倒不太需要关注这些东西，因此我会另外写一篇文章进行叙述。
 
 # 初始化配置
 下面只讲Windows的操作方法（尽管截图是macOS）。对于Linux或苹果用户而言，我觉得既然能使用这两种系统，就说明不太需要这种详细教程吧。
@@ -41,26 +19,26 @@ IDEA可以从[官网](https://www.jetbrains.com/idea/download/)下载，下载�
 ## 安装SVN客户端
 SVN客户端推荐使用[TortoiseSVN](https://tortoisesvn.net/downloads.html)，因为和系统整合得比较好。安装时注意把“Command Line Tool”也安装上，否则后面IDEA和SVN配置会比较麻烦。
 
-## 项目配置
+# 项目配置
 下面假设项目代码库内已经有统一配置，后续会专门解释如何从头开始配置。
 
 第一次打开项目时，系统需要花一段时间去建立索引，而第一次启动时系统也要花时间去编译和复制文件，但是这两项工作完成以后响应就比较快了。
 
-在开始工作之前，需要检查和调整系统与项目的设置，例如SVN、JDK和Tomcat的路径：
+在开始工作之前，需要检查和调整系统与项目的设置，例如SVN、JDK和Tomcat的路径。如果项目使用GBK等编码，还需要检查字符编码设置：
 
-### SVN路径
+## SVN路径
 点击File下面的Settings菜单，进入系统设置界面，选择“Version Control”下面的“Subversion”，在右侧设置中进行SVN路径的设置。找到SVN的安装目录，然后去里面找bin和svn.exe。如果没有发现svn.exe，说明你在安装TortoiseSVN时未安装命令行工具，需要重新安装。
 
 ![SVN设置](/img/2018-12-01-switch-to-idea-1/svnconfig.png)
 
-### JDK路径
+## JDK路径
 点击File下面的Project Structure菜单，在弹出的对话框中选择左面的“Project”，可以看到类似下面的图：
 
 ![Project Structure](/img/2018-12-01-switch-to-idea-1/structure.png)
 
 图中Project SDK为空，所以需要添加项目所使用的JDK，而且Project language level选择项目所用的JDK版本。下面Project compiler output则是项目编译之后文件的存放位置，只要别提交到SVN上面，放在哪里其实都无所谓，不过一定要设置，否则无法启动。
 
-### Tomcat路径
+## Tomcat路径
 点击Run下面的Edit Configuration菜单，进入启动设置界面，如下图所示：
 
 ![缺少Tomcat](/img/2018-12-01-switch-to-idea-1/tomcat-1.png)
@@ -72,6 +50,9 @@ SVN客户端推荐使用[TortoiseSVN](https://tortoisesvn.net/downloads.html)，
 如果路径正确，IDEA会给出Tomcat的版本。
 
 若有自定义的context.xml并在其中指定了数据源，那么还要在Tomcat的lib目录中加入相应的数据库驱动，例如[ojdbc6.jar](https://www.oracle.com/technetwork/apps-tech/jdbc-112010-090769.html)。
+
+## 字符编码
+默认字符编码是UTF-8。如果项目使用GB2312、GBK、GB18030这种编码，需要在系统设置“Editor”里的“File Encodings”设置默认编码。
 
 # 日常工作
 ## 保存
