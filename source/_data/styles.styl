@@ -1,0 +1,50 @@
+header.post-header {
+    & > h1.post-title {
+        text-align: left; 
+    }
+        
+    & > div.post-meta {
+        text-align: left; 
+    }
+}
+
+header.post-header > h1.post-title {
+    font-size: 1.5rem;
+}
+
+article div.post-body > div.post-button {
+    text-align: right;
+}
+
+footer.post-footer > div.post-tags {
+    text-align: left;
+}
+
+div.category-all-page > div.category-all-title {
+    text-align: left;
+}
+
+div.tag-cloud {
+    text-align: left;
+}
+
+div.post-body div.note {
+    & > h2, 
+    & > h3,
+    & > h4,
+    & > h5,
+    & > h6 {
+        margin-bottom: 0.5em;
+    }
+}
+
+article.post div.post-body a,
+article.post div.post-body span.exturl {
+  color: $link-color-article;
+  border-bottom: 1px solid $link-decoration-color-article;
+
+  &:hover {
+    color: $link-hover-color-article;
+    border-bottom-color: $link-decoration-hover-color-article;
+  }
+}

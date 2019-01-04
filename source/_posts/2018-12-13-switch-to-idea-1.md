@@ -106,7 +106,8 @@ IDEA的Version Control窗口可以很直观地列出你所进行的修改。如�
 
 ![检查待提交文件列表和内容，输入摘要，点击Commit提交。](/img/2018-12-01-switch-to-idea-1/changelist-2.png)
 
-{% callout 针对新开发者的提醒 %}
+{% note info %}
+#### 针对新开发者的提醒
 以下内容转载自[编程随想的博客](https://program-think.blogspot.com/2009/02/6.html)：
 
 据俺多年的观察，发觉 RCS（备注：版本管理软件）主要有如下几种误用的情况：
@@ -124,7 +125,7 @@ IDEA的Version Control窗口可以很直观地列出你所进行的修改。如�
 　　在正规的开发团队，每当有一个版本发布（Release）并交付给用户使用时，都需要在 RCS 中制作一个基线，以便于进行相应的 bug 跟踪和补丁制作。因此，诸如【做基线】之类的事情，属于整个团队的集体行为，需要由 Team Leader 牵头来搞。
 　　假如一个开发团队从来不做代码基线或者代码分支，仅仅是把 RCS 当成一个源文件的备份工具来用，那至少说明这个团队的 Team Leader 在软件工程管理方面非常失败。
 
-{% endcallout %}
+{% endnote %}
 
 ### 查看文件提交历史
 对着文件点击右键，选择“Subversion”里面的“Show History”，即可在下面的Version Control窗口看到文件的提交历史。对着版本点击右键，选择“Show Diff”，即可看到某个版本是哪个人进行了哪些修改。
@@ -139,3 +140,9 @@ Version Control第一个页签是你的待提交修改，第二个页签就是�
 <!--## 数据库操作
 IDEA Ultimate版内置了DataGrip插件。
 -->
+
+# 本系列目录
+* [为什么进行切换](/2018/12/12/switch-to-idea-0/)
+* 切换的基本操作
+* 传统Web项目在IDEA的Project Structure（待撰）
+* Maven和Gradle项目在IDEA的Project Structure（待撰）
