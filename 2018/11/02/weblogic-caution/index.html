@@ -463,6 +463,7 @@ code {
 
 <h1 id="开发阶段"><a href="#开发阶段" class="headerlink" title="开发阶段"></a>开发阶段</h1><h2 id="准备测试区"><a href="#准备测试区" class="headerlink" title="准备测试区"></a>准备测试区</h2><p>务必准备一个和生产环境架构接近的测试环境，而且开发环境、测试环境和生产环境的JDK与中间件版本应该保持一致，如果条件不够，至少测试环境和生产环境要一致。开发时用某个版本JDK和Tomcat，部署到生产环境时用另一个版本的JDK和Weblogic，这样很容易遭遇意外。</p>
 <p>举一些例子，以下几个就属于Tomcat上面测不出来，挪到Weblogic上面就可能会暴露出来的错误，好在下表这些错误通过修改Weblogic服务器启动参数就能在一定程度上解决了：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -489,6 +490,7 @@ code {
 </tr>
 </tbody>
 </table>
+</div>
 <h2 id="路径问题"><a href="#路径问题" class="headerlink" title="路径问题"></a>路径问题</h2><p>假设程序部署在服务器的<code>/home/weblogic/project</code>中，Weblogic安装在<code>/u01/Oracle/Middleware</code>下面，而且程序会动态生成文件，实际上文件会放在类似于<code>/u01/Oracle/Middleware/user_projects/domains/base_domain/servers/app_server1/stage/project</code>的对应位置中，而且激活更新时候文件会丢失，需要重新生成。</p>
 <p>避免使用中文文件名和中文路径，以免因字符编码问题导致部署或升级失败。举个例子，如果文件里有中文名，打包并解压之后文件名变成了乱码，那么更新的时候Weblogic会提示<code>Error occurred while downloading files from admin server for deployment request &quot;xxx,xxx,xxx&quot;. Underlying error is: &quot;null&quot;</code>。</p>
 <h2 id="数据源名称"><a href="#数据源名称" class="headerlink" title="数据源名称"></a>数据源名称</h2><p>假如JNDI数据源名称为dataSource，在Tomcat中运行时，需要写成<code>java:comp/env/dataSource</code>，但是在Weblogic中运行时要把“java:comp/env/”去掉，直接写成dataSource。</p>
@@ -711,7 +713,7 @@ code {
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -779,7 +781,7 @@ code {
                     
                       
                     
-                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
