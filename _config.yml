@@ -108,7 +108,10 @@ theme_config:
   language: zh-CN
   avatar:
     url: /img/myavatar.jpg
-  creative_commons: by-nc-sa
+  creative_commons:
+    license: by-nc-sa
+    sidebar: true
+    post: true
 
   scheme: Pisces
   fancybox: false
@@ -125,8 +128,15 @@ theme_config:
     archives: /archives/ || archive
   footer:
     since: 2018
+    powered:
+      enable: true
+    theme:
+      enable: true
   motion:
     enable: false
+  #toc:
+  #  wrap: true
+  site_state: true
 
   social:
     GitHub: https://github.com/infnan || github
@@ -134,8 +144,9 @@ theme_config:
   social_icons:
     enable: true
 
-  highlight_theme: night
+  #highlight_theme: night
   exturl: true
+  baidu_push: true
   font:
     enable: false
   note:
