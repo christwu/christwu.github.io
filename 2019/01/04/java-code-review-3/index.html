@@ -94,20 +94,18 @@
 
 
 
-  <meta name="description" content="不同系统之间存取数据，技术上最简单的方式就是提供接口。既然是不同系统，那么大家很可能不是同一家单位，需要留意的事情也会更多。本文记录了一些接口设计、联调前后需要考虑的事情。总体上来讲，我们既要保证准确实现功能，又要留个心眼，保护自己的利益，避免让自己吃亏。">
-<meta name="keywords" content="Web,内网穿透,项目实施">
+  <meta name="description" content="这里是我个人的倡议，仅供参考。各项目应按照实际情况制定自己的操作规范，经常加强对新人的教育，以免把经文念得越来越歪。">
+<meta name="keywords" content="Java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="接口设计与联调经验">
-<meta property="og:url" content="https://plusnan.me/2018/07/14/cross-company-debug/index.html">
+<meta property="og:title" content="Java代码审查（三）：关于编程习惯的要求">
+<meta property="og:url" content="https://plusnan.me/2019/01/04/java-code-review-3/index.html">
 <meta property="og:site_name" content="一点微小的博客">
-<meta property="og:description" content="不同系统之间存取数据，技术上最简单的方式就是提供接口。既然是不同系统，那么大家很可能不是同一家单位，需要留意的事情也会更多。本文记录了一些接口设计、联调前后需要考虑的事情。总体上来讲，我们既要保证准确实现功能，又要留个心眼，保护自己的利益，避免让自己吃亏。">
+<meta property="og:description" content="这里是我个人的倡议，仅供参考。各项目应按照实际情况制定自己的操作规范，经常加强对新人的教育，以免把经文念得越来越歪。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://plusnan.me/img/cross-company-debug/putty-tunnel.png">
-<meta property="og:updated_time" content="2019-01-05T15:42:37.373Z">
+<meta property="og:updated_time" content="2019-01-06T04:36:23.574Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="接口设计与联调经验">
-<meta name="twitter:description" content="不同系统之间存取数据，技术上最简单的方式就是提供接口。既然是不同系统，那么大家很可能不是同一家单位，需要留意的事情也会更多。本文记录了一些接口设计、联调前后需要考虑的事情。总体上来讲，我们既要保证准确实现功能，又要留个心眼，保护自己的利益，避免让自己吃亏。">
-<meta name="twitter:image" content="https://plusnan.me/img/cross-company-debug/putty-tunnel.png">
+<meta name="twitter:title" content="Java代码审查（三）：关于编程习惯的要求">
+<meta name="twitter:description" content="这里是我个人的倡议，仅供参考。各项目应按照实际情况制定自己的操作规范，经常加强对新人的教育，以免把经文念得越来越歪。">
 
 
 
@@ -116,7 +114,7 @@
 
 
 
-  <link rel="canonical" href="https://plusnan.me/2018/07/14/cross-company-debug/"/>
+  <link rel="canonical" href="https://plusnan.me/2019/01/04/java-code-review-3/"/>
 
 
 
@@ -126,7 +124,7 @@
   };
 </script>
 
-  <title>接口设计与联调经验 | 一点微小的博客</title>
+  <title>Java代码审查（三）：关于编程习惯的要求 | 一点微小的博客</title>
   
 
 
@@ -329,7 +327,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2018/07/14/cross-company-debug/"/>
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2019/01/04/java-code-review-3/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="InfNaN"/>
@@ -346,7 +344,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">接口设计与联调经验
+          <h1 class="post-title" itemprop="name headline">Java代码审查（三）：关于编程习惯的要求
 
               
             
@@ -372,7 +370,7 @@
                 
               
 
-              <time title="创建时间：2018-07-14 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-14T00:00:00+08:00">2018-07-14</time>
+              <time title="创建时间：2019-01-04 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-04T00:00:00+08:00">2019-01-04</time>
             
 
             
@@ -389,7 +387,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-01-05 23:42:37" itemprop="dateModified" datetime="2019-01-05T23:42:37+08:00">2019-01-05</time>
+                <time title="修改时间：2019-01-06 12:36:23" itemprop="dateModified" datetime="2019-01-06T12:36:23+08:00">2019-01-06</time>
               
             
           </span>
@@ -421,10 +419,10 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/07/14/cross-company-debug/#comments" itemprop="discussionUrl">
+                <a href="/2019/01/04/java-code-review-3/#comments" itemprop="discussionUrl">
                 
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/07/14/cross-company-debug/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2019/01/04/java-code-review-3/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -452,45 +450,90 @@
       
 
       
-        <p>不同系统之间存取数据，技术上最简单的方式就是提供接口。既然是不同系统，那么大家很可能不是同一家单位，需要留意的事情也会更多。本文记录了一些接口设计、联调前后需要考虑的事情。总体上来讲，我们既要保证准确实现功能，又要留个心眼，保护自己的利益，避免让自己吃亏。<br><a id="more"></a> </p>
-<h1 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h1><p>虽然接口的原理很简单，开发工作量可能也比其他开发工作少很多，但是需要留意，在业务问题上“我这样想”不代表“对方也会这样想”，并且开发时的沟通成本往往会比较高，上线之后一旦出现故障可能还会互相踢皮球，因此也不能把设计工作想象得太简单。</p>
-<ol>
-<li>约定好具体的数据格式、字符编码和收发方式！例如“传JSON”既可能是直接HTTP POST一段JSON（application/json），也可能是调用WebService，里面参数为JSON（application/xml），前者通常是在用户浏览器上通过AJAX调用，后者可能是自己后台直接调用对方的服务器，不经过用户的界面。如果连这个都弄错，后续发现问题时就要全部推倒重来了；</li>
-<li>确保双方对于每个函数、每个参数的理解是一致的。特别是业务系统，对方对业务场景与业务的理解可能与我们很不一样，因此要多进行确认（有条件的话建议开会，当面聊），及时更新和完善文档；</li>
-<li>搞清楚接口调用时机、频率，估计一下接口调用数据规模，避免因为频率不当或者数据规模太大而出问题；</li>
-<li>有异常处理和超时机制，能够正确处理目标服务器宕机、404、500、长时间不返回等情况。接口恢复后，故障期间产生的数据能够正确消化掉；</li>
-<li>检查输入数据是否合法（格式正确、符合业务要求以及具有业务权限），拒绝格式不合规范的数据，避免出现类似用户改个ID就能查看或修改别人数据的情况；</li>
-<li>对于有状态的数据，约定好重复发送请求（例如用户或程序重复提交工作单）的后果；</li>
-<li>考虑专门的日志记录，例如使用专门的文件或在数据库建立接口日志表；</li>
-<li>有认证机制和访问控制机制，防止接口被无关厂商及人员冒用或恶意调用。</li>
+        <p>这里是我个人的倡议，仅供参考。各项目应按照实际情况制定自己的操作规范，经常加强对新人的教育，以免把经文念得越来越歪。<br><a id="more"></a></p>
+<h1 id="新来者"><a href="#新来者" class="headerlink" title="新来者"></a>新来者</h1><ul>
+<li>主动了解项目有哪些开发规范。<ul>
+<li>如果实际操作与开发规范已经不符，要敢于提出质疑，纠正错误操作或调整过时规范。</li>
+</ul>
+</li>
+<li>仿写是快速学习的一种方法，但是，仿写时候要动脑子，不要完全照抄已有代码，更不要照搬垃圾代码。</li>
+<li>除了完成任务，不要忘了界面美观、操作便利、性能高效、保证信息安全、代码规范清晰这类不会使自己涨工资但是能减少被诅咒次数的东西。</li>
+<li>如果不能保质保量地完成任务，一定要尽早吱声。如果拖到最后也做不出来，或者做到最后挖的坑比正面贡献还多，后果好不了。</li>
+</ul>
+<h1 id="开发工作"><a href="#开发工作" class="headerlink" title="开发工作"></a>开发工作</h1><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ul>
+<li>新功能和数据库表结构的设计都要通过评审。</li>
+<li>搞清楚业务场景和业务逻辑再动手。</li>
+<li>把数据量估计好，以免产生正式环境运行过慢、页面展示爆炸等特效。</li>
+</ul>
+<h2 id="书写新代码"><a href="#书写新代码" class="headerlink" title="书写新代码"></a>书写新代码</h2><ul>
+<li>避免直接copy-paste。就算抄也要自己写一遍，过一下脑子。</li>
+<li>如果一段代码重复了两三遍甚至更多，那么应当改写成公共代码。<ul>
+<li>接上条，造新轮子之前，查一下有没有可以拿来用的现成的东西。</li>
+</ul>
+</li>
+<li>将Web（请求处理）、BO（业务逻辑）、DAO（数据持久）等层次与PO（持久对象）、VO（值对象）等领域区分好，例如不要在Web层或JSP页面写业务逻辑。</li>
+<li>代码和页面风格都要规范统一。</li>
+</ul>
+<h2 id="修改既有代码"><a href="#修改既有代码" class="headerlink" title="修改既有代码"></a>修改既有代码</h2><ul>
+<li>修改函数签名、函数实现、应用配置、接口签名等内容之前必须先检查引用情况。<ul>
+<li>修改公共方法和公共配置之前应仔细评估影响并加强测试。如果不清楚影响，那么要先咨询老员工再修改。</li>
+<li>设计和修改公共组件（包括公共函数、标签、模板、Filter等），除了正确实现功能，还必须更加关注运行效率、资源占用、线程安全性等问题。</li>
+</ul>
+</li>
+<li>如果发现待修改的代码比较诡异，修改之前建议先问问老员工有没有什么历史原因或者坑。</li>
+<li>即使是简单的修改也要进行测试，因为再有经验也有可能改出问题。</li>
+<li>及时清理出于备份目的留下的注释，以免造成混淆。如果后续有可能恢复，那么应当用注释说清情况。</li>
+</ul>
+<h2 id="提交"><a href="#提交" class="headerlink" title="提交"></a>提交</h2><ul>
+<li>提交代码之前完成功能自测。</li>
+<li>提交之前对代码进行一下美化，例如自动缩进、移除无用import等（需要事先统一标准）。</li>
+<li>提交之前必须检查待提交的Diff（差异）：<ul>
+<li>提交务必完整，不能出现编译错误，不能导致程序无法正常运行。</li>
+<li>不能完整提交就不要提交。</li>
+<li>不要有错别字、笔误和语病。</li>
+<li>不要把本地调试代码（例如alert(val)、屏蔽校验规则、写死测试数据之类的）提交上去。</li>
+</ul>
+</li>
+<li>提交时书写提交说明，例如实现了什么功能或解决了什么问题。</li>
+<li>注意提交频率，按活动一次性提交齐全，不要长期不提交，也不要改一个文件就提交一下。</li>
+</ul>
+<h1 id="代码细节"><a href="#代码细节" class="headerlink" title="代码细节"></a>代码细节</h1><h2 id="命名"><a href="#命名" class="headerlink" title="命名"></a>命名</h2><ul>
+<li>除了循环ijk那种一望而知的情况，要用有意义的英文名，而且不要用拼音简写，更不要拼音英语混写。</li>
+<li>保持命名一致，例如不要前面还在用“state”表示“状态”，后面就变成了用“status”表示状态。如果不知道如何一致，那么就看代码规范以及别人怎么写的。</li>
+<li>如果确实需要借用名称或借用字段，要把情况写清楚，以免造成混淆。</li>
+</ul>
+<h2 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h2><ul>
+<li>书写SQL要实地执行一下。</li>
+<li>要估计投入到生产环境之后会产生多少数据，以免效率过低甚至系统瘫痪。</li>
+<li>查询和关联时要留意是否一定能查到数据。不确定的话要与熟悉业务的人或DBA交流。</li>
+<li>书写复杂SQL要看执行计划，估算执行效率，必要时与DBA交流，以便在数据库层面进行优化调整。<ul>
+<li>如果顺便发现没有主键或索引，那么也要告诉DBA。</li>
+</ul>
+</li>
+<li>对于改造升级类的系统，注意要兼容历史数据。</li>
+</ul>
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><ul>
+<li>在业务代码处简单地解释业务规则。</li>
+<li>复杂逻辑、边界情况、HACK操作以及“装逼操作”要写注释说明。</li>
+<li>需求变更、业务逻辑修改等情况务必在相关代码中写注释说明，而且要标出在什么时间、因什么原因而修改，以便事后追溯。<ul>
+<li>接上条，如果预计以后还会发生变动，建议各关联代码都用唯一且相同的代码进行标记（例如CHANGE20190101），这样以后再改代码的时候容易搜索。</li>
+</ul>
+</li>
+<li>TODO的事情写上TODO四个字母并进行跟踪，已经完成以及不是TODO的事情不要写TODO。</li>
+</ul>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
+<li>关于报错：给用户展示正常人类能看懂的文字，而且让用户和开发者都能知道大概是哪方面错误以及如何处理。</li>
+<li>及时清理无效引用与变更。</li>
+<li>及时维护文档。如果不能及时维护，建议强迫自己改完文档再编码。</li>
+</ul>
+<h1 id="本系列目录"><a href="#本系列目录" class="headerlink" title="本系列目录"></a>本系列目录</h1><ol>
+<li><a href="/2019/01/02/java-code-review-1">代码审查问题</a></li>
+<li><a href="/2019/01/03/java-code-review-2">应用安全问题</a></li>
+<li><strong>关于编程习惯的要求</strong></li>
+<li>使用Phabricator进行人工代码审查</li>
+<li>使用FindBugs和SonarQube等工具进行扫描</li>
+<li>……</li>
 </ol>
-<h1 id="联调"><a href="#联调" class="headerlink" title="联调"></a>联调</h1><p><strong>如果是不同公司之间进行合作，务必要留证据！</strong>具体而言：</p>
-<ol>
-<li>记录哪天、与哪个人、调试了什么东西、结果如何；</li>
-<li>各接口函数要输出日志，记录时间、原始数据和一些关键数据；</li>
-<li>重要内容留截图。</li>
-</ol>
-<p>推荐两个调试接口的软件，一个是专门测WebService的<span class="exturl" data-url="aHR0cHM6Ly93d3cuc29hcHVpLm9yZw==" title="https://www.soapui.org">SoapUI<i class="fa fa-external-link"></i></span>，另一个是可以测各种请求的<span class="exturl" data-url="aHR0cHM6Ly93d3cuZ2V0cG9zdG1hbi5jb20vYXBwcw==" title="https://www.getpostman.com/apps">Postman<i class="fa fa-external-link"></i></span>。对我个人而言，由于我们项目经常是WebService里面套JSON，所以SoapUI用得并不舒服，不如自己抓到调用WebService的原始请求内容然后全部扔到Postman中调试：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">soap:Envelope</span> <span class="attr">xmlns:soap</span>=<span class="string">"http://schemas.xmlsoap.org/soap/envelope/"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">soap:Body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ns1:xxxxxmethod</span> <span class="attr">xmlns:ns1</span>=<span class="string">"http://service.xxx.xxxcompany.com/"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">arg0</span>&gt;</span></span><br><span class="line">                &#123;</span><br><span class="line">                    "param1": "xxx",</span><br><span class="line">                    "param2": "yyy",</span><br><span class="line">                    ...</span><br><span class="line">                &#125;</span><br><span class="line">            <span class="tag">&lt;/<span class="name">arg0</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">ns1:xxxxxmethod</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">soap:Body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">soap:Envelope</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>如果主要系统已经上线了，注意不要在生产环境或使用生产库直接联调（顶多是试一试接口和主要功能通不通），而是要准备一个和生产环境架构相似的测试环境，在测试环境上进行联调。</p>
-<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>上线之后更要专门记录接口的调用情况，做到有据可查。清楚地了解接口调用情况、频率以及状态，在出现故障时可以尽量避免踢皮球和承担无谓责任。有必要的话还应该实行访问控制，一旦遭遇攻击或疑似攻击（例如调用频率太高等）时可以方便地进行处理。</p>
-<div class="note info"><p>我们系统有一个接口经常出问题，责任经常在对方，但是用户总给我们客服打电话，而且对方公司经常消极对待，于是我一怒之下把对方公司的名字和客服电话写到展示给用户的错误信息里面了。</p></div>
-<h1 id="补充技巧：内网穿透"><a href="#补充技巧：内网穿透" class="headerlink" title="补充技巧：内网穿透"></a>补充技巧：内网穿透</h1><p>理想情况下应该建立一个双方都便于访问的开发测试区。如果没有条件或者来不及准备，而且双方公司都能访问互联网，可以通过内网穿透的方法把本地应用映射到公网上。</p>
-<p>操作之前去搞一台VPS。我个人推荐<span class="exturl" data-url="aHR0cHM6Ly92dWx0ci5jb20=" title="https://vultr.com">Vultr<i class="fa fa-external-link"></i></span>，因为他家VPS价格比较便宜，而且按使用时间计费，可以随时买随时扔。对于内网穿透而言，$5（备注：支持支付宝和微信支付）的VPS足矣。</p>
-<div class="note danger"><p>计划以内网穿透方法进行联调之前，请留意自己公司的管理制度里面有没有网络限制，以免倒霉被抓挨罚。如果能以遵守制度的方式将内网端口映射到公网，建议走公司的手续。</p></div>
-<div class="note info"><p>使用Vultr部署时建议选择洛杉矶或东京节点，这两个网络相对而言比较好。购买时注意不要选$2.5的机器，因为没有IPv4地址。</p></div>
-<div class="note warning"><p>有时候你的服务器会出现Ping不通，或者出现能Ping通但是SSH连接超时的情况，这很可能是你服务器的IP或端口被墙了。如果遇到这种情况，可以去买一台新机器并删除旧的机器。另外有时候需要多刷几次。</p></div>
-<p>新机器启动之后，先在公司Ping一下，没问题的话就可以用PuTTY等软件建立连接了。输入Vultr网站上面给你提供的服务器IP（端口22）、用户名和密码，然后</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
-<p>将其中的<code>GatewayPorts no</code>改成<code>yes</code>，没找到的话就在文件末尾追加一行，保存。然后</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart sshd</span><br></pre></td></tr></table></figure>
-<p>准备工作就做好了。</p>
-<div class="note warning"><p>有些操作系统（例如CentOS）会默认开启防火墙，所以要确认一下防火墙状态，然后关闭防火墙或者开放待使用端口。</p></div>
-<p>联调时先去下载PuTTY，启动，在里面输入服务器地址和端口（默认22），并且按下图进行设置</p>
-<p><img src="/img/cross-company-debug/putty-tunnel.png" alt="PuTTY设置"></p>
-<p>不要忘记点Add按钮。假如本机是<code>http://172.18.106.3:8080</code>，服务器IP是198.13.60.108，你选择的端口是8080，那么登录成功后就可以通过<code>http://198.13.60.108:8080</code>来访问自己的应用了。</p>
-<div class="note warning"><p>因为是外国服务器，所以连接可能不太稳定，需要不定期检查连接，断了的话随时重新连。</p></div>
-<div class="note info"><p>如果需要域名，我个人建议去<span class="exturl" data-url="aHR0cHM6Ly9uYW1lY2hlYXAuY29t" title="https://namecheap.com">Namecheap<i class="fa fa-external-link"></i></span>上面购买个便宜的外国域名（注意：需要准备Visa/MasterCard信用卡）。如果还需要HTTPS，可以使用Let’s Encrypt。如果有国内已备案域名，也可以给应用建个二级域名，但是在国内购买新的一级域名需要花时间备案。</p></div>
 
       
     </div>
@@ -524,7 +567,7 @@
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
     
-    <a href="https://plusnan.me/2018/07/14/cross-company-debug/" title="接口设计与联调经验">https://plusnan.me/2018/07/14/cross-company-debug/</a>
+    <a href="https://plusnan.me/2019/01/04/java-code-review-3/" title="Java代码审查（三）：关于编程习惯的要求">https://plusnan.me/2019/01/04/java-code-review-3/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li>
@@ -537,11 +580,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Web/" rel="tag"># Web</a>
-          
-            <a href="/tags/内网穿透/" rel="tag"># 内网穿透</a>
-          
-            <a href="/tags/项目实施/" rel="tag"># 项目实施</a>
+            <a href="/tags/Java/" rel="tag"># Java</a>
           
         </div>
       
@@ -554,8 +593,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/15/deployment/" rel="next" title="Web应用部署注意事项">
-                <i class="fa fa-chevron-left"></i> Web应用部署注意事项
+              <a href="/2019/01/02/java-code-review-1/" rel="next" title="Java代码审查（一）：代码审查问题">
+                <i class="fa fa-chevron-left"></i> Java代码审查（一）：代码审查问题
               </a>
             
           </div>
@@ -563,10 +602,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/15/to-new-employee/" rel="prev" title="给校招新员工分享的一点人生的经验">
-                给校招新员工分享的一点人生的经验 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -797,7 +832,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#设计"><span class="nav-number">1.</span> <span class="nav-text">设计</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#联调"><span class="nav-number">2.</span> <span class="nav-text">联调</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运行"><span class="nav-number">3.</span> <span class="nav-text">运行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#补充技巧：内网穿透"><span class="nav-number">4.</span> <span class="nav-text">补充技巧：内网穿透</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#新来者"><span class="nav-number">1.</span> <span class="nav-text">新来者</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开发工作"><span class="nav-number">2.</span> <span class="nav-text">开发工作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">2.1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#书写新代码"><span class="nav-number">2.2.</span> <span class="nav-text">书写新代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改既有代码"><span class="nav-number">2.3.</span> <span class="nav-text">修改既有代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提交"><span class="nav-number">2.4.</span> <span class="nav-text">提交</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码细节"><span class="nav-number">3.</span> <span class="nav-text">代码细节</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#命名"><span class="nav-number">3.1.</span> <span class="nav-text">命名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL"><span class="nav-number">3.2.</span> <span class="nav-text">SQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注释"><span class="nav-number">3.3.</span> <span class="nav-text">注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">3.4.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#本系列目录"><span class="nav-number">4.</span> <span class="nav-text">本系列目录</span></a></li></ol></div>
             
 
           </div>
@@ -952,9 +987,9 @@
   
     <script>
       var disqus_config = function () {
-        this.page.url = "https://plusnan.me/2018/07/14/cross-company-debug/";
-        this.page.identifier = "2018/07/14/cross-company-debug/";
-        this.page.title = '接口设计与联调经验';
+        this.page.url = "https://plusnan.me/2019/01/04/java-code-review-3/";
+        this.page.identifier = "2019/01/04/java-code-review-3/";
+        this.page.title = 'Java代码审查（三）：关于编程习惯的要求';
         };
       function loadComments () {
         var d = document, s = d.createElement('script');
