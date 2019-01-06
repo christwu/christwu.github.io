@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://plusnan.me/2018/11/02/weblogic-caution/</loc>
+    
+    <lastmod>2019-01-06T18:02:43.288Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://plusnan.me/2019/01/03/java-code-review-2/</loc>
     
     <lastmod>2019-01-06T17:53:57.139Z</lastmod>
@@ -47,13 +54,6 @@
     <loc>https://plusnan.me/2018/05/15/deployment/</loc>
     
     <lastmod>2019-01-05T15:42:33.655Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://plusnan.me/2018/11/02/weblogic-caution/</loc>
-    
-    <lastmod>2019-01-05T15:30:02.468Z</lastmod>
     
   </url>
   
