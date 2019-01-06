@@ -94,20 +94,18 @@
 
 
 
-  <meta name="description" content="在讨论代码审查问题之前，需要指出不遵守代码规范的后果：  被骂“坑爹” 被同事暗中诅咒 跳槽之后被新同事暗中诅咒 跳槽之后被原来公司的同事暗中诅咒  为了避免诅咒的命运，本系列文章整理了一些代码审查问题，并以个人角度对编程习惯提出一些要求和建议。对于项目而言，一方面要加强审查，另一方面要加强对项目成员的教育，防止问题再次产生。">
-<meta name="keywords" content="Java">
+  <meta name="description" content="由于安全问题经常被忽视与无视，因此有必要专门指出一些常见的安全隐患以及预防措施。">
+<meta name="keywords" content="Java,安全,注入,越权">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java代码审查：目录">
-<meta property="og:url" content="https://plusnan.me/2019/01/01/java-code-review-0/index.html">
+<meta property="og:title" content="Java代码审查（二）：应用安全问题">
+<meta property="og:url" content="https://plusnan.me/2019/01/03/java-code-review-2/index.html">
 <meta property="og:site_name" content="一点微小的博客">
-<meta property="og:description" content="在讨论代码审查问题之前，需要指出不遵守代码规范的后果：  被骂“坑爹” 被同事暗中诅咒 跳槽之后被新同事暗中诅咒 跳槽之后被原来公司的同事暗中诅咒  为了避免诅咒的命运，本系列文章整理了一些代码审查问题，并以个人角度对编程习惯提出一些要求和建议。对于项目而言，一方面要加强审查，另一方面要加强对项目成员的教育，防止问题再次产生。">
+<meta property="og:description" content="由于安全问题经常被忽视与无视，因此有必要专门指出一些常见的安全隐患以及预防措施。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://plusnan.me/img/2019-01-01-java-code-review-0/kuroneko.jpg">
-<meta property="og:updated_time" content="2019-01-05T16:55:50.813Z">
+<meta property="og:updated_time" content="2019-01-06T04:52:43.680Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java代码审查：目录">
-<meta name="twitter:description" content="在讨论代码审查问题之前，需要指出不遵守代码规范的后果：  被骂“坑爹” 被同事暗中诅咒 跳槽之后被新同事暗中诅咒 跳槽之后被原来公司的同事暗中诅咒  为了避免诅咒的命运，本系列文章整理了一些代码审查问题，并以个人角度对编程习惯提出一些要求和建议。对于项目而言，一方面要加强审查，另一方面要加强对项目成员的教育，防止问题再次产生。">
-<meta name="twitter:image" content="https://plusnan.me/img/2019-01-01-java-code-review-0/kuroneko.jpg">
+<meta name="twitter:title" content="Java代码审查（二）：应用安全问题">
+<meta name="twitter:description" content="由于安全问题经常被忽视与无视，因此有必要专门指出一些常见的安全隐患以及预防措施。">
 
 
 
@@ -116,7 +114,7 @@
 
 
 
-  <link rel="canonical" href="https://plusnan.me/2019/01/01/java-code-review-0/"/>
+  <link rel="canonical" href="https://plusnan.me/2019/01/03/java-code-review-2/"/>
 
 
 
@@ -126,7 +124,7 @@
   };
 </script>
 
-  <title>Java代码审查：目录 | 一点微小的博客</title>
+  <title>Java代码审查（二）：应用安全问题 | 一点微小的博客</title>
   
 
 
@@ -329,7 +327,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2019/01/01/java-code-review-0/"/>
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2019/01/03/java-code-review-2/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="InfNaN"/>
@@ -346,7 +344,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Java代码审查：目录
+          <h1 class="post-title" itemprop="name headline">Java代码审查（二）：应用安全问题
 
               
             
@@ -372,7 +370,7 @@
                 
               
 
-              <time title="创建时间：2019-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-01T00:00:00+08:00">2019-01-01</time>
+              <time title="创建时间：2019-01-03 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-03T00:00:00+08:00">2019-01-03</time>
             
 
             
@@ -389,7 +387,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-01-06 00:55:50" itemprop="dateModified" datetime="2019-01-06T00:55:50+08:00">2019-01-06</time>
+                <time title="修改时间：2019-01-06 12:52:43" itemprop="dateModified" datetime="2019-01-06T12:52:43+08:00">2019-01-06</time>
               
             
           </span>
@@ -421,10 +419,10 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/01/01/java-code-review-0/#comments" itemprop="discussionUrl">
+                <a href="/2019/01/03/java-code-review-2/#comments" itemprop="discussionUrl">
                 
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/01/01/java-code-review-0/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2019/01/03/java-code-review-2/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -452,20 +450,38 @@
       
 
       
-        <p>在讨论代码审查问题之前，需要指出不遵守代码规范的后果：</p>
-<ol>
-<li>被骂“坑爹”</li>
-<li>被同事暗中诅咒</li>
-<li>跳槽之后被新同事暗中诅咒</li>
-<li>跳槽之后被原来公司的同事暗中诅咒</li>
-</ol>
-<p>为了避免诅咒的命运，本系列文章整理了一些代码审查问题，并以个人角度对编程习惯提出一些要求和建议。对于项目而言，一方面要加强审查，另一方面要加强对项目成员的教育，防止问题再次产生。</p>
+        <p>由于安全问题经常被忽视与无视，因此有必要专门指出一些常见的安全隐患以及预防措施。</p>
 <a id="more"></a>
-<p><img src="/img/2019-01-01-java-code-review-0/kuroneko.jpg" alt="诅咒"></p>
+<h1 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h1><h1 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h1><h2 id="其他注入"><a href="#其他注入" class="headerlink" title="其他注入"></a>其他注入</h2><p>路径注入</p>
+<h1 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h1><h1 id="恶意文件执行"><a href="#恶意文件执行" class="headerlink" title="恶意文件执行"></a>恶意文件执行</h1><p>例：应用提供文件上传功能，并可通过指定路径访问。假如上传1.jpg之后便可通过<code>http://www.xxx.com/files/1.jpg</code>进行访问，那么自然会有人试图上传 backdoor.jsp，一旦服务器能够执行<code>http://www.xxx.com/files/backdoor.jsp</code>这个路径，那么就会出现渗透和攻击。</p>
+<p>防范措施：</p>
+<ol>
+<li>检查待上传文件的文件类型。</li>
+<li>对服务器进行设置，或者对目录加以处理，防止服务器执行存放目录下的文件。</li>
+</ol>
+<h1 id="越权访问"><a href="#越权访问" class="headerlink" title="越权访问"></a>越权访问</h1><p>例1：自己的工作单是<code>http://www.xxx.com/business/view.jsp?id=1024</code>，将1024改成其他数字就看到了其他人的工作单。</p>
+<p>防范措施：加入访问控制检测，只允许查询自己的工作单。例如校验工作单的办理者是否为本人，或者在SQL上面加入权限相关条件，使不具备访问权限的数据查不出来。</p>
+<p>例2：张三有权限查看一些敏感数据，而李四没有。李四发现张三查看敏感数据的网址是<code>http://www.xxx.com/business/viewsecret.jsp</code>，之后将其记录下来，并使用自己账号访问这个地址，结果也看到了敏感数据。</p>
+<p>防范措施：假设用户知道每一个功能的URL。对于每个URL，进入之前程序需要先校验用户是否具有相关权限。另外为了方便，也可以实现用户访问控制相关框架。</p>
+<p>例3：你在某功能上只有部分操作权限，使用浏览器的“检查元素”功能找到那些按钮，将disabled属性删除，结果便可以进行受限操作。</p>
+<p>防范措施：无论前台是否有校验，后台务必进行校验。</p>
+<h1 id="信息泄漏"><a href="#信息泄漏" class="headerlink" title="信息泄漏"></a>信息泄漏</h1><p>例1：登录系统，用户名错误时系统提示“用户名错误”，密码错误时系统提示“密码错误”。这样攻击者看到“密码错误”时便知道用户名是正确的。</p>
+<p>防范措施：</p>
+<ol>
+<li>提示“用户名或密码错误”。</li>
+<li>加入验证码，或者多次失败后锁定账号，以防暴力猜测密码。</li>
+</ol>
+<p>例2：在错误信息中出现SQL语句。这样攻击者一旦攻进数据库便会更加容易知道该查哪些表的哪些数据。</p>
+<p>防范措施：检查报错内容，并且检查有没有关闭类似“Debug模式”的设置，不要暴露程序源代码或SQL这样的敏感信息。</p>
+<p>例3：直接展示用户身份证号、手机号等敏感数据。</p>
+<p>防范措施：如无必要展示则不展示，或者进行脱敏处理（138****1234、320101******121234）。</p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>例1：分页功能每页最多显示100条，通过构造请求，使每页查出10000条。</p>
+<p>防范措施：</p>
+<p>例2：重复提交</p>
 <h1 id="本系列目录"><a href="#本系列目录" class="headerlink" title="本系列目录"></a>本系列目录</h1><ol>
 <li><a href="/2019/01/02/java-code-review-1">代码审查问题</a></li>
-<li><a href="/2019/01/03/java-code-review-2">应用安全问题</a>：由于安全问题经常被忽视和无视，因此有必要专门指出安全隐患以及预防措施。</li>
-<li><a href="/2019/01/04/java-code-review-3">关于编程习惯的要求</a>：这里主要是我个人关于操作方面的倡议，感觉合理的话可以参考。</li>
+<li><strong>应用安全问题</strong></li>
+<li><a href="/2019/01/04/java-code-review-3">关于编程习惯的要求</a></li>
 <li>使用Phabricator进行人工代码审查</li>
 <li>使用FindBugs和SonarQube等工具进行扫描</li>
 <li>……</li>
@@ -503,7 +519,7 @@
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
     
-    <a href="https://plusnan.me/2019/01/01/java-code-review-0/" title="Java代码审查：目录">https://plusnan.me/2019/01/01/java-code-review-0/</a>
+    <a href="https://plusnan.me/2019/01/03/java-code-review-2/" title="Java代码审查（二）：应用安全问题">https://plusnan.me/2019/01/03/java-code-review-2/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li>
@@ -518,6 +534,12 @@
           
             <a href="/tags/Java/" rel="tag"># Java</a>
           
+            <a href="/tags/安全/" rel="tag"># 安全</a>
+          
+            <a href="/tags/注入/" rel="tag"># 注入</a>
+          
+            <a href="/tags/越权/" rel="tag"># 越权</a>
+          
         </div>
       
 
@@ -529,8 +551,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/20/deploy-checklist/" rel="next" title="升级发版检查表">
-                <i class="fa fa-chevron-left"></i> 升级发版检查表
+              <a href="/2019/01/02/java-code-review-1/" rel="next" title="Java代码审查（一）：代码审查问题">
+                <i class="fa fa-chevron-left"></i> Java代码审查（一）：代码审查问题
               </a>
             
           </div>
@@ -539,8 +561,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/01/02/java-code-review-1/" rel="prev" title="Java代码审查（一）：代码审查问题">
-                Java代码审查（一）：代码审查问题 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/01/04/java-code-review-3/" rel="prev" title="Java代码审查（三）：关于编程习惯的要求">
+                Java代码审查（三）：关于编程习惯的要求 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -768,7 +790,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#本系列目录"><span class="nav-number">1.</span> <span class="nav-text">本系列目录</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#XSS"><span class="nav-number">1.</span> <span class="nav-text">XSS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SQL注入"><span class="nav-number">2.</span> <span class="nav-text">SQL注入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#其他注入"><span class="nav-number">2.1.</span> <span class="nav-text">其他注入</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CSRF"><span class="nav-number">3.</span> <span class="nav-text">CSRF</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#恶意文件执行"><span class="nav-number">4.</span> <span class="nav-text">恶意文件执行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#越权访问"><span class="nav-number">5.</span> <span class="nav-text">越权访问</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#信息泄漏"><span class="nav-number">6.</span> <span class="nav-text">信息泄漏</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他"><span class="nav-number">7.</span> <span class="nav-text">其他</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#本系列目录"><span class="nav-number">8.</span> <span class="nav-text">本系列目录</span></a></li></ol></div>
             
 
           </div>
@@ -923,9 +945,9 @@
   
     <script>
       var disqus_config = function () {
-        this.page.url = "https://plusnan.me/2019/01/01/java-code-review-0/";
-        this.page.identifier = "2019/01/01/java-code-review-0/";
-        this.page.title = 'Java代码审查：目录';
+        this.page.url = "https://plusnan.me/2019/01/03/java-code-review-2/";
+        this.page.identifier = "2019/01/03/java-code-review-2/";
+        this.page.title = 'Java代码审查（二）：应用安全问题';
         };
       function loadComments () {
         var d = document, s = d.createElement('script');
