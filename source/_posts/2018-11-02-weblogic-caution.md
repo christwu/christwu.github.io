@@ -136,7 +136,7 @@ securerandom.source=file:/dev/./urandom
 之后建域和起停之类操作就不需要再等待十多分钟了。
 
 ## 如果通过控制台启动服务器时起不来
-如果Weblogic各节点已正确设置，各服务器的防火墙已经开放5556端口，NodeManager也已经启动，但是仍然无法通过控制台启动节点，提示“不兼容的状态”，而且在startNodeManager.sh的输出中出现`javax.net.ssl.SSLKeyException: \[Security:090482\]BAD_CERTIFICATE alert was received from ...`：
+如果Weblogic各节点已正确设置，各服务器的防火墙已经开放5556端口，NodeManager也已经启动，但是仍然无法通过控制台启动节点，提示“不兼容的状态”，而且在startNodeManager.sh的输出中出现`javax.net.ssl.SSLKeyException: [Security:090482]BAD_CERTIFICATE alert was received from ...`：
 
 ### 方法一：重新设置证书
 在集群的每台服务器上面设置一下证书（如果执行第一行命令就报错的话，请把$WL_HOME换成实际安装目录）：
