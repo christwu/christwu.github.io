@@ -30,7 +30,7 @@ code {
 | Apache CXF提供WebService服务	| javax.xml.ws.soap.SOAPFaultException: Cannot create a secure XMLInputFactory | -Dorg.apache.cxf.stax.allowInsecureParser=1
 
 ## 路径问题
-假设程序部署在服务器的`/home/weblogic/project`中，Weblogic安装在`/u01/Oracle/Middleware`下面，而且程序会动态生成文件，实际上文件会放在类似于`/u01/Oracle/Middleware/user_projects/domains/base_domain/servers/app_server1/stage/project`的对应位置中。
+假设程序部署在服务器的`/home/weblogic/project`中，Weblogic安装在`/u01/Oracle/Middleware`下面，而且程序会动态生成文件，实际上文件会放在类似于`/u01/Oracle/Middleware/user_projects/domains/base_domain/servers/app_server1/stage/project`的对应位置中，而且激活更新时候文件会丢失，需要重新生成。
 
 避免使用中文文件名和中文路径，以免因字符编码问题导致部署或升级失败。举个例子，如果文件里有中文名，打包并解压之后文件名变成了乱码，那么更新的时候Weblogic会提示`Error occurred while downloading files from admin server for deployment request "xxx,xxx,xxx". Underlying error is: "null"`。
 
@@ -41,11 +41,15 @@ code {
 生产环境通常会架设集群，通过负载均衡进行访问。如果负载均衡未按照Cookie进行分配，或者分配策略不完全正确，那么这样的话很可能会存在串Session的问题，例如登录成功之后进的是节点1，稍微做点操作后默默地跳到了节点3，导致会话丢失，系统提示重新登录。因为平时开发不会去使用负载均衡，所以可能注意不到这个问题。
 
 这个问题可以通过以下几种方法解决：
-1. 正确地配置负载均衡，保证同一会话的流量只分配到同一节点上；
+1. 正确地配置负载均衡，保证同一会话（JSESSIONID）的流量只分配到同一节点上；
 2. 使用Weblogic的“会话复制”功能（这个比较正统）；
 3. 通过Redis等实现会话共享（比较复杂，而且Weblogic不是没有相关功能，不推荐）。
 
-会话复制的操作方法可以用Google搜索。由于我们项目比较特殊，所以使用的方法和以上三种均不相同（用户认证和会话控制由集成在上游的系统管理，请求通过上游的反向代理传过来，用户信息保存在特定HTTP Header中，而我们自己项目内的用户验证在Filter中进行，一旦Session丢掉可以直接根据Header信息重建）。
+会话复制的操作方法可以用Google搜索。
+
+{% note default %}
+由于我们项目比较特殊，所以使用的方法和以上三种均不相同：用户认证和会话控制由集成在上游的系统管理，请求通过上游的反向代理传过来，用户信息保存在特定HTTP Header中，而我们自己项目内的用户验证在Filter中进行，一旦Session丢掉可以直接根据Header信息重建。
+{% endnote %}
 
 # 部署阶段
 ## 主机名与hosts
@@ -59,7 +63,7 @@ code {
 ## 建议进行网络测试
 在开始部署之前，建议在应用服务器上测试一下能否访问数据库等资源。如果网络不通，那么改Weblogic设置时可能会无响应，卡了半天之后才蹦出一句`The Network adapter could not establish the connection`，白白耽误时间。
 
-如果系统没装telnet，可以通过以下Java程序来测一下端口通不通，或者简单地测试一下能不能ping通（但是有些机房可能会出现IP能ping通但是端口访问被拦截的情况）：
+如果系统没装telnet，可以简单地测试一下能不能ping通，或者通过以下Java程序来测一下端口通不通（有些机房可能会出现IP能ping通但是端口被拦截的情况）：
 
 ```java
 import java.io.IOException;
@@ -165,7 +169,7 @@ SecureListener = false
 如果NodeManager使用SSL，解压完成后，前文提到的“NodeManager证书”还是要在每台服务器上操作一遍。
 
 ### （待研究）服务器监听地址不要贸然写成0.0.0.0
-虽然0.0.0.0也是一个有效的监听地址，但是在组建集群时不要贸然地写成0.0.0.0，否则AdminServer与各节点之间的通信肯可能会出现问题，例如服务器状态变成UNKNOWN，或者部署应用无响应。具体原因和解决方法待研究。
+虽然0.0.0.0也是一个有效的监听地址，但是在组建集群时不要贸然地写成0.0.0.0，否则AdminServer与各节点之间的通信会出现问题，例如服务器状态变成UNKNOWN，或者部署应用无响应。具体原因和解决方法待研究。
 
 ## 增加线程数
 如果预计并发数比较高，可以增加应用线程池的线程数。修改config.xml配置文件（例如`/u01/Oracle/Middleware/user_projects/base_domain/config/config.xml`）。假如应用服务器叫app_server1，那么需要找到类似以下的代码
