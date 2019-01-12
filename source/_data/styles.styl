@@ -40,11 +40,15 @@ div.post-body div.note {
 
 article.post div.post-body a:not(.btn),
 article.post div.post-body span.exturl {
-  color: $link-color-article;
-  border-bottom: 1px solid $link-decoration-color-article;
+    color: $link-color-article;
+    border-bottom: 1px solid $link-decoration-color-article;
 
-  &:hover {
-    color: $link-hover-color-article;
-    border-bottom-color: $link-decoration-hover-color-article;
-  }
+    &:hover {
+        color: $link-hover-color-article;
+        border-bottom-color: $link-decoration-hover-color-article;
+    }
+}
+
+.post-body .tabs ul.nav-tabs li.tab.active {
+    border-top-color: $link-color-article;
 }

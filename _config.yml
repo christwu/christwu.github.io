@@ -136,6 +136,12 @@ theme_config:
     enable: false
   #toc:
   #  wrap: true
+  tabs:
+    enable: true
+    transition:
+      tabs: false
+      labels: false
+    border_radius: 0
   site_state: true
 
   social:
