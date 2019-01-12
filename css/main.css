@@ -978,9 +978,6 @@ pre .javascript .function {
   display: block;
   line-height: 1.8em;
   padding: 0.25em 0.75em;
-  transition-duration: 0.2s;
-  transition-timing-function: ease-out;
-  transition-delay: 0s;
 }
 .post-body .tabs ul.nav-tabs li.tab a i {
   width: 1.285714285714286em;
@@ -1926,7 +1923,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #6b2f7d;
+  background: #5bff22;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3079,4 +3076,7 @@ article.post div.post-body a:not(.btn):hover,
 article.post div.post-body span.exturl:hover {
   color: #056a97;
   border-bottom-color: #056a97;
+}
+.post-body .tabs ul.nav-tabs li.tab.active {
+  border-top-color: #0684bd;
 }
