@@ -8,7 +8,7 @@ tags:
 - 扯淡
 - Cheatsheet
 ---
-上班时间看小说有很多种方式，例如直接拿手机看，在浏览器上面看，用小说阅读器看，拷到Word里面看，甚至拷到Eclipse里面看……然而，这几种方式看起来都比较显眼，就算放在Eclipse上面看起来也不太自然（毕竟方块字太多太密而且没有语法高亮）。在此，本文针对软件开发和运维人员介绍一种可以大大方方在上班时间看小说、又不会引起怀疑的方法——在数据库客户端里面看小说。
+上班时间看小说有很多种方式，例如直接拿手机看，在浏览器上面看，用小说阅读器看，拷到Word里面看，甚至拷到Eclipse里面看……然而，这几种方式看起来都比较显眼，就算放在Eclipse上面看起来也不太自然（方块字又多又密，而且没有语法高亮，一看就不像程序代码）。在此，本文针对软件开发和运维人员介绍一种可以大大方方在上班时间看小说而且不会引起怀疑的方法——在数据库客户端里面看小说。
 
 <!-- more -->
 
@@ -50,7 +50,7 @@ GRANT ALL PRIVILEGES ON oggforward.* TO oggforward@'%';
 {% tabs 建立表结构 %}
 <!-- tab Oracle -->
 ```sql
--- 《埃罗芒阿老师》（台版《情色漫畫老師》）
+-- 《情色漫畫老師》（中国大陆译作《埃罗芒阿老师》）
 CREATE SEQUENCE OGGFORWARD.SEQ_TBL_EROMANGA START WITH 1 INCREMENT BY 1 NOMAXVALUE;
 CREATE TABLE OGGFORWARD.TBL_EROMANGA (
     ID VARCHAR2(20) NOT NULL        -- 主键
@@ -59,20 +59,21 @@ CREATE TABLE OGGFORWARD.TBL_EROMANGA (
     CHAPTER VARCHAR2(50),           -- 章节
     TEXT VARCHAR2(700),             -- 小说内容，为便于阅读，每行只留200字
     IS_READ CHAR(1) DEFAULT '0',    -- 是否已经阅读
-    ACCESS_TIME DATE
+    ACCESS_TIME DATE                -- 阅读时间
 );
 ```
 <!-- endtab -->
 
 <!-- tab MySQL -->
 ```sql
+-- 《情色漫畫老師》（中国大陆译作《埃罗芒阿老师》）
 CREATE TABLE IF NOT EXISTS oggforward.tbl_eromanga (
-    id INT NOT NULL AUTO_INCREMENT,       -- 主键
-    book VARCHAR(100) NOT NULL,    -- 第几作
-    chapter VARCHAR(50),           -- 章节
-    text VARCHAR(700),             -- 小说内容，为便于阅读，每行只留200字
-    is_read CHAR(1) DEFAULT '0',    -- 是否已经阅读
-    access_time DATE,
+    id INT NOT NULL AUTO_INCREMENT,     -- 主键
+    book VARCHAR(100) NOT NULL,         -- 第几作
+    chapter VARCHAR(50),                -- 章节
+    text VARCHAR(700),                  -- 小说内容，为便于阅读，每行只留200字
+    is_read CHAR(1) DEFAULT '0',        -- 是否已经阅读
+    access_time DATE,                   -- 阅读时间
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ```
@@ -519,11 +520,11 @@ SELECT * FROM v$sqlstats ORDER BY buffer_gets DESC;
 <!-- endtab -->
 {% endtabs %}
 
-如果在IDEA等环境操作数据库，可以再打开一些平日工作用的程序代码，例如：
+如果在IDEA等环境操作数据库，可以再打开一些平日工作用的程序代码。
 
-![看不出任何问题](/img/2019-01-11-oracle-novel/preview.png)
+![看不出什么问题](/img/2019-01-11-oracle-novel/preview.png)
 
-嗯，看不出任何问题（如果不看插画的话），而且领导来了也不怕，大大方方继续执行附近SQL就行了。
+嗯，看不出什么问题（如果不看[插画](/img/2019-01-11-oracle-novel/eromanga.jpg)的话），而且领导来了也不怕，大大方方地继续执行附近SQL就行了。
 
 # 拓展
-如果公司网络管的不严，而且自己电脑或数据库服务器能访问互联网，那么也可以继续拓展，通过Oracle刷新闻、贴吧或微博之类的东西。
+如果公司网络管的不严，而且自己电脑或数据库服务器能访问互联网，那么也可以继续拓展，通过Oracle或MySQL刷新闻、贴吧或微博之类的东西。
