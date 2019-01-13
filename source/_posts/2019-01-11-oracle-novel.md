@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 通过数据库“阅读器”在上班时间看小说
-category: 教程
+category: 闲谈
 tags:
 - Oracle
 - MySQL
@@ -524,7 +524,7 @@ SELECT * FROM v$sqlstats ORDER BY buffer_gets DESC;
 
 ![看不出什么问题](/img/2019-01-11-oracle-novel/preview.png)
 
-嗯，看不出什么问题（如果不看[插画](/img/2019-01-11-oracle-novel/eromanga.jpg)的话），而且领导来了也不怕，大大方方地继续执行附近SQL就行了。
+嗯，看不出什么问题（如果不看[插画](/img/2019-01-11-oracle-novel/eromanga.jpg)的话），而且领导来了也不怕，大大方方地继续执行附近SQL就行了——没准领导还会以为你热爱钻研数据库技术呢。
 
 # 拓展
 如果公司网络管的不严，而且自己电脑或数据库服务器能访问互联网，那么也可以继续拓展，通过Oracle或MySQL刷新闻、贴吧或微博之类的东西。
