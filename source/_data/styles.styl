@@ -51,4 +51,9 @@ article.post div.post-body span.exturl {
 
 .post-body .tabs ul.nav-tabs li.tab.active {
     border-top-color: $link-color-article;
+
+    +mobile-smallest() {
+        border-top-color: $table-border-color;
+        border-left-color: $link-color-article;
+    }
 }
