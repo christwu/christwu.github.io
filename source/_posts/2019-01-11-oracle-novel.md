@@ -5,7 +5,6 @@ category: 闲谈
 tags:
 - Oracle
 - MySQL
-- 扯淡
 - Cheatsheet
 ---
 上班时间看小说有很多种方式，例如直接拿手机看，在浏览器上面看，用小说阅读器看，拷到Word里面看，甚至拷到Eclipse里面看……然而，这几种方式看起来都比较显眼，就算放在Eclipse上面看起来也不太自然（方块字又多又密，而且没有语法高亮，一看就不像程序代码）。在此，本文针对软件开发和运维人员介绍一种可以大大方方在上班时间看小说而且不会引起怀疑的方法——在数据库客户端里面看小说。
@@ -53,7 +52,7 @@ GRANT ALL PRIVILEGES ON oggforward.* TO oggforward@'%';
 -- 《情色漫畫老師》（中国大陆译作《埃罗芒阿老师》）
 CREATE SEQUENCE OGGFORWARD.SEQ_TBL_EROMANGA START WITH 1 INCREMENT BY 1 NOMAXVALUE;
 CREATE TABLE OGGFORWARD.TBL_EROMANGA (
-    ID VARCHAR2(20) NOT NULL        -- 主键
+    ID NUMBER NOT NULL        -- 主键
         CONSTRAINT PK_TBL_EROMANGA PRIMARY KEY,
     BOOK VARCHAR2(100) NOT NULL,    -- 第几作
     CHAPTER VARCHAR2(50),           -- 章节
