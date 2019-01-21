@@ -1923,7 +1923,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #5bff22;
+  background: #a6ffff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3079,4 +3079,10 @@ article.post div.post-body span.exturl:hover {
 }
 .post-body .tabs ul.nav-tabs li.tab.active {
   border-top-color: #0684bd;
+}
+@media (max-width: 413px) {
+  .post-body .tabs ul.nav-tabs li.tab.active {
+    border-top-color: #ddd;
+    border-left-color: #0684bd;
+  }
 }
