@@ -9,9 +9,9 @@ tags:
 <!-- more -->
 
 # 本系列内容
-* 为什么进行切换（本文）
+* **为什么进行切换**
 * [切换的基本操作](/2018/12/13/switch-to-idea-1/)
-* 传统Web项目在IDEA的Project Structure（待撰）
+* [古典Web项目在IDEA的Project Structure](/2019/01/27/switch-to-idea-2)
 * Maven和Gradle项目在IDEA的Project Structure（待撰）
 
 # 切换到IDEA的理由

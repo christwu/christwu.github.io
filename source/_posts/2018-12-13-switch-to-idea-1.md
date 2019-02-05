@@ -141,8 +141,11 @@ Version Control第一个页签是你的待提交修改，第二个页签就是�
 IDEA Ultimate版内置了DataGrip插件。
 -->
 
+# 参见
+* [Migrating From Eclipse to IntelliJ IDEA](https://www.jetbrains.com/help/idea/migrating-from-eclipse-to-intellij-idea.html)
+
 # 本系列目录
 * [为什么进行切换](/2018/12/12/switch-to-idea-0/)
-* 切换的基本操作
-* 传统Web项目在IDEA的Project Structure（待撰）
+* **切换的基本操作**
+* [古典Web项目在IDEA的Project Structure](/2019/01/27/switch-to-idea-2)
 * Maven和Gradle项目在IDEA的Project Structure（待撰）
