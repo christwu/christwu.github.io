@@ -5,10 +5,10 @@ category: 教程
 tags: 
 - IDEA
 ---
-本文主要介绍如何将古典Web项目（不使用Maven、Gradle等构建工具，jar包等全部手工配置）从Eclipse转换到IDEA，即古典项目的Project Structure。
+本文主要介绍如何将古典Web项目（不使用Maven、Gradle等构建工具，jar包等全部手工配置）从Eclipse转换到IDEA。主要内容为古典项目的Project Structure配置。
 <!-- more -->
 
-# 关于Project Structure和Run Configuration
+# 关于IDEA中的Project Structure和Run Configuration
 Project Structure即项目结构。配置Project Structure大体上就是在告诉IDEA以下几件事：
 
 1. 项目用哪个JDK开发？

@@ -564,6 +564,6 @@ tags:
 1. **代码审查问题**
 2. [应用安全问题](/2019/01/03/java-code-review-2)
 3. [关于编程习惯的要求](/2019/01/04/java-code-review-3)
-4. 使用Phabricator进行人工代码审查
+4. [使用Phabricator进行人工代码审查](/2019/02/06/java-code-review-4)
 5. 使用FindBugs和SonarQube等工具进行扫描
 6. ……
