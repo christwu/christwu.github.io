@@ -102,12 +102,12 @@
 <meta property="og:site_name" content="一点微小的博客">
 <meta property="og:description" content="不同系统之间存取数据，技术上最简单的方式就是提供接口。既然是不同系统，那么大家很可能不是同一家单位，需要留意的事情也会更多。本文记录了一些接口设计、联调前后需要考虑的事情。总体上来讲，我们既要保证准确实现功能，又要留个心眼，保护自己的利益，避免让自己吃亏。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://plusnan.me/img/cross-company-debug/putty-tunnel.png">
-<meta property="og:updated_time" content="2019-01-13T14:12:51.322Z">
+<meta property="og:image" content="https://plusnan.me/img/2018-07-14-cross-company-debug/putty-tunnel.png">
+<meta property="og:updated_time" content="2019-02-06T06:32:43.275Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="接口设计与联调经验">
 <meta name="twitter:description" content="不同系统之间存取数据，技术上最简单的方式就是提供接口。既然是不同系统，那么大家很可能不是同一家单位，需要留意的事情也会更多。本文记录了一些接口设计、联调前后需要考虑的事情。总体上来讲，我们既要保证准确实现功能，又要留个心眼，保护自己的利益，避免让自己吃亏。">
-<meta name="twitter:image" content="https://plusnan.me/img/cross-company-debug/putty-tunnel.png">
+<meta name="twitter:image" content="https://plusnan.me/img/2018-07-14-cross-company-debug/putty-tunnel.png">
 
 
 
@@ -389,7 +389,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-01-13 22:12:51" itemprop="dateModified" datetime="2019-01-13T22:12:51+08:00">2019-01-13</time>
+                <time title="修改时间：2019-02-06 14:32:43" itemprop="dateModified" datetime="2019-02-06T14:32:43+08:00">2019-02-06</time>
               
             
           </span>
@@ -467,7 +467,7 @@
 </ol>
 <h1 id="联调"><a href="#联调" class="headerlink" title="联调"></a>联调</h1><p>联调最典型的就是沟通成本，因为沟通成本高所以容易积攒问题，因此建议：</p>
 <ol>
-<li>组织不定期交流，有条件当面聊的话最好当面聊，没有条件的话也要有语音视频会议，避免纯文字交流，免得越做偏差越大；</li>
+<li>不定期组织交流，有条件当面聊的话最好当面聊，没有条件的话也要有语音视频会议，避免纯文字交流，免得越做偏差越大；</li>
 <li>早联调、多联调，早点暴露问题，不要等一切都准备好之后才开始调；</li>
 <li>有条件的话可以准备能随时调用的环境（当然也要给对方准备数据）。</li>
 </ol>
@@ -495,7 +495,7 @@
 <p>准备工作就做好了。</p>
 <div class="note warning"><p>有些操作系统（例如CentOS）会默认开启防火墙，所以要确认一下防火墙状态，然后关闭防火墙或者开放待使用端口。</p></div>
 <p>联调时先去下载PuTTY，启动，在里面输入服务器地址和端口（默认22），并且按下图进行设置</p>
-<p><img src="/img/cross-company-debug/putty-tunnel.png" alt="PuTTY设置"></p>
+<p><img src="/img/2018-07-14-cross-company-debug/putty-tunnel.png" alt="PuTTY设置"></p>
 <p>不要忘记点Add按钮。假如本机是<code>http://172.18.106.3:8080</code>，服务器IP是198.13.60.108，你选择的端口是8080，那么登录成功后就可以通过<code>http://198.13.60.108:8080</code>来访问自己的应用了。</p>
 <div class="note warning"><p>因为是外国服务器，所以连接可能不太稳定，需要不定期检查连接，断了的话随时重新连。</p></div>
 <div class="note info"><p>如果需要域名，我个人建议去<span class="exturl" data-url="aHR0cHM6Ly9uYW1lY2hlYXAuY29t" title="https://namecheap.com">Namecheap<i class="fa fa-external-link"></i></span>上面购买个便宜的外国域名（注意：需要准备Visa/MasterCard信用卡）。如果还需要HTTPS，可以使用Let’s Encrypt。如果有国内已备案域名，也可以给应用建个二级域名，但是在国内购买新的一级域名需要花时间备案。</p></div>
@@ -655,7 +655,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -735,7 +735,7 @@
                     
                       
                     
-                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-count">17</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
