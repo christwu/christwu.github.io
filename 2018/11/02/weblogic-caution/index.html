@@ -46,19 +46,19 @@
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
 
-<link rel="stylesheet" href="/css/main.css?v=6.7.0"/>
+<link rel="stylesheet" href="/css/main.css?v=7.0.0"/>
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
 
 
-  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
 
 
 
@@ -71,7 +71,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    version: '6.7.0',
+    version: '7.0.0',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: false,
     fastclick: false,
@@ -393,7 +393,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -414,15 +414,17 @@
 
           
             
+            
+              
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
                 <a href="/2018/11/02/weblogic-caution/#comments" itemprop="discussionUrl">
-                
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/11/02/weblogic-caution/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/11/02/weblogic-caution/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -500,7 +502,9 @@ code {
 <li>通过Redis等实现会话共享（比较复杂，而且Weblogic不是没有相关功能，不推荐）。</li>
 </ol>
 <p>会话复制的操作方法可以用Google搜索。</p>
-<div class="note default"><p>由于我们项目比较特殊，所以使用的方法和以上三种均不相同：用户认证和会话控制由集成在上游的系统管理，请求通过上游的反向代理传过来，用户信息保存在特定HTTP Header中，而我们自己项目内的用户验证在Filter中进行，一旦Session丢掉可以直接根据Header信息重建。</p></div>
+<div class="note default">
+            <p>由于我们项目比较特殊，所以使用的方法和以上三种均不相同：用户认证和会话控制由集成在上游的系统管理，请求通过上游的反向代理传过来，用户信息保存在特定HTTP Header中，而我们自己项目内的用户验证在Filter中进行，一旦Session丢掉可以直接根据Header信息重建。</p>
+          </div>
 <h1 id="部署阶段"><a href="#部署阶段" class="headerlink" title="部署阶段"></a>部署阶段</h1><h2 id="主机名与hosts"><a href="#主机名与hosts" class="headerlink" title="主机名与hosts"></a>主机名与hosts</h2><p>给服务器设置一个固定IP和固定的主机名，然后将服务器的IP与主机名加入到<code>/etc/hosts</code>中。对于Oracle厂的产品，即便后续设置用不到主机名，设置好之后也可以避免一些不必要的麻烦。</p>
 <h2 id="防火墙配置"><a href="#防火墙配置" class="headerlink" title="防火墙配置"></a>防火墙配置</h2><p>默认情况下，管理控制台的端口是7001，应用是7003，节点管理器是5556，初次部署时需要注意让防火墙放行这三个端口。</p>
 <p>为了安全，需要仔细控制防火墙的放行范围，不要让7001和5556暴露到互联网上面。另外不要把应用部署到AdminServer上面，否则封锁7001端口之后应用就无法访问了。</p>
@@ -545,7 +549,9 @@ code {
 <p>建议编写一份升级检查表，将准备工作、实施工作和收尾工作全部列入，以免因漏项导致升级出现问题。</p>
 <p>如果更新时遭遇<code>Error occurred while downloading files from admin server for deployment request &quot;xxx,xxx,xxx&quot;. Underlying error is: &quot;null&quot;</code>，那么需要去检查AdminServer.log的日志（例如<code>/u01/Oracle/Middleware/user_projects/base_domain/servers/AdminServer/logs/AdminServer.log</code>）。我碰到过两种会出现这种错误的情况，一种是文件名乱码，另一种是文件权限不正确（例如服务以weblogic用户运行，但是文件所有者是root，weblogic访问不了）。假如权限不正确，可以<code>chown -R weblogic:weblogic 存放程序的目录</code>。</p>
 <p>我们部分应用服务器安装了防篡改软件，如果升级之前忘记关闭防护功能，在控制台上激活时会报错，提示无法“remove staged files”。</p>
-<div class="note info"><p>建议在系统中加入可配置参数的系统公告功能，这样在升级或者维护之前可以通知用户，使用户及时做好准备。</p></div>
+<div class="note info">
+            <p>建议在系统中加入可配置参数的系统公告功能，这样在升级或者维护之前可以通知用户，使用户及时做好准备。</p>
+          </div>
 <h2 id="重启服务器"><a href="#重启服务器" class="headerlink" title="重启服务器"></a>重启服务器</h2><p>如果只是重启应用节点，操作就比较简单，直接在控制台上操作即可。不过，在Weblogic控制台重启服务的时候不要点完“启动”就不管了，一定要等到状态显示为“RUNNING”之后再收工。如果变成“ADMIN”，那么可能是有报错，需要去应用服务器日志检查一下。若确认不耽误事（例如<code>java.lang.NoClassDefFoundError: com/ctc/wstx/stax/WstxInputFactory</code>）那么在控制台点一下“恢复”就好了。</p>
 <p>如果不慎关掉AdminServer，或者打算整个重启，那么操作会比较麻烦，大体上要按以下思路操作：</p>
 <ol>
@@ -711,7 +717,7 @@ code {
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-count">17</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -791,7 +797,9 @@ code {
                     
                       
                     
-                    <span class="site-state-item-count">17</span>
+                      
+                    
+                    <span class="site-state-item-count">18</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -922,6 +930,7 @@ code {
 
 
 
+
         
       </div>
     </footer>
@@ -986,67 +995,56 @@ code {
   
 
 
-  <script src="/js/src/utils.js?v=6.7.0"></script>
+  <script src="/js/src/utils.js?v=7.0.0"></script>
 
-  <script src="/js/src/motion.js?v=6.7.0"></script>
-
-
-
-  
-  
-
-
-  <script src="/js/src/affix.js?v=6.7.0"></script>
-
-  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+  <script src="/js/src/motion.js?v=7.0.0"></script>
 
 
 
   
-  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
-<script src="/js/src/post-details.js?v=6.7.0"></script>
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.0"></script>
 
 
 
   
-
-
-  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
 
 
 
   
 
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
   
-    <script id="dsq-count-scr" src="https://christ-wus-blog.disqus.com/count.js" async></script>
   
+  <script id="dsq-count-scr" src="https://christ-wus-blog.disqus.com/count.js" async></script>
 
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://plusnan.me/2018/11/02/weblogic-caution/";
+    this.page.identifier = "2018/11/02/weblogic-caution/";
+    this.page.title = 'Weblogic踩坑记录';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://christ-wus-blog.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
   
-    <script>
-      var disqus_config = function () {
-        this.page.url = "https://plusnan.me/2018/11/02/weblogic-caution/";
-        this.page.identifier = "2018/11/02/weblogic-caution/";
-        this.page.title = 'Weblogic踩坑记录';
-        };
-      function loadComments () {
-        var d = document, s = d.createElement('script');
-        s.src = 'https://christ-wus-blog.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', '' + +new Date());
-        (d.head || d.body).appendChild(s);
-      }
-      
-        loadComments();
-      
-    </script>
+    loadComments();
   
-
-
-
-
-
-
-
-
+</script>
 
 
 
@@ -1055,10 +1053,23 @@ code {
   
 
 
+  
+
 
 
 
   
+
+  
+
+  
+  
+
+  
+  
+
+  
+
 
   
 
@@ -1068,7 +1079,7 @@ code {
       var bp = document.createElement('script');
       var curProtocol = window.location.protocol.split(':')[0];
       if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'; 
       }
       else {
         bp.src = 'http://push.zhanzhang.baidu.com/push.js';
@@ -1082,13 +1093,6 @@ code {
   
 
   
-  
-
-  
-  
-
-  
-
 
   
 
@@ -1097,12 +1101,8 @@ code {
   
 
   
+  <script src="/js/src/exturl.js?v=7.0.0"></script>
 
-  
-  <script src="/js/src/exturl.js?v=6.7.0"></script>
-
-
-  
 
   
 

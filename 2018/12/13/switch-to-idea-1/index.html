@@ -46,19 +46,19 @@
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
 
-<link rel="stylesheet" href="/css/main.css?v=6.7.0"/>
+<link rel="stylesheet" href="/css/main.css?v=7.0.0"/>
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
 
 
-  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
 
 
 
@@ -71,7 +71,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    version: '6.7.0',
+    version: '7.0.0',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: false,
     fastclick: false,
@@ -401,7 +401,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -422,15 +422,17 @@
 
           
             
+            
+              
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
                 <a href="/2018/12/13/switch-to-idea-1/#comments" itemprop="discussionUrl">
-                
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/12/13/switch-to-idea-1/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/13/switch-to-idea-1/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -564,7 +566,9 @@
 <h3 id="提交代码与回退"><a href="#提交代码与回退" class="headerlink" title="提交代码与回退"></a>提交代码与回退</h3><p>当准备进行提交时，只要在Version Control窗口对着Changelist或待提交文件（按Ctrl键多选）点右键，选择Commit，就会看到提交代码的窗口。</p>
 <p>相反地，如果需要撤销更改，选择Revert菜单即可。</p>
 <p><img src="/img/2018-12-01-switch-to-idea-1/changelist-2.png" alt="检查待提交文件列表和内容，输入摘要，点击Commit提交。"></p>
-<div class="note info"><h4 id="针对新开发者的提醒"><a href="#针对新开发者的提醒" class="headerlink" title="针对新开发者的提醒"></a>针对新开发者的提醒</h4><p>以下内容转载自<span class="exturl" data-url="aHR0cHM6Ly9wcm9ncmFtLXRoaW5rLmJsb2dzcG90LmNvbS8yMDA5LzAyLzYuaHRtbA==" title="https://program-think.blogspot.com/2009/02/6.html">编程随想的博客<i class="fa fa-external-link"></i></span>：</p><p>据俺多年的观察，发觉 RCS（备注：版本管理软件）主要有如下几种误用的情况：</p><p>◇不正确的提交频度<br>　　有很多新手不习惯使用 RCS，很少进行代码的提交。有些人甚至到项目快结束时还没有提交过一行代码。结果导致整个 RCS 形同虚设。<br>　　还有一些人则走向另一个极端，频繁提交代码。有些人每改完一个文件就提交一次，还有些人甚至把修改一半，尚【不能】编译通过的代码也提交到 RCS。<br>　　俺个人认为，正确的提交频度应该分两种情况：在编写功能代码时，每完成一个功能点，并且自己经过了自测之后，提交一次；在调试的时候，每修复一个 bug，提交一次。这样能够保证提交到 RCS 的代码都是【能编译通过】的（详见<span class="exturl" data-url="aHR0cHM6Ly9wcm9ncmFtLXRoaW5rLmJsb2dzcG90LmNvbS8yMDA5LzAyL2RhaWx5LWJ1aWxkLTAtb3ZlcnZpZXcuaHRtbA==" title="https://program-think.blogspot.com/2009/02/daily-build-0-overview.html">每日构建系列<i class="fa fa-external-link"></i></span>），并且业务逻辑上也是相对完整的（对于每日构建后的测试很重要）。</p><p>◇提交时不写注释<br>　　很多人提交代码时不写注释，将来再想到版本历史里面找代码就犹如大海捞针般困难。<br>　　比如在俺经手的代码中，有些源代码文件历时3年，提交次数上百次，如果提交时不写注释，日后根本没法找。</p><p>◇不做代码基线（Baseline）、不做代码分支（Branch）<br>　　在正规的开发团队，每当有一个版本发布（Release）并交付给用户使用时，都需要在 RCS 中制作一个基线，以便于进行相应的 bug 跟踪和补丁制作。因此，诸如【做基线】之类的事情，属于整个团队的集体行为，需要由 Team Leader 牵头来搞。<br>　　假如一个开发团队从来不做代码基线或者代码分支，仅仅是把 RCS 当成一个源文件的备份工具来用，那至少说明这个团队的 Team Leader 在软件工程管理方面非常失败。</p></div>
+<div class="note info">
+            <h4 id="针对新开发者的提醒"><a href="#针对新开发者的提醒" class="headerlink" title="针对新开发者的提醒"></a>针对新开发者的提醒</h4><p>以下内容转载自<span class="exturl" data-url="aHR0cHM6Ly9wcm9ncmFtLXRoaW5rLmJsb2dzcG90LmNvbS8yMDA5LzAyLzYuaHRtbA==" title="https://program-think.blogspot.com/2009/02/6.html">编程随想的博客<i class="fa fa-external-link"></i></span>：</p><p>据俺多年的观察，发觉 RCS（备注：版本管理软件）主要有如下几种误用的情况：</p><p>◇不正确的提交频度<br>　　有很多新手不习惯使用 RCS，很少进行代码的提交。有些人甚至到项目快结束时还没有提交过一行代码。结果导致整个 RCS 形同虚设。<br>　　还有一些人则走向另一个极端，频繁提交代码。有些人每改完一个文件就提交一次，还有些人甚至把修改一半，尚【不能】编译通过的代码也提交到 RCS。<br>　　俺个人认为，正确的提交频度应该分两种情况：在编写功能代码时，每完成一个功能点，并且自己经过了自测之后，提交一次；在调试的时候，每修复一个 bug，提交一次。这样能够保证提交到 RCS 的代码都是【能编译通过】的（详见<span class="exturl" data-url="aHR0cHM6Ly9wcm9ncmFtLXRoaW5rLmJsb2dzcG90LmNvbS8yMDA5LzAyL2RhaWx5LWJ1aWxkLTAtb3ZlcnZpZXcuaHRtbA==" title="https://program-think.blogspot.com/2009/02/daily-build-0-overview.html">每日构建系列<i class="fa fa-external-link"></i></span>），并且业务逻辑上也是相对完整的（对于每日构建后的测试很重要）。</p><p>◇提交时不写注释<br>　　很多人提交代码时不写注释，将来再想到版本历史里面找代码就犹如大海捞针般困难。<br>　　比如在俺经手的代码中，有些源代码文件历时3年，提交次数上百次，如果提交时不写注释，日后根本没法找。</p><p>◇不做代码基线（Baseline）、不做代码分支（Branch）<br>　　在正规的开发团队，每当有一个版本发布（Release）并交付给用户使用时，都需要在 RCS 中制作一个基线，以便于进行相应的 bug 跟踪和补丁制作。因此，诸如【做基线】之类的事情，属于整个团队的集体行为，需要由 Team Leader 牵头来搞。<br>　　假如一个开发团队从来不做代码基线或者代码分支，仅仅是把 RCS 当成一个源文件的备份工具来用，那至少说明这个团队的 Team Leader 在软件工程管理方面非常失败。</p>
+          </div>
 <h3 id="查看文件提交历史"><a href="#查看文件提交历史" class="headerlink" title="查看文件提交历史"></a>查看文件提交历史</h3><p>对着文件点击右键，选择“Subversion”里面的“Show History”，即可在下面的Version Control窗口看到文件的提交历史。对着版本点击右键，选择“Show Diff”，即可看到某个版本是哪个人进行了哪些修改。</p>
 <p>除SVN提交历史外，也可以查看文件的本地编辑历史。假如不慎错误地修改了某些内容，又不方便直接回退文件，可对着文件点右键，找到“Local History”，查看本地的历史记录以便恢复。</p>
 <h3 id="查看代码库版本变更记录"><a href="#查看代码库版本变更记录" class="headerlink" title="查看代码库版本变更记录"></a>查看代码库版本变更记录</h3><p>Version Control第一个页签是你的待提交修改，第二个页签就是其他人已经提交的修改。如果没有看到提交记录，点击刷新按钮即可。</p>
@@ -733,7 +737,7 @@ IDEA Ultimate版内置了DataGrip插件。
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-count">17</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -813,7 +817,9 @@ IDEA Ultimate版内置了DataGrip插件。
                     
                       
                     
-                    <span class="site-state-item-count">17</span>
+                      
+                    
+                    <span class="site-state-item-count">18</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -944,6 +950,7 @@ IDEA Ultimate版内置了DataGrip插件。
 
 
 
+
         
       </div>
     </footer>
@@ -1008,67 +1015,56 @@ IDEA Ultimate版内置了DataGrip插件。
   
 
 
-  <script src="/js/src/utils.js?v=6.7.0"></script>
+  <script src="/js/src/utils.js?v=7.0.0"></script>
 
-  <script src="/js/src/motion.js?v=6.7.0"></script>
-
-
-
-  
-  
-
-
-  <script src="/js/src/affix.js?v=6.7.0"></script>
-
-  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+  <script src="/js/src/motion.js?v=7.0.0"></script>
 
 
 
   
-  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
-<script src="/js/src/post-details.js?v=6.7.0"></script>
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.0"></script>
 
 
 
   
-
-
-  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
 
 
 
   
 
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
   
-    <script id="dsq-count-scr" src="https://christ-wus-blog.disqus.com/count.js" async></script>
   
+  <script id="dsq-count-scr" src="https://christ-wus-blog.disqus.com/count.js" async></script>
 
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://plusnan.me/2018/12/13/switch-to-idea-1/";
+    this.page.identifier = "2018/12/13/switch-to-idea-1/";
+    this.page.title = '从Eclipse切换到IDEA（一）：切换操作';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://christ-wus-blog.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
   
-    <script>
-      var disqus_config = function () {
-        this.page.url = "https://plusnan.me/2018/12/13/switch-to-idea-1/";
-        this.page.identifier = "2018/12/13/switch-to-idea-1/";
-        this.page.title = '从Eclipse切换到IDEA（一）：切换操作';
-        };
-      function loadComments () {
-        var d = document, s = d.createElement('script');
-        s.src = 'https://christ-wus-blog.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', '' + +new Date());
-        (d.head || d.body).appendChild(s);
-      }
-      
-        loadComments();
-      
-    </script>
+    loadComments();
   
-
-
-
-
-
-
-
-
+</script>
 
 
 
@@ -1077,10 +1073,23 @@ IDEA Ultimate版内置了DataGrip插件。
   
 
 
+  
+
 
 
 
   
+
+  
+
+  
+  
+
+  
+  
+
+  
+
 
   
 
@@ -1090,7 +1099,7 @@ IDEA Ultimate版内置了DataGrip插件。
       var bp = document.createElement('script');
       var curProtocol = window.location.protocol.split(':')[0];
       if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'; 
       }
       else {
         bp.src = 'http://push.zhanzhang.baidu.com/push.js';
@@ -1104,13 +1113,6 @@ IDEA Ultimate版内置了DataGrip插件。
   
 
   
-  
-
-  
-  
-
-  
-
 
   
 
@@ -1119,12 +1121,8 @@ IDEA Ultimate版内置了DataGrip插件。
   
 
   
+  <script src="/js/src/exturl.js?v=7.0.0"></script>
 
-  
-  <script src="/js/src/exturl.js?v=6.7.0"></script>
-
-
-  
 
   
 

@@ -46,19 +46,19 @@
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
 
-<link rel="stylesheet" href="/css/main.css?v=6.7.0"/>
+<link rel="stylesheet" href="/css/main.css?v=7.0.0"/>
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
 
 
-  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
 
 
 
@@ -71,7 +71,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    version: '6.7.0',
+    version: '7.0.0',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: false,
     fastclick: false,
@@ -393,7 +393,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -414,15 +414,17 @@
 
           
             
+            
+              
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
                 <a href="/2018/12/12/switch-to-idea-0/#comments" itemprop="discussionUrl">
-                
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/12/12/switch-to-idea-0/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/12/switch-to-idea-0/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -625,7 +627,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-count">17</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -705,7 +707,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">17</span>
+                      
+                    
+                    <span class="site-state-item-count">18</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -836,6 +840,7 @@
 
 
 
+
         
       </div>
     </footer>
@@ -900,67 +905,56 @@
   
 
 
-  <script src="/js/src/utils.js?v=6.7.0"></script>
+  <script src="/js/src/utils.js?v=7.0.0"></script>
 
-  <script src="/js/src/motion.js?v=6.7.0"></script>
-
-
-
-  
-  
-
-
-  <script src="/js/src/affix.js?v=6.7.0"></script>
-
-  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+  <script src="/js/src/motion.js?v=7.0.0"></script>
 
 
 
   
-  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
-<script src="/js/src/post-details.js?v=6.7.0"></script>
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.0"></script>
 
 
 
   
-
-
-  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
 
 
 
   
 
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
   
-    <script id="dsq-count-scr" src="https://christ-wus-blog.disqus.com/count.js" async></script>
   
+  <script id="dsq-count-scr" src="https://christ-wus-blog.disqus.com/count.js" async></script>
 
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://plusnan.me/2018/12/12/switch-to-idea-0/";
+    this.page.identifier = "2018/12/12/switch-to-idea-0/";
+    this.page.title = '从Eclipse切换到IDEA';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://christ-wus-blog.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
   
-    <script>
-      var disqus_config = function () {
-        this.page.url = "https://plusnan.me/2018/12/12/switch-to-idea-0/";
-        this.page.identifier = "2018/12/12/switch-to-idea-0/";
-        this.page.title = '从Eclipse切换到IDEA';
-        };
-      function loadComments () {
-        var d = document, s = d.createElement('script');
-        s.src = 'https://christ-wus-blog.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', '' + +new Date());
-        (d.head || d.body).appendChild(s);
-      }
-      
-        loadComments();
-      
-    </script>
+    loadComments();
   
-
-
-
-
-
-
-
-
+</script>
 
 
 
@@ -969,10 +963,23 @@
   
 
 
+  
+
 
 
 
   
+
+  
+
+  
+  
+
+  
+  
+
+  
+
 
   
 
@@ -982,7 +989,7 @@
       var bp = document.createElement('script');
       var curProtocol = window.location.protocol.split(':')[0];
       if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'; 
       }
       else {
         bp.src = 'http://push.zhanzhang.baidu.com/push.js';
@@ -996,13 +1003,6 @@
   
 
   
-  
-
-  
-  
-
-  
-
 
   
 
@@ -1011,12 +1011,8 @@
   
 
   
+  <script src="/js/src/exturl.js?v=7.0.0"></script>
 
-  
-  <script src="/js/src/exturl.js?v=6.7.0"></script>
-
-
-  
 
   
 

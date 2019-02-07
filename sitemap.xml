@@ -2,16 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://plusnan.me/2019/02/06/java-code-review-4/</loc>
+    <loc>https://plusnan.me/2019/01/29/equals/</loc>
     
-    <lastmod>2019-02-06T13:43:27.838Z</lastmod>
+    <lastmod>2019-02-07T02:47:08.711Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://plusnan.me/2018/07/14/cross-company-debug/</loc>
     
-    <lastmod>2019-02-06T06:32:43.275Z</lastmod>
+    <lastmod>2019-02-06T14:00:17.244Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://plusnan.me/2019/02/06/java-code-review-4/</loc>
+    
+    <lastmod>2019-02-06T13:55:12.430Z</lastmod>
     
   </url>
   

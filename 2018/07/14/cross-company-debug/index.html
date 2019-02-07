@@ -46,19 +46,19 @@
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
 
-<link rel="stylesheet" href="/css/main.css?v=6.7.0"/>
+<link rel="stylesheet" href="/css/main.css?v=7.0.0"/>
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
 
 
-  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
 
 
 
@@ -71,7 +71,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    version: '6.7.0',
+    version: '7.0.0',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: false,
     fastclick: false,
@@ -103,7 +103,7 @@
 <meta property="og:description" content="不同系统之间存取数据，技术上最简单的方式就是提供接口。既然是不同系统，那么大家很可能不是同一家单位，需要留意的事情也会更多。本文记录了一些接口设计、联调前后需要考虑的事情。总体上来讲，我们既要保证准确实现功能，又要留个心眼，保护自己的利益，避免让自己吃亏。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://plusnan.me/img/2018-07-14-cross-company-debug/putty-tunnel.png">
-<meta property="og:updated_time" content="2019-02-06T06:32:43.275Z">
+<meta property="og:updated_time" content="2019-02-06T14:00:17.244Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="接口设计与联调经验">
 <meta name="twitter:description" content="不同系统之间存取数据，技术上最简单的方式就是提供接口。既然是不同系统，那么大家很可能不是同一家单位，需要留意的事情也会更多。本文记录了一些接口设计、联调前后需要考虑的事情。总体上来讲，我们既要保证准确实现功能，又要留个心眼，保护自己的利益，避免让自己吃亏。">
@@ -389,13 +389,13 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-02-06 14:32:43" itemprop="dateModified" datetime="2019-02-06T14:32:43+08:00">2019-02-06</time>
+                <time title="修改时间：2019-02-06 22:00:17" itemprop="dateModified" datetime="2019-02-06T22:00:17+08:00">2019-02-06</time>
               
             
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -416,15 +416,17 @@
 
           
             
+            
+              
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
                 <a href="/2018/07/14/cross-company-debug/#comments" itemprop="discussionUrl">
-                
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/07/14/cross-company-debug/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/07/14/cross-company-debug/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -465,13 +467,13 @@
 <li>考虑专门的日志记录，例如使用专门的文件或在数据库建立接口日志表；</li>
 <li>有认证机制和访问控制机制，防止接口被无关厂商及人员冒用或恶意调用。</li>
 </ol>
-<h1 id="联调"><a href="#联调" class="headerlink" title="联调"></a>联调</h1><p>联调最典型的就是沟通成本，因为沟通成本高所以容易积攒问题，因此建议：</p>
+<h1 id="联调"><a href="#联调" class="headerlink" title="联调"></a>联调</h1><p>联调最大的问题就是沟通成本，因为沟通成本高所以容易积攒问题，因此建议：</p>
 <ol>
 <li>不定期组织交流，有条件当面聊的话最好当面聊，没有条件的话也要有语音视频会议，避免纯文字交流，免得越做偏差越大；</li>
 <li>早联调、多联调，早点暴露问题，不要等一切都准备好之后才开始调；</li>
-<li>有条件的话可以准备能随时调用的环境（当然也要给对方准备数据）。</li>
+<li>有条件的话准备一个能够随时调用的环境（当然也要有配套的测试数据）。</li>
 </ol>
-<p>如果是不同公司之间进行合作，务必要留证据！具体而言：</p>
+<p>如果是不同公司之间进行合作，不要忘记留证据，具体而言：</p>
 <ol>
 <li>记录哪天、与哪个人、调试了什么东西、结果如何；</li>
 <li>各接口函数要输出日志，记录时间、原始数据和一些关键数据；</li>
@@ -479,26 +481,40 @@
 </ol>
 <p>推荐两个调试接口的软件，一个是专门测WebService的<span class="exturl" data-url="aHR0cHM6Ly93d3cuc29hcHVpLm9yZw==" title="https://www.soapui.org">SoapUI<i class="fa fa-external-link"></i></span>，另一个是可以测各种请求的<span class="exturl" data-url="aHR0cHM6Ly93d3cuZ2V0cG9zdG1hbi5jb20vYXBwcw==" title="https://www.getpostman.com/apps">Postman<i class="fa fa-external-link"></i></span>。对我个人而言，由于我们项目经常是WebService里面套JSON，所以SoapUI用得并不舒服，不如自己抓到调用WebService的原始请求内容然后全部扔到Postman中调试：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">soap:Envelope</span> <span class="attr">xmlns:soap</span>=<span class="string">"http://schemas.xmlsoap.org/soap/envelope/"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">soap:Body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ns1:xxxxxmethod</span> <span class="attr">xmlns:ns1</span>=<span class="string">"http://service.xxx.xxxcompany.com/"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">arg0</span>&gt;</span></span><br><span class="line">                &#123;</span><br><span class="line">                    "param1": "xxx",</span><br><span class="line">                    "param2": "yyy",</span><br><span class="line">                    ...</span><br><span class="line">                &#125;</span><br><span class="line">            <span class="tag">&lt;/<span class="name">arg0</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">ns1:xxxxxmethod</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">soap:Body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">soap:Envelope</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>如果主要系统已经上线了，注意不要在生产环境或使用生产库直接联调，而是要准备一个和生产环境架构相似的测试环境，在测试环境上进行联调。在生产环境和生产库上，双方最多测试接口和功能能否走通。</p>
+<p>如果主要系统已经上线了，注意不要在生产环境或使用生产库直接联调，而是要准备一个和生产环境架构相似的测试环境，在测试环境上进行联调。在生产环境和生产库上，双方顶多测一下接口和功能通没通，不要测别的东西。</p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>上线之后更要专门记录接口的调用情况，做到有据可查。清楚地了解接口调用情况、频率以及状态，在出现故障时可以尽量避免踢皮球和承担无谓责任。有必要的话还应该实行访问控制，一旦遭遇攻击或疑似攻击（例如调用频率太高等）时可以方便地进行处理。</p>
 <p>运行之后，假如要对接口进行重大调整，那么要确保向后兼容，除非非常确定大家不会再使用旧版定义了。</p>
-<div class="note info"><p>我们系统有一个接口经常出问题，责任经常在对方，但是用户总给我们客服打电话，而且对方公司经常消极对待，于是我一怒之下把对方公司的名字和客服电话写到展示给用户的错误信息里面了。</p></div>
+<div class="note info">
+            <p>我们系统有一个接口经常出问题，责任经常在对方，但是用户总给我们客服打电话，而且对方公司经常消极对待，于是我一怒之下把对方公司的名字和客服电话写到展示给用户的错误信息里面了。</p>
+          </div>
 <h1 id="补充技巧：内网穿透"><a href="#补充技巧：内网穿透" class="headerlink" title="补充技巧：内网穿透"></a>补充技巧：内网穿透</h1><p>理想情况下应该建立一个双方都便于访问的开发测试区。如果没有条件或者来不及准备，而且双方公司都能访问互联网，可以通过内网穿透的方法把本地应用映射到公网上。</p>
 <p>操作之前去搞一台VPS。我个人推荐<span class="exturl" data-url="aHR0cHM6Ly92dWx0ci5jb20=" title="https://vultr.com">Vultr<i class="fa fa-external-link"></i></span>，因为他家VPS价格比较便宜，而且按使用时间计费，可以随时买随时扔。对于内网穿透而言，每月$5（备注：支持支付宝和微信支付）的VPS足矣。</p>
-<div class="note danger"><p>计划以内网穿透方法进行联调之前，请留意自己公司的管理制度里面有没有网络限制，以免倒霉被抓挨罚。如果能以遵守制度的方式将内网端口映射到公网，建议走公司的手续。</p></div>
-<div class="note info"><p>使用Vultr部署时建议选择洛杉矶或东京节点，这两个网络相对而言比较好。购买时注意不要选$2.5的机器，因为没有IPv4地址。</p></div>
-<div class="note warning"><p>有时候你的服务器会出现Ping不通，或者出现能Ping通但是SSH连接超时的情况，这很可能是你服务器的IP或端口被墙了。如果遇到这种情况，可以去买一台新机器并删除旧的机器。另外有时候需要多刷几次。</p></div>
+<div class="note danger">
+            <p>计划以内网穿透方法进行联调之前，请留意自己公司的管理制度里面有没有网络限制，以免倒霉被抓挨罚。如果能以遵守制度的方式将内网端口映射到公网，建议走公司的手续。</p>
+          </div>
+<div class="note info">
+            <p>使用Vultr部署时建议选择洛杉矶或东京节点，这两个网络相对而言比较好。购买时注意不要选$2.5的机器，因为没有IPv4地址。</p>
+          </div>
+<div class="note warning">
+            <p>有时候你的服务器会出现Ping不通，或者出现能Ping通但是SSH连接超时的情况，这很可能是你服务器的IP或端口被墙了。如果遇到这种情况，可以去买一台新机器并删除旧的机器。另外有时候需要多刷几次。</p>
+          </div>
 <p>新机器启动之后，先在公司Ping一下，没问题的话就可以用PuTTY等软件建立连接了。输入Vultr网站上面给你提供的服务器IP（端口22）、用户名和密码，然后</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
 <p>将其中的<code>GatewayPorts no</code>改成<code>yes</code>，没找到的话就在文件末尾追加一行，保存。然后</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart sshd</span><br></pre></td></tr></table></figure>
 <p>准备工作就做好了。</p>
-<div class="note warning"><p>有些操作系统（例如CentOS）会默认开启防火墙，所以要确认一下防火墙状态，然后关闭防火墙或者开放待使用端口。</p></div>
+<div class="note warning">
+            <p>有些操作系统（例如CentOS）会默认开启防火墙，所以要确认一下防火墙状态，然后关闭防火墙或者开放待使用端口。</p>
+          </div>
 <p>联调时先去下载PuTTY，启动，在里面输入服务器地址和端口（默认22），并且按下图进行设置</p>
 <p><img src="/img/2018-07-14-cross-company-debug/putty-tunnel.png" alt="PuTTY设置"></p>
 <p>不要忘记点Add按钮。假如本机是<code>http://172.18.106.3:8080</code>，服务器IP是198.13.60.108，你选择的端口是8080，那么登录成功后就可以通过<code>http://198.13.60.108:8080</code>来访问自己的应用了。</p>
-<div class="note warning"><p>因为是外国服务器，所以连接可能不太稳定，需要不定期检查连接，断了的话随时重新连。</p></div>
-<div class="note info"><p>如果需要域名，我个人建议去<span class="exturl" data-url="aHR0cHM6Ly9uYW1lY2hlYXAuY29t" title="https://namecheap.com">Namecheap<i class="fa fa-external-link"></i></span>上面购买个便宜的外国域名（注意：需要准备Visa/MasterCard信用卡）。如果还需要HTTPS，可以使用Let’s Encrypt。如果有国内已备案域名，也可以给应用建个二级域名，但是在国内购买新的一级域名需要花时间备案。</p></div>
+<div class="note warning">
+            <p>因为是外国服务器，所以连接可能不太稳定，需要不定期检查连接，断了的话随时重新连。</p>
+          </div>
+<div class="note info">
+            <p>如果需要域名，我个人建议去<span class="exturl" data-url="aHR0cHM6Ly9uYW1lY2hlYXAuY29t" title="https://namecheap.com">Namecheap<i class="fa fa-external-link"></i></span>上面购买个便宜的外国域名（注意：需要准备Visa/MasterCard信用卡）。如果还需要HTTPS，可以使用Let’s Encrypt。如果有国内已备案域名，也可以给应用建个二级域名，但是在国内购买新的一级域名需要花时间备案。</p>
+          </div>
 
       
     </div>
@@ -655,7 +671,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-count">17</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -735,7 +751,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">17</span>
+                      
+                    
+                    <span class="site-state-item-count">18</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -866,6 +884,7 @@
 
 
 
+
         
       </div>
     </footer>
@@ -930,67 +949,56 @@
   
 
 
-  <script src="/js/src/utils.js?v=6.7.0"></script>
+  <script src="/js/src/utils.js?v=7.0.0"></script>
 
-  <script src="/js/src/motion.js?v=6.7.0"></script>
-
-
-
-  
-  
-
-
-  <script src="/js/src/affix.js?v=6.7.0"></script>
-
-  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+  <script src="/js/src/motion.js?v=7.0.0"></script>
 
 
 
   
-  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
-<script src="/js/src/post-details.js?v=6.7.0"></script>
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.0"></script>
 
 
 
   
-
-
-  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
 
 
 
   
 
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
   
-    <script id="dsq-count-scr" src="https://christ-wus-blog.disqus.com/count.js" async></script>
   
+  <script id="dsq-count-scr" src="https://christ-wus-blog.disqus.com/count.js" async></script>
 
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://plusnan.me/2018/07/14/cross-company-debug/";
+    this.page.identifier = "2018/07/14/cross-company-debug/";
+    this.page.title = '接口设计与联调经验';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://christ-wus-blog.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
   
-    <script>
-      var disqus_config = function () {
-        this.page.url = "https://plusnan.me/2018/07/14/cross-company-debug/";
-        this.page.identifier = "2018/07/14/cross-company-debug/";
-        this.page.title = '接口设计与联调经验';
-        };
-      function loadComments () {
-        var d = document, s = d.createElement('script');
-        s.src = 'https://christ-wus-blog.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', '' + +new Date());
-        (d.head || d.body).appendChild(s);
-      }
-      
-        loadComments();
-      
-    </script>
+    loadComments();
   
-
-
-
-
-
-
-
-
+</script>
 
 
 
@@ -999,10 +1007,23 @@
   
 
 
+  
+
 
 
 
   
+
+  
+
+  
+  
+
+  
+  
+
+  
+
 
   
 
@@ -1012,7 +1033,7 @@
       var bp = document.createElement('script');
       var curProtocol = window.location.protocol.split(':')[0];
       if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'; 
       }
       else {
         bp.src = 'http://push.zhanzhang.baidu.com/push.js';
@@ -1026,13 +1047,6 @@
   
 
   
-  
-
-  
-  
-
-  
-
 
   
 
@@ -1041,12 +1055,8 @@
   
 
   
+  <script src="/js/src/exturl.js?v=7.0.0"></script>
 
-  
-  <script src="/js/src/exturl.js?v=6.7.0"></script>
-
-
-  
 
   
 

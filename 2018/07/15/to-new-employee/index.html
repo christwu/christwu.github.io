@@ -46,19 +46,19 @@
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
 
-<link rel="stylesheet" href="/css/main.css?v=6.7.0"/>
+<link rel="stylesheet" href="/css/main.css?v=7.0.0"/>
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
 
 
-  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
 
 
 
@@ -71,7 +71,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    version: '6.7.0',
+    version: '7.0.0',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: false,
     fastclick: false,
@@ -393,7 +393,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -414,15 +414,17 @@
 
           
             
+            
+              
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
                 <a href="/2018/07/15/to-new-employee/#comments" itemprop="discussionUrl">
-                
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/07/15/to-new-employee/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/07/15/to-new-employee/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -461,7 +463,9 @@
 <h2 id="注意记录"><a href="#注意记录" class="headerlink" title="注意记录"></a>注意记录</h2><p>重要事项应当作记录，而且要及时维护。像需求变更、数据库表结构变更之类的重要变更，或者是数据库表结构这种需要各库同步的东西，如果没有准确的记录，结果会很糟糕。</p>
 <p>与用户或其他单位交流时更要注意留存证据，有条件的话最好截图/录音。开会、评审等活动必须有会议纪要和与会者的签名，以保障自己的利益。</p>
 <p>开发工作中经常有很多琐事和问题，这些也应当记录下来，不然的话很快就忘记了。除此之外，建议不定期地总结一下自己手头的工作，完善程序注释，并且写出一些文档（例如自制构件的使用方法、某项工作的操作步骤或者配置注意事项等）。这种文档不是为了交差或者给领导汇报，而是为了方便让别人帮忙或把工作推出去。</p>
-<div class="note info"><h3 id="记录的形式"><a href="#记录的形式" class="headerlink" title="记录的形式"></a>记录的形式</h3><p>记录的形式很多，例如：</p><ol><li>纸质记录：笔记本、便利贴</li><li>以笔记形式记录：OneNote、Evernote、Leanote</li><li>以博客形式记录：WordPress、Hexo</li><li>以维基形式记录：MediaWiki</li></ol><p>如果程序会暴露到互联网上，请注意保护个人隐私和公司机密。</p></div>
+<div class="note info">
+            <h3 id="记录的形式"><a href="#记录的形式" class="headerlink" title="记录的形式"></a>记录的形式</h3><p>记录的形式很多，例如：</p><ol><li>纸质记录：笔记本、便利贴</li><li>以笔记形式记录：OneNote、Evernote、Leanote</li><li>以博客形式记录：WordPress、Hexo</li><li>以维基形式记录：MediaWiki</li></ol><p>如果程序会暴露到互联网上，请注意保护个人隐私和公司机密。</p>
+          </div>
 <h2 id="避免挖坑"><a href="#避免挖坑" class="headerlink" title="避免挖坑"></a>避免挖坑</h2><p>我觉得，如果你在同事中的口碑很差，那么大概有三种可能：一种是太烦人，一种是根本不好好干活，还有一种是老给其他人挖坑。挖坑的情况有很多种，比方说代码极其难懂，或者留下了很久以后才被发现的缺陷，或者经常制造缺陷，或者把好好的东西改坏等等。</p>
 <p>后来者不熟悉项目情况，无论水平多高，接手新工作都有可能出问题，所以工作时候务必细心，抠得细一些，不懂要多提问。事实上，除非为了纯粹地赶进度，我们要的不是迅速完成工作，而是在合理时间范围内尽可能高质量地完成工作。</p>
 <p>建议一开始不要急着投入工作。先去花点时间，大概了解一下自己工作的内容，了解相关的业务场景和需求。换句话说，先去弄清楚：项目是做什么的？我手头的工作是做什么的？面向的群体是谁？目标群体的关注点是什么？</p>
@@ -470,9 +474,13 @@
 <p>开发完成之后务必要自测，而且不要光测合法情况，还要测试非法情况。如果是修改功能，那么要测一下原来的功能还能否正常工作。鉴于新人不熟悉项目，老员工有必要主动去评审代码，指导或监督新人进行测试，而且“授人以鱼不如授人以渔”。</p>
 <h1 id="提高知识水平"><a href="#提高知识水平" class="headerlink" title="提高知识水平"></a>提高知识水平</h1><p>无论准备往技术方向发展，还是往管理方向发展，都要提高自己的知识水平。</p>
 <p>一开始什么都不懂是正常现象。学校所学基本上与工作脱节，所以实际上很多人都是白纸一张。这也意味着自学能力非常重要，毕竟工作一段时间之后还是什么都不懂就不正常了。</p>
-<div class="note info"><p>在此提醒：争取做技术或管理专家，避免做业务专家，因为后者主要是无谓的重复劳动，而且太精通业务的话容易陷坑里出不来，换家公司的话业务知识积累也会全部白瞎。</p></div>
+<div class="note info">
+            <p>在此提醒：争取做技术或管理专家，避免做业务专家，因为后者主要是无谓的重复劳动，而且太精通业务的话容易陷坑里出不来，换家公司的话业务知识积累也会全部白瞎。</p>
+          </div>
 <h2 id="Google"><a href="#Google" class="headerlink" title="Google"></a>Google</h2><p>在技术方面遇到问题，建议直接用Google搜英语，搜不到的话可以去StackOverflow上面提问。想找一些程序的话，也可以去GitHub搜一下有没有现成的开源程序。有很多问题用英语可以比较容易地找到答案，但是用百度搜只能搜到翻来覆去的重复结果，或者干脆搜不到。</p>
-<div class="note info"><h3 id="关于翻墙"><a href="#关于翻墙" class="headerlink" title="关于翻墙"></a>关于翻墙</h3><p>我觉得翻墙就应该是一种常识般的存在。如果没翻过墙，可以先去<span class="exturl" data-url="aHR0cHM6Ly92dWx0ci5jb20=" title="https://vultr.com">Vultr<i class="fa fa-external-link"></i></span>买台服务器，用<span class="exturl" data-url="aHR0cHM6Ly90ZWRkeXN1bi5jb20vNDg2Lmh0bWw=" title="https://teddysun.com/486.html">这里<i class="fa fa-external-link"></i></span>和<span class="exturl" data-url="aHR0cHM6Ly90ZWRkeXN1bi5jb20vNDg5Lmh0bWw=" title="https://teddysun.com/489.html">这里<i class="fa fa-external-link"></i></span>的脚本安装服务器端Shadowsocks，然后再<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3NoYWRvd3NvY2tzL3NoYWRvd3NvY2tzLXdpbmRvd3MvcmVsZWFzZXM=" title="https://github.com/shadowsocks/shadowsocks-windows/releases">下载客户端<i class="fa fa-external-link"></i></span>，与服务器进行连接。</p><p>稍微离个题，很多人在翻墙之后会很自然地试图接触政治内容，我的建议是：不要随便参与政治，无论它是你所认为的正确内容还是错误内容。墙外的情况很复杂，什么人都有，而且很多事情和你想的完全不一样。如果看到与自己认识不同的言论之后情绪激动，那么请直接远离政治，不要尝试去捍卫正确立场。乱来的话只会让自己不爽，甚至招来麻烦。</p></div>
+<div class="note info">
+            <h3 id="关于翻墙"><a href="#关于翻墙" class="headerlink" title="关于翻墙"></a>关于翻墙</h3><p>我觉得翻墙就应该是一种常识般的存在。如果没翻过墙，可以先去<span class="exturl" data-url="aHR0cHM6Ly92dWx0ci5jb20=" title="https://vultr.com">Vultr<i class="fa fa-external-link"></i></span>买台服务器，用<span class="exturl" data-url="aHR0cHM6Ly90ZWRkeXN1bi5jb20vNDg2Lmh0bWw=" title="https://teddysun.com/486.html">这里<i class="fa fa-external-link"></i></span>和<span class="exturl" data-url="aHR0cHM6Ly90ZWRkeXN1bi5jb20vNDg5Lmh0bWw=" title="https://teddysun.com/489.html">这里<i class="fa fa-external-link"></i></span>的脚本安装服务器端Shadowsocks，然后再<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3NoYWRvd3NvY2tzL3NoYWRvd3NvY2tzLXdpbmRvd3MvcmVsZWFzZXM=" title="https://github.com/shadowsocks/shadowsocks-windows/releases">下载客户端<i class="fa fa-external-link"></i></span>，与服务器进行连接。</p><p>稍微离个题，很多人在翻墙之后会很自然地试图接触政治内容，我的建议是：不要随便参与政治，无论它是你所认为的正确内容还是错误内容。墙外的情况很复杂，什么人都有，而且很多事情和你想的完全不一样。如果看到与自己认识不同的言论之后情绪激动，那么请直接远离政治，不要尝试去捍卫正确立场。乱来的话只会让自己不爽，甚至招来麻烦。</p>
+          </div>
 <h2 id="加班"><a href="#加班" class="headerlink" title="加班"></a>加班</h2><p>如果还没抱老婆孩子，也不急着操心安家的事情，建议平时稍微加点班。不是因为工作干不完或者干额外工作而加班，而是挤一些闲工夫来加强学习。工作很辛苦，精力不会再像学生时候那样旺盛，两三年以后可能连刷夜打游戏都扛不住，所以充电要趁早。</p>
 <h2 id="玩"><a href="#玩" class="headerlink" title="玩"></a>玩</h2><p>这里的“玩”指的不是打游戏，而是在技术层面上折腾，<span class="exturl" data-url="aHR0cHM6Ly9wcm9ncmFtLXRoaW5rLmJsb2dzcG90LmNvbS8yMDE3LzA0L1RoZS1JbXBvcnRhbmNlLW9mLVpoZXRlbmcuaHRtbA==" title="https://program-think.blogspot.com/2017/04/The-Importance-of-Zheteng.html">通过折腾来提升自己的水平<i class="fa fa-external-link"></i></span>。</p>
 <p>以我自己举例：</p>
@@ -481,7 +489,9 @@
 <li>搞一个VPS，除了用来翻墙，还能用来学习Linux系统管理（<a href="/plus1s">也可以用来续秒</a>）。折腾LAMP之类东西还有助于加深对网络的认识。</li>
 <li>在目前参与开发的系统中乱点，自己造数据来办理业务，有助于加深对系统整体和各具体业务的了解。另外为了快速准备业务数据需要使用PL/SQL。</li>
 </ol>
-<div class="note info"><p>假如只是折腾玩，对网络没有特殊要求，建议搞国外主机，一方面是因为比国内便宜，另一方面是因为<span class="exturl" data-url="aHR0cDovL2NuLnVuY3ljbG9wZWRpYS53aWtpYS5jb20vd2lraS8lRTYlOUMlODklRTUlODUlQjMlRTklODMlQTglRTklOTclQTg=" title="http://cn.uncyclopedia.wikia.com/wiki/%E6%9C%89%E5%85%B3%E9%83%A8%E9%97%A8">有关部门<i class="fa fa-external-link"></i></span>管不着，不需要乱七八糟的手续。</p><p>折腾VPS需要花钱，建议提前准备一张有VISA或MasterCard标志的信用卡。另外，如果已经搞到VISA/MasterCard卡，可以去Google Compute Engine注册新用户，把信用卡绑上，然后就可以免费使用一年。</p></div>
+<div class="note info">
+            <p>假如只是折腾玩，对网络没有特殊要求，建议搞国外主机，一方面是因为比国内便宜，另一方面是因为<span class="exturl" data-url="aHR0cDovL2NuLnVuY3ljbG9wZWRpYS53aWtpYS5jb20vd2lraS8lRTYlOUMlODklRTUlODUlQjMlRTklODMlQTglRTklOTclQTg=" title="http://cn.uncyclopedia.wikia.com/wiki/%E6%9C%89%E5%85%B3%E9%83%A8%E9%97%A8">有关部门<i class="fa fa-external-link"></i></span>管不着，不需要乱七八糟的手续。</p><p>折腾VPS需要花钱，建议提前准备一张有VISA或MasterCard标志的信用卡。另外，如果已经搞到VISA/MasterCard卡，可以去Google Compute Engine注册新用户，把信用卡绑上，然后就可以免费使用一年。</p>
+          </div>
 
       
     </div>
@@ -634,7 +644,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-count">17</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -714,7 +724,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">17</span>
+                      
+                    
+                    <span class="site-state-item-count">18</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -845,6 +857,7 @@
 
 
 
+
         
       </div>
     </footer>
@@ -909,67 +922,56 @@
   
 
 
-  <script src="/js/src/utils.js?v=6.7.0"></script>
+  <script src="/js/src/utils.js?v=7.0.0"></script>
 
-  <script src="/js/src/motion.js?v=6.7.0"></script>
-
-
-
-  
-  
-
-
-  <script src="/js/src/affix.js?v=6.7.0"></script>
-
-  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+  <script src="/js/src/motion.js?v=7.0.0"></script>
 
 
 
   
-  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
-<script src="/js/src/post-details.js?v=6.7.0"></script>
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.0"></script>
 
 
 
   
-
-
-  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
 
 
 
   
 
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
   
-    <script id="dsq-count-scr" src="https://christ-wus-blog.disqus.com/count.js" async></script>
   
+  <script id="dsq-count-scr" src="https://christ-wus-blog.disqus.com/count.js" async></script>
 
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://plusnan.me/2018/07/15/to-new-employee/";
+    this.page.identifier = "2018/07/15/to-new-employee/";
+    this.page.title = '给校招新员工分享的一点人生的经验';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://christ-wus-blog.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
   
-    <script>
-      var disqus_config = function () {
-        this.page.url = "https://plusnan.me/2018/07/15/to-new-employee/";
-        this.page.identifier = "2018/07/15/to-new-employee/";
-        this.page.title = '给校招新员工分享的一点人生的经验';
-        };
-      function loadComments () {
-        var d = document, s = d.createElement('script');
-        s.src = 'https://christ-wus-blog.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', '' + +new Date());
-        (d.head || d.body).appendChild(s);
-      }
-      
-        loadComments();
-      
-    </script>
+    loadComments();
   
-
-
-
-
-
-
-
-
+</script>
 
 
 
@@ -978,10 +980,23 @@
   
 
 
+  
+
 
 
 
   
+
+  
+
+  
+  
+
+  
+  
+
+  
+
 
   
 
@@ -991,7 +1006,7 @@
       var bp = document.createElement('script');
       var curProtocol = window.location.protocol.split(':')[0];
       if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'; 
       }
       else {
         bp.src = 'http://push.zhanzhang.baidu.com/push.js';
@@ -1005,13 +1020,6 @@
   
 
   
-  
-
-  
-  
-
-  
-
 
   
 
@@ -1020,12 +1028,8 @@
   
 
   
+  <script src="/js/src/exturl.js?v=7.0.0"></script>
 
-  
-  <script src="/js/src/exturl.js?v=6.7.0"></script>
-
-
-  
 
   
 
