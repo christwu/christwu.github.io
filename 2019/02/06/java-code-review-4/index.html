@@ -94,13 +94,13 @@
 
 
 
-  <meta name="description" content="本文介绍如何使用Phabricator进行人工代码审查，以及供参考的操作规范。因为时间和篇幅有限，不再写如何搭建Phabricator，需要者可自行在网上搜索安装教程。 Phabricator是一个开发管理平台，其中包括一个代码审查工具。工具支持两种代码审查方式，一种是事前审查，即提交之后必须先审查通过才能进入代码库；另一种是事后审查，也就是无论是否审查，代码都已经提交到代码库中。考虑我们自身实际">
+  <meta name="description" content="本文介绍如何使用Phabricator进行人工代码审查，以及供参考的操作规范。因为时间和篇幅有限，不再写如何搭建Phabricator，需要者可自行在网上搜索安装教程。 Phabricator是一个在浏览器上操作的开发管理平台，其中包括一个代码审查工具。工具支持两种代码审查方式，一种是事前审查，即提交之后必须先审查通过才能进入代码库；另一种是事后审查，也就是无论是否审查，代码都已经提交到代码库中。">
 <meta name="keywords" content="Phabricator">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java代码审查（四）：使用Phabricator进行人工代码审查（事后审查）">
 <meta property="og:url" content="https://plusnan.me/2019/02/06/java-code-review-4/index.html">
 <meta property="og:site_name" content="一点微小的博客">
-<meta property="og:description" content="本文介绍如何使用Phabricator进行人工代码审查，以及供参考的操作规范。因为时间和篇幅有限，不再写如何搭建Phabricator，需要者可自行在网上搜索安装教程。 Phabricator是一个开发管理平台，其中包括一个代码审查工具。工具支持两种代码审查方式，一种是事前审查，即提交之后必须先审查通过才能进入代码库；另一种是事后审查，也就是无论是否审查，代码都已经提交到代码库中。考虑我们自身实际">
+<meta property="og:description" content="本文介绍如何使用Phabricator进行人工代码审查，以及供参考的操作规范。因为时间和篇幅有限，不再写如何搭建Phabricator，需要者可自行在网上搜索安装教程。 Phabricator是一个在浏览器上操作的开发管理平台，其中包括一个代码审查工具。工具支持两种代码审查方式，一种是事前审查，即提交之后必须先审查通过才能进入代码库；另一种是事后审查，也就是无论是否审查，代码都已经提交到代码库中。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://plusnan.me/img/2019-02-06-java-code-review-4/repository.png">
 <meta property="og:image" content="https://plusnan.me/img/2019-02-06-java-code-review-4/uri-1.png">
@@ -112,10 +112,10 @@
 <meta property="og:image" content="https://plusnan.me/img/2019-02-06-java-code-review-4/commit.png">
 <meta property="og:image" content="https://plusnan.me/img/2019-02-06-java-code-review-4/commitview.png">
 <meta property="og:image" content="https://plusnan.me/img/2019-02-06-java-code-review-4/search.png">
-<meta property="og:updated_time" content="2019-02-06T13:55:12.430Z">
+<meta property="og:updated_time" content="2019-02-08T00:10:30.053Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java代码审查（四）：使用Phabricator进行人工代码审查（事后审查）">
-<meta name="twitter:description" content="本文介绍如何使用Phabricator进行人工代码审查，以及供参考的操作规范。因为时间和篇幅有限，不再写如何搭建Phabricator，需要者可自行在网上搜索安装教程。 Phabricator是一个开发管理平台，其中包括一个代码审查工具。工具支持两种代码审查方式，一种是事前审查，即提交之后必须先审查通过才能进入代码库；另一种是事后审查，也就是无论是否审查，代码都已经提交到代码库中。考虑我们自身实际">
+<meta name="twitter:description" content="本文介绍如何使用Phabricator进行人工代码审查，以及供参考的操作规范。因为时间和篇幅有限，不再写如何搭建Phabricator，需要者可自行在网上搜索安装教程。 Phabricator是一个在浏览器上操作的开发管理平台，其中包括一个代码审查工具。工具支持两种代码审查方式，一种是事前审查，即提交之后必须先审查通过才能进入代码库；另一种是事后审查，也就是无论是否审查，代码都已经提交到代码库中。">
 <meta name="twitter:image" content="https://plusnan.me/img/2019-02-06-java-code-review-4/repository.png">
 
 
@@ -381,12 +381,24 @@
                 
               
 
-              <time title="创建时间：2019-02-06 00:00:00 / 修改时间：21:55:12" itemprop="dateCreated datePublished" datetime="2019-02-06T00:00:00+08:00">2019-02-06</time>
+              <time title="创建时间：2019-02-06 00:00:00" itemprop="dateCreated datePublished" datetime="2019-02-06T00:00:00+08:00">2019-02-06</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-02-08 08:10:30" itemprop="dateModified" datetime="2019-02-08T08:10:30+08:00">2019-02-08</time>
               
             
           </span>
@@ -452,10 +464,10 @@
 
       
         <p>本文介绍如何使用Phabricator进行人工代码审查，以及供参考的操作规范。因为时间和篇幅有限，不再写如何搭建Phabricator，需要者可自行在网上搜索安装教程。</p>
-<p>Phabricator是一个开发管理平台，其中包括一个代码审查工具。工具支持两种代码审查方式，一种是事前审查，即提交之后必须先审查通过才能进入代码库；另一种是事后审查，也就是无论是否审查，代码都已经提交到代码库中。考虑我们自身实际情况（事前审查成本比较高），我们采用了“事后审查”的方式，本文也将讲述事后审查的操作。<br><a id="more"></a></p>
+<p>Phabricator是一个在浏览器上操作的开发管理平台，其中包括一个代码审查工具。工具支持两种代码审查方式，一种是事前审查，即提交之后必须先审查通过才能进入代码库；另一种是事后审查，也就是无论是否审查，代码都已经提交到代码库中。考虑我们自身实际情况（事前审查成本比较高），我们采用了“事后审查”的方式，本文也将讲述事后审查的操作。<br><a id="more"></a></p>
 <h1 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h1><p>使用Phabricator进行代码审查的理由：</p>
 <ul>
-<li>配置好之后比较容易上手。（不过对于配置者来说很难上手）</li>
+<li>配置好之后比较容易上手，而且不用额外安装软件，只要电脑有浏览器就能使用。（不过对于配置者来说很难上手）</li>
 <li>审查以代码提交为单位，每个提交都会展示差异，比较方便和直观。</li>
 <li>审查时可直接在具体代码处标记问题，方便定位和纠正。</li>
 <li>如采用Phabricator进行任务或缺陷管理，可将代码提交活动与任务/缺陷进行关联，便于任务跟踪。</li>
@@ -619,6 +631,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2019/02/08/login-page/" rel="prev" title="并不简单的简单工作（一）：登录页面">
+                并不简单的简单工作（一）：登录页面 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -698,7 +714,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-count">18</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

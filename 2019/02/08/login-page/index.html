@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html class="theme-next pisces" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":false},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="开发业务系统，虽然原理非常简单，就是数据库的增删改查，而且业务规则也不过是一堆if-else判断，但是想要做好其实并不容易。本系列文章旨在说明：即使是看起来非常简单的工作，在设计和实现上也会有很多陷阱，需要非常认真和细心才行。 本文以简单的登录页面为例，为了突出问题，假设系统只有两个页面：一个登录页面，另一个是登录成功之后显示的“Hello world”。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="并不简单的简单工作（一）：登录页面">
+<meta property="og:url" content="https://plusnan.me/2019/02/08/login-page/index.html">
+<meta property="og:site_name" content="一点微小的博客">
+<meta property="og:description" content="开发业务系统，虽然原理非常简单，就是数据库的增删改查，而且业务规则也不过是一堆if-else判断，但是想要做好其实并不容易。本系列文章旨在说明：即使是看起来非常简单的工作，在设计和实现上也会有很多陷阱，需要非常认真和细心才行。 本文以简单的登录页面为例，为了突出问题，假设系统只有两个页面：一个登录页面，另一个是登录成功之后显示的“Hello world”。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://plusnan.me/img/2019-02-08-login-page/password.png">
+<meta property="og:updated_time" content="2019-02-08T06:56:50.950Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="并不简单的简单工作（一）：登录页面">
+<meta name="twitter:description" content="开发业务系统，虽然原理非常简单，就是数据库的增删改查，而且业务规则也不过是一堆if-else判断，但是想要做好其实并不容易。本系列文章旨在说明：即使是看起来非常简单的工作，在设计和实现上也会有很多陷阱，需要非常认真和细心才行。 本文以简单的登录页面为例，为了突出问题，假设系统只有两个页面：一个登录页面，另一个是登录成功之后显示的“Hello world”。">
+<meta name="twitter:image" content="https://plusnan.me/img/2019-02-08-login-page/password.png">
+
+
+
+  <link rel="alternate" href="/rss.xml" title="一点微小的博客" type="application/atom+xml"/>
+
+
+
+
+  <link rel="canonical" href="https://plusnan.me/2019/02/08/login-page/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>并不简单的简单工作（一）：登录页面 | 一点微小的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一点微小的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">走向女装之路</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br/>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2019/02/08/login-page/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="InfNaN"/>
+      <meta itemprop="description" content="一点微小的博客"/>
+      <meta itemprop="image" content="/img/myavatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一点微小的博客"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">并不简单的简单工作（一）：登录页面
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-08 00:00:00 / 修改时间：14:56:50" itemprop="dateCreated datePublished" datetime="2019-02-08T00:00:00+08:00">2019-02-08</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/闲谈/" itemprop="url" rel="index"><span itemprop="name">闲谈</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/02/08/login-page/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/02/08/login-page/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>开发业务系统，虽然原理非常简单，就是数据库的增删改查，而且业务规则也不过是一堆if-else判断，但是想要做好其实并不容易。本系列文章旨在说明：即使是看起来非常简单的工作，在设计和实现上也会有很多陷阱，需要非常认真和细心才行。</p>
+<p>本文以简单的登录页面为例，为了突出问题，假设系统只有两个页面：一个登录页面，另一个是登录成功之后显示的“Hello world”。<br><a id="more"></a></p>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>登录的思路很简单，就是去数据库里查一下用户输入的账号和密码是否和数据库数据一致，如果一致就将会话状态设置成“已登录”，并跳转到正式的操作页面上，如果不一致就返回登录页面并提示“账号密码错误”。</p>
+<h1 id="设计方面的问题"><a href="#设计方面的问题" class="headerlink" title="设计方面的问题"></a>设计方面的问题</h1><h2 id="暴露多余的信息"><a href="#暴露多余的信息" class="headerlink" title="暴露多余的信息"></a>暴露多余的信息</h2><p>有的系统会“智能”地提示“用户名错误”、“密码错误”，这样会在不经意间暴露多余信息。特别是“密码错误”，这个提示会暗示“用户名正确”，从而促使攻击者加快攻击的步伐。正确的做法是使信息尽可能模糊，只提示“用户名或密码错误”。</p>
+<h2 id="未防范暴力破解"><a href="#未防范暴力破解" class="headerlink" title="未防范暴力破解"></a>未防范暴力破解</h2><p>虽然密码不正确的话进不去，但是网站也未针对暴力破解进行防范，也就是说，只要写个程序一个一个密码地试验，早晚能把密码试出来。因此需要设计防暴力破解的机制，例如：</p>
+<ul>
+<li>输入正确的验证码才能登录（需注意简单的验证码可以被机器识别）。</li>
+<li>第一次不需要输入验证码，但是输错账号密码之后需要输入验证码（需注意“第一次进入登录页面”这种情况也可以伪造）。</li>
+<li>多次认证错误之后锁定账号，例如输错3次密码锁定半小时。（推荐）</li>
+</ul>
+<h2 id="明文存储密码"><a href="#明文存储密码" class="headerlink" title="明文存储密码"></a>明文存储密码</h2><p>在数据库中密码不应当明文存储，否则数据库被攻破之后密码会直接泄漏，更严重的话用户在其他网站账号也会随之攻破（例如<span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvMjAxMSVFNSVCOSVCNCVFNCVCOCVBRCVFNSU5QiVCRCVFNyVCRCU5MSVFNyVBQiU5OSVFNyU5NCVBOCVFNiU4OCVCNyVFNCVCRiVBMSVFNiU4MSVBRiVFNiVCMyU4NCVFOSU5QyVCMiVFNCVCQSU4QiVFNCVCQiVCNg==" title="https://zh.wikipedia.org/wiki/2011%E5%B9%B4%E4%B8%AD%E5%9B%BD%E7%BD%91%E7%AB%99%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2%E4%BA%8B%E4%BB%B6">2011年中国网站用户信息泄露事件<i class="fa fa-external-link"></i></span>）。</p>
+<p>密码应当散列之后再存储到数据库中，而且要用比较安全的散列算法，例如bcrypt。不能用简单的MD5、SHA1（包括MD5之后再MD5），否则仍然有可能通过彩虹表等手段破解（例如事先把常用密码的MD5都计算好，看到<code>202CB962AC59075B964B07152D234B70</code>之后就很容易猜出它是“123”）。</p>
+<h2 id="没有日志记录"><a href="#没有日志记录" class="headerlink" title="没有日志记录"></a>没有日志记录</h2><p>建议设计登录审计功能，每次登录无论成功还是失败都将用户信息记录（主要是IP信息）下来，并提供记录查询，以便使用户判断账号是否安全，或者在发生盗号等安全事件之后进行追溯。</p>
+<p>除此之外也可以加入多重认证（例如隐私验证问题、短信验证码、Google Authenticator）、异地登录提醒等功能，提高安全性。</p>
+<h2 id="没有找回密码功能"><a href="#没有找回密码功能" class="headerlink" title="没有找回密码功能"></a>没有找回密码功能</h2><p>既然有登录功能，那么也应该提供找回密码的功能（设计上要求用户拿着身份证去柜台申请重置密码的除外），使忘记密码的人能够自行重置密码。<span class="exturl" data-url="aHR0cDovL3d3dy5ydWFueWlmZW5nLmNvbS9ibG9nLzIwMTkvMDIvcGFzc3dvcmQuaHRtbA==" title="http://www.ruanyifeng.com/blog/2019/02/password.html">这篇文章<i class="fa fa-external-link"></i></span>介绍了设计找回密码功能时需要注意的事情。</p>
+<h2 id="是否需要互斥？"><a href="#是否需要互斥？" class="headerlink" title="是否需要互斥？"></a>是否需要互斥？</h2><p>无论是业务系统，还是其他系统，均会存在多人同时操作同一账号的情况，因此在设计上需要考虑是否允许这种情况（若不允许，需要考虑是否在技术上加以限制）。</p>
+<h1 id="实现方面的问题"><a href="#实现方面的问题" class="headerlink" title="实现方面的问题"></a>实现方面的问题</h1><p>初学者被安排编码工作之后，如果经验不足，也容易犯一些错误，例如：</p>
+<h2 id="绕过认证"><a href="#绕过认证" class="headerlink" title="绕过认证"></a>绕过认证</h2><p>如果知道Helloworld页面的网址，没登录的情况下能不能依靠直接敲网址进去呢？如果能，说明只实现了登录功能，配套的会话验证和权限验证功能没实现。</p>
+<h2 id="SQL注入问题"><a href="#SQL注入问题" class="headerlink" title="SQL注入问题"></a>SQL注入问题</h2><p>初学者容易这样来书写SQL：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String sql = <span class="string">"SELECT count(1) FROM users WHERE username='"</span> + username + <span class="string">"' AND password='"</span> + password + <span class="string">"'"</span>;</span><br></pre></td></tr></table></figure>
+<p>代码中的SQL是直接拼接的，所以只要在密码框输入<code>&#39; or &#39;&#39;=&#39;</code>即可绕过验证，因为SQL会变成：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">count</span>(<span class="number">1</span>) <span class="keyword">FROM</span> <span class="keyword">users</span> <span class="keyword">WHERE</span> username=<span class="string">'admin'</span> <span class="keyword">AND</span> <span class="keyword">password</span>=<span class="string">''</span> <span class="keyword">or</span> <span class="string">''</span>=<span class="string">''</span>;</span><br><span class="line">                                                                ^=======^</span><br></pre></td></tr></table></figure>
+<p>所输密码成为了SQL逻辑的一部分，破坏了原来SQL的逻辑，即SQL注入。</p>
+<p>建议尽可能用绑定参数的形式来查询SQL。如果非要去拼接字符串，那么必须保证用户输入全部被转义，但是不推荐拼接因为容易忘记过滤。</p>
+<h2 id="前台校验"><a href="#前台校验" class="headerlink" title="前台校验"></a>前台校验</h2><p>建议加入前台校验，当用户未输入用户名或密码便点击登录按钮时，系统给出提示并跳转到未输入内容的文本框上，因为前台校验和提示发生在用户的浏览器上面，耗时可以忽略不计，而提交到服务器去校验，提交和返回都需要时间，网络状况差的话速度会比较慢。另外建议采用统一的校验程序，不要自己写校验js，浪费时间精力。</p>
+<div class="note warning">
+            <p>即便如此，后台校验（特别是业务层面的校验）也是必不可少的，因为前台校验即使逻辑再严密也可以很轻松地绕过去。</p>
+          </div>
+<h2 id="重复提交表单"><a href="#重复提交表单" class="headerlink" title="重复提交表单"></a>重复提交表单</h2><p>由于用户的网络环境不一定很好，点击“登录”按钮之后可能需要等待一段时间才能出来结果，这时候不耐烦的用户可能会多点击几下按钮，因此编码时候要考虑到这一点。一个简单的处理办法是点击“登录”按钮之后立刻将按钮变灰（无法点击），直到返回结果之后再恢复按钮状态。</p>
+<h2 id="明文传输"><a href="#明文传输" class="headerlink" title="明文传输"></a>明文传输</h2><p>国内很多网站仍然在使用HTTP协议进行传输。HTTP传输内容都是明文，在不安全的网络环境下，用户访问的信息很容易遭到监视和篡改：</p>
+<p><img src="/img/2019-02-08-login-page/password.png" alt="密码被截获"></p>
+<p>而HTTPS协议传输内容是经过加密的，监听者既无法解密也无法篡改，因此建议尽可能将网站更换成HTTPS协议。</p>
+<h2 id="串号"><a href="#串号" class="headerlink" title="串号"></a>串号</h2><p>有些人喜欢注册小号，即使是必须本人操作的业务系统，也存在很多将账号交给他人代办的情况。假如用户操作完A账号，注销（或者直接重新进入登录页面），然后登录B账号，但是A账号相关页面并未关闭，那么在这些页面中还能继续操作吗？</p>
+<h1 id="更致命的问题——有必要全部自己开发吗？"><a href="#更致命的问题——有必要全部自己开发吗？" class="headerlink" title="更致命的问题——有必要全部自己开发吗？"></a>更致命的问题——有必要全部自己开发吗？</h1><p>本文章只是为了说明问题，功能也简单到只有俩页面。实际上，在生产过程中应当采用一些现成的成熟框架，不要自己从头开始实现用户管理功能，既浪费时间和金钱，又容易漏洞百出。</p>
+<h1 id="本系列目录"><a href="#本系列目录" class="headerlink" title="本系列目录"></a>本系列目录</h1><ol>
+<li><strong>登录页面</strong></li>
+<li>信息展示列表</li>
+<li>信息维护页面</li>
+<li>业务申办-审批流程</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+      <div>
+        
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>InfNaN</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://plusnan.me/2019/02/08/login-page/" title="并不简单的简单工作（一）：登录页面">https://plusnan.me/2019/02/08/login-page/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/06/java-code-review-4/" rel="next" title="Java代码审查（四）：使用Phabricator进行人工代码审查（事后审查）">
+                <i class="fa fa-chevron-left"></i> Java代码审查（四）：使用Phabricator进行人工代码审查（事后审查）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/img/myavatar.jpg"
+                alt="InfNaN"/>
+            
+              <p class="site-author-name" itemprop="name">InfNaN</p>
+              <p class="site-description motion-element" itemprop="description">一点微小的博客</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">18</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">18</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/rss.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbg==" title="GitHub &rarr; https://github.com/infnan"><i class="fa fa-fw fa-github"></i>GitHub</span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:me@plusnan.me" title="E-Mail &rarr; mailto:me@plusnan.me"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+             <div class="cc-license motion-element" itemprop="license">
+              
+                
+              
+              
+              
+              <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"/></span>
+             </div>
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#思路"><span class="nav-number">1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设计方面的问题"><span class="nav-number">2.</span> <span class="nav-text">设计方面的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#暴露多余的信息"><span class="nav-number">2.1.</span> <span class="nav-text">暴露多余的信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#未防范暴力破解"><span class="nav-number">2.2.</span> <span class="nav-text">未防范暴力破解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#明文存储密码"><span class="nav-number">2.3.</span> <span class="nav-text">明文存储密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#没有日志记录"><span class="nav-number">2.4.</span> <span class="nav-text">没有日志记录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#没有找回密码功能"><span class="nav-number">2.5.</span> <span class="nav-text">没有找回密码功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#是否需要互斥？"><span class="nav-number">2.6.</span> <span class="nav-text">是否需要互斥？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现方面的问题"><span class="nav-number">3.</span> <span class="nav-text">实现方面的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#绕过认证"><span class="nav-number">3.1.</span> <span class="nav-text">绕过认证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL注入问题"><span class="nav-number">3.2.</span> <span class="nav-text">SQL注入问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前台校验"><span class="nav-number">3.3.</span> <span class="nav-text">前台校验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重复提交表单"><span class="nav-number">3.4.</span> <span class="nav-text">重复提交表单</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#明文传输"><span class="nav-number">3.5.</span> <span class="nav-text">明文传输</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#串号"><span class="nav-number">3.6.</span> <span class="nav-text">串号</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#更致命的问题——有必要全部自己开发吗？"><span class="nav-number">4.</span> <span class="nav-text">更致命的问题——有必要全部自己开发吗？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#本系列目录"><span class="nav-number">5.</span> <span class="nav-text">本系列目录</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">InfNaN</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Pisces</span></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
+  
+  
+  <script id="dsq-count-scr" src="https://christ-wus-blog.disqus.com/count.js" async></script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://plusnan.me/2019/02/08/login-page/";
+    this.page.identifier = "2019/02/08/login-page/";
+    this.page.title = '并不简单的简单工作（一）：登录页面';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://christ-wus-blog.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    loadComments();
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'; 
+      }
+      else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script src="/js/src/exturl.js?v=7.0.0"></script>
+
+
+  
+
+  
+
+</body>
+</html>
