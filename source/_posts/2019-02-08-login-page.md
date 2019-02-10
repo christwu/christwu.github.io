@@ -1,9 +1,9 @@
 ---
 layout: post
-title: 并不简单的简单工作（一）：登录页面
+title: 并不简单的简单开发工作（一）：登录页面
 category: 闲谈
 ---
-开发业务系统，虽然原理非常简单，就是数据库的增删改查，而且业务规则也不过是一堆if-else判断，但是想要做好其实并不容易。本系列文章旨在说明：即使是看起来非常简单的工作，在设计和实现上也会有很多陷阱，需要非常认真和细心才行。
+开发业务系统，虽然原理非常简单，就是数据库的增删改查，而且业务规则也不过是一堆if-else判断，但是想要做好其实并不容易。本系列文章旨在说明：即使是看起来非常简单的开发工作，在设计和实现上也会有很多陷阱，需要非常认真和细心才行。
 
 本文以简单的登录页面为例，为了突出问题，假设系统只有两个页面：一个登录页面，另一个是登录成功之后显示的“Hello world”。
 <!-- more -->
@@ -51,11 +51,11 @@ category: 闲谈
 String sql = "SELECT count(1) FROM users WHERE username='" + username + "' AND password='" + password + "'";
 ```
 
-代码中的SQL是直接拼接的，所以只要在密码框输入`' or ''='`即可绕过验证，因为SQL会变成：
+代码中的SQL是直接拼接的，所以只要在密码框输入`' or '1'='1`即可绕过验证，因为SQL会变成：
 
 ```sql
-SELECT count(1) FROM users WHERE username='admin' AND password='' or ''='';
-                                                                ^=======^
+SELECT count(1) FROM users WHERE username='admin' AND password='' or '1'='1';
+                                                                ^=========^
 ```
 
 所输密码成为了SQL逻辑的一部分，破坏了原来SQL的逻辑，即SQL注入。
@@ -87,6 +87,6 @@ SELECT count(1) FROM users WHERE username='admin' AND password='' or ''='';
 
 # 本系列目录
 1. **登录页面**
-2. 信息展示列表
+2. [信息展示列表](/2019/02/09/list-page/)
 3. 信息维护页面
 4. 业务申办-审批流程
