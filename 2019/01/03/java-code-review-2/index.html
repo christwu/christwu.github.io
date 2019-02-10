@@ -425,9 +425,9 @@
 </ul>
 <h2 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h2><ul>
 <li><p>示例：假如用以下SQL进行登录信息校验</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isValidLogin</span><span class="params">(String username, String password)</span> </span>&#123;</span><br><span class="line">    String sql = <span class="string">"SELECT 1 FROM users WHERE username='"</span> + username + <span class="string">"' AND password='"</span> + password + <span class="string">"'"</span>;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  
 <p>  那么登录时在密码中输入<code>&#39; or &#39;&#39;=&#39;</code>，SQL就会变成</p>
-  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="number">1</span> <span class="keyword">FROM</span> <span class="keyword">users</span> <span class="keyword">WHERE</span> username=<span class="string">'admin'</span> <span class="keyword">AND</span> <span class="keyword">password</span>=<span class="string">''</span> <span class="keyword">OR</span> <span class="string">''</span>=<span class="string">''</span></span><br></pre></td></tr></table></figure>
+  
 <p>  结果就会变成不知道密码也能直接进去了。</p>
 <p>  另外，假如密码输入的是<code>&#39;; drop table users; --</code>……</p>
 <ul>

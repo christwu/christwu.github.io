@@ -435,7 +435,7 @@
 <li>重要内容留截图。</li>
 </ol>
 <p>推荐两个调试接口的软件，一个是专门测WebService的<span class="exturl" data-url="aHR0cHM6Ly93d3cuc29hcHVpLm9yZw==" title="https://www.soapui.org">SoapUI<i class="fa fa-external-link"></i></span>，另一个是可以测各种请求的<span class="exturl" data-url="aHR0cHM6Ly93d3cuZ2V0cG9zdG1hbi5jb20vYXBwcw==" title="https://www.getpostman.com/apps">Postman<i class="fa fa-external-link"></i></span>。对我个人而言，由于我们项目经常是WebService里面套JSON，所以SoapUI用得并不舒服，不如自己抓到调用WebService的原始请求内容然后全部扔到Postman中调试：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">soap:Envelope</span> <span class="attr">xmlns:soap</span>=<span class="string">"http://schemas.xmlsoap.org/soap/envelope/"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">soap:Body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ns1:xxxxxmethod</span> <span class="attr">xmlns:ns1</span>=<span class="string">"http://service.xxx.xxxcompany.com/"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">arg0</span>&gt;</span></span><br><span class="line">                &#123;</span><br><span class="line">                    "param1": "xxx",</span><br><span class="line">                    "param2": "yyy",</span><br><span class="line">                    ...</span><br><span class="line">                &#125;</span><br><span class="line">            <span class="tag">&lt;/<span class="name">arg0</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">ns1:xxxxxmethod</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">soap:Body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">soap:Envelope</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 <p>如果主要系统已经上线了，注意不要在生产环境或使用生产库直接联调，而是要准备一个和生产环境架构相似的测试环境，在测试环境上进行联调。在生产环境和生产库上，双方顶多测一下接口和功能通没通，不要测别的东西。</p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>上线之后更要专门记录接口的调用情况，做到有据可查。清楚地了解接口调用情况、频率以及状态，在出现故障时可以尽量避免踢皮球和承担无谓责任。有必要的话还应该实行访问控制，一旦遭遇攻击或疑似攻击（例如调用频率太高等）时可以方便地进行处理。</p>
 <p>运行之后，假如要对接口进行重大调整，那么要确保向后兼容，除非非常确定大家不会再使用旧版定义了。</p>
@@ -454,9 +454,9 @@
             <p>有时候你的服务器会出现Ping不通，或者出现能Ping通但是SSH连接超时的情况，这很可能是你服务器的IP或端口被墙了。如果遇到这种情况，可以去买一台新机器并删除旧的机器。另外有时候需要多刷几次。</p>
           </div>
 <p>新机器启动之后，先在公司Ping一下，没问题的话就可以用PuTTY等软件建立连接了。输入Vultr网站上面给你提供的服务器IP（端口22）、用户名和密码，然后</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+
 <p>将其中的<code>GatewayPorts no</code>改成<code>yes</code>，没找到的话就在文件末尾追加一行，保存。然后</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart sshd</span><br></pre></td></tr></table></figure>
+
 <p>准备工作就做好了。</p>
 <div class="note warning">
             <p>有些操作系统（例如CentOS）会默认开启防火墙，所以要确认一下防火墙状态，然后关闭防火墙或者开放待使用端口。</p>

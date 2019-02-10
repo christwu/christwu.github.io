@@ -427,9 +427,9 @@
 <h1 id="实现方面的问题"><a href="#实现方面的问题" class="headerlink" title="实现方面的问题"></a>实现方面的问题</h1><p>初学者被安排编码工作之后，如果经验不足，也容易犯一些错误，例如：</p>
 <h2 id="绕过认证"><a href="#绕过认证" class="headerlink" title="绕过认证"></a>绕过认证</h2><p>如果知道Helloworld页面的网址，没登录的情况下能不能依靠直接敲网址进去呢？如果能，说明只实现了登录功能，配套的会话验证和权限验证功能没实现。</p>
 <h2 id="SQL注入问题"><a href="#SQL注入问题" class="headerlink" title="SQL注入问题"></a>SQL注入问题</h2><p>初学者容易这样来书写SQL：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String sql = <span class="string">"SELECT count(1) FROM users WHERE username='"</span> + username + <span class="string">"' AND password='"</span> + password + <span class="string">"'"</span>;</span><br></pre></td></tr></table></figure>
+
 <p>代码中的SQL是直接拼接的，所以只要在密码框输入<code>&#39; or &#39;1&#39;=&#39;1</code>即可绕过验证，因为SQL会变成：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">count</span>(<span class="number">1</span>) <span class="keyword">FROM</span> <span class="keyword">users</span> <span class="keyword">WHERE</span> username=<span class="string">'admin'</span> <span class="keyword">AND</span> <span class="keyword">password</span>=<span class="string">''</span> <span class="keyword">or</span> <span class="string">'1'</span>=<span class="string">'1'</span>;</span><br><span class="line">                                                                ^=========^</span><br></pre></td></tr></table></figure>
+
 <p>所输密码成为了SQL逻辑的一部分，破坏了原来SQL的逻辑，即SQL注入。</p>
 <p>建议尽可能用绑定参数的形式来查询SQL。如果非要去拼接字符串，那么必须保证用户输入全部被转义，但是不推荐拼接因为容易忘记过滤。</p>
 <h2 id="前台校验"><a href="#前台校验" class="headerlink" title="前台校验"></a>前台校验</h2><p>建议加入前台校验，当用户未输入用户名或密码便点击登录按钮时，系统给出提示并跳转到未输入内容的文本框上，因为前台校验和提示发生在用户的浏览器上面，耗时可以忽略不计，而提交到服务器去校验，提交和返回都需要时间，网络状况差的话速度会比较慢。另外建议采用统一的校验程序，不要自己写校验js，浪费时间精力。</p>
