@@ -98,7 +98,7 @@ archive_generator:
   monthly: false
   daily: false
 
-all_minifier: false
+all_minifier: true
 
 ## Themes: https://hexo.io/themes/
 theme: hexo-theme-next
