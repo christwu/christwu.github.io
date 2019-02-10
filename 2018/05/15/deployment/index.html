@@ -1,1 +1,965 @@
-<!DOCTYPE html><html class="theme-next pisces" lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#222"><link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"><link rel="stylesheet" href="/css/main.css?v=7.0.0"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0"><link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222"><script id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/",scheme:"Pisces",version:"7.0.0",sidebar:{position:"left",display:"post",offset:12,b2t:!1,scrollpercent:!1,onmobile:!1},fancybox:!1,fastclick:!1,lazyload:!1,tabs:!0,motion:{enable:!1},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}}}</script><meta name="description" content="部署Web应用是一项细活：它的配置和操作通常涉及各方面，而且要求准确无误。平时注意配置管理，工作认真负责，方可保证应用正常上线运行。"><meta name="keywords" content="Web,项目实施"><meta property="og:type" content="article"><meta property="og:title" content="Web应用部署注意事项"><meta property="og:url" content="https://plusnan.me/2018/05/15/deployment/index.html"><meta property="og:site_name" content="一点微小的博客"><meta property="og:description" content="部署Web应用是一项细活：它的配置和操作通常涉及各方面，而且要求准确无误。平时注意配置管理，工作认真负责，方可保证应用正常上线运行。"><meta property="og:locale" content="zh-CN"><meta property="og:updated_time" content="2019-01-05T15:42:33.655Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Web应用部署注意事项"><meta name="twitter:description" content="部署Web应用是一项细活：它的配置和操作通常涉及各方面，而且要求准确无误。平时注意配置管理，工作认真负责，方可保证应用正常上线运行。"><link rel="alternate" href="/rss.xml" title="一点微小的博客" type="application/atom+xml"><link rel="canonical" href="https://plusnan.me/2018/05/15/deployment/"><script id="page.configurations">CONFIG.page={sidebar:""}</script><title>Web应用部署注意事项 | 一点微小的博客</title><noscript><style>.sidebar-inner,.use-motion .brand,.use-motion .collection-title,.use-motion .comments,.use-motion .menu-item,.use-motion .motion-element,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header{opacity:initial}.use-motion .logo,.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.use-motion .logo-line-before i{left:initial}.use-motion .logo-line-after i{right:initial}</style></noscript></head><body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN"><div class="container sidebar-position-left page-post-detail"><div class="headband"></div><header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-wrapper"><div class="site-meta"><div class="custom-logo-site-title"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">一点微小的博客</span> <span class="logo-line-after"><i></i></span></a></div><p class="site-subtitle">走向女装之路</p></div><div class="site-nav-toggle"><button aria-label="切换导航栏"><span class="btn-bar"></span> <span class="btn-bar"></span> <span class="btn-bar"></span></button></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i><br>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i><br>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br>归档</a></li></ul></nav></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><div class="post-block"><link itemprop="mainEntityOfPage" href="https://plusnan.me/2018/05/15/deployment/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="name" content="InfNaN"><meta itemprop="description" content="一点微小的博客"><meta itemprop="image" content="/img/myavatar.jpg"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="一点微小的博客"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Web应用部署注意事项</h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i> </span><span class="post-meta-item-text">发表于</span> <time title="创建时间：2018-05-15 00:00:00" itemprop="dateCreated datePublished" datetime="2018-05-15T00:00:00+08:00">2018-05-15</time> <span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-calendar-check-o"></i> </span><span class="post-meta-item-text">更新于</span> <time title="修改时间：2019-01-05 23:42:33" itemprop="dateModified" datetime="2019-01-05T23:42:33+08:00">2019-01-05</time> </span><span class="post-category"><span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-folder-o"></i> </span><span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/经验/" itemprop="url" rel="index"><span itemprop="name">经验</span></a></span> </span><span class="post-comments-count"><span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-comment-o"></i> </span><span class="post-meta-item-text">评论数：</span> <a href="/2018/05/15/deployment/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/05/15/deployment/" itemprop="commentCount"></span></a></span></div></header><div class="post-body" itemprop="articleBody"><p>部署Web应用是一项细活：它的配置和操作通常涉及各方面，而且要求准确无误。平时注意配置管理，工作认真负责，方可保证应用正常上线运行。<br><a id="more"></a></p><h1 id="部署之前"><a href="#部署之前" class="headerlink" title="部署之前"></a>部署之前</h1><h2 id="开发时"><a href="#开发时" class="headerlink" title="开发时"></a>开发时</h2><p>早在开发阶段就应当注意整理和维护应用配置，包括但不限于：</p><ol><li>各数据源的配置（地址、端口、实例、用户名、密码）与涉及的配置文件；</li><li>外部接口的地址（IP、端口、路径等）与涉及的配置文件；</li><li>依赖的外部程序（例如ImageMagick等）；</li><li>应用中开发模式/生产模式的切换开关（如果有的话）；</li><li>涉及文件操作的目录路径（如果需要在应用程序目录中读写文件的话）；</li><li>准确的数据库表结构（字段名、类型、长度、Nullable）、索引、序列（如使用Oracle等数据库）、触发器、存储过程、函数以及字典数据内容。在维护数据库时应注意同步数据库设计文档、开发库、测试库，系统部署时还要同步维护生产库。</li></ol><p>开发过程中，如无特殊需求，应避免将应用地址、端口或路径写死，否则的话，一旦需要更换地址或路径就会遇到很大的麻烦。</p><h2 id="上线前"><a href="#上线前" class="headerlink" title="上线前"></a>上线前</h2><p>准备部署之前，应完整识别出开发/测试环境与生产环境配置的差异，避免疏漏。除此之外，强烈建议对各服务器资源和部署步骤进行记录，例如：</p><ol><li>各服务器内网IP地址、公网IP地址、操作系统、CPU、内存、硬盘空间；</li><li>各服务器用途（数据库/应用节点/负载均衡等）；</li><li>各服务器主要应用及版本；</li><li>各服务器登录方式；</li><li>应用或数据部署路径；</li><li>系统设置，包括防火墙、参数设定等。</li></ol><p>操作生产环境之前，最好找个类似的测试环境进行测试，了解如何处理意外情况（例如断电、死机、系统慢等）。</p><p>如果预计需要频繁部署，建议写部署脚本。</p><h1 id="部署中"><a href="#部署中" class="headerlink" title="部署中"></a>部署中</h1><h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><p>部署数据库时应注意：</p><ol><li>确保数据库软件已正确安装和启动；</li><li>表空间、账号密码正确；</li><li>字符集配置正确；</li><li>正确建立表结构、索引、序列、触发器、存储过程、函数等；对于升级，正确将旧结构修改成新结构；</li><li>正确初始化字典数据；</li><li>根据实际情况调整连接数和 Max open files 等设置。</li></ol><h2 id="应用服务器"><a href="#应用服务器" class="headerlink" title="应用服务器"></a>应用服务器</h2><p>部署应用时需要注意：</p><ol><li>各软件（如Apache、PHP和应用所需外部程序）已正确安装，环境变量、端口、证书（HTTPS）正确配置；</li><li>程序代码或编译后文件已放到正确位置；</li><li>如果应用不是以root身份启动，那么程序文件已设置正确所有者；</li><li>应用程序配置、数据源已按生产环境进行修改；</li><li>系统防火墙和相关外部接口已正确配置；</li><li>如果系统规模较大，Max open files 数量（/etc/security/limits.conf）和 fs.file-max（/etc/sysctl.conf）已进行调整；</li><li>了解如何取用后台日志。</li></ol><h2 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h2><ol><li>注意各节点应配置好；</li><li>注意负载均衡算法的选择；</li><li>注意会话保持的设置。</li></ol><h1 id="部署之后"><a href="#部署之后" class="headerlink" title="部署之后"></a>部署之后</h1><p>部署时或部署完成后，仍然要对资源和使用情况进行整理总结，以便后续运维。</p></div><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者： </strong>InfNaN</li><li class="post-copyright-link"><strong>本文链接：</strong> <a href="https://plusnan.me/2018/05/15/deployment/" title="Web应用部署注意事项">https://plusnan.me/2018/05/15/deployment/</a></li><li class="post-copyright-license"><strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li></ul></div><footer class="post-footer"><div class="post-tags"><a href="/tags/Web/" rel="tag"># Web</a> <a href="/tags/项目实施/" rel="tag"># 项目实施</a></div><div class="post-nav"><div class="post-nav-next post-nav-item"></div><span class="post-nav-divider"></span><div class="post-nav-prev post-nav-item"><a href="/2018/07/14/cross-company-debug/" rel="prev" title="接口设计与联调经验">接口设计与联调经验 <i class="fa fa-chevron-right"></i></a></div></div></footer></div></article></div></div><div class="comments" id="comments"><div id="disqus_thread"><noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript></div></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span> <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span> <span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">文章目录</li><li class="sidebar-nav-overview" data-target="site-overview-wrap">站点概览</li></ul><div class="site-overview-wrap sidebar-panel"><div class="site-overview"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="site-author-image" itemprop="image" src="/img/myavatar.jpg" alt="InfNaN"><p class="site-author-name" itemprop="name">InfNaN</p><p class="site-description motion-element" itemprop="description">一点微小的博客</p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"><a href="/archives/"><span class="site-state-item-count">19</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"><a href="/categories/index.html"><span class="site-state-item-count">3</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"><a href="/tags/index.html"><span class="site-state-item-count">18</span> <span class="site-state-item-name">标签</span></a></div></nav><div class="feed-link motion-element"><a href="/rss.xml" rel="alternate"><i class="fa fa-rss"></i> RSS</a></div><div class="links-of-author motion-element"><span class="links-of-author-item"><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbg==" title="GitHub &rarr; https://github.com/infnan"><i class="fa fa-fw fa-github"></i>GitHub</span> </span><span class="links-of-author-item"><a href="mailto:me@plusnan.me" title="E-Mail &rarr; mailto:me@plusnan.me"><i class="fa fa-fw fa-envelope"></i>E-Mail</a></span></div><div class="cc-license motion-element" itemprop="license"><span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span></div></div></div><div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#部署之前"><span class="nav-number">1.</span> <span class="nav-text">部署之前</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#开发时"><span class="nav-number">1.1.</span> <span class="nav-text">开发时</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上线前"><span class="nav-number">1.2.</span> <span class="nav-text">上线前</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#部署中"><span class="nav-number">2.</span> <span class="nav-text">部署中</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库"><span class="nav-number">2.1.</span> <span class="nav-text">数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用服务器"><span class="nav-number">2.2.</span> <span class="nav-text">应用服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#负载均衡"><span class="nav-number">2.3.</span> <span class="nav-text">负载均衡</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#部署之后"><span class="nav-number">3.</span> <span class="nav-text">部署之后</span></a></li></ol></div></div></div></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span> <span class="with-love" id="animate"><i class="fa fa-"></i> </span><span class="author" itemprop="copyrightHolder">InfNaN</span></div><div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动</div><span class="post-meta-divider">|</span><div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Pisces</span></div></div></footer><div class="back-to-top"><i class="fa fa-arrow-up"></i></div></div><script>"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script><script src="/lib/jquery/index.js?v=2.1.3"></script><script src="/lib/velocity/velocity.min.js?v=1.2.1"></script><script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script><script src="/js/src/utils.js?v=7.0.0"></script><script src="/js/src/motion.js?v=7.0.0"></script><script src="/js/src/affix.js?v=7.0.0"></script><script src="/js/src/schemes/pisces.js?v=7.0.0"></script><script src="/js/src/scrollspy.js?v=7.0.0"></script><script src="/js/src/post-details.js?v=7.0.0"></script><script src="/js/src/bootstrap.js?v=7.0.0"></script><script id="dsq-count-scr" src="https://christ-wus-blog.disqus.com/count.js" async></script><script>var disqus_config=function(){this.page.url="https://plusnan.me/2018/05/15/deployment/",this.page.identifier="2018/05/15/deployment/",this.page.title="Web应用部署注意事项"};function loadComments(){var t=document,e=t.createElement("script");e.src="https://christ-wus-blog.disqus.com/embed.js",e.setAttribute("data-timestamp",""+ +new Date),(t.head||t.body).appendChild(e)}loadComments()</script><script>!function(){var t=document.createElement("script"),e=window.location.protocol.split(":")[0];t.src="https"===e?"https://zz.bdstatic.com/linksubmit/push.js":"http://push.zhanzhang.baidu.com/push.js";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}()</script><script src="/js/src/exturl.js?v=7.0.0"></script></body></html>
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html class="theme-next pisces" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/",scheme:"Pisces",version:"7.0.0",sidebar:{position:"left",display:"post",offset:12,b2t:!1,scrollpercent:!1,onmobile:!1},fancybox:!1,fastclick:!1,lazyload:!1,tabs:!0,motion:{enable:!1},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}}}</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="部署Web应用是一项细活：它的配置和操作通常涉及各方面，而且要求准确无误。平时注意配置管理，工作认真负责，方可保证应用正常上线运行。">
+<meta name="keywords" content="Web,项目实施">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web应用部署注意事项">
+<meta property="og:url" content="https://plusnan.me/2018/05/15/deployment/index.html">
+<meta property="og:site_name" content="一点微小的博客">
+<meta property="og:description" content="部署Web应用是一项细活：它的配置和操作通常涉及各方面，而且要求准确无误。平时注意配置管理，工作认真负责，方可保证应用正常上线运行。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-01-05T15:42:33.655Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web应用部署注意事项">
+<meta name="twitter:description" content="部署Web应用是一项细活：它的配置和操作通常涉及各方面，而且要求准确无误。平时注意配置管理，工作认真负责，方可保证应用正常上线运行。">
+
+
+
+  <link rel="alternate" href="/rss.xml" title="一点微小的博客" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://plusnan.me/2018/05/15/deployment/">
+
+
+
+<script id="page.configurations">CONFIG.page={sidebar:""}</script>
+
+  <title>Web应用部署注意事项 | 一点微小的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>.sidebar-inner,.use-motion .brand,.use-motion .collection-title,.use-motion .comments,.use-motion .menu-item,.use-motion .motion-element,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header{opacity:initial}.use-motion .logo,.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.use-motion .logo-line-before i{left:initial}.use-motion .logo-line-after i{right:initial}</style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一点微小的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">走向女装之路</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2018/05/15/deployment/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="InfNaN">
+      <meta itemprop="description" content="一点微小的博客">
+      <meta itemprop="image" content="/img/myavatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一点微小的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Web应用部署注意事项
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-05-15 00:00:00" itemprop="dateCreated datePublished" datetime="2018-05-15T00:00:00+08:00">2018-05-15</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-01-05 23:42:33" itemprop="dateModified" datetime="2019-01-05T23:42:33+08:00">2019-01-05</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/经验/" itemprop="url" rel="index"><span itemprop="name">经验</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2018/05/15/deployment/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/05/15/deployment/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>部署Web应用是一项细活：它的配置和操作通常涉及各方面，而且要求准确无误。平时注意配置管理，工作认真负责，方可保证应用正常上线运行。<br><a id="more"></a> </p>
+<h1 id="部署之前"><a href="#部署之前" class="headerlink" title="部署之前"></a>部署之前</h1><h2 id="开发时"><a href="#开发时" class="headerlink" title="开发时"></a>开发时</h2><p>早在开发阶段就应当注意整理和维护应用配置，包括但不限于：</p>
+<ol>
+<li>各数据源的配置（地址、端口、实例、用户名、密码）与涉及的配置文件；</li>
+<li>外部接口的地址（IP、端口、路径等）与涉及的配置文件；</li>
+<li>依赖的外部程序（例如ImageMagick等）；</li>
+<li>应用中开发模式/生产模式的切换开关（如果有的话）；</li>
+<li>涉及文件操作的目录路径（如果需要在应用程序目录中读写文件的话）；</li>
+<li>准确的数据库表结构（字段名、类型、长度、Nullable）、索引、序列（如使用Oracle等数据库）、触发器、存储过程、函数以及字典数据内容。在维护数据库时应注意同步数据库设计文档、开发库、测试库，系统部署时还要同步维护生产库。</li>
+</ol>
+<p>开发过程中，如无特殊需求，应避免将应用地址、端口或路径写死，否则的话，一旦需要更换地址或路径就会遇到很大的麻烦。</p>
+<h2 id="上线前"><a href="#上线前" class="headerlink" title="上线前"></a>上线前</h2><p>准备部署之前，应完整识别出开发/测试环境与生产环境配置的差异，避免疏漏。除此之外，强烈建议对各服务器资源和部署步骤进行记录，例如：</p>
+<ol>
+<li>各服务器内网IP地址、公网IP地址、操作系统、CPU、内存、硬盘空间；</li>
+<li>各服务器用途（数据库/应用节点/负载均衡等）；</li>
+<li>各服务器主要应用及版本；</li>
+<li>各服务器登录方式；</li>
+<li>应用或数据部署路径；</li>
+<li>系统设置，包括防火墙、参数设定等。</li>
+</ol>
+<p>操作生产环境之前，最好找个类似的测试环境进行测试，了解如何处理意外情况（例如断电、死机、系统慢等）。</p>
+<p>如果预计需要频繁部署，建议写部署脚本。</p>
+<h1 id="部署中"><a href="#部署中" class="headerlink" title="部署中"></a>部署中</h1><h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><p>部署数据库时应注意：</p>
+<ol>
+<li>确保数据库软件已正确安装和启动；</li>
+<li>表空间、账号密码正确；</li>
+<li>字符集配置正确；</li>
+<li>正确建立表结构、索引、序列、触发器、存储过程、函数等；对于升级，正确将旧结构修改成新结构；</li>
+<li>正确初始化字典数据；</li>
+<li>根据实际情况调整连接数和 Max open files 等设置。</li>
+</ol>
+<h2 id="应用服务器"><a href="#应用服务器" class="headerlink" title="应用服务器"></a>应用服务器</h2><p>部署应用时需要注意：</p>
+<ol>
+<li>各软件（如Apache、PHP和应用所需外部程序）已正确安装，环境变量、端口、证书（HTTPS）正确配置；</li>
+<li>程序代码或编译后文件已放到正确位置；</li>
+<li>如果应用不是以root身份启动，那么程序文件已设置正确所有者；</li>
+<li>应用程序配置、数据源已按生产环境进行修改；</li>
+<li>系统防火墙和相关外部接口已正确配置；</li>
+<li>如果系统规模较大，Max open files 数量（/etc/security/limits.conf）和 fs.file-max（/etc/sysctl.conf）已进行调整；</li>
+<li>了解如何取用后台日志。</li>
+</ol>
+<h2 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h2><ol>
+<li>注意各节点应配置好；</li>
+<li>注意负载均衡算法的选择；</li>
+<li>注意会话保持的设置。</li>
+</ol>
+<h1 id="部署之后"><a href="#部署之后" class="headerlink" title="部署之后"></a>部署之后</h1><p>部署时或部署完成后，仍然要对资源和使用情况进行整理总结，以便后续运维。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+      <div>
+        
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>InfNaN</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://plusnan.me/2018/05/15/deployment/" title="Web应用部署注意事项">https://plusnan.me/2018/05/15/deployment/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Web/" rel="tag"># Web</a>
+          
+            <a href="/tags/项目实施/" rel="tag"># 项目实施</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/14/cross-company-debug/" rel="prev" title="接口设计与联调经验">
+                接口设计与联调经验 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/img/myavatar.jpg" alt="InfNaN">
+            
+              <p class="site-author-name" itemprop="name">InfNaN</p>
+              <p class="site-description motion-element" itemprop="description">一点微小的博客</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">18</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/rss.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbg==" title="GitHub &rarr; https://github.com/infnan"><i class="fa fa-fw fa-github"></i>GitHub</span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:me@plusnan.me" title="E-Mail &rarr; mailto:me@plusnan.me"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+             <div class="cc-license motion-element" itemprop="license">
+              
+                
+              
+              
+              
+              <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+             </div>
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#部署之前"><span class="nav-number">1.</span> <span class="nav-text">部署之前</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#开发时"><span class="nav-number">1.1.</span> <span class="nav-text">开发时</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上线前"><span class="nav-number">1.2.</span> <span class="nav-text">上线前</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#部署中"><span class="nav-number">2.</span> <span class="nav-text">部署中</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库"><span class="nav-number">2.1.</span> <span class="nav-text">数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用服务器"><span class="nav-number">2.2.</span> <span class="nav-text">应用服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#负载均衡"><span class="nav-number">2.3.</span> <span class="nav-text">负载均衡</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#部署之后"><span class="nav-number">3.</span> <span class="nav-text">部署之后</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">InfNaN</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Pisces</span></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
+  
+  
+  <script id="dsq-count-scr" src="https://christ-wus-blog.disqus.com/count.js" async></script>
+
+
+<script>var disqus_config=function(){this.page.url="https://plusnan.me/2018/05/15/deployment/",this.page.identifier="2018/05/15/deployment/",this.page.title="Web应用部署注意事项"};function loadComments(){var t=document,e=t.createElement("script");e.src="https://christ-wus-blog.disqus.com/embed.js",e.setAttribute("data-timestamp",""+ +new Date),(t.head||t.body).appendChild(e)}loadComments()</script>
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+  <script>!function(){var t=document.createElement("script"),e=window.location.protocol.split(":")[0];t.src="https"===e?"https://zz.bdstatic.com/linksubmit/push.js":"http://push.zhanzhang.baidu.com/push.js";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}()</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script src="/js/src/exturl.js?v=7.0.0"></script>
+
+
+  
+
+  
+
+</body>
+</html>
