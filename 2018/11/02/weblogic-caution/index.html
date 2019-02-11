@@ -14,10 +14,10 @@
 
 <html class="theme-next pisces" lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2">
-<meta name="theme-color" content="#222">
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
 
 
 
@@ -44,9 +44,9 @@
 
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
 
-<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+<link rel="stylesheet" href="/css/main.css?v=7.0.0"/>
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
@@ -66,7 +66,27 @@
 
 
 
-<script id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/",scheme:"Pisces",version:"7.0.0",sidebar:{position:"left",display:"post",offset:12,b2t:!1,scrollpercent:!1,onmobile:!1},fancybox:!1,fastclick:!1,lazyload:!1,tabs:!0,motion:{enable:!1},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}}}</script>
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":false},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
 
 
   
@@ -89,16 +109,20 @@
 
 
 
-  <link rel="alternate" href="/rss.xml" title="一点微小的博客" type="application/atom+xml">
+  <link rel="alternate" href="/rss.xml" title="一点微小的博客" type="application/atom+xml"/>
 
 
 
 
-  <link rel="canonical" href="https://plusnan.me/2018/11/02/weblogic-caution/">
+  <link rel="canonical" href="https://plusnan.me/2018/11/02/weblogic-caution/"/>
 
 
 
-<script id="page.configurations">CONFIG.page={sidebar:""}</script>
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
 
   <title>Weblogic踩坑记录 | 一点微小的博客</title>
   
@@ -115,7 +139,28 @@
 
 
   <noscript>
-  <style>.sidebar-inner,.use-motion .brand,.use-motion .collection-title,.use-motion .comments,.use-motion .menu-item,.use-motion .motion-element,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header{opacity:initial}.use-motion .logo,.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.use-motion .logo-line-before i{left:initial}.use-motion .logo-line-after i{right:initial}</style>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
 </noscript>
 
 </head>
@@ -179,7 +224,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>首页</a>
 
   </li>
         
@@ -196,7 +241,7 @@
 
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br/>标签</a>
 
   </li>
         
@@ -213,7 +258,7 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>分类</a>
 
   </li>
         
@@ -230,7 +275,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>归档</a>
 
   </li>
 
@@ -282,16 +327,16 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2018/11/02/weblogic-caution/">
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2018/11/02/weblogic-caution/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="InfNaN">
-      <meta itemprop="description" content="一点微小的博客">
-      <meta itemprop="image" content="/img/myavatar.jpg">
+      <meta itemprop="name" content="InfNaN"/>
+      <meta itemprop="description" content="一点微小的博客"/>
+      <meta itemprop="image" content="/img/myavatar.jpg"/>
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一点微小的博客">
+      <meta itemprop="name" content="一点微小的博客"/>
     </span>
 
     
@@ -408,7 +453,15 @@
 
       
         <p>本文记录我在部署Weblogic时遇到的各种坑。其中JDK为1.6，Weblogic版本11g。<br><a id="more"></a></p>
-<style>#post-content table{word-break:break-all}code{word-break:break-all}</style>
+<style>
+#post-content table {
+    word-break: break-all;
+}
+
+code {
+    word-break: break-all;
+}
+</style>
 
 <h1 id="开发阶段"><a href="#开发阶段" class="headerlink" title="开发阶段"></a>开发阶段</h1><h2 id="准备测试区"><a href="#准备测试区" class="headerlink" title="准备测试区"></a>准备测试区</h2><p>务必准备一个和生产环境架构接近的测试环境，而且开发环境、测试环境和生产环境的JDK与中间件版本应该保持一致，如果条件不够，至少测试环境和生产环境要一致。开发时用某个版本JDK和Tomcat，部署到生产环境时用另一个版本的JDK和Weblogic，这样很容易遭遇意外。</p>
 <p>举一些例子，以下几个就属于Tomcat上面测不出来，挪到Weblogic上面就可能会暴露出来的错误，好在下表这些错误通过修改Weblogic服务器启动参数就能在一定程度上解决了：</p>
@@ -457,37 +510,37 @@
 <p>为了安全，需要仔细控制防火墙的放行范围，不要让7001和5556暴露到互联网上面。另外不要把应用部署到AdminServer上面，否则封锁7001端口之后应用就无法访问了。</p>
 <h2 id="建议进行网络测试"><a href="#建议进行网络测试" class="headerlink" title="建议进行网络测试"></a>建议进行网络测试</h2><p>在开始部署之前，建议在应用服务器上测试一下能否访问数据库等资源。如果网络不通，那么改Weblogic设置时可能会无响应，卡了半天之后才蹦出一句<code>The Network adapter could not establish the connection</code>，白白耽误时间。</p>
 <p>如果系统没装telnet，可以简单地测试一下能不能ping通，或者通过以下Java程序来测一下端口通不通（有些机房可能会出现IP能ping通但是端口被拦截的情况）：</p>
-
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.net.InetSocketAddress;</span><br><span class="line"><span class="keyword">import</span> java.net.Socket;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IpTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        Socket connect = <span class="keyword">new</span> Socket();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            String ip = <span class="string">""</span>;</span><br><span class="line">            <span class="keyword">int</span> port = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">int</span> timeout = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (args.length &lt; <span class="number">2</span>) &#123;</span><br><span class="line">                System.out.println(<span class="string">"用法：java IpTest &lt;IP地址&gt; &lt;端口号&gt; [超时时间]"</span>);</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                ip = args[<span class="number">0</span>];</span><br><span class="line">                port = Integer.parseInt(args[<span class="number">1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (args.length &gt; <span class="number">2</span>)&#123;</span><br><span class="line">                timeout = Integer.parseInt(args[<span class="number">2</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(<span class="string">"正在连接 "</span> + ip + <span class="string">":"</span> + port);</span><br><span class="line"></span><br><span class="line">            InetSocketAddress addr = <span class="keyword">new</span> InetSocketAddress(ip, port);</span><br><span class="line">            connect.connect(addr, timeout);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (connect.isConnected()) &#123;</span><br><span class="line">                System.out.println(<span class="string">"连接成功"</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                System.out.println(<span class="string">"连接失败"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                connect.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>使用方法：</p>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">javac IpTest.java</span><br><span class="line">java IpTest 10.15.2.9 1521</span><br></pre></td></tr></table></figure>
 <h2 id="修改java-security"><a href="#修改java-security" class="headerlink" title="修改java.security"></a>修改java.security</h2><p>Java 6存在一个关于随机数的bug，如果不Hack，在Linux系统下面Weblogic建域和启动时需要等待很长时间，因此建议装完Java之后立刻去修改java.security。</p>
 <p>假设$JAVA_HOME为<code>/opt/jdk1.6.0_145</code>，也就是说JDK装在了这个地方，那么需要修改<code>$JAVA_HOME/jre/lib/security/java.security</code>文件，找到</p>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">securerandom.source=file:/dev/urandom</span><br></pre></td></tr></table></figure>
 <p>修改成</p>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">securerandom.source=file:/dev/./urandom</span><br></pre></td></tr></table></figure>
 <p>之后建域和起停之类操作就不需要再等待十多分钟了。</p>
 <h2 id="如果通过控制台启动服务器时起不来"><a href="#如果通过控制台启动服务器时起不来" class="headerlink" title="如果通过控制台启动服务器时起不来"></a>如果通过控制台启动服务器时起不来</h2><p>如果Weblogic各节点已正确设置，各服务器的防火墙已经开放5556端口，NodeManager也已经启动，但是仍然无法通过控制台启动节点，提示“不兼容的状态”，而且在startNodeManager.sh的输出中出现<code>javax.net.ssl.SSLKeyException: [Security:090482]BAD_CERTIFICATE alert was received from ...</code>：</p>
 <h3 id="方法一：重新设置证书"><a href="#方法一：重新设置证书" class="headerlink" title="方法一：重新设置证书"></a>方法一：重新设置证书</h3><p>在集群的每台服务器上面设置一下证书（如果执行第一行命令就报错的话，请把$WL_HOME换成实际安装目录）：</p>
-
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">. <span class="variable">$WL_HOME</span>/server/bin/setWLSEnv.sh</span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$WL_HOME</span>/server/lib</span><br><span class="line">java utils.CertGen -keyfilepass DemoIdentityPassPhrase -certfile newcert -keyfile newkey</span><br><span class="line">java utils.ImportPrivateKey -keystore DemoIdentity.jks -storepass DemoIdentityKeyStorePassPhrase -keyfile newkey.pem -keyfilepass DemoIdentityPassPhrase -certfile newcert.pem -<span class="built_in">alias</span> demoidentity</span><br></pre></td></tr></table></figure>
 <h3 id="方法二：不使用SSL"><a href="#方法二：不使用SSL" class="headerlink" title="方法二：不使用SSL"></a>方法二：不使用SSL</h3><p>除此以外，还有一种做法是不使用SSL通信以避免出现证书问题：修改<code>$WL_HOME/common/nodemanager/nodemanager.properties</code>文件，将其中的</p>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SecureListener = true</span><br></pre></td></tr></table></figure>
 <p>改成</p>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SecureListener = false</span><br></pre></td></tr></table></figure>
 <p>然后重新启动NodeManager。另外在控制台上建立“计算机”时，类型就不再是“SSL”，而是“普通”（Plain）。</p>
 <h2 id="组建集群"><a href="#组建集群" class="headerlink" title="组建集群"></a>组建集群</h2><p>我们并不需要每一台机器都执行一遍建域之类的操作。只要各服务器JDK路径和Weblogic安装路径一致，那么在一台机器上面把Weblogic的各种参数都配置好，然后将user_projects目录打包（或者干脆把整个Middleware打包），复制到其他各服务器上面解压就差不多了。</p>
 <p>如果NodeManager使用SSL，解压完成后，前文提到的“NodeManager证书”还是要在每台服务器上操作一遍。</p>
 <h3 id="（待研究）服务器监听地址不要贸然写成0-0-0-0"><a href="#（待研究）服务器监听地址不要贸然写成0-0-0-0" class="headerlink" title="（待研究）服务器监听地址不要贸然写成0.0.0.0"></a>（待研究）服务器监听地址不要贸然写成0.0.0.0</h3><p>虽然0.0.0.0也是一个有效的监听地址，但是在组建集群时不要贸然地写成0.0.0.0，否则AdminServer与各节点之间的通信会出现问题，例如服务器状态变成UNKNOWN，或者部署应用无响应。具体原因和解决方法待研究。</p>
 <h2 id="增加线程数"><a href="#增加线程数" class="headerlink" title="增加线程数"></a>增加线程数</h2><p>如果预计并发数比较高，可以增加应用线程池的线程数。修改config.xml配置文件（例如<code>/u01/Oracle/Middleware/user_projects/base_domain/config/config.xml</code>）。假如应用服务器叫app_server1，那么需要找到类似以下的代码</p>
-
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">server</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>app_server1<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
 <p>修改成</p>
-
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">server</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>app_server1<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">self-tuning-thread-pool-size-min</span>&gt;</span>1000<span class="tag">&lt;/<span class="name">self-tuning-thread-pool-size-min</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">self-tuning-thread-pool-size-max</span>&gt;</span>1000<span class="tag">&lt;/<span class="name">self-tuning-thread-pool-size-max</span>&gt;</span></span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
 <p>需要注意的是，如果数值改得太大，启动时可能会出现以下错误：</p>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[ERROR][thread ] Could not start thread [ACTIVE] ExecuteThread: &apos;977&apos; for queue: &apos;weblogic.kernel.Default (self-tuning)&apos;. Resource temporarily unavailable</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Attempting to allocate 8192M bytes</span><br><span class="line"></span><br><span class="line">There is insufficient native memory for the Java</span><br><span class="line">Runtime Environment to continue.</span><br><span class="line"></span><br><span class="line">Possible reasons:</span><br><span class="line">  The system is out of physical RAM or swap space</span><br><span class="line">  In 32 bit mode, the process size limit was hit</span><br><span class="line"></span><br><span class="line">Possible solutions:</span><br><span class="line">  Reduce memory load on the system</span><br><span class="line">  Increase physical memory or swap space</span><br><span class="line">  Check if swap backing store is full</span><br><span class="line">  Use 64 bit Java on a 64 bit OS</span><br><span class="line">  Decrease Java heap size (-Xmx/-Xms)</span><br><span class="line">  Decrease number of Java threads</span><br><span class="line">  Decrease Java thread stack sizes (-Xss)</span><br><span class="line">  Disable compressed references (-XXcompressedRefs=false)</span><br><span class="line"></span><br><span class="line">java.lang.OutOfMemoryError: Resource temporarily unavailable in tsStartJavaThread (lifecycle.c:1097).</span><br></pre></td></tr></table></figure>
 <p>报错信息看起来像是内存不足，实际上不是内存不足，而是Linux系统默认情况下限制了最大线程数，需要进行修改。</p>
 <p>如果使用CentOS 6或RHEL6，可以按照以下方法进行修改：</p>
-<p>首先修改/etc/security/limits.conf，加入<br></p>
-<p>然后修改/etc/security/limits.d/90-nproc.conf，加入<br></p>
-<p>最后修改/etc/pam.d/login，加入<br></p>
+<p>首先修改/etc/security/limits.conf，加入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">* hard nofile 1048576</span><br><span class="line">* soft nofile 1048576</span><br></pre></td></tr></table></figure></p>
+<p>然后修改/etc/security/limits.d/90-nproc.conf，加入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">weblogic   soft    nproc     655350</span><br></pre></td></tr></table></figure></p>
+<p>最后修改/etc/pam.d/login，加入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">session required /lib64/security/pam_limits.so</span><br></pre></td></tr></table></figure></p>
 <p>修改完成后不要马上退出shell，要开个新窗口测试各账号能否登进去。如果登不进去（例如提示could not open session），说明参数改得太大，需要适当往小调。</p>
 <p>另外如果线程数改大了，内存也应当适当调大，因为每个线程都会占一些内存空间。</p>
 <h1 id="运维阶段"><a href="#运维阶段" class="headerlink" title="运维阶段"></a>运维阶段</h1><h2 id="应用升级"><a href="#应用升级" class="headerlink" title="应用升级"></a>应用升级</h2><p>改完文件之后要在控制台的“部署”里面进行更新，否则内容不会生效。改静态文件也是。</p>
@@ -649,7 +702,9 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/img/myavatar.jpg" alt="InfNaN">
+              <img class="site-author-image" itemprop="image"
+                src="/img/myavatar.jpg"
+                alt="InfNaN"/>
             
               <p class="site-author-name" itemprop="name">InfNaN</p>
               <p class="site-description motion-element" itemprop="description">一点微小的博客</p>
@@ -796,7 +851,7 @@
               
               
               
-              <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+              <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"/></span>
              </div>
           
 
@@ -812,7 +867,7 @@
       </div>
 
       
-      
+      <!--noindex-->
         <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
           <div class="post-toc">
 
@@ -827,7 +882,7 @@
 
           </div>
         </div>
-      
+      <!--/noindex-->
       
 
       
@@ -896,7 +951,11 @@
 
   
 
-<script>"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script>
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
 
 
 
@@ -970,7 +1029,22 @@
   <script id="dsq-count-scr" src="https://christ-wus-blog.disqus.com/count.js" async></script>
 
 
-<script>var disqus_config=function(){this.page.url="https://plusnan.me/2018/11/02/weblogic-caution/",this.page.identifier="2018/11/02/weblogic-caution/",this.page.title="Weblogic踩坑记录"};function loadComments(){var t=document,e=t.createElement("script");e.src="https://christ-wus-blog.disqus.com/embed.js",e.setAttribute("data-timestamp",""+ +new Date),(t.head||t.body).appendChild(e)}loadComments()</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://plusnan.me/2018/11/02/weblogic-caution/";
+    this.page.identifier = "2018/11/02/weblogic-caution/";
+    this.page.title = 'Weblogic踩坑记录';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://christ-wus-blog.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    loadComments();
+  
+</script>
 
 
 
@@ -1000,7 +1074,20 @@
   
 
   
-  <script>!function(){var t=document.createElement("script"),e=window.location.protocol.split(":")[0];t.src="https"===e?"https://zz.bdstatic.com/linksubmit/push.js":"http://push.zhanzhang.baidu.com/push.js";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}()</script>
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'; 
+      }
+      else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
 
 
   

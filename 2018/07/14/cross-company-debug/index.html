@@ -14,10 +14,10 @@
 
 <html class="theme-next pisces" lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2">
-<meta name="theme-color" content="#222">
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
 
 
 
@@ -44,9 +44,9 @@
 
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
 
-<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+<link rel="stylesheet" href="/css/main.css?v=7.0.0"/>
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
@@ -66,7 +66,27 @@
 
 
 
-<script id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/",scheme:"Pisces",version:"7.0.0",sidebar:{position:"left",display:"post",offset:12,b2t:!1,scrollpercent:!1,onmobile:!1},fancybox:!1,fastclick:!1,lazyload:!1,tabs:!0,motion:{enable:!1},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}}}</script>
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":false},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
 
 
   
@@ -91,16 +111,20 @@
 
 
 
-  <link rel="alternate" href="/rss.xml" title="一点微小的博客" type="application/atom+xml">
+  <link rel="alternate" href="/rss.xml" title="一点微小的博客" type="application/atom+xml"/>
 
 
 
 
-  <link rel="canonical" href="https://plusnan.me/2018/07/14/cross-company-debug/">
+  <link rel="canonical" href="https://plusnan.me/2018/07/14/cross-company-debug/"/>
 
 
 
-<script id="page.configurations">CONFIG.page={sidebar:""}</script>
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
 
   <title>接口设计与联调经验 | 一点微小的博客</title>
   
@@ -117,7 +141,28 @@
 
 
   <noscript>
-  <style>.sidebar-inner,.use-motion .brand,.use-motion .collection-title,.use-motion .comments,.use-motion .menu-item,.use-motion .motion-element,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header{opacity:initial}.use-motion .logo,.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.use-motion .logo-line-before i{left:initial}.use-motion .logo-line-after i{right:initial}</style>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
 </noscript>
 
 </head>
@@ -181,7 +226,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>首页</a>
 
   </li>
         
@@ -198,7 +243,7 @@
 
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br/>标签</a>
 
   </li>
         
@@ -215,7 +260,7 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>分类</a>
 
   </li>
         
@@ -232,7 +277,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>归档</a>
 
   </li>
 
@@ -284,16 +329,16 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2018/07/14/cross-company-debug/">
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2018/07/14/cross-company-debug/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="InfNaN">
-      <meta itemprop="description" content="一点微小的博客">
-      <meta itemprop="image" content="/img/myavatar.jpg">
+      <meta itemprop="name" content="InfNaN"/>
+      <meta itemprop="description" content="一点微小的博客"/>
+      <meta itemprop="image" content="/img/myavatar.jpg"/>
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一点微小的博客">
+      <meta itemprop="name" content="一点微小的博客"/>
     </span>
 
     
@@ -435,7 +480,7 @@
 <li>重要内容留截图。</li>
 </ol>
 <p>推荐两个调试接口的软件，一个是专门测WebService的<span class="exturl" data-url="aHR0cHM6Ly93d3cuc29hcHVpLm9yZw==" title="https://www.soapui.org">SoapUI<i class="fa fa-external-link"></i></span>，另一个是可以测各种请求的<span class="exturl" data-url="aHR0cHM6Ly93d3cuZ2V0cG9zdG1hbi5jb20vYXBwcw==" title="https://www.getpostman.com/apps">Postman<i class="fa fa-external-link"></i></span>。对我个人而言，由于我们项目经常是WebService里面套JSON，所以SoapUI用得并不舒服，不如自己抓到调用WebService的原始请求内容然后全部扔到Postman中调试：</p>
-
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">soap:Envelope</span> <span class="attr">xmlns:soap</span>=<span class="string">"http://schemas.xmlsoap.org/soap/envelope/"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">soap:Body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ns1:xxxxxmethod</span> <span class="attr">xmlns:ns1</span>=<span class="string">"http://service.xxx.xxxcompany.com/"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">arg0</span>&gt;</span></span><br><span class="line">                &#123;</span><br><span class="line">                    "param1": "xxx",</span><br><span class="line">                    "param2": "yyy",</span><br><span class="line">                    ...</span><br><span class="line">                &#125;</span><br><span class="line">            <span class="tag">&lt;/<span class="name">arg0</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">ns1:xxxxxmethod</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">soap:Body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">soap:Envelope</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>如果主要系统已经上线了，注意不要在生产环境或使用生产库直接联调，而是要准备一个和生产环境架构相似的测试环境，在测试环境上进行联调。在生产环境和生产库上，双方顶多测一下接口和功能通没通，不要测别的东西。</p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>上线之后更要专门记录接口的调用情况，做到有据可查。清楚地了解接口调用情况、频率以及状态，在出现故障时可以尽量避免踢皮球和承担无谓责任。有必要的话还应该实行访问控制，一旦遭遇攻击或疑似攻击（例如调用频率太高等）时可以方便地进行处理。</p>
 <p>运行之后，假如要对接口进行重大调整，那么要确保向后兼容，除非非常确定大家不会再使用旧版定义了。</p>
@@ -454,9 +499,9 @@
             <p>有时候你的服务器会出现Ping不通，或者出现能Ping通但是SSH连接超时的情况，这很可能是你服务器的IP或端口被墙了。如果遇到这种情况，可以去买一台新机器并删除旧的机器。另外有时候需要多刷几次。</p>
           </div>
 <p>新机器启动之后，先在公司Ping一下，没问题的话就可以用PuTTY等软件建立连接了。输入Vultr网站上面给你提供的服务器IP（端口22）、用户名和密码，然后</p>
-
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
 <p>将其中的<code>GatewayPorts no</code>改成<code>yes</code>，没找到的话就在文件末尾追加一行，保存。然后</p>
-
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart sshd</span><br></pre></td></tr></table></figure>
 <p>准备工作就做好了。</p>
 <div class="note warning">
             <p>有些操作系统（例如CentOS）会默认开启防火墙，所以要确认一下防火墙状态，然后关闭防火墙或者开放待使用端口。</p>
@@ -611,7 +656,9 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/img/myavatar.jpg" alt="InfNaN">
+              <img class="site-author-image" itemprop="image"
+                src="/img/myavatar.jpg"
+                alt="InfNaN"/>
             
               <p class="site-author-name" itemprop="name">InfNaN</p>
               <p class="site-description motion-element" itemprop="description">一点微小的博客</p>
@@ -758,7 +805,7 @@
               
               
               
-              <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+              <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"/></span>
              </div>
           
 
@@ -774,7 +821,7 @@
       </div>
 
       
-      
+      <!--noindex-->
         <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
           <div class="post-toc">
 
@@ -789,7 +836,7 @@
 
           </div>
         </div>
-      
+      <!--/noindex-->
       
 
       
@@ -858,7 +905,11 @@
 
   
 
-<script>"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script>
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
 
 
 
@@ -932,7 +983,22 @@
   <script id="dsq-count-scr" src="https://christ-wus-blog.disqus.com/count.js" async></script>
 
 
-<script>var disqus_config=function(){this.page.url="https://plusnan.me/2018/07/14/cross-company-debug/",this.page.identifier="2018/07/14/cross-company-debug/",this.page.title="接口设计与联调经验"};function loadComments(){var t=document,e=t.createElement("script");e.src="https://christ-wus-blog.disqus.com/embed.js",e.setAttribute("data-timestamp",""+ +new Date),(t.head||t.body).appendChild(e)}loadComments()</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://plusnan.me/2018/07/14/cross-company-debug/";
+    this.page.identifier = "2018/07/14/cross-company-debug/";
+    this.page.title = '接口设计与联调经验';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://christ-wus-blog.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    loadComments();
+  
+</script>
 
 
 
@@ -962,7 +1028,20 @@
   
 
   
-  <script>!function(){var t=document.createElement("script"),e=window.location.protocol.split(":")[0];t.src="https"===e?"https://zz.bdstatic.com/linksubmit/push.js":"http://push.zhanzhang.baidu.com/push.js";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}()</script>
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'; 
+      }
+      else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
 
 
   

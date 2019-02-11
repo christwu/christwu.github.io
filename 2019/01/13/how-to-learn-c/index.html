@@ -14,10 +14,10 @@
 
 <html class="theme-next pisces" lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2">
-<meta name="theme-color" content="#222">
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
 
 
 
@@ -44,9 +44,9 @@
 
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
 
-<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+<link rel="stylesheet" href="/css/main.css?v=7.0.0"/>
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
@@ -66,7 +66,27 @@
 
 
 
-<script id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/",scheme:"Pisces",version:"7.0.0",sidebar:{position:"left",display:"post",offset:12,b2t:!1,scrollpercent:!1,onmobile:!1},fancybox:!1,fastclick:!1,lazyload:!1,tabs:!0,motion:{enable:!1},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}}}</script>
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":false},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
 
 
   
@@ -92,16 +112,20 @@
 
 
 
-  <link rel="alternate" href="/rss.xml" title="一点微小的博客" type="application/atom+xml">
+  <link rel="alternate" href="/rss.xml" title="一点微小的博客" type="application/atom+xml"/>
 
 
 
 
-  <link rel="canonical" href="https://plusnan.me/2019/01/13/how-to-learn-c/">
+  <link rel="canonical" href="https://plusnan.me/2019/01/13/how-to-learn-c/"/>
 
 
 
-<script id="page.configurations">CONFIG.page={sidebar:""}</script>
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
 
   <title>作为非计算机专业的学生，如果只想考试及格以及过二级，如何学习C语言 | 一点微小的博客</title>
   
@@ -118,7 +142,28 @@
 
 
   <noscript>
-  <style>.sidebar-inner,.use-motion .brand,.use-motion .collection-title,.use-motion .comments,.use-motion .menu-item,.use-motion .motion-element,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header{opacity:initial}.use-motion .logo,.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.use-motion .logo-line-before i{left:initial}.use-motion .logo-line-after i{right:initial}</style>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
 </noscript>
 
 </head>
@@ -182,7 +227,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>首页</a>
 
   </li>
         
@@ -199,7 +244,7 @@
 
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br/>标签</a>
 
   </li>
         
@@ -216,7 +261,7 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>分类</a>
 
   </li>
         
@@ -233,7 +278,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>归档</a>
 
   </li>
 
@@ -285,16 +330,16 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2019/01/13/how-to-learn-c/">
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2019/01/13/how-to-learn-c/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="InfNaN">
-      <meta itemprop="description" content="一点微小的博客">
-      <meta itemprop="image" content="/img/myavatar.jpg">
+      <meta itemprop="name" content="InfNaN"/>
+      <meta itemprop="description" content="一点微小的博客"/>
+      <meta itemprop="image" content="/img/myavatar.jpg"/>
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一点微小的博客">
+      <meta itemprop="name" content="一点微小的博客"/>
     </span>
 
     
@@ -425,14 +470,14 @@
 <p>C语言作为一门“语言”，当然有自己的语法，只不过是人类和机器约定好的、互相都能看得懂的语法。人类可以一目十行，但是对于机器而言，它只能一行一行地读、一句一句地读。</p>
 <p>如果把每一条语句当作一件事儿，那么计算机当然是有条不紊地做事儿。写代码的时候，你当然也要一件事儿一件事儿地做。</p>
 <p>因为我们学的是简单的单文件的C语言，所以实际上代码结构基本都是这样的：</p>
-
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 输入</span></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 处理</span></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 输出</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, a);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>注意上面有“输入”、“处理”和“输出”三个阶段。做题的时候（编写练习程序和做题类似），我们需要按照题目要求逐步完善这三个阶段的内容，或者说按照题目要求填坑。至于能不能填上，就看你积累了多少“段子”——这和多做数学题积攒解题思路是差不多的。</p>
 <p>填坑的时候有一个技巧：如果遇到困难，尽量先把题目的语言翻译成“像C语言的东西”。例如，“判断n是否为XX数，如果是则输出YES和全部的xxx，否则输出‘NO’”。那么首先应该能够想到，“判断”是if，因此：</p>
-
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (n是XX数)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"YES\n"</span>);</span><br><span class="line">    <span class="comment">// 输出全部的xxx</span></span><br><span class="line">    <span class="built_in">printf</span>(全部xxx);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"NO\n"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>那什么是“XX数”呢？看题目其他条件，例如“一个数恰好等于因子之和”，那么if语句应该是</p>
-
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (n == n的因子之和)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 <p>“因子”之和怎么求呢？按照以往的练习，因子是用for语句找的，所以在if之前最起码得有个for语句：</p>
-
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (i=<span class="number">1</span>; i&lt;n; i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (i是因子)</span><br><span class="line">    &#123;</span><br><span class="line">        sum=sum+i;    <span class="comment">// 不要忘记前面 sum=0</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (n == sum)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 <p>“是因子”实际上就是整除，即“n%i==0”。</p>
 <p>假如题目还需要输出所有因子，那么我们不妨在找因子的时候把类似代码再敲一遍。因为我们是应付考试，不是参加ACM比赛，倒不需要太追求性能。</p>
 <p>最后检查一下输入输出格式，把细节完善（见后面的“一一对应”），然后测试、调试，一切OK就可以提交了。如果考试是笔试，实在遇到困难，也可以用类似方法骗分。</p>
@@ -448,7 +493,7 @@
 <p>学习一门编程语言，很多时候找个老师不如<strong>找一段示例代码，照着敲一遍，编译运行，观察现象，然后对代码稍作修改，编译运行，观察产生了什么变化……</strong></p>
 <p>需要注意的是，有些东西涉及算法（应该都是简单算法，不涉及数据结构），例如简单素数判断<span class="blackout">（素数测试有很多种）</span>。那么你需要找到一些现成的代码，搞清楚处理过程中哪些变量是输入、哪些是结果，了解大致的思路，然后自己写一遍。这种东西务必亲自上机写一遍，哪怕没有完全理解——光靠背是不现实的。</p>
 <p>很多算法的套路是固定的，因此建议学过函数之后，自己编程的时候把它们都扔到函数里，例如：</p>
-
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">is_prime</span><span class="params">(<span class="keyword">int</span> number)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">2</span>; i&lt;number; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (number % i == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>在做作业的时候直接<code>is_prime(a)</code>判断（别忘了把函数实现拷到作业里头），既方便又避免出错。</p>
 <h2 id="一一对应"><a href="#一一对应" class="headerlink" title="一一对应"></a>一一对应</h2><p>编程是个比较严谨的东西。初学者在写代码的时候，为了避免出错，要注意“一一对应”：</p>
 <ul>
@@ -456,7 +501,7 @@
 <li>该写分号的地方是否写分号了？</li>
 <li>不该写分号的地方是不是没写？（例如for (…;…;…)的后面不应该写，如果故意要写，最好用个注释说明一下）</li>
 <li><p>printf、scanf中的“%d”（或别的什么）是否和后面的变量一一对应？数量、类型都对应了吗？</p>
-  
+  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a;</span><br><span class="line"><span class="keyword">float</span> b;</span><br><span class="line">             第二个%d对应后面的b</span><br><span class="line">            |------|</span><br><span class="line">            v      v</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d %f"</span>, a, b);</span><br><span class="line">        ^       ^</span><br><span class="line">        |-------|</span><br><span class="line">         第一个%d对应后面的a</span><br></pre></td></tr></table></figure>
 <ul>
 <li>假如后面不是int类型，你前面是否还在用“%d”？</li>
 </ul>
@@ -482,11 +527,11 @@
 </ul>
 <h2 id="多试验"><a href="#多试验" class="headerlink" title="多试验"></a>多试验</h2><p>别怕试验。多写一些小片段，看看那些代码是怎样运行的。</p>
 <p>举个例子——for循环到底执行了多少次：</p>
-
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (i=<span class="number">12</span>; i&lt;<span class="number">15</span>; i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"A"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"i=%d\n"</span>, i);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (i=<span class="number">12</span>; i&lt;=<span class="number">15</span>; i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"B"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"i=%d\n"</span>, i);</span><br></pre></td></tr></table></figure>
 <p>scanf和gets的冲突：scanf和get紧挨着可能在输入数据时遇到问题，这时候需要一个小技巧……</p>
-
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">scanf</span>(<span class="string">"%d\n"</span>, &amp;n);</span><br><span class="line">fgets(str, <span class="number">100</span>, <span class="built_in">stdin</span>);   <span class="comment">// 其实就是 gets(str) 的推荐写法</span></span><br><span class="line"><span class="built_in">puts</span>(str);                <span class="comment">// 如果那个scanf里没有“\n”，gets的时候……</span></span><br></pre></td></tr></table></figure>
 <p>再举个例子（指针与一维数组）：</p>
-
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a[]=&#123;<span class="number">6</span>, <span class="number">8</span>, <span class="number">10</span>, <span class="number">12</span>, <span class="number">14</span>, <span class="number">16</span>, <span class="number">18</span>, <span class="number">20</span>, <span class="number">22</span>, <span class="number">24</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> *p = a;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, a);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, a[<span class="number">0</span>]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, &amp;a[<span class="number">0</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, p);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, p+<span class="number">1</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, *p);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, *(p+<span class="number">1</span>));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, *p+<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>因为只是为了看个结果，所以，只要自己能把结果弄明白，怎么舒服怎么来。</p>
 <p>当然有个重要前提——你手头得有个电脑。如果没有电脑，或者“大一不让带”，可以买个几百或一两千的Win10平板，比手机便宜，而且便于隐藏和携带，既可防导员查寝，又可带教室去开小差。</p>
 <h2 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h2><p>经常有人问“为什么我的代码结果不对”，然后贴上一段代码。这是非常令人讨厌的行为。</p>
@@ -494,10 +539,10 @@
 <p>作为非专业人士，与其学习那些复杂又难用的调试工具，不如学习又简单又实用的 printf。</p>
 <p>printf有两大作用：定位错误、查看中间值。</p>
 <p>假如程序崩溃了，可以这样调试：</p>
-
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">10</span>];</span><br><span class="line"><span class="keyword">int</span> i, n;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"准备读n\n"</span>);</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%d"</span>, n);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"准备读a\n"</span>);</span><br><span class="line"><span class="keyword">for</span> (i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;a[i]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"开始处理\n"</span>);</span><br></pre></td></tr></table></figure>
 <p>假如崩溃的时候屏幕上面只有“准备读n”而没有“准备读a”，说明中间夹着的scanf有问题；假如崩溃的时候有“准备读a”而没有“开始处理”，说明中间夹着的for有问题，这样你可以在for语句内部插入一些<code>printf(&quot;a\n&quot;)</code>，从而精确地找到错误的出处（例如，崩溃的时候看到10个a，说明数组开得不够大）。</p>
 <p>如果计算结果不正确，可以这样调试（筛法求素数）：</p>
-
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i, num, isprime;</span><br><span class="line">isprime = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span> (num=<span class="number">2</span>; num&lt;<span class="number">10</span>; num++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">2</span>; i&lt;num; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (num % i == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"DEBUG: %d不是素数(╯°Д°)╯︵ ┻━┻\n"</span>, num);</span><br><span class="line">            isprime = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"DEBUG: %d 是素数吗？%d\n"</span>, num, isprime);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (isprime)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d "</span>, num);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>运行结果只有2和3。通过观察调试输出，发现程序认为5不是素数。按理说，如果不是素数，屏幕会输出一个掀桌子的表情。然而程序认为5不是素数，但是还没有掀桌子表情，说明问题出在isprime变量上面——<code>isprime=1</code>的位置不对。</p>
 <p>当然，交作业的时候别忘了把这种输出删掉。</p>
 <h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>不要把测试和调试搞混。用一句话概括它们的区别：测试是为了观察“程序结果是否正确”，而调试是为了“找到程序的错误”。</p>
@@ -525,7 +570,7 @@
 <li>使用“黑科技”（不解释就难以理解）的时候要加注释。</li>
 <li>if、for等语句后面可以不加花括号对吧？别懒，把花括号加上，免得犯这样的错误：</li>
 </ul>
-
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (a &gt; b)</span><br><span class="line">    c=a;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>,c);</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    c=b;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>,c);</span><br></pre></td></tr></table></figure>
 <h1 id="如何通过二级"><a href="#如何通过二级" class="headerlink" title="如何通过二级"></a>如何通过二级</h1><p>这是也很多人关心的问题。虽然事实上计算机二级比英语六级容易通过（对于985、211的学生来说，只要英语三级也就是高考成绩不太烂，英语四级裸奔也能过……），但是很多人还是没通过。这不是他们不刻苦或者学得不好，而是因为他们不知道如何对付一个考证级别的考试。对，和英语四六级有着本质的区别。</p>
 <p>首先用一句话概括通过计算机三级和四级的武林秘籍：去购买高等教育出版社的、封面上带个大大的黄色字母K的官方题库（不是教材），从头到尾把题刷一遍，该背的试题背下来，如果还没通过那你肯定是没好好背。</p>
 <h2 id="基本内容"><a href="#基本内容" class="headerlink" title="基本内容"></a>基本内容</h2><p>虽然二级过了三四级成绩才能算数，但是，之所以先介绍三四级，是因为三四级比二级好过——三四级基本上可以纯背，但二级还是要会点东西的。下面就介绍介绍二级C语言：</p>
@@ -727,7 +772,9 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/img/myavatar.jpg" alt="InfNaN">
+              <img class="site-author-image" itemprop="image"
+                src="/img/myavatar.jpg"
+                alt="InfNaN"/>
             
               <p class="site-author-name" itemprop="name">InfNaN</p>
               <p class="site-description motion-element" itemprop="description">一点微小的博客</p>
@@ -874,7 +921,7 @@
               
               
               
-              <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+              <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"/></span>
              </div>
           
 
@@ -890,7 +937,7 @@
       </div>
 
       
-      
+      <!--noindex-->
         <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
           <div class="post-toc">
 
@@ -905,7 +952,7 @@
 
           </div>
         </div>
-      
+      <!--/noindex-->
       
 
       
@@ -974,7 +1021,11 @@
 
   
 
-<script>"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script>
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
 
 
 
@@ -1048,7 +1099,22 @@
   <script id="dsq-count-scr" src="https://christ-wus-blog.disqus.com/count.js" async></script>
 
 
-<script>var disqus_config=function(){this.page.url="https://plusnan.me/2019/01/13/how-to-learn-c/",this.page.identifier="2019/01/13/how-to-learn-c/",this.page.title="作为非计算机专业的学生，如果只想考试及格以及过二级，如何学习C语言"};function loadComments(){var t=document,e=t.createElement("script");e.src="https://christ-wus-blog.disqus.com/embed.js",e.setAttribute("data-timestamp",""+ +new Date),(t.head||t.body).appendChild(e)}loadComments()</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://plusnan.me/2019/01/13/how-to-learn-c/";
+    this.page.identifier = "2019/01/13/how-to-learn-c/";
+    this.page.title = '作为非计算机专业的学生，如果只想考试及格以及过二级，如何学习C语言';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://christ-wus-blog.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    loadComments();
+  
+</script>
 
 
 
@@ -1078,7 +1144,20 @@
   
 
   
-  <script>!function(){var t=document.createElement("script"),e=window.location.protocol.split(":")[0];t.src="https"===e?"https://zz.bdstatic.com/linksubmit/push.js":"http://push.zhanzhang.baidu.com/push.js";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}()</script>
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'; 
+      }
+      else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
 
 
   

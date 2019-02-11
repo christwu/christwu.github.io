@@ -14,10 +14,10 @@
 
 <html class="theme-next pisces" lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2">
-<meta name="theme-color" content="#222">
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
 
 
 
@@ -44,9 +44,9 @@
 
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
 
-<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+<link rel="stylesheet" href="/css/main.css?v=7.0.0"/>
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
@@ -66,7 +66,27 @@
 
 
 
-<script id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/",scheme:"Pisces",version:"7.0.0",sidebar:{position:"left",display:"post",offset:12,b2t:!1,scrollpercent:!1,onmobile:!1},fancybox:!1,fastclick:!1,lazyload:!1,tabs:!0,motion:{enable:!1},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}}}</script>
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":false},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
 
 
   
@@ -90,16 +110,20 @@
 
 
 
-  <link rel="alternate" href="/rss.xml" title="一点微小的博客" type="application/atom+xml">
+  <link rel="alternate" href="/rss.xml" title="一点微小的博客" type="application/atom+xml"/>
 
 
 
 
-  <link rel="canonical" href="https://plusnan.me/2019/02/08/login-page/">
+  <link rel="canonical" href="https://plusnan.me/2019/02/08/login-page/"/>
 
 
 
-<script id="page.configurations">CONFIG.page={sidebar:""}</script>
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
 
   <title>并不简单的简单开发工作（一）：登录页面 | 一点微小的博客</title>
   
@@ -116,7 +140,28 @@
 
 
   <noscript>
-  <style>.sidebar-inner,.use-motion .brand,.use-motion .collection-title,.use-motion .comments,.use-motion .menu-item,.use-motion .motion-element,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header{opacity:initial}.use-motion .logo,.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.use-motion .logo-line-before i{left:initial}.use-motion .logo-line-after i{right:initial}</style>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
 </noscript>
 
 </head>
@@ -180,7 +225,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>首页</a>
 
   </li>
         
@@ -197,7 +242,7 @@
 
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br/>标签</a>
 
   </li>
         
@@ -214,7 +259,7 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>分类</a>
 
   </li>
         
@@ -231,7 +276,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>归档</a>
 
   </li>
 
@@ -283,16 +328,16 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2019/02/08/login-page/">
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2019/02/08/login-page/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="InfNaN">
-      <meta itemprop="description" content="一点微小的博客">
-      <meta itemprop="image" content="/img/myavatar.jpg">
+      <meta itemprop="name" content="InfNaN"/>
+      <meta itemprop="description" content="一点微小的博客"/>
+      <meta itemprop="image" content="/img/myavatar.jpg"/>
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一点微小的博客">
+      <meta itemprop="name" content="一点微小的博客"/>
     </span>
 
     
@@ -427,9 +472,9 @@
 <h1 id="实现方面的问题"><a href="#实现方面的问题" class="headerlink" title="实现方面的问题"></a>实现方面的问题</h1><p>初学者被安排编码工作之后，如果经验不足，也容易犯一些错误，例如：</p>
 <h2 id="绕过认证"><a href="#绕过认证" class="headerlink" title="绕过认证"></a>绕过认证</h2><p>如果知道Helloworld页面的网址，没登录的情况下能不能依靠直接敲网址进去呢？如果能，说明只实现了登录功能，配套的会话验证和权限验证功能没实现。</p>
 <h2 id="SQL注入问题"><a href="#SQL注入问题" class="headerlink" title="SQL注入问题"></a>SQL注入问题</h2><p>初学者容易这样来书写SQL：</p>
-
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String sql = <span class="string">"SELECT count(1) FROM users WHERE username='"</span> + username + <span class="string">"' AND password='"</span> + password + <span class="string">"'"</span>;</span><br></pre></td></tr></table></figure>
 <p>代码中的SQL是直接拼接的，所以只要在密码框输入<code>&#39; or &#39;1&#39;=&#39;1</code>即可绕过验证，因为SQL会变成：</p>
-
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">count</span>(<span class="number">1</span>) <span class="keyword">FROM</span> <span class="keyword">users</span> <span class="keyword">WHERE</span> username=<span class="string">'admin'</span> <span class="keyword">AND</span> <span class="keyword">password</span>=<span class="string">''</span> <span class="keyword">or</span> <span class="string">'1'</span>=<span class="string">'1'</span>;</span><br><span class="line">                                                                ^=========^</span><br></pre></td></tr></table></figure>
 <p>所输密码成为了SQL逻辑的一部分，破坏了原来SQL的逻辑，即SQL注入。</p>
 <p>建议尽可能用绑定参数的形式来查询SQL。如果非要去拼接字符串，那么必须保证用户输入全部被转义，但是不推荐拼接因为容易忘记过滤。</p>
 <h2 id="前台校验"><a href="#前台校验" class="headerlink" title="前台校验"></a>前台校验</h2><p>建议加入前台校验，当用户未输入用户名或密码便点击登录按钮时，系统给出提示并跳转到未输入内容的文本框上，因为前台校验和提示发生在用户的浏览器上面，耗时可以忽略不计，而提交到服务器去校验，提交和返回都需要时间，网络状况差的话速度会比较慢。另外建议采用统一的校验程序，不要自己写校验js，浪费时间精力。</p>
@@ -579,7 +624,9 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/img/myavatar.jpg" alt="InfNaN">
+              <img class="site-author-image" itemprop="image"
+                src="/img/myavatar.jpg"
+                alt="InfNaN"/>
             
               <p class="site-author-name" itemprop="name">InfNaN</p>
               <p class="site-description motion-element" itemprop="description">一点微小的博客</p>
@@ -726,7 +773,7 @@
               
               
               
-              <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+              <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"/></span>
              </div>
           
 
@@ -742,7 +789,7 @@
       </div>
 
       
-      
+      <!--noindex-->
         <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
           <div class="post-toc">
 
@@ -757,7 +804,7 @@
 
           </div>
         </div>
-      
+      <!--/noindex-->
       
 
       
@@ -826,7 +873,11 @@
 
   
 
-<script>"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script>
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
 
 
 
@@ -900,7 +951,22 @@
   <script id="dsq-count-scr" src="https://christ-wus-blog.disqus.com/count.js" async></script>
 
 
-<script>var disqus_config=function(){this.page.url="https://plusnan.me/2019/02/08/login-page/",this.page.identifier="2019/02/08/login-page/",this.page.title="并不简单的简单开发工作（一）：登录页面"};function loadComments(){var t=document,e=t.createElement("script");e.src="https://christ-wus-blog.disqus.com/embed.js",e.setAttribute("data-timestamp",""+ +new Date),(t.head||t.body).appendChild(e)}loadComments()</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://plusnan.me/2019/02/08/login-page/";
+    this.page.identifier = "2019/02/08/login-page/";
+    this.page.title = '并不简单的简单开发工作（一）：登录页面';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://christ-wus-blog.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    loadComments();
+  
+</script>
 
 
 
@@ -930,7 +996,20 @@
   
 
   
-  <script>!function(){var t=document.createElement("script"),e=window.location.protocol.split(":")[0];t.src="https"===e?"https://zz.bdstatic.com/linksubmit/push.js":"http://push.zhanzhang.baidu.com/push.js";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}()</script>
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'; 
+      }
+      else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
 
 
   
