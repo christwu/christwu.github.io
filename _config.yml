@@ -3,9 +3,9 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 一点微小的博客
-subtitle: 走向女装之路
-description: 一点微小的博客
+title: 修罗场与女装
+subtitle: 从修罗场通向女装之路
+description: 适量女装，有益身心
 keywords:
 author: InfNaN
 language: zh-CN
@@ -98,16 +98,34 @@ archive_generator:
   monthly: false
   daily: false
 
-all_minifier: true
 html_minifier:
+  enable: false
   collapseWhitespace: false
   removeEmptyAttributes: false
+js_minifier:
+  enable: false
+  mangle: true
+  output:
+  compress:
+  exclude: 
+    - '*.min.js'
+css_minifier:
+  enable: false
+  exclude: 
+    - '*.min.css'
+image_minifier: 
+  enable: true
+  interlaced: false
+  multipass: false
+  optimizationLevel: 2
+  pngquant: false
+  progressive: false
 
 ## Themes: https://hexo.io/themes/
 theme: hexo-theme-next
 theme_config:
   author: infNaN
-  description: 走向女装之路
+  description: 适量女装，有益身心
   language: zh-CN
   avatar:
     url: /img/myavatar.jpg
@@ -174,6 +192,8 @@ theme_config:
     engine: mathjax
     mathjax:
       cdn: //cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+
+  google_analytics: UA-134391990-1
 
 #theme: hexo-theme-indigo
 #theme_config:
