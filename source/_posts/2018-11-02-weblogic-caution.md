@@ -47,13 +47,82 @@ code {
 
 会话复制的操作方法可以用Google搜索。
 
-{% note default %}
+{% note info %}
 由于我们项目比较特殊，所以使用的方法和以上三种均不相同：用户认证和会话控制由集成在上游的系统管理，请求通过上游的反向代理传过来，用户信息保存在特定HTTP Header中，而我们自己项目内的用户验证在Filter中进行，一旦Session丢掉可以直接根据Header信息重建。
 {% endnote %}
 
+## 访问HTTPS网站的问题
+如果程序涉及访问HTTPS网站（包括接口），那么JDK最低要1.7。其实并不是说JDK1.6不行，而是碰到问题的话会非常麻烦，解决起来不如升JDK靠谱。
+
+配置新环境时建议用一个小程序来验证HTTPS是否能正常访问：
+
+```java
+import java.net.URL;
+import java.net.URLConnection;
+
+public class HttpsTest {
+    public static void main(String[] args) {
+        try {
+            String url = "https://www.baidu.com";
+            if (args.length > 0) {
+                url = args[0];
+            }
+            if (!url.startsWith("http://") && !url.startsWith("https://")) {
+                url = "https://" + url;
+            }
+
+            URL u = new URL(url);
+            URLConnection conn = u.openConnection();
+            conn.setConnectTimeout(2000);
+            conn.connect();
+
+            System.out.println("连接成功");
+        } catch (Exception e) {
+            System.out.println("连接失败");
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+使用方法：
+
+```
+javac HttpsTest.java
+java HttpsTest www.baidu.com
+```
+
+假如报`sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target`错，说明证书验证未通过，Java主动拒绝访问目标网站。这时候需要检查：
+
+1. 目标网站的HTTPS证书是否有效。可以用Chrome或Firefox浏览器测试一下。
+2. 如果目标网站证书有效，你需要检查JDK的根证书库是否正确。
+3. 如果目标网站证书无效，你需要将证书加入信任才行。
+
+### cacerts
+如果证书有效，但是Java还是报错，可能是JDK本身没有正确加载根证书库。你需要检查`$JAVA_HOME/jre/lib/security/cacerts`存不存在，没有的话，可以从其他装Java 8或10的机器上拷一份。
+
+拷完之后注意检查一下JDK有没有把cacerts文件认出来，命令`keytool -list -storepass changeit`。有的JDK会在其他位置保存根证书库，这样的话你即使拷到security目录也是没用，需要再用`keytool -importkeystore -srckeystore 你的cacerts -srcstorepass changeit -deststorepass changeit`把你的cacerts文件导一遍（如果你知道正确的位置和文件名，直接把cacerts文件扔到正确位置也行）。
+
+另外如果目标网站采用Let's Encrypt证书，那么你需要检查一下JDK版本，7u111+（需要掏钱买才能弄到）、8u101+，因为对Let's Encrypt的信任是后加的，所以低于这个版本的话需要手动导证书，否则还是会报错，跟使用自签名证书没啥区别。
+
+### 导证书
+HTTPS证书通常需要花钱，所以开发阶段多会考虑自行签发证书，即自签名证书。系统不信任这种证书，所以你必然要用keytool命令来导证书。操作方法大致是先用浏览器把证书文件保存下来，再运行`keytool -trustcacerts -storepass changeit -importcert -alias zhengshu -file 证书文件.cer`命令加入信任。
+
+除此之外还要注意三个问题：
+
+1. 证书不能过期。过期证书即使设置信任，运行时候也会报错，你必须要求目标网站更换未过期的证书。
+2. 若域名与证书的Common Name不一致，那么会报类似`java.security.cert.CertificateException: No name matching xxx found`的错。你可以要求目标换用合法证书或修改域名，调不了域名的话也可以在本地修改hosts。
+3. 操作系统时间要正确，不管用北京、南京、东京还是西京的时间，别和地球时间差太多。
+
 # 部署阶段
+## 操作系统时间
+用date命令检查一下系统时间是否正确，不对的话要调成正确时间。
+
 ## 主机名与hosts
 给服务器设置一个固定IP和固定的主机名，然后将服务器的IP与主机名加入到`/etc/hosts`中。对于Oracle厂的产品，即便后续设置用不到主机名，设置好之后也可以避免一些不必要的麻烦。
+
+## 避免放多套Java/Weblogic
+Java也好，Weblogic也好，应用也好，要避免在同一服务器放好几份。如果换了新版本，但旧版本没改名、移走或删除，你有可能会坑了你自己：最典型的例子就是在A目录修改配置文件，怎么改都不生效，仔细看进程列表之后才发现实际启动的是B目录里的程序。
 
 ## 防火墙配置
 默认情况下，管理控制台的端口是7001，应用是7003，节点管理器是5556，初次部署时需要注意让防火墙放行这三个端口。
@@ -118,6 +187,8 @@ javac IpTest.java
 java IpTest 10.15.2.9 1521
 ```
 
+涉及HTTPS时建议再对HTTPS网站做个访问测试，具体程序见前文。
+
 ## 修改java.security
 Java 6存在一个关于随机数的bug，如果不Hack，在Linux系统下面Weblogic建域和启动时需要等待很长时间，因此建议装完Java之后立刻去修改java.security。
 
@@ -170,6 +241,11 @@ SecureListener = false
 
 ### （待研究）服务器监听地址不要贸然写成0.0.0.0
 虽然0.0.0.0也是一个有效的监听地址，但是在组建集群时不要贸然地写成0.0.0.0，否则AdminServer与各节点之间的通信会出现问题，例如服务器状态变成UNKNOWN，或者部署应用无响应。具体原因和解决方法待研究。
+
+## 扩大内存
+默认的Xmx和MaxPermSize比较小，建议在setDomainEnv.sh中把这两个参数适当调大一些。
+
+如果采用32位的JDK（Java6/7/8的测试命令：`java -d64 -version`，如果报错说明是32位的），那么可以设置的最大内存不会超过4GB，想继续扩大的话只能换成64位JDK。
 
 ## 增加线程数
 如果预计并发数比较高，可以增加应用线程池的线程数。修改config.xml配置文件（例如`/u01/Oracle/Middleware/user_projects/base_domain/config/config.xml`）。假如应用服务器叫app_server1，那么需要找到类似以下的代码
@@ -248,6 +324,8 @@ session required /lib64/security/pam_limits.so
 改完文件之后要在控制台的“部署”里面进行更新，否则内容不会生效。改静态文件也是。
 
 每次更新的时候，JVM会把Class信息保存到内存的永久保留区域中，而旧的内容不会释放。如果Weblogic启动参数中的-XX:MaxPermSize比较小，那么更新几次可能就会卡死挂掉，而且应用日志会显示`java.lang.OutOfMemoryError: PermGen space`。在这种情况下，把Weblogic里面的服务器停掉然后再启动一次就好了。
+
+建议每升两三次级就彻底重启一次受管节点，避免出现用一阵子之后莫名其妙死掉的问题。
 
 在开始更新到更新结束，应用会出现短暂的中断，因此要注意选择合适的时间进行操作。另外在业务繁忙时进行更新，不但会影响用户，而且容易因为Weblogic繁忙而导致更新无响应或失败。
 
