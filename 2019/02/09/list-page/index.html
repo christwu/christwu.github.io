@@ -98,7 +98,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="并不简单的简单开发工作（二）：信息展示列表">
 <meta property="og:url" content="https://plusnan.me/2019/02/09/list-page/index.html">
-<meta property="og:site_name" content="一点微小的博客">
+<meta property="og:site_name" content="修罗场与女装">
 <meta property="og:description" content="本文以被各大学校学生做滥了的“学生信息管理系统”为例，讲述信息展示列表开发中的一些问题。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-02-10T17:07:19.968Z">
@@ -108,7 +108,7 @@
 
 
 
-  <link rel="alternate" href="/rss.xml" title="一点微小的博客" type="application/atom+xml"/>
+  <link rel="alternate" href="/rss.xml" title="修罗场与女装" type="application/atom+xml"/>
 
 
 
@@ -123,7 +123,7 @@
   };
 </script>
 
-  <title>并不简单的简单开发工作（二）：信息展示列表 | 一点微小的博客</title>
+  <title>并不简单的简单开发工作（二）：信息展示列表 | 修罗场与女装</title>
   
 
 
@@ -190,13 +190,13 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">一点微小的博客</span>
+        <span class="site-title">修罗场与女装</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
     
       
-        <p class="site-subtitle">走向女装之路</p>
+        <p class="site-subtitle">从修罗场通向女装之路</p>
       
     
     
@@ -338,12 +338,12 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="InfNaN"/>
-      <meta itemprop="description" content="一点微小的博客"/>
+      <meta itemprop="description" content="适量女装，有益身心"/>
       <meta itemprop="image" content="/img/myavatar.jpg"/>
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一点微小的博客"/>
+      <meta itemprop="name" content="修罗场与女装"/>
     </span>
 
     
@@ -463,6 +463,7 @@
 <h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><p>本文只讨论一个页面：学生信息管理系统中的学生列表页面，大体上样式如下（PC浏览器）</p>
 <div class="tabs" id="学生信息管理"><ul class="nav-tabs"><li class="tab active"><a href="#学生信息管理-1">学生信息管理</a></li></ul><div class="tab-content"><div class="tab-pane active" id="学生信息管理-1"><p>身份证号码：<input type="text"> 姓名：<input type="text"> 学号：<input type="text"> <a class="btn" href="#"><i class="fa fa-search fa-fw"></i>查找</a><a class="btn" href="#"><i class="fa fa-history fa-fw"></i>重置</a></p>
 <p><a class="btn" href="#"><i class="fa fa-plus fa-fw"></i>添加学生</a></p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -541,6 +542,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>每页显示<select><option>10</option><option>20</option><option>50</option><option>100</option></select>条，共49条 <a class="btn" href="#"><i class="fa fa-angle-double-left fa-fw"></i>首页</a> <a class="btn" href="#"><i class="fa fa-angle-left fa-fw"></i>上一页</a> <select><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>/5页 <a class="btn" href="#"><i class="fa fa-angle-right fa-fw"></i>下一页</a> <a class="btn" href="#"><i class="fa fa-angle-double-right fa-fw"></i>尾页</a></p></div></div></div>
 <h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>列表页面的原理比较简单，不考虑分页的话，<code>SELECT idcard, name, gender, ... FROM students WHERE 一些条件</code>，然后将查出来的结果全部展示到页面即可。但是加上分页之后逻辑会复杂很多，因此建议事先将分页功能封装成公共函数或组件（本文不再讨论分页的实现方式）。</p>
 <p>对于有固定取值的数据（性别、省市县、学院等），建议准备专门的字典表或配置文件，展示时从字典中取值。建议将读取字典数据也维护成公共函数或组件。</p>
@@ -710,7 +712,7 @@
                 alt="InfNaN"/>
             
               <p class="site-author-name" itemprop="name">InfNaN</p>
-              <p class="site-description motion-element" itemprop="description">一点微小的博客</p>
+              <p class="site-description motion-element" itemprop="description">适量女装，有益身心</p>
           </div>
 
           

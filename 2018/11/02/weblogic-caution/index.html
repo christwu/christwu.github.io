@@ -99,17 +99,17 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Weblogic踩坑记录">
 <meta property="og:url" content="https://plusnan.me/2018/11/02/weblogic-caution/index.html">
-<meta property="og:site_name" content="一点微小的博客">
+<meta property="og:site_name" content="修罗场与女装">
 <meta property="og:description" content="本文记录我在部署Weblogic时遇到的各种坑。其中JDK为1.6，Weblogic版本11g。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-02-11T01:36:50.780Z">
+<meta property="og:updated_time" content="2019-02-16T17:04:10.748Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Weblogic踩坑记录">
 <meta name="twitter:description" content="本文记录我在部署Weblogic时遇到的各种坑。其中JDK为1.6，Weblogic版本11g。">
 
 
 
-  <link rel="alternate" href="/rss.xml" title="一点微小的博客" type="application/atom+xml"/>
+  <link rel="alternate" href="/rss.xml" title="修罗场与女装" type="application/atom+xml"/>
 
 
 
@@ -124,7 +124,7 @@
   };
 </script>
 
-  <title>Weblogic踩坑记录 | 一点微小的博客</title>
+  <title>Weblogic踩坑记录 | 修罗场与女装</title>
   
 
 
@@ -191,13 +191,13 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">一点微小的博客</span>
+        <span class="site-title">修罗场与女装</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
     
       
-        <p class="site-subtitle">走向女装之路</p>
+        <p class="site-subtitle">从修罗场通向女装之路</p>
       
     
     
@@ -339,12 +339,12 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="InfNaN"/>
-      <meta itemprop="description" content="一点微小的博客"/>
+      <meta itemprop="description" content="适量女装，有益身心"/>
       <meta itemprop="image" content="/img/myavatar.jpg"/>
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一点微小的博客"/>
+      <meta itemprop="name" content="修罗场与女装"/>
     </span>
 
     
@@ -395,7 +395,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-02-11 09:36:50" itemprop="dateModified" datetime="2019-02-11T09:36:50+08:00">2019-02-11</time>
+                <time title="修改时间：2019-02-17 01:04:10" itemprop="dateModified" datetime="2019-02-17T01:04:10+08:00">2019-02-17</time>
               
             
           </span>
@@ -513,7 +513,30 @@ code {
 <div class="note info">
             <p>由于我们项目比较特殊，所以使用的方法和以上三种均不相同：用户认证和会话控制由集成在上游的系统管理，请求通过上游的反向代理传过来，用户信息保存在特定HTTP Header中，而我们自己项目内的用户验证在Filter中进行，一旦Session丢掉可以直接根据Header信息重建。</p>
           </div>
-<h1 id="部署阶段"><a href="#部署阶段" class="headerlink" title="部署阶段"></a>部署阶段</h1><h2 id="主机名与hosts"><a href="#主机名与hosts" class="headerlink" title="主机名与hosts"></a>主机名与hosts</h2><p>给服务器设置一个固定IP和固定的主机名，然后将服务器的IP与主机名加入到<code>/etc/hosts</code>中。对于Oracle厂的产品，即便后续设置用不到主机名，设置好之后也可以避免一些不必要的麻烦。</p>
+<h2 id="访问HTTPS网站的问题"><a href="#访问HTTPS网站的问题" class="headerlink" title="访问HTTPS网站的问题"></a>访问HTTPS网站的问题</h2><p>如果程序涉及访问HTTPS网站（包括接口），那么JDK最低要1.7。其实并不是说JDK1.6不行，而是碰到问题的话会非常麻烦，解决起来不如升JDK靠谱。</p>
+<p>配置新环境时建议用一个小程序来验证HTTPS是否能正常访问：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.net.URL;</span><br><span class="line"><span class="keyword">import</span> java.net.URLConnection;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HttpsTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            String url = <span class="string">"https://www.baidu.com"</span>;</span><br><span class="line">            <span class="keyword">if</span> (args.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                url = args[<span class="number">0</span>];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (!url.startsWith(<span class="string">"http://"</span>) &amp;&amp; !url.startsWith(<span class="string">"https://"</span>)) &#123;</span><br><span class="line">                url = <span class="string">"https://"</span> + url;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            URL u = <span class="keyword">new</span> URL(url);</span><br><span class="line">            URLConnection conn = u.openConnection();</span><br><span class="line">            conn.setConnectTimeout(<span class="number">2000</span>);</span><br><span class="line">            conn.connect();</span><br><span class="line"></span><br><span class="line">            System.out.println(<span class="string">"连接成功"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            System.out.println(<span class="string">"连接失败"</span>);</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">javac HttpsTest.java</span><br><span class="line">java HttpsTest www.baidu.com</span><br></pre></td></tr></table></figure>
+<p>假如报<code>sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target</code>错，说明证书验证未通过，Java主动拒绝访问目标网站。这时候需要检查：</p>
+<ol>
+<li>目标网站的HTTPS证书是否有效。可以用Chrome或Firefox浏览器测试一下。</li>
+<li>如果目标网站证书有效，你需要检查JDK的根证书库是否正确。</li>
+<li>如果目标网站证书无效，你需要将证书加入信任才行。</li>
+</ol>
+<h3 id="cacerts"><a href="#cacerts" class="headerlink" title="cacerts"></a>cacerts</h3><p>如果证书有效，但是Java还是报错，可能是JDK本身没有正确加载根证书库。你需要检查<code>$JAVA_HOME/jre/lib/security/cacerts</code>存不存在，没有的话，可以从其他装Java 8或10的机器上拷一份。</p>
+<p>拷完之后注意检查一下JDK有没有把cacerts文件认出来，命令<code>keytool -list -storepass changeit</code>。有的JDK会在其他位置保存根证书库，这样的话你即使拷到security目录也是没用，需要再用<code>keytool -importkeystore -srckeystore 你的cacerts -srcstorepass changeit -deststorepass changeit</code>把你的cacerts文件导一遍（如果你知道正确的位置和文件名，直接把cacerts文件扔到正确位置也行）。</p>
+<p>另外如果目标网站采用Let’s Encrypt证书，那么你需要检查一下JDK版本，7u111+（需要掏钱买才能弄到）、8u101+，因为对Let’s Encrypt的信任是后加的，所以低于这个版本的话需要手动导证书，否则还是会报错，跟使用自签名证书没啥区别。</p>
+<h3 id="导证书"><a href="#导证书" class="headerlink" title="导证书"></a>导证书</h3><p>HTTPS证书通常需要花钱，所以开发阶段多会考虑自行签发证书，即自签名证书。系统不信任这种证书，所以你必然要用keytool命令来导证书。操作方法大致是先用浏览器把证书文件保存下来，再运行<code>keytool -trustcacerts -storepass changeit -importcert -alias zhengshu -file 证书文件.cer</code>命令加入信任。</p>
+<p>除此之外还要注意三个问题：</p>
+<ol>
+<li>证书不能过期。过期证书即使设置信任，运行时候也会报错，你必须要求目标网站更换未过期的证书。</li>
+<li>若域名与证书的Common Name不一致，那么会报类似<code>java.security.cert.CertificateException: No name matching xxx found</code>的错。你可以要求目标换用合法证书或修改域名，调不了域名的话也可以在本地修改hosts。</li>
+<li>操作系统时间要正确，不管用北京、南京、东京还是西京的时间，别和地球时间差太多。</li>
+</ol>
+<h1 id="部署阶段"><a href="#部署阶段" class="headerlink" title="部署阶段"></a>部署阶段</h1><h2 id="操作系统时间"><a href="#操作系统时间" class="headerlink" title="操作系统时间"></a>操作系统时间</h2><p>用date命令检查一下系统时间是否正确，不对的话要调成正确时间。</p>
+<h2 id="主机名与hosts"><a href="#主机名与hosts" class="headerlink" title="主机名与hosts"></a>主机名与hosts</h2><p>给服务器设置一个固定IP和固定的主机名，然后将服务器的IP与主机名加入到<code>/etc/hosts</code>中。对于Oracle厂的产品，即便后续设置用不到主机名，设置好之后也可以避免一些不必要的麻烦。</p>
+<h2 id="避免放多套Java-Weblogic"><a href="#避免放多套Java-Weblogic" class="headerlink" title="避免放多套Java/Weblogic"></a>避免放多套Java/Weblogic</h2><p>Java也好，Weblogic也好，应用也好，要避免在同一服务器放好几份。如果换了新版本，但旧版本没改名、移走或删除，你有可能会坑了你自己：最典型的例子就是在A目录修改配置文件，怎么改都不生效，仔细看进程列表之后才发现实际启动的是B目录里的程序。</p>
 <h2 id="防火墙配置"><a href="#防火墙配置" class="headerlink" title="防火墙配置"></a>防火墙配置</h2><p>默认情况下，管理控制台的端口是7001，应用是7003，节点管理器是5556，初次部署时需要注意让防火墙放行这三个端口。</p>
 <p>为了安全，需要仔细控制防火墙的放行范围，不要让7001和5556暴露到互联网上面。另外不要把应用部署到AdminServer上面，否则封锁7001端口之后应用就无法访问了。</p>
 <h2 id="建议进行网络测试"><a href="#建议进行网络测试" class="headerlink" title="建议进行网络测试"></a>建议进行网络测试</h2><p>在开始部署之前，建议在应用服务器上测试一下能否访问数据库等资源。如果网络不通，那么改Weblogic设置时可能会无响应，卡了半天之后才蹦出一句<code>The Network adapter could not establish the connection</code>，白白耽误时间。</p>
@@ -521,6 +544,7 @@ code {
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.net.InetSocketAddress;</span><br><span class="line"><span class="keyword">import</span> java.net.Socket;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IpTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        Socket connect = <span class="keyword">new</span> Socket();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            String ip = <span class="string">""</span>;</span><br><span class="line">            <span class="keyword">int</span> port = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">int</span> timeout = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (args.length &lt; <span class="number">2</span>) &#123;</span><br><span class="line">                System.out.println(<span class="string">"用法：java IpTest &lt;IP地址&gt; &lt;端口号&gt; [超时时间]"</span>);</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                ip = args[<span class="number">0</span>];</span><br><span class="line">                port = Integer.parseInt(args[<span class="number">1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (args.length &gt; <span class="number">2</span>)&#123;</span><br><span class="line">                timeout = Integer.parseInt(args[<span class="number">2</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(<span class="string">"正在连接 "</span> + ip + <span class="string">":"</span> + port);</span><br><span class="line"></span><br><span class="line">            InetSocketAddress addr = <span class="keyword">new</span> InetSocketAddress(ip, port);</span><br><span class="line">            connect.connect(addr, timeout);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (connect.isConnected()) &#123;</span><br><span class="line">                System.out.println(<span class="string">"连接成功"</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                System.out.println(<span class="string">"连接失败"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                connect.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>使用方法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">javac IpTest.java</span><br><span class="line">java IpTest 10.15.2.9 1521</span><br></pre></td></tr></table></figure>
+<p>涉及HTTPS时建议再对HTTPS网站做个访问测试，具体程序见前文。</p>
 <h2 id="修改java-security"><a href="#修改java-security" class="headerlink" title="修改java.security"></a>修改java.security</h2><p>Java 6存在一个关于随机数的bug，如果不Hack，在Linux系统下面Weblogic建域和启动时需要等待很长时间，因此建议装完Java之后立刻去修改java.security。</p>
 <p>假设$JAVA_HOME为<code>/opt/jdk1.6.0_145</code>，也就是说JDK装在了这个地方，那么需要修改<code>$JAVA_HOME/jre/lib/security/java.security</code>文件，找到</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">securerandom.source=file:/dev/urandom</span><br></pre></td></tr></table></figure>
@@ -538,6 +562,8 @@ code {
 <h2 id="组建集群"><a href="#组建集群" class="headerlink" title="组建集群"></a>组建集群</h2><p>我们并不需要每一台机器都执行一遍建域之类的操作。只要各服务器JDK路径和Weblogic安装路径一致，那么在一台机器上面把Weblogic的各种参数都配置好，然后将user_projects目录打包（或者干脆把整个Middleware打包），复制到其他各服务器上面解压就差不多了。</p>
 <p>如果NodeManager使用SSL，解压完成后，前文提到的“NodeManager证书”还是要在每台服务器上操作一遍。</p>
 <h3 id="（待研究）服务器监听地址不要贸然写成0-0-0-0"><a href="#（待研究）服务器监听地址不要贸然写成0-0-0-0" class="headerlink" title="（待研究）服务器监听地址不要贸然写成0.0.0.0"></a>（待研究）服务器监听地址不要贸然写成0.0.0.0</h3><p>虽然0.0.0.0也是一个有效的监听地址，但是在组建集群时不要贸然地写成0.0.0.0，否则AdminServer与各节点之间的通信会出现问题，例如服务器状态变成UNKNOWN，或者部署应用无响应。具体原因和解决方法待研究。</p>
+<h2 id="扩大内存"><a href="#扩大内存" class="headerlink" title="扩大内存"></a>扩大内存</h2><p>默认的Xmx和MaxPermSize比较小，建议在setDomainEnv.sh中把这两个参数适当调大一些。</p>
+<p>如果采用32位的JDK（Java6/7/8的测试命令：<code>java -d64 -version</code>，如果报错说明是32位的），那么可以设置的最大内存不会超过4GB，想继续扩大的话只能换成64位JDK。</p>
 <h2 id="增加线程数"><a href="#增加线程数" class="headerlink" title="增加线程数"></a>增加线程数</h2><p>如果预计并发数比较高，可以增加应用线程池的线程数。修改config.xml配置文件（例如<code>/u01/Oracle/Middleware/user_projects/base_domain/config/config.xml</code>）。假如应用服务器叫app_server1，那么需要找到类似以下的代码</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">server</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>app_server1<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
 <p>修改成</p>
@@ -553,6 +579,7 @@ code {
 <p>另外如果线程数改大了，内存也应当适当调大，因为每个线程都会占一些内存空间。</p>
 <h1 id="运维阶段"><a href="#运维阶段" class="headerlink" title="运维阶段"></a>运维阶段</h1><h2 id="应用升级"><a href="#应用升级" class="headerlink" title="应用升级"></a>应用升级</h2><p>改完文件之后要在控制台的“部署”里面进行更新，否则内容不会生效。改静态文件也是。</p>
 <p>每次更新的时候，JVM会把Class信息保存到内存的永久保留区域中，而旧的内容不会释放。如果Weblogic启动参数中的-XX:MaxPermSize比较小，那么更新几次可能就会卡死挂掉，而且应用日志会显示<code>java.lang.OutOfMemoryError: PermGen space</code>。在这种情况下，把Weblogic里面的服务器停掉然后再启动一次就好了。</p>
+<p>建议每升两三次级就彻底重启一次受管节点，避免出现用一阵子之后莫名其妙死掉的问题。</p>
 <p>在开始更新到更新结束，应用会出现短暂的中断，因此要注意选择合适的时间进行操作。另外在业务繁忙时进行更新，不但会影响用户，而且容易因为Weblogic繁忙而导致更新无响应或失败。</p>
 <p>建议编写一份升级检查表，将准备工作、实施工作和收尾工作全部列入，以免因漏项导致升级出现问题。</p>
 <p>如果更新时遭遇<code>Error occurred while downloading files from admin server for deployment request &quot;xxx,xxx,xxx&quot;. Underlying error is: &quot;null&quot;</code>，那么需要去检查AdminServer.log的日志（例如<code>/u01/Oracle/Middleware/user_projects/base_domain/servers/AdminServer/logs/AdminServer.log</code>）。我碰到过两种会出现这种错误的情况，一种是文件名乱码，另一种是文件权限不正确（例如服务以weblogic用户运行，但是文件所有者是root，weblogic访问不了）。假如权限不正确，可以<code>chown -R weblogic:weblogic 存放程序的目录</code>。</p>
@@ -715,7 +742,7 @@ code {
                 alt="InfNaN"/>
             
               <p class="site-author-name" itemprop="name">InfNaN</p>
-              <p class="site-description motion-element" itemprop="description">一点微小的博客</p>
+              <p class="site-description motion-element" itemprop="description">适量女装，有益身心</p>
           </div>
 
           
@@ -885,7 +912,7 @@ code {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#开发阶段"><span class="nav-number">1.</span> <span class="nav-text">开发阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备测试区"><span class="nav-number">1.1.</span> <span class="nav-text">准备测试区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路径问题"><span class="nav-number">1.2.</span> <span class="nav-text">路径问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据源名称"><span class="nav-number">1.3.</span> <span class="nav-text">数据源名称</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集群Session丢失问题"><span class="nav-number">1.4.</span> <span class="nav-text">集群Session丢失问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#部署阶段"><span class="nav-number">2.</span> <span class="nav-text">部署阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#主机名与hosts"><span class="nav-number">2.1.</span> <span class="nav-text">主机名与hosts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防火墙配置"><span class="nav-number">2.2.</span> <span class="nav-text">防火墙配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建议进行网络测试"><span class="nav-number">2.3.</span> <span class="nav-text">建议进行网络测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改java-security"><span class="nav-number">2.4.</span> <span class="nav-text">修改java.security</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如果通过控制台启动服务器时起不来"><span class="nav-number">2.5.</span> <span class="nav-text">如果通过控制台启动服务器时起不来</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法一：重新设置证书"><span class="nav-number">2.5.1.</span> <span class="nav-text">方法一：重新设置证书</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法二：不使用SSL"><span class="nav-number">2.5.2.</span> <span class="nav-text">方法二：不使用SSL</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组建集群"><span class="nav-number">2.6.</span> <span class="nav-text">组建集群</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#（待研究）服务器监听地址不要贸然写成0-0-0-0"><span class="nav-number">2.6.1.</span> <span class="nav-text">（待研究）服务器监听地址不要贸然写成0.0.0.0</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#增加线程数"><span class="nav-number">2.7.</span> <span class="nav-text">增加线程数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运维阶段"><span class="nav-number">3.</span> <span class="nav-text">运维阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#应用升级"><span class="nav-number">3.1.</span> <span class="nav-text">应用升级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重启服务器"><span class="nav-number">3.2.</span> <span class="nav-text">重启服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打补丁"><span class="nav-number">3.3.</span> <span class="nav-text">打补丁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搬家"><span class="nav-number">3.4.</span> <span class="nav-text">搬家</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#监控"><span class="nav-number">3.5.</span> <span class="nav-text">监控</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#开发阶段"><span class="nav-number">1.</span> <span class="nav-text">开发阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备测试区"><span class="nav-number">1.1.</span> <span class="nav-text">准备测试区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路径问题"><span class="nav-number">1.2.</span> <span class="nav-text">路径问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据源名称"><span class="nav-number">1.3.</span> <span class="nav-text">数据源名称</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集群Session丢失问题"><span class="nav-number">1.4.</span> <span class="nav-text">集群Session丢失问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#访问HTTPS网站的问题"><span class="nav-number">1.5.</span> <span class="nav-text">访问HTTPS网站的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cacerts"><span class="nav-number">1.5.1.</span> <span class="nav-text">cacerts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导证书"><span class="nav-number">1.5.2.</span> <span class="nav-text">导证书</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#部署阶段"><span class="nav-number">2.</span> <span class="nav-text">部署阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统时间"><span class="nav-number">2.1.</span> <span class="nav-text">操作系统时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主机名与hosts"><span class="nav-number">2.2.</span> <span class="nav-text">主机名与hosts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#避免放多套Java-Weblogic"><span class="nav-number">2.3.</span> <span class="nav-text">避免放多套Java/Weblogic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防火墙配置"><span class="nav-number">2.4.</span> <span class="nav-text">防火墙配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建议进行网络测试"><span class="nav-number">2.5.</span> <span class="nav-text">建议进行网络测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改java-security"><span class="nav-number">2.6.</span> <span class="nav-text">修改java.security</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如果通过控制台启动服务器时起不来"><span class="nav-number">2.7.</span> <span class="nav-text">如果通过控制台启动服务器时起不来</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法一：重新设置证书"><span class="nav-number">2.7.1.</span> <span class="nav-text">方法一：重新设置证书</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法二：不使用SSL"><span class="nav-number">2.7.2.</span> <span class="nav-text">方法二：不使用SSL</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组建集群"><span class="nav-number">2.8.</span> <span class="nav-text">组建集群</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#（待研究）服务器监听地址不要贸然写成0-0-0-0"><span class="nav-number">2.8.1.</span> <span class="nav-text">（待研究）服务器监听地址不要贸然写成0.0.0.0</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩大内存"><span class="nav-number">2.9.</span> <span class="nav-text">扩大内存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#增加线程数"><span class="nav-number">2.10.</span> <span class="nav-text">增加线程数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运维阶段"><span class="nav-number">3.</span> <span class="nav-text">运维阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#应用升级"><span class="nav-number">3.1.</span> <span class="nav-text">应用升级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重启服务器"><span class="nav-number">3.2.</span> <span class="nav-text">重启服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打补丁"><span class="nav-number">3.3.</span> <span class="nav-text">打补丁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搬家"><span class="nav-number">3.4.</span> <span class="nav-text">搬家</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#监控"><span class="nav-number">3.5.</span> <span class="nav-text">监控</span></a></li></ol></li></ol></div>
             
 
           </div>
