@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 修罗场与女装
-subtitle: 从修罗场通向女装之路
+title: infNaN
+subtitle:
 description: 适量女装，有益身心
 keywords:
-author: InfNaN
+author: infNaN
 language: zh-CN
 timezone: Asia/Shanghai
 
@@ -121,6 +121,12 @@ image_minifier:
   pngquant: false
   progressive: false
 
+disqus_proxy:
+  shortname: christ-wu-blog
+  username: infnan
+  host: disqus-proxy.plusnan.me
+  port: 443
+
 ## Themes: https://hexo.io/themes/
 theme: hexo-theme-next
 theme_config:
@@ -139,7 +145,7 @@ theme_config:
 
   disqus:
     enable: true
-    shortname: christ-wus-blog
+    shortname: christ-wu-blog
     count: true
 
   menu:
