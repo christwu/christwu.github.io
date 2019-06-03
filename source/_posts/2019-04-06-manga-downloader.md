@@ -238,7 +238,7 @@ const doWork = async (urllist, options) => {
             if (url.match(/\/comic\/\d+\/\d+/)) {
                 await processSingleManga(page, url, options);
             } else {
-                logger.info('检测到要下载整部作品，请做好觉悟');
+                logger.info('检测到要下载整部作品');
                 await processWholeManga(page, url, options);
             }
         } catch (e) {
