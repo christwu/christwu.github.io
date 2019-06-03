@@ -42,23 +42,21 @@
 
 
 
-
-
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
 
-<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
 
 
-  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
 
 
 
@@ -71,8 +69,10 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    version: '7.0.0',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
     fancybox: false,
     fastclick: false,
     lazyload: false,
@@ -113,7 +113,8 @@
 
 
 
-
+  
+  
   <link rel="canonical" href="https://plusnan.me/2018/11/02/weblogic-caution/">
 
 
@@ -129,14 +130,6 @@
 
 
 
-
-  <script async src="//www.googletagmanager.com/gtag/js?id=UA-134391990-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'UA-134391990-1');
-  </script>
 
 
 
@@ -419,19 +412,6 @@
           
             
             
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">评论数：</span>
-                <a href="/2018/11/02/weblogic-caution/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/11/02/weblogic-caution/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -469,6 +449,7 @@ code {
 
 <h1 id="开发阶段"><a href="#开发阶段" class="headerlink" title="开发阶段"></a>开发阶段</h1><h2 id="准备测试区"><a href="#准备测试区" class="headerlink" title="准备测试区"></a>准备测试区</h2><p>务必准备一个和生产环境架构接近的测试环境，而且开发环境、测试环境和生产环境的JDK与中间件版本应该保持一致，如果条件不够，至少测试环境和生产环境要一致。开发时用某个版本JDK和Tomcat，部署到生产环境时用另一个版本的JDK和Weblogic，这样很容易遭遇意外。</p>
 <p>举一些例子，以下几个就属于Tomcat上面测不出来，挪到Weblogic上面就可能会暴露出来的错误，好在下表这些错误通过修改Weblogic服务器启动参数就能在一定程度上解决了：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -495,6 +476,7 @@ code {
 </tr>
 </tbody>
 </table>
+</div>
 <h2 id="路径问题"><a href="#路径问题" class="headerlink" title="路径问题"></a>路径问题</h2><p>假设程序部署在服务器的<code>/home/weblogic/project</code>中，Weblogic安装在<code>/u01/Oracle/Middleware</code>下面，而且程序会动态生成文件，实际上文件会放在类似于<code>/u01/Oracle/Middleware/user_projects/domains/base_domain/servers/app_server1/stage/project</code>的对应位置中，而且激活更新时候文件会丢失，需要重新生成。</p>
 <p>避免使用中文文件名和中文路径，以免因字符编码问题导致部署或升级失败。举个例子，如果文件里有中文名，打包并解压之后文件名变成了乱码，那么更新的时候Weblogic会提示<code>Error occurred while downloading files from admin server for deployment request &quot;xxx,xxx,xxx&quot;. Underlying error is: &quot;null&quot;</code>。</p>
 <h2 id="数据源名称"><a href="#数据源名称" class="headerlink" title="数据源名称"></a>数据源名称</h2><p>假如JNDI数据源名称为dataSource，在Tomcat中运行时，需要写成<code>java:comp/env/dataSource</code>，但是在Weblogic中运行时要把“java:comp/env/”去掉，直接写成dataSource。</p>
@@ -597,20 +579,6 @@ code {
 <h2 id="监控"><a href="#监控" class="headerlink" title="监控"></a>监控</h2><p>建议在服务器上面安装专门的监控软件。像我们项目组那种服务器由用户管理，应用由项目组自行运维的情况，更要有自己的监控程序，这样在出现问题时也好及时定位，以免一塌糊涂。</p>
 <p>目前我们项目组自己写了一个监控脚本，在繁忙时期每隔10分钟、空闲时期每隔半小时把Weblogic控制台的一些常用指标记录到日志文件中（通过cron控制），<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbi9zY3JpcHRzL2Jsb2IvbWFzdGVyL+mDqOe9suWSjOi/kOe7tC93ZWJsb2dpYy1tb25pdG9yLnNo" title="https://github.com/infnan/scripts/blob/master/部署和运维/weblogic-monitor.sh">代码见此<i class="fa fa-external-link"></i></span>。</p>
 
-      <script>
-        window.disqusProxy={
-          shortname: 'christ-wu-blog',
-          username: 'infnan',
-          server: 'disqus-proxy.plusnan.me',
-          port: 443,
-          adminAvatar: '/avatars/admin-avatar.jpg',
-          identifier: '2018/11/02/weblogic-caution/',
-        };
-        window.disqus_config = function () {
-          this.page.url = window.location.href;
-          this.page.identifier = window.disqusProxy.identifier;
-        };
-      </script>
       
     </div>
 
@@ -630,6 +598,7 @@ code {
     
       <div>
         
+
 
 
 
@@ -704,19 +673,6 @@ code {
           
 
   
-    <div class="comments" id="comments">
-      
-      <script src="//cdn.bootcss.com/react/16.0.0/umd/react.production.min.js"></script>
-      <script src="//cdn.bootcss.com/react-dom/16.0.0/umd/react-dom.production.min.js"></script>
-      <script src="//cdn.bootcss.com/fetch/2.0.3/fetch.min.js"></script>
-      <script src="//cdn.jsdelivr.net/npm/blockies-identicon@0.1.0/blockies.min.js"></script>
-      <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-      <div id="disqus_proxy_thread"><script src="/scripts/hexo-disqus-proxy-primary.js" async></script>
-        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
-      </div>
-    </div>
-
-  
 
 
 
@@ -733,7 +689,6 @@ code {
   </div>
 
   <aside id="sidebar" class="sidebar">
-    
     <div class="sidebar-inner">
 
       
@@ -756,7 +711,7 @@ code {
               <img class="site-author-image" itemprop="image" src="/img/myavatar.jpg" alt="infNaN">
             
               <p class="site-author-name" itemprop="name">infNaN</p>
-              <p class="site-description motion-element" itemprop="description">适量女装，有益身心</p>
+              <div class="site-description motion-element" itemprop="description">适量女装，有益身心</div>
           </div>
 
           
@@ -766,7 +721,7 @@ code {
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-count">23</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -776,7 +731,11 @@ code {
                 
                 
                 <div class="site-state-item site-state-categories">
-                  <a href="/categories/index.html">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
                     
                     
                       
@@ -803,7 +762,11 @@ code {
                 
                 
                 <div class="site-state-item site-state-tags">
-                  <a href="/tags/index.html">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
                     
                     
                       
@@ -852,7 +815,9 @@ code {
                     
                       
                     
-                    <span class="site-state-item-count">20</span>
+                      
+                    
+                    <span class="site-state-item-count">21</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -867,6 +832,8 @@ code {
                 RSS
               </a>
             </div>
+          
+
           
 
           
@@ -899,6 +866,7 @@ code {
 
           
              <div class="cc-license motion-element" itemprop="license">
+              
               
                 
               
@@ -942,6 +910,7 @@ code {
 
     </div>
   </aside>
+  
 
 
         
@@ -1048,59 +1017,43 @@ code {
   
 
 
-  <script src="/js/src/utils.js?v=7.0.0"></script>
+  <script src="/js/utils.js?v=7.1.0"></script>
 
-  <script src="/js/src/motion.js?v=7.0.0"></script>
-
-
-
-  
-  
-
-
-  <script src="/js/src/affix.js?v=7.0.0"></script>
-
-  <script src="/js/src/schemes/pisces.js?v=7.0.0"></script>
-
-
-
-  
-  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
-<script src="/js/src/post-details.js?v=7.0.0"></script>
-
-
-
-  
-
-
-  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+  <script src="/js/motion.js?v=7.1.0"></script>
 
 
 
   
   
-  <script id="dsq-count-scr" src="https://christ-wu-blog.disqus.com/count.js" async></script>
 
 
-<script>
-  var disqus_config = function() {
-    this.page.url = "https://plusnan.me/2018/11/02/weblogic-caution/";
-    this.page.identifier = "2018/11/02/weblogic-caution/";
-    this.page.title = 'Weblogic踩坑记录';
-    };
-  function loadComments() {
-    var d = document, s = d.createElement('script');
-    
-    s.setAttribute('data-timestamp', '' + +new Date());
-    
-  }
+  <script src="/js/affix.js?v=7.1.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.0"></script>
+
+
+
   
-    loadComments();
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
   
-</script>
 
 
+  <script src="/js/next-boot.js?v=7.1.0"></script>
 
+
+  
+
+  
+  <script src="/js/exturl.js?v=7.1.0"></script>
+
+
+  
+
+  
 
 
   
@@ -1123,6 +1076,8 @@ code {
 
   
 
+
+  
 
   
 
@@ -1131,12 +1086,7 @@ code {
     (function(){
       var bp = document.createElement('script');
       var curProtocol = window.location.protocol.split(':')[0];
-      if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'; 
-      }
-      else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-      }
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
       var s = document.getElementsByTagName("script")[0];
       s.parentNode.insertBefore(bp, s);
     })();
@@ -1154,8 +1104,6 @@ code {
   
 
   
-  <script src="/js/src/exturl.js?v=7.0.0"></script>
-
 
   
 

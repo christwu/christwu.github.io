@@ -42,23 +42,21 @@
 
 
 
-
-
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
 
-<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
 
 
-  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
 
 
 
@@ -71,8 +69,10 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    version: '7.0.0',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
     fancybox: false,
     fastclick: false,
     lazyload: false,
@@ -113,7 +113,8 @@
 
 
 
-
+  
+  
   <link rel="canonical" href="https://plusnan.me/2019/01/29/equals/">
 
 
@@ -129,14 +130,6 @@
 
 
 
-
-  <script async src="//www.googletagmanager.com/gtag/js?id=UA-134391990-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'UA-134391990-1');
-  </script>
 
 
 
@@ -419,19 +412,6 @@
           
             
             
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">评论数：</span>
-                <a href="/2019/01/29/equals/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/01/29/equals/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -468,20 +448,6 @@
 <h1 id="已知问题"><a href="#已知问题" class="headerlink" title="已知问题"></a>已知问题</h1><p><code>str != null &amp;&amp; !&quot;&quot;.equals(str)</code>以及<code>str == null || &quot;&quot;.equals(str)</code>转换之后会变成<code>str != null &amp;&amp; StringUtils.isNotEmpty(str)</code>和<code>str == null || StringUtils.isEmpty(str)</code>，但空指针判断已经没有必要，应当删除。</p>
 <h1 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h1><p>写脚本和调试脚本花了半天时间，下午脚本执行完成，然后手工处理了一些暴露出来的代码错误。隔壁两位新员工分别改另外两类简单问题，结果各花了一星期，因此非常建议大家学习一两门辅助语言，并且自动化处理事情。</p>
 
-      <script>
-        window.disqusProxy={
-          shortname: 'christ-wu-blog',
-          username: 'infnan',
-          server: 'disqus-proxy.plusnan.me',
-          port: 443,
-          adminAvatar: '/avatars/admin-avatar.jpg',
-          identifier: '2019/01/29/equals/',
-        };
-        window.disqus_config = function () {
-          this.page.url = window.location.href;
-          this.page.identifier = window.disqusProxy.identifier;
-        };
-      </script>
       
     </div>
 
@@ -501,6 +467,7 @@
     
       <div>
         
+
 
 
 
@@ -575,19 +542,6 @@
           
 
   
-    <div class="comments" id="comments">
-      
-      <script src="//cdn.bootcss.com/react/16.0.0/umd/react.production.min.js"></script>
-      <script src="//cdn.bootcss.com/react-dom/16.0.0/umd/react-dom.production.min.js"></script>
-      <script src="//cdn.bootcss.com/fetch/2.0.3/fetch.min.js"></script>
-      <script src="//cdn.jsdelivr.net/npm/blockies-identicon@0.1.0/blockies.min.js"></script>
-      <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-      <div id="disqus_proxy_thread"><script src="/scripts/hexo-disqus-proxy-primary.js" async></script>
-        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
-      </div>
-    </div>
-
-  
 
 
 
@@ -604,7 +558,6 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
-    
     <div class="sidebar-inner">
 
       
@@ -627,7 +580,7 @@
               <img class="site-author-image" itemprop="image" src="/img/myavatar.jpg" alt="infNaN">
             
               <p class="site-author-name" itemprop="name">infNaN</p>
-              <p class="site-description motion-element" itemprop="description">适量女装，有益身心</p>
+              <div class="site-description motion-element" itemprop="description">适量女装，有益身心</div>
           </div>
 
           
@@ -637,7 +590,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-count">23</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -647,7 +600,11 @@
                 
                 
                 <div class="site-state-item site-state-categories">
-                  <a href="/categories/index.html">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
                     
                     
                       
@@ -674,7 +631,11 @@
                 
                 
                 <div class="site-state-item site-state-tags">
-                  <a href="/tags/index.html">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
                     
                     
                       
@@ -723,7 +684,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">20</span>
+                      
+                    
+                    <span class="site-state-item-count">21</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -738,6 +701,8 @@
                 RSS
               </a>
             </div>
+          
+
           
 
           
@@ -770,6 +735,7 @@
 
           
              <div class="cc-license motion-element" itemprop="license">
+              
               
                 
               
@@ -813,6 +779,7 @@
 
     </div>
   </aside>
+  
 
 
         
@@ -919,59 +886,43 @@
   
 
 
-  <script src="/js/src/utils.js?v=7.0.0"></script>
+  <script src="/js/utils.js?v=7.1.0"></script>
 
-  <script src="/js/src/motion.js?v=7.0.0"></script>
-
-
-
-  
-  
-
-
-  <script src="/js/src/affix.js?v=7.0.0"></script>
-
-  <script src="/js/src/schemes/pisces.js?v=7.0.0"></script>
-
-
-
-  
-  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
-<script src="/js/src/post-details.js?v=7.0.0"></script>
-
-
-
-  
-
-
-  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+  <script src="/js/motion.js?v=7.1.0"></script>
 
 
 
   
   
-  <script id="dsq-count-scr" src="https://christ-wu-blog.disqus.com/count.js" async></script>
 
 
-<script>
-  var disqus_config = function() {
-    this.page.url = "https://plusnan.me/2019/01/29/equals/";
-    this.page.identifier = "2019/01/29/equals/";
-    this.page.title = '批量将&#34;&#34;.equals()替换成StringUtils.isEmpty()';
-    };
-  function loadComments() {
-    var d = document, s = d.createElement('script');
-    
-    s.setAttribute('data-timestamp', '' + +new Date());
-    
-  }
+  <script src="/js/affix.js?v=7.1.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.0"></script>
+
+
+
   
-    loadComments();
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
   
-</script>
 
 
+  <script src="/js/next-boot.js?v=7.1.0"></script>
 
+
+  
+
+  
+  <script src="/js/exturl.js?v=7.1.0"></script>
+
+
+  
+
+  
 
 
   
@@ -994,6 +945,8 @@
 
   
 
+
+  
 
   
 
@@ -1002,12 +955,7 @@
     (function(){
       var bp = document.createElement('script');
       var curProtocol = window.location.protocol.split(':')[0];
-      if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'; 
-      }
-      else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-      }
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
       var s = document.getElementsByTagName("script")[0];
       s.parentNode.insertBefore(bp, s);
     })();
@@ -1025,8 +973,6 @@
   
 
   
-  <script src="/js/src/exturl.js?v=7.0.0"></script>
-
 
   
 
