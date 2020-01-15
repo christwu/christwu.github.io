@@ -1,137 +1,77 @@
 <!DOCTYPE html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<html class="theme-next pisces" lang="zh-CN">
-<head><meta name="generator" content="Hexo 3.8.0">
+<html lang="zh-CN">
+<head>
   <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.8.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
-
-<link rel="stylesheet" href="/css/main.css?v=7.1.0">
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
-
-
-
-
-
-
-
-<script id="hexo.configurations">
+<script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    hostname: new URL('https://plusnan.me').hostname,
     root: '/',
     scheme: 'Pisces',
-    version: '7.1.0',
-    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
-    back2top: true,
-    back2top_sidebar: false,
+    version: '7.7.0',
+    exturl: true,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
     fancybox: false,
-    fastclick: false,
+    mediumzoom: false,
     lazyload: false,
-    tabs: true,
-    motion: {"enable":false},
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
     algolia: {
-      applicationID: '',
+      appID: '',
       apiKey: '',
       indexName: '',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":false}
   };
 </script>
 
-
-  
-
-
-
-
-  <meta name="description" content="为了能在iOS设备上连接互联网，并且能玩到一些原版游戏，需要把Apple ID的地区修改成中国以外的地方。最彻底的操作方法就是移民，然而，广大普通群众并不具备这样的条件，所以只好放弃，或者设法进行麻烦的操作。">
+  <meta name="description" content="为了能在iOS设备上连接互联网，为了能在iOS设备上玩原生游戏而非国内黑心代理版本，为了能在iOS设备上安装已下架应用，我们需要把Apple ID的地区修改成中国以外的地方。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="日区Apple ID和美区Apple ID">
+<meta property="og:title" content="日区、美区和港区Apple ID">
 <meta property="og:url" content="https://plusnan.me/2019/06/01/apple-id/index.html">
 <meta property="og:site_name" content="infNaN">
-<meta property="og:description" content="为了能在iOS设备上连接互联网，并且能玩到一些原版游戏，需要把Apple ID的地区修改成中国以外的地方。最彻底的操作方法就是移民，然而，广大普通群众并不具备这样的条件，所以只好放弃，或者设法进行麻烦的操作。">
+<meta property="og:description" content="为了能在iOS设备上连接互联网，为了能在iOS设备上玩原生游戏而非国内黑心代理版本，为了能在iOS设备上安装已下架应用，我们需要把Apple ID的地区修改成中国以外的地方。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-03T16:13:04.670Z">
+<meta property="og:updated_time" content="2020-01-15T05:22:54.336Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="日区Apple ID和美区Apple ID">
-<meta name="twitter:description" content="为了能在iOS设备上连接互联网，并且能玩到一些原版游戏，需要把Apple ID的地区修改成中国以外的地方。最彻底的操作方法就是移民，然而，广大普通群众并不具备这样的条件，所以只好放弃，或者设法进行麻烦的操作。">
+<meta name="twitter:title" content="日区、美区和港区Apple ID">
+<meta name="twitter:description" content="为了能在iOS设备上连接互联网，为了能在iOS设备上玩原生游戏而非国内黑心代理版本，为了能在iOS设备上安装已下架应用，我们需要把Apple ID的地区修改成中国以外的地方。">
+
+<link rel="canonical" href="https://plusnan.me/2019/06/01/apple-id/">
 
 
-
-  <link rel="alternate" href="/rss.xml" title="infNaN" type="application/atom+xml">
-
-
-
-  
-  
-  <link rel="canonical" href="https://plusnan.me/2019/06/01/apple-id/">
-
-
-
-<script id="page.configurations">
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
+    isHome: false,
+    isPost: true
   };
 </script>
 
-  <title>日区Apple ID和美区Apple ID | infNaN</title>
+  <title>日区、美区和港区Apple ID | infNaN</title>
   
-
-
-
-
-
-
 
 
 
@@ -140,7 +80,6 @@
 
   <noscript>
   <style>
-  .use-motion .motion-element,
   .use-motion .brand,
   .use-motion .menu-item,
   .sidebar-inner,
@@ -149,9 +88,8 @@
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-title { opacity: initial; }
+  .use-motion .collection-header { opacity: initial; }
 
-  .use-motion .logo,
   .use-motion .site-title,
   .use-motion .site-subtitle {
     opacity: initial;
@@ -165,266 +103,130 @@
 
 </head>
 
-<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
   <div class="site-meta">
-    
 
-    <div class="custom-logo-site-title">
+    <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">infNaN</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-    
-    
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="切换导航栏">
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
   </div>
 </div>
-
 
 
 <nav class="site-nav">
   
-    <ul id="menu" class="menu">
-      
-        
-        
-        
-          
-          <li class="menu-item menu-item-home">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
 
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-tags">
+        <li class="menu-item menu-item-tags">
 
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
 
   </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-categories">
+        <li class="menu-item menu-item-categories">
 
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
 
   </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-archives">
+        <li class="menu-item menu-item-archives">
 
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
 
   </li>
+  </ul>
 
-      
-      
-    </ul>
-  
-
-  
-
-  
 </nav>
-
-
-
-  
-
-
-
 </div>
     </header>
 
     
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
 
 
-    <main id="main" class="main">
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
           
+
+          <div class="content">
             
 
-          
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
+  <div class="posts-expand">
+      
   
   
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://plusnan.me/2019/06/01/apple-id/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/myavatar.jpg">
       <meta itemprop="name" content="infNaN">
       <meta itemprop="description" content="适量女装，有益身心">
-      <meta itemprop="image" content="/img/myavatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="infNaN">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">日区Apple ID和美区Apple ID
-
-              
-            
-          </h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+          日区、美区和港区Apple ID
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
+              <span class="post-meta-item-text">发表于</span>
 
               <time title="创建时间：2019-06-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-06-01T00:00:00+08:00">2019-06-01</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
+            </span>
+              <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-06-04 00:13:04" itemprop="dateModified" datetime="2019-06-04T00:13:04+08:00">2019-06-04</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-15 13:22:54" itemprop="dateModified" datetime="2020-01-15T13:22:54+08:00">2020-01-15</time>
+              </span>
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/闲谈/" itemprop="url" rel="index"><span itemprop="name">闲谈</span></a></span>
-
-                
-                
-              
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/闲谈/" itemprop="url" rel="index">
+                    <span itemprop="name">闲谈</span>
+                  </a>
+                </span>
             </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
 
           
 
         </div>
       </header>
-    
 
     
     
@@ -432,442 +234,227 @@
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        <p>为了能在iOS设备上连接互联网，并且能玩到一些原版游戏，需要把Apple ID的地区修改成中国以外的地方。最彻底的操作方法就是移民，然而，广大普通群众并不具备这样的条件，所以只好放弃，或者设法进行麻烦的操作。<br><a id="more"></a></p>
-<h2 id="全部的前提"><a href="#全部的前提" class="headerlink" title="全部的前提"></a>全部的前提</h2><p>如果你翻不了墙或者办不了信用卡，那么后面不用看了。</p>
-<p>如果你已经成功身处国外（就算没出国也要在港澳台），那么后面也不用看了，直接办个当地的手机号和信用卡就OK。</p>
+        <p>为了能在iOS设备上连接互联网，为了能在iOS设备上玩原生游戏而非国内黑心代理版本，为了能在iOS设备上安装已下架应用，我们需要把Apple ID的地区修改成中国以外的地方。<br><a id="more"></a></p>
+<h2 id="全部的前提"><a href="#全部的前提" class="headerlink" title="全部的前提"></a>全部的前提</h2><p>如果你翻不了墙，或者办不了信用卡，那么后面不用看了。不过你可以尝试在网上搜一下公用的Apple ID，运气好的话没准能用一阵子。</p>
+<p>如果你已经成功跑到国外（跑到港澳台也行），而且能办当地的手机号和信用卡，那么也不用往下看了。</p>
 <h2 id="通用事项"><a href="#通用事项" class="headerlink" title="通用事项"></a>通用事项</h2><ul>
-<li>苹果未限制一个人持有多个Apple ID，也没限制一个人持有多个区的Apple ID，而且允许设备Apple ID与商店Apple ID不一致，所以可以在每个有能力注册的区里面注册一个账号，分别使用合适的账号登录设备和商店。</li>
+<li><strong>本文写于2019年6月，内容有时效性，当你阅读本文的时候操作方法可能已经失效了。</strong></li>
+<li>苹果未限制一个人持有多个Apple ID，也没限制一个人持有多个区的Apple ID，而且允许设备Apple ID与商店Apple ID不一致，所以可以在每个有能力注册的区里面注册一个账号（中国大陆、香港/台湾、日本、美国），分别使用合适的账号登录设备和商店。</li>
 <li>换区之前要全程当地代理操作，否则在支付选项中一定不会出现“无”的选项。不过有人反映全程代理之后仍然看不到“无”，这大概是个哲学问题。</li>
-<li>建议绑定真实支付方式。如果没有，可以去<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwbGUuY29tL3Nob3AvZ2lmdC1jYXJkcy9pdHVuZXMtZWxlY3Ryb25pYw==" title="https://www.apple.com/shop/gift-cards/itunes-electronic">苹果官网<i class="fa fa-external-link"></i></span>购买充值的Gift Card（by Email）。以美区为例，一次最低可充$10，但需要至少等4小时之后才能到货。</li>
+<li>绑定了真实支付方式，而且成功发生消费才算成功。</li>
+<li>建议绑定真实支付方式。如果支付方式是“无”，而且需要消费，可以去<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwbGUuY29tL3Nob3AvZ2lmdC1jYXJkcy9pdHVuZXMtZWxlY3Ryb25pYw==" title="https://www.apple.com/shop/gift-cards/itunes-electronic">苹果官网<i class="fa fa-external-link"></i></span>购买充值的Gift Card（选择by Email，然后充值码会发到邮箱）。美区一次最低可充$10，但需要等至少4小时之后才能到账。</li>
 <li>如果访问appleid.apple.com出现“502 Bad Gateway”，可以换用真实iOS设备操作。</li>
-<li>如果邮箱已经跟Apple ID扯上过关系，那么它不能用在其他地区，除非原始账号也跟着改区了。</li>
-<li>注册账号时需要填写地址，请到Google地图上找个真实地址。</li>
-<li>注册账号时需要验证手机，不过用中国手机就行。</li>
+<li>如果邮箱已经跟Apple ID扯上过关系（例如用作备用邮箱），那么它不能用在其他地区，除非原始账号也跟着改区了。</li>
+<li>注册账号时需要填写地址，可以到Google地图上随便找个真实地址。瞎编一个其实也可以。</li>
+<li>注册账号时需要验证手机，不过中国手机也没问题。</li>
 </ul>
-<h2 id="日区"><a href="#日区" class="headerlink" title="日区"></a>日区</h2><p>目前日区注册比较简单，系统未对信用卡的发卡国家进行校验，因此准备好日本代理，然后再去招商银行或者什么银行办一张JCB信用卡就能换区了。</p>
+<h2 id="日区"><a href="#日区" class="headerlink" title="日区"></a>日区</h2><p>目前（2019年6月）日区注册比较简单，系统未对JCB信用卡的发卡国家进行校验，因此准备好日本IP的全局代理，然后再去招商银行或者什么银行办一张JCB信用卡就能换区了。</p>
 <h2 id="美区"><a href="#美区" class="headerlink" title="美区"></a>美区</h2><p>（备注：我未测试过American Express信用卡。如果中国发的American Express卡也能使用，那么事情就和日区一样简单了。）</p>
-<p>美区的注册非常困难，因为系统会检查Visa/Mastercard的发卡行，中国发出来的信用卡无法关联，只能迂回一下，绑定美区PayPal，而这正是操作中的难点。</p>
-<p>注册思路比较简单：首先注册美区PayPal账号，然后将Apple ID关联到美区PayPal账号，事情就搞定了。然而，<strong>PayPal操作容不得一丁点差错</strong>，任何一点小失误都可能会导致PayPal账号永远报废，你所绑定的手机和银行卡也将无法使用，所以必须要进行充分的准备。</p>
+<p>美区的注册非常困难，因为系统会检查Visa/Mastercard的发卡行，中国发出来的信用卡无法关联，只能迂回一下，绑定美区PayPal，而这个PayPal正是操作中的难点。</p>
+<p>虽然思路比较简单：首先注册美区PayPal账号，然后将Apple ID关联到美区PayPal账号，事情就搞定了。然而，<strong>PayPal操作容不得一丁点差错</strong>，任何一点小失误都可能会导致PayPal账号永远报废，你所绑定的手机和银行卡也将无法使用，所以必须要进行充分的准备。</p>
 <h3 id="PayPal准备工作"><a href="#PayPal准备工作" class="headerlink" title="PayPal准备工作"></a>PayPal准备工作</h3><p>请确认以下东西全部准备好之后再开始注册。</p>
 <ul>
-<li>准备好<strong>全局代理</strong>。如果你无法确定自己是不是全局代理，那么有两种办法：<ul>
-<li>用百度搜索“ip”，若出现你的代理地址，说明可能是全局代理了，因为一般的翻墙规则不会让百度也跟着翻墙。</li>
-<li>不放心的话，找台美国服务器，装个桌面环境和浏览器，然后在上面进行操作。</li>
+<li>准备好<strong>美国IP全局代理</strong>。如果你无法确定自己是不是全局代理，那么有两种办法：<ul>
+<li>用百度搜索“ip”，若出现你的代理地址，说明可能是全局代理了，因为翻墙软件或配置通常不会让百度也跟着翻墙。</li>
+<li>不放心的话，买台美国服务器，装个桌面环境和浏览器，然后在上面进行操作。</li>
 </ul>
 </li>
-<li>准备好Visa/Mastercard信用卡。这个可以是中国发的卡，但最好是本人的真实卡片。使用他人银行卡非常容易出问题。</li>
-<li>准备一个<strong>可以长期持有</strong>的美国手机号。可以是实体号码，也可以是虚拟号码（例如Google Voice），但是你需要留意手机号的有效期，<strong>绝对不能让手机号被回收</strong>，否则以后可能永远都无法再登进PayPal。<ul>
+<li>准备好Visa/Mastercard信用卡。这个可以是中国发的卡，但最好是本人的真实卡片。使用他人银行卡容易出问题。</li>
+<li>准备一个<strong>可以长期持有</strong>的美国手机号。可以是实体号码，也可以是虚拟号码（例如Google Voice），但是你需要留意手机号的有效期，<strong>绝对不能让手机号被回收</strong>，否则以后就无法再登进PayPal。<ul>
 <li>注意，美国有些州（例如俄勒冈州）是免税州，在这些州消费可以免消费税。如果有条件，可以搞这些州的手机号和地址，后续消费时候能省点钱。</li>
 </ul>
 </li>
 </ul>
 <h3 id="注册步骤"><a href="#注册步骤" class="headerlink" title="注册步骤"></a>注册步骤</h3><ol>
-<li>去PayPal官网进行注册。注意PayPal分国区和美区，注册时必须确保处于美区。如果你注册完成之后能绑中国手机号，关联银联的卡，抱歉，你不幸进了国区，需要删号之后重新来过，因为国区以及其他国家账号都无法用来绑定美区Apple ID。</li>
+<li>去PayPal官网进行注册。注意PayPal分国区和美区，注册时必须确保处于美区。如果你注册完成之后能绑中国手机号，关联银联的卡，抱歉，你不幸进了国区，需要删号之后重新来过。注意国区以及其他国家账号都无法用来绑定美区Apple ID。</li>
 <li>注册时候使用和信用卡一致的姓名。地址的话，去Google地图上看着搜一个（例如大学）就行。个人建议选免税州，而且地区和手机号一致。</li>
 <li>注册完成之后需要验证身份，用事先准备的美国手机号进行验证（收验证码）即可通过。</li>
 <li>然后需要绑定信用卡。注意信用卡姓名和账号姓名一致，否则会面临人工验证银行用户的情况。</li>
-<li>手机号要保持可用。如果换好，记得把PayPal上面的账号也换掉。</li>
-<li>无论什么时候登录PayPal，你都需要保证自己处于美国IP。不小心用中国IP登美区账号可能会导致锁定。</li>
+<li>PayPal验证成功之后，等24小时再去关联Apple ID。新账号无法立刻绑定。</li>
+<li>手机号要保持可用。如果换号，记得把PayPal上面的账号也换掉。</li>
+<li>无论什么时候登录PayPal，你都需要保证自己处于美国IP。不小心用中国IP登美区账号可能会导致锁定，而且你会因为没有美国身份证件而无法申诉。</li>
 </ol>
-<p>注意，在账号完全验证成功（身份验证和银行卡验证都成功）之前，账号会处于受限状态。账号信息无法随便改，也无法删除，填错卡还无法解绑，人工申诉的话你还拿不出身份证明，所以务必慎重操作。</p>
-
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-      <div>
-        
-
-
-
-
-  
-
-
-
-<ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>本文作者： </strong>infNaN</li>
-  <li class="post-copyright-link">
-    <strong>本文链接：</strong>
-    
-    <a href="https://plusnan.me/2019/06/01/apple-id/" title="日区Apple ID和美区Apple ID">https://plusnan.me/2019/06/01/apple-id/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li>
+<p>注意，在账号完全验证成功之前，即身份验证和银行卡验证都成功之前，账号会处于受限状态。账号信息无法随便改，也无法删除，填错卡无法解绑，人工申诉的话你会因为拿不出身份证明而卡住（当然是因为你没有美国的身份证明文件），所以务必慎重操作。</p>
+<h2 id="港区"><a href="#港区" class="headerlink" title="港区"></a>港区</h2><p>港区也对信用卡发卡地区进行了校验（中国内地当然不行），不支持PayPal（港区PayPal也不行），而且在内地很难申请到属地为香港的信用卡。我们能做的事情就是全程香港代理，然后指望支付方式中出现“无”，后面需要付费时再买礼品卡充值。</p>
+<p>当然你也可以找虚拟信用卡碰碰运气，例如<span class="exturl" data-url="aHR0cHM6Ly93d3cudGFwbmdvLmNvbS5oay9jaGkvYXBwbHkuaHRtbA==" title="https://www.tapngo.com.hk/chi/apply.html">拍住赏<i class="fa fa-external-link"></i></span>。</p>
+<h2 id="其他资料"><a href="#其他资料" class="headerlink" title="其他资料"></a>其他资料</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcHBsZWNlbnNvcnNoaXAuY29tLw==" title="https://applecensorship.com/">Apple Censorship<i class="fa fa-external-link"></i></span>：列举各地区App Store里面少了哪些应用。需要说明的是，列表中很多应用“消失”实际上是因为锁区（例如日本手游）而非下架。</li>
 </ul>
 
-      </div>
+    </div>
+
     
-
-    <footer class="post-footer">
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2019/04/06/manga-downloader/" rel="next" title="用Puppeteer扒漫画">
-                <i class="fa fa-chevron-left"></i> 用Puppeteer扒漫画
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/06/02/document-management/" rel="prev" title="资料/知识分享软件或网站推荐">
-                资料/知识分享软件或网站推荐 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-  </div>
-
-
-          </div>
-          
-
-  
-
-
-
-        </div>
+    
+    
         
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
 
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-            
-              <img class="site-author-image" itemprop="image" src="/img/myavatar.jpg" alt="infNaN">
-            
-              <p class="site-author-name" itemprop="name">infNaN</p>
-              <div class="site-description motion-element" itemprop="description">适量女装，有益身心</div>
-          </div>
-
-          
-            <nav class="site-state motion-element">
-              
-                <div class="site-state-item site-state-posts">
-                
-                  <a href="/archives/">
-                
-                    <span class="site-state-item-count">23</span>
-                    <span class="site-state-item-name">日志</span>
-                  </a>
-                </div>
-              
-
-              
-                
-                
-                <div class="site-state-item site-state-categories">
-                  
-                    
-                      <a href="/categories/">
-                    
-                  
-                    
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">3</span>
-                    <span class="site-state-item-name">分类</span>
-                  </a>
-                </div>
-              
-
-              
-                
-                
-                <div class="site-state-item site-state-tags">
-                  
-                    
-                      <a href="/tags/">
-                    
-                  
-                    
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">21</span>
-                    <span class="site-state-item-name">标签</span>
-                  </a>
-                </div>
-              
-            </nav>
-          
-
-          
-            <div class="feed-link motion-element">
-              <a href="/rss.xml" rel="alternate">
-                <i class="fa fa-rss"></i>
-                RSS
-              </a>
-            </div>
-          
-
-          
-
-          
-            <div class="links-of-author motion-element">
-              
-                <span class="links-of-author-item">
-                  
-                  
-                    
-                  
-                  
-                    
-                  
-                  <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbg==" title="GitHub &rarr; https://github.com/infnan"><i class="fa fa-fw fa-github"></i>GitHub</span>
-                </span>
-              
-                <span class="links-of-author-item">
-                  
-                  
-                    
-                  
-                  
-                    
-                  
-                  <a href="mailto:me@plusnan.me" title="E-Mail &rarr; mailto:me@plusnan.me"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-                </span>
-              
-            </div>
-          
-
-          
-             <div class="cc-license motion-element" itemprop="license">
-              
-              
-                
-              
-              
-              
-              <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
-             </div>
-          
-
-          
-          
-
-          
-            
-          
-          
-
-        </div>
-      </div>
-
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#全部的前提"><span class="nav-number">1.</span> <span class="nav-text">全部的前提</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通用事项"><span class="nav-number">2.</span> <span class="nav-text">通用事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日区"><span class="nav-number">3.</span> <span class="nav-text">日区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#美区"><span class="nav-number">4.</span> <span class="nav-text">美区</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PayPal准备工作"><span class="nav-number">4.1.</span> <span class="nav-text">PayPal准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注册步骤"><span class="nav-number">4.2.</span> <span class="nav-text">注册步骤</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-  
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
-  <span class="with-love" id="animate">
-    <i class="fa fa-"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">infNaN</span>
-
-  
-
-  
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>infNaN
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://plusnan.me/2019/06/01/apple-id/" title="日区、美区和港区Apple ID">https://plusnan.me/2019/06/01/apple-id/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
 </div>
 
 
-  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动</div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Pisces</span></div>
-
-
-
+      <footer class="post-footer">
 
         
 
 
-
-
-
-
-
-
         
-      </div>
-    </footer>
-
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/05/27/dbftp/" rel="prev" title="利用Oracle数据库进行文件传输">
+      <i class="fa fa-chevron-left"></i> 利用Oracle数据库进行文件传输
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/06/02/document-management/" rel="next" title="资料/知识分享软件或网站推荐">
+      资料/知识分享软件或网站推荐 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
     
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-    
-
-    
-  </div>
-
+  </article>
+  
+  
   
 
+  </div>
+
+
+          </div>
+          
+
 <script>
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
   }
 </script>
 
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#全部的前提"><span class="nav-number">1.</span> <span class="nav-text">全部的前提</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通用事项"><span class="nav-number">2.</span> <span class="nav-text">通用事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日区"><span class="nav-number">3.</span> <span class="nav-text">日区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#美区"><span class="nav-number">4.</span> <span class="nav-text">美区</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PayPal准备工作"><span class="nav-number">4.1.</span> <span class="nav-text">PayPal准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注册步骤"><span class="nav-number">4.2.</span> <span class="nav-text">注册步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#港区"><span class="nav-number">5.</span> <span class="nav-text">港区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他资料"><span class="nav-number">6.</span> <span class="nav-text">其他资料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="infNaN" src="/img/myavatar.jpg">
+  <p class="site-author-name" itemprop="name">infNaN</p>
+  <div class="site-description" itemprop="description">适量女装，有益身心</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbg==" title="GitHub → https://github.com/infnan"><i class="fa fa-fw fa-github"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">infNaN</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span>
+  </div>
+
+        
 
 
 
@@ -876,99 +463,17 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      </div>
+    </footer>
+  </div>
 
   
-  <script src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  <script src="/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
 
 
-  
-
-
-  <script src="/js/utils.js?v=7.1.0"></script>
-
-  <script src="/js/motion.js?v=7.1.0"></script>
-
-
-
-  
-  
-
-
-  <script src="/js/affix.js?v=7.1.0"></script>
-
-  <script src="/js/schemes/pisces.js?v=7.1.0"></script>
-
-
-
-  
-  <script src="/js/scrollspy.js?v=7.1.0"></script>
-<script src="/js/post-details.js?v=7.1.0"></script>
-
-
-
-  
-
-
-  <script src="/js/next-boot.js?v=7.1.0"></script>
-
-
-  
-
-  
-  <script src="/js/exturl.js?v=7.1.0"></script>
-
-
-  
-
-  
-
-
-  
-
-
-  
-
-
-
-
-  
-
-  
-
-  
-  
-
-  
-  
-
-  
-
-
-  
-
-  
 
   
   <script>
@@ -982,17 +487,18 @@
   </script>
 
 
-  
 
-  
 
-  
 
-  
 
-  
 
-  
+
+
+
+
+
+
+
 
   
 
