@@ -121,11 +121,11 @@ image_minifier:
   pngquant: false
   progressive: false
 
-disqus_proxy:
-  shortname: christ-wu-blog
-  username: infnan
-  host: disqus-proxy.plusnan.me
-  port: 443
+#disqus_proxy:
+#  shortname: christ-wu-blog
+#  username: proxy
+#  host: disqus-proxy.plusnan.me
+#  port: 443
 
 ## Themes: https://hexo.io/themes/
 theme: hexo-theme-next
@@ -143,10 +143,20 @@ theme_config:
   scheme: Pisces
   fancybox: false
 
-  disqus:
+  #disqus:
+  #  enable: true
+  #  shortname: christ-wu-blog
+  #  count: true
+  disqusjs:
     enable: true
+    # API Endpoint of Disqus API (https://disqus.com/api/)
+    # leave api empty if you are able to connect to Disqus API
+    # otherwise you need a reverse proxy for Disqus API
+    # For example: 
+    # api: https://disqus.skk.moe/disqus/
+    api: https://disqus-proxy.plusnan.me/
+    apikey: # register new application from https://disqus.com/api/applications/
     shortname: christ-wu-blog
-    count: true
 
   menu:
     home: / || home
@@ -189,8 +199,8 @@ theme_config:
     light_bg_offset: 0
 
   custom_file_path:
-    variables: source/_data/variables.styl
-    styles: source/_data/styles.styl
+    variable: source/_data/variables.styl
+    style: source/_data/styles.styl
 
   math:
     enable: true
