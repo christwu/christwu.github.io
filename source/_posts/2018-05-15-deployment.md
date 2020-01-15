@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Web应用部署注意事项
-category: 经验
+category: 系统运维
 tags: 
 - Web
 - 项目实施

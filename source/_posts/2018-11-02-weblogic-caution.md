@@ -1,11 +1,11 @@
 ---
 layout: post
-title: Weblogic踩坑记录
-category: 经验
+title: WebLogic踩坑记录
+category: 系统运维
 tags:
-- Weblogic
+- WebLogic
 ---
-本文记录我在部署Weblogic时遇到的各种坑。其中JDK为1.6，Weblogic版本11g。
+本文记录我在部署WebLogic时遇到的各种坑。其中JDK为1.6，WebLogic版本11g。
 <!-- more -->
 <style>
 #post-content table {
@@ -19,9 +19,9 @@ code {
 
 # 开发阶段
 ## 准备测试区
-务必准备一个和生产环境架构接近的测试环境，而且开发环境、测试环境和生产环境的JDK与中间件版本应该保持一致，如果条件不够，至少测试环境和生产环境要一致。开发时用某个版本JDK和Tomcat，部署到生产环境时用另一个版本的JDK和Weblogic，这样很容易遭遇意外。
+务必准备一个和生产环境架构接近的测试环境，而且开发环境、测试环境和生产环境的JDK与中间件版本应该保持一致，如果条件不够，至少测试环境和生产环境要一致。开发时用某个版本JDK和Tomcat，部署到生产环境时用另一个版本的JDK和WebLogic，这样很容易遭遇意外。
 
-举一些例子，以下几个就属于Tomcat上面测不出来，挪到Weblogic上面就可能会暴露出来的错误，好在下表这些错误通过修改Weblogic服务器启动参数就能在一定程度上解决了：
+举一些例子，以下几个就属于Tomcat上面测不出来，挪到WebLogic上面就可能会暴露出来的错误，好在下表这些错误通过修改WebLogic服务器启动参数就能在一定程度上解决了：
 
 | 场景							| 错误信息							| 启动参数
 |------------------------------|----------------------------------|-----------------------------
@@ -30,20 +30,20 @@ code {
 | Apache CXF提供WebService服务	| javax.xml.ws.soap.SOAPFaultException: Cannot create a secure XMLInputFactory | -Dorg.apache.cxf.stax.allowInsecureParser=1
 
 ## 路径问题
-假设程序部署在服务器的`/home/weblogic/project`中，Weblogic安装在`/u01/Oracle/Middleware`下面，而且程序会动态生成文件，实际上文件会放在类似于`/u01/Oracle/Middleware/user_projects/domains/base_domain/servers/app_server1/stage/project`的对应位置中，而且激活更新时候文件会丢失，需要重新生成。
+假设程序部署在服务器的`/home/weblogic/project`中，WebLogic安装在`/u01/Oracle/Middleware`下面，而且程序会动态生成文件，实际上文件会放在类似于`/u01/Oracle/Middleware/user_projects/domains/base_domain/servers/app_server1/stage/project`的对应位置中，而且激活更新时候文件会丢失，需要重新生成。
 
-避免使用中文文件名和中文路径，以免因字符编码问题导致部署或升级失败。举个例子，如果文件里有中文名，打包并解压之后文件名变成了乱码，那么更新的时候Weblogic会提示`Error occurred while downloading files from admin server for deployment request "xxx,xxx,xxx". Underlying error is: "null"`。
+避免使用中文文件名和中文路径，以免因字符编码问题导致部署或升级失败。举个例子，如果文件里有中文名，打包并解压之后文件名变成了乱码，那么更新的时候WebLogic会提示`Error occurred while downloading files from admin server for deployment request "xxx,xxx,xxx". Underlying error is: "null"`。
 
 ## 数据源名称
-假如JNDI数据源名称为dataSource，在Tomcat中运行时，需要写成`java:comp/env/dataSource`，但是在Weblogic中运行时要把“java:comp/env/”去掉，直接写成dataSource。
+假如JNDI数据源名称为dataSource，在Tomcat中运行时，需要写成`java:comp/env/dataSource`，但是在WebLogic中运行时要把“java:comp/env/”去掉，直接写成dataSource。
 
 ## 集群Session丢失问题
 生产环境通常会架设集群，通过负载均衡进行访问。如果负载均衡未按照Cookie进行分配，或者分配策略不完全正确，那么这样的话很可能会存在串Session的问题，例如登录成功之后进的是节点1，稍微做点操作后默默地跳到了节点3，导致会话丢失，系统提示重新登录。因为平时开发不会去使用负载均衡，所以可能注意不到这个问题。
 
 这个问题可以通过以下几种方法解决：
 1. 正确地配置负载均衡，保证同一会话（JSESSIONID）的流量只分配到同一节点上；
-2. 使用Weblogic的“会话复制”功能（这个比较正统）；
-3. 通过Redis等实现会话共享（比较复杂，而且Weblogic不是没有相关功能，不推荐）。
+2. 使用WebLogic的“会话复制”功能（这个比较正统）；
+3. 通过Redis等实现会话共享（比较复杂，而且WebLogic不是没有相关功能，不推荐）。
 
 会话复制的操作方法可以用Google搜索。
 
@@ -114,6 +114,11 @@ HTTPS证书通常需要花钱，所以开发阶段多会考虑自行签发证书
 2. 若域名与证书的Common Name不一致，那么会报类似`java.security.cert.CertificateException: No name matching xxx found`的错。你可以要求目标换用合法证书或修改域名，调不了域名的话也可以在本地修改hosts。
 3. 操作系统时间要正确，不管用北京、南京、东京还是西京的时间，别和地球时间差太多。
 
+## 大文件不要打到WAR包中
+如果网站提供了软件、视频等体积较大文件的下载，尽量不要把它们打到应用的WAR包中。如果WAR包解压后总大小超过1GB，WebLogic部署会失败。
+
+建议将此类额外下载文件放到专门的文件服务器中。
+
 # 部署阶段
 ## 操作系统时间
 用date命令检查一下系统时间是否正确，不对的话要调成正确时间。
@@ -121,16 +126,23 @@ HTTPS证书通常需要花钱，所以开发阶段多会考虑自行签发证书
 ## 主机名与hosts
 给服务器设置一个固定IP和固定的主机名，然后将服务器的IP与主机名加入到`/etc/hosts`中。对于Oracle厂的产品，即便后续设置用不到主机名，设置好之后也可以避免一些不必要的麻烦。
 
-## 避免放多套Java/Weblogic
-Java也好，Weblogic也好，应用也好，要避免在同一服务器放好几份。如果换了新版本，但旧版本没改名、移走或删除，你有可能会坑了你自己：最典型的例子就是在A目录修改配置文件，怎么改都不生效，仔细看进程列表之后才发现实际启动的是B目录里的程序。
+## 避免放多套Java/WebLogic
+Java也好，WebLogic也好，应用也好，要避免在同一服务器放好几份。如果换了新版本，但旧版本没改名、移走或删除，你有可能会坑了你自己：最典型的例子就是在A目录修改配置文件，怎么改都不生效，仔细看进程列表之后才发现实际启动的是B目录里的程序。
+
+及时清理临时文件。如果处理故障时建立了一些临时配置文件，观察一段时间之后发现系统能够稳定运行，那么你需要找时间用已启用的临时配置文件把未启用的正式配置文件换掉，以免造成误导。
 
 ## 防火墙配置
 默认情况下，管理控制台的端口是7001，应用是7003，节点管理器是5556，初次部署时需要注意让防火墙放行这三个端口。
 
-为了安全，需要仔细控制防火墙的放行范围，不要让7001和5556暴露到互联网上面。另外不要把应用部署到AdminServer上面，否则封锁7001端口之后应用就无法访问了。
+为了安全，需要仔细控制防火墙的放行范围，不要让7001和5556暴露到互联网上面。
 
-## 建议进行网络测试
-在开始部署之前，建议在应用服务器上测试一下能否访问数据库等资源。如果网络不通，那么改Weblogic设置时可能会无响应，卡了半天之后才蹦出一句`The Network adapter could not establish the connection`，白白耽误时间。
+另外不要把应用部署到AdminServer上面，否则封锁7001端口之后应用就无法访问了。
+
+## 不要给控制台配置成HTTPS
+虽然HTTPS很安全，然而给控制台配置成HTTPS容易产生问题，例如更新部署时节点无响应。建议采用设置强密码与配置防火墙的方式来加固控制台。
+
+## 进行网络策略测试
+在开始部署之前，建议在应用服务器上测试一下能否访问数据库等资源。如果网络不通，那么改WebLogic设置时可能会无响应，卡了半天之后才蹦出一句`The Network adapter could not establish the connection`，白白耽误时间。
 
 如果系统没装telnet，可以简单地测试一下能不能ping通，或者通过以下Java程序来测一下端口通不通（有些机房可能会出现IP能ping通但是端口被拦截的情况）：
 
@@ -190,7 +202,7 @@ java IpTest 10.15.2.9 1521
 涉及HTTPS时建议再对HTTPS网站做个访问测试，具体程序见前文。
 
 ## 修改java.security
-Java 6存在一个关于随机数的bug，如果不Hack，在Linux系统下面Weblogic建域和启动时需要等待很长时间，因此建议装完Java之后立刻去修改java.security。
+Java 6存在一个关于随机数的bug，如果不Hack，在Linux系统下面WebLogic建域和启动时需要等待很长时间，因此建议装完Java之后立刻去修改java.security。
 
 假设$JAVA_HOME为`/opt/jdk1.6.0_145`，也就是说JDK装在了这个地方，那么需要修改`$JAVA_HOME/jre/lib/security/java.security`文件，找到
 
@@ -207,7 +219,7 @@ securerandom.source=file:/dev/./urandom
 之后建域和起停之类操作就不需要再等待十多分钟了。
 
 ## 如果通过控制台启动服务器时起不来
-如果Weblogic各节点已正确设置，各服务器的防火墙已经开放5556端口，NodeManager也已经启动，但是仍然无法通过控制台启动节点，提示“不兼容的状态”，而且在startNodeManager.sh的输出中出现`javax.net.ssl.SSLKeyException: [Security:090482]BAD_CERTIFICATE alert was received from ...`：
+如果WebLogic各节点已正确设置，各服务器的防火墙已经开放5556端口，NodeManager也已经启动，但是仍然无法通过控制台启动节点，提示“不兼容的状态”，而且在startNodeManager.sh的输出中出现`javax.net.ssl.SSLKeyException: [Security:090482]BAD_CERTIFICATE alert was received from ...`：
 
 ### 方法一：重新设置证书
 在集群的每台服务器上面设置一下证书（如果执行第一行命令就报错的话，请把$WL_HOME换成实际安装目录）：
@@ -235,12 +247,14 @@ SecureListener = false
 然后重新启动NodeManager。另外在控制台上建立“计算机”时，类型就不再是“SSL”，而是“普通”（Plain）。
 
 ## 组建集群
-我们并不需要每一台机器都执行一遍建域之类的操作。只要各服务器JDK路径和Weblogic安装路径一致，那么在一台机器上面把Weblogic的各种参数都配置好，然后将user_projects目录打包（或者干脆把整个Middleware打包），复制到其他各服务器上面解压就差不多了。
+我们并不需要每一台机器都执行一遍建域之类的操作，而且在每一台机器上都手动建域，即使域的名字相同也不一定能正确连接。
 
-如果NodeManager使用SSL，解压完成后，前文提到的“NodeManager证书”还是要在每台服务器上操作一遍。
+更好的做法是：保证各服务器JDK路径和WebLogic安装路径一致，在主节点上面把WebLogic的各种参数都配置好，然后将user_projects目录打包（或者干脆把整个Middleware打包），复制到其他各服务器的相应位置。
 
-### （待研究）服务器监听地址不要贸然写成0.0.0.0
-虽然0.0.0.0也是一个有效的监听地址，但是在组建集群时不要贸然地写成0.0.0.0，否则AdminServer与各节点之间的通信会出现问题，例如服务器状态变成UNKNOWN，或者部署应用无响应。具体原因和解决方法待研究。
+由于NodeManager配置文件不在user_projects目录中，因此前文提到的“NodeManager证书”需要在每台服务器上都配置一遍。
+
+### 服务器监听地址不要写成0.0.0.0
+服务器监听地址使用固定IP，不要填0.0.0.0。虽然0.0.0.0也是一个有效的监听地址，但是如此配置之后，AdminServer与各节点之间的通信会出现问题，例如服务器状态变成UNKNOWN，或者部署应用无响应。
 
 ## 扩大内存
 默认的Xmx和MaxPermSize比较小，建议在setDomainEnv.sh中把这两个参数适当调大一些。
@@ -318,29 +332,34 @@ session required /lib64/security/pam_limits.so
 
 另外如果线程数改大了，内存也应当适当调大，因为每个线程都会占一些内存空间。
 
+## 启动报错“Assertion `ia_addressID' failed”
+如果提示`java: Net.c:229: Java_com_bea_wcp_sctp_Net_initIDs: Assertion \`ia_addressID' failed.`，可尝试删除`/u01/Oracle/Middleware/wlserver_10.3/sip/server/native/linux/x86_64/libsctpwrapper.so`文件。
+
 # 运维阶段
 
 ## 应用升级
 改完文件之后要在控制台的“部署”里面进行更新，否则内容不会生效。改静态文件也是。
 
-每次更新的时候，JVM会把Class信息保存到内存的永久保留区域中，而旧的内容不会释放。如果Weblogic启动参数中的-XX:MaxPermSize比较小，那么更新几次可能就会卡死挂掉，而且应用日志会显示`java.lang.OutOfMemoryError: PermGen space`。在这种情况下，把Weblogic里面的服务器停掉然后再启动一次就好了。
+每次更新的时候，JVM会把Class信息保存到内存的永久保留区域中，而旧的内容不会释放。如果WebLogic启动参数中的-XX:MaxPermSize比较小，那么更新几次可能就会卡死挂掉，而且应用日志会显示`java.lang.OutOfMemoryError: PermGen space`。在这种情况下，把WebLogic里面的服务器停掉然后再启动一次就好了。
 
 建议每升两三次级就彻底重启一次受管节点，避免出现用一阵子之后莫名其妙死掉的问题。
 
-在开始更新到更新结束，应用会出现短暂的中断，因此要注意选择合适的时间进行操作。另外在业务繁忙时进行更新，不但会影响用户，而且容易因为Weblogic繁忙而导致更新无响应或失败。
+在开始更新到更新结束，应用会出现短暂的中断，因此要注意选择合适的时间进行操作。另外在业务繁忙时进行更新，不但会影响用户，而且容易因为WebLogic繁忙而导致更新无响应或失败。
 
 建议编写一份升级检查表，将准备工作、实施工作和收尾工作全部列入，以免因漏项导致升级出现问题。
 
-如果更新时遭遇`Error occurred while downloading files from admin server for deployment request "xxx,xxx,xxx". Underlying error is: "null"`，那么需要去检查AdminServer.log的日志（例如`/u01/Oracle/Middleware/user_projects/base_domain/servers/AdminServer/logs/AdminServer.log`）。我碰到过两种会出现这种错误的情况，一种是文件名乱码，另一种是文件权限不正确（例如服务以weblogic用户运行，但是文件所有者是root，weblogic访问不了）。假如权限不正确，可以`chown -R weblogic:weblogic 存放程序的目录`。
+如果更新时遭遇`Error occurred while downloading files from admin server for deployment request "xxx,xxx,xxx". Underlying error is: "null"`，那么需要去检查AdminServer.log的日志（例如`/u01/Oracle/Middleware/user_projects/base_domain/servers/AdminServer/logs/AdminServer.log`）。我碰到过两种会出现这种错误的情况，一种是文件名乱码，另一种是文件权限不正确（例如服务以weblogic用户运行，但是文件所有者是root，WebLogic访问不了）。假如权限不正确，可以`chown -R weblogic:weblogic 存放程序的目录`。
 
-我们部分应用服务器安装了防篡改软件，如果升级之前忘记关闭防护功能，在控制台上激活时会报错，提示无法“remove staged files”。
+我们部分应用服务器安装了WAF并配置了防篡改，如果升级之前忘记关闭防护功能，在控制台上激活时会报错，提示无法“remove staged files”。
 
 {% note info %}
 建议在系统中加入可配置参数的系统公告功能，这样在升级或者维护之前可以通知用户，使用户及时做好准备。
 {% endnote %}
 
 ## 重启服务器
-如果只是重启应用节点，操作就比较简单，直接在控制台上操作即可。不过，在Weblogic控制台重启服务的时候不要点完“启动”就不管了，一定要等到状态显示为“RUNNING”之后再收工。如果变成“ADMIN”，那么可能是有报错，需要去应用服务器日志检查一下。若确认不耽误事（例如`java.lang.NoClassDefFoundError: com/ctc/wstx/stax/WstxInputFactory`）那么在控制台点一下“恢复”就好了。
+如果只是重启应用节点，操作就比较简单，直接在控制台上操作即可。不过，在WebLogic控制台重启服务的时候不要点完“启动”就不管了，一定要等到状态显示为“RUNNING”之后再收工。如果变成“ADMIN”，那么可能是有报错，需要去应用服务器日志检查一下。若确认不耽误事（例如`java.lang.NoClassDefFoundError: com/ctc/wstx/stax/WstxInputFactory`）那么在控制台点一下“恢复”就好了。
+
+有时观察服务器状态，可以看到状态是“RUNNING”，然而健康状况没有内容，这说明节点可能死了，你可以试一下重启复活。
 
 如果不慎关掉AdminServer，或者打算整个重启，那么操作会比较麻烦，大体上要按以下思路操作：
 1. 在管理节点上启动AdminServer（startWebLogic.sh）。
@@ -349,14 +368,29 @@ session required /lib64/security/pam_limits.so
 4. 启动完成后确认“部署”里面各应用是否启动。
 
 ## 打补丁
+WebLogic打补丁速度比较慢，在打补丁过程中你需要干等，所以要多留一些操作时间。
+
 安装补丁之前，需要检查bsu.sh文件（例如`/u01/Oracle/Middleware/utils/bsu/bsu.sh`），将其中的最大内存Xmx改大些，例如-Xmx2048m。因为打补丁实在太慢，等了半天出来的却是java.lang.OutOfMemoryError的话实在太憋屈。
 
-打补丁对业务影响不大，可以随时操作，但是打完之后需要重启Weblogic才能生效。
+打补丁对业务影响不大，可以随时操作，但是打完之后需要彻底重启WebLogic才能生效。
 
 ## 搬家
-尽量不要搬家，因为Weblogic安装和建域之后会产生很多已经写好了路径的配置文件。即使将它们全部改成新路径，Middleware目录中还有个registry.dat，此文件记录了Weblogic的安装情况，而且已经加密，如果贸然搬家会在升级等方面遇到麻烦。实在需要的话还是建立软链接比较好。
+尽量不要搬家，因为WebLogic安装和建域之后会产生很多已经写好了路径的配置文件。Middleware目录中有个registry.dat，此文件记录了WebLogic的安装情况，而且已经加密，如果贸然搬家会在升级等方面遇到麻烦。实在需要的话还是建立软链接比较好。
+
+## 改密码
+### WebLogic控制台密码
+修改密码之前先观察系统有没有相关监控或管理软件，例如Oracle Enterprise Manager。假如WebLogic控制台密码改了，依赖控制台的监控软件的密码没改，那么你可能会把自己锁在外面。
+
+找个方便重启的时间来修改WebLogic控制台密码。在控制台修改完成之后，你需要试探性地重启各应用服务器节点，确保各节点不会因密码错误而无法启动。
+
+假如应用节点真的因控制台密码错误而无法启动，你需要在WebLogic“服务器”页面中找到该节点，进入详细设置，在页面上方找到“服务器启动”页面，并在里面（最下方）输入正确的用户密码。
+
+### 数据库/数据源密码
+修改数据库密码会造成应用短暂停摆。你需要找个方便关停应用系统的时间来进行操作，或者提前通知系统维护。
+
+在正式修改数据库密码之前，你需要确认数据库账户锁定阈值，或者能够以sysdba身份（Oracle数据库）操作。无论是先改WebLogic数据源密码，还是先修改数据库密码，只要WebLogic连接池尝试以旧密码建立连接，数据库账号就有可能会立刻锁定。
 
 ## 监控
 建议在服务器上面安装专门的监控软件。像我们项目组那种服务器由用户管理，应用由项目组自行运维的情况，更要有自己的监控程序，这样在出现问题时也好及时定位，以免一塌糊涂。
 
-目前我们项目组自己写了一个监控脚本，在繁忙时期每隔10分钟、空闲时期每隔半小时把Weblogic控制台的一些常用指标记录到日志文件中（通过cron控制），[代码见此](https://github.com/infnan/scripts/blob/master/部署和运维/weblogic-monitor.sh)。
+目前我们项目组自己写了一个监控脚本，在繁忙时期每隔10分钟、空闲时期每隔半小时把WebLogic控制台的一些常用指标记录到日志文件中（通过cron控制），[代码见此](https://github.com/infnan/scripts/blob/master/部署和运维/WebLogic-monitor.sh)。

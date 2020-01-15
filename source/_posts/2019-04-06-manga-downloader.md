@@ -6,7 +6,7 @@ tags:
   - 爬虫
   - Puppeteer
 ---
-[Puppeteer](https://github.com/GoogleChrome/puppeteer)是Google搞的爬虫框架，其特点就是我们可以直接通过程序来操作Google浏览器（服务器没装图形界面也没关系，这个Google浏览器不需要图形界面）。通过这个框架，我们就可以像正常使用浏览器一样爬网站，并且像进控制台那样操作页面获取信息，甚至还可以截图。只要网站不使用验证码或reCAPTCHA之类的大杀器，而且运营者不希望正常使用浏览器的用户也无法访问页面，那么我们就可以随便扒网站了。例如本文就在从[https://tw.manhuagui.com](tw.manhuagui.com)网站扒漫画。
+[Puppeteer](https://github.com/GoogleChrome/puppeteer)是Google搞的爬虫框架，其特点就是我们可以直接通过程序来操作Google浏览器（服务器没装图形界面也没关系，这个Google浏览器不需要图形界面）。通过这个框架，我们就可以像正常使用浏览器一样爬网站，并且像进控制台那样操作页面获取信息，甚至还可以截图。只要网站不使用验证码或reCAPTCHA之类的大杀器，而且运营者不希望正常使用浏览器的用户也无法访问页面，那么我们就可以随便扒网站了。例如本文从[https://tw.manhuagui.com](tw.manhuagui.com)网站扒漫画。
 <!-- more -->
 
 下面直接贴代码：

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 在2018版MacBook Pro安装Windows 10，以及分区扩容
+title: 在2018版MacBook Pro手工安装Windows 10，以及分区扩容
 category: 教程
 tags: 
 - Mac
@@ -74,3 +74,6 @@ tags:
     extend
     ```
 11. 检查两个系统能否正常启动。如果没问题就可以删掉苹果系统里的/backup.img了。
+
+# 后续（2019年）
+实际上大多数ISO是可以借助Boot Camp安装的，可以去[MSDN I Tell You](https://msdn.itellyou.cn/)多试几个版本，总有一个能用的。

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 升级发版检查表
-category: 经验
+category: 系统运维
 tags:
 - Web
 - 项目实施
