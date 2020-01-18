@@ -11,8 +11,8 @@ tags:
 # 本系列内容
 * **为什么进行切换**
 * [切换的基本操作](/2018/12/13/switch-to-idea-1/)
-* [古典Web项目在IDEA的Project Structure](/2019/01/27/switch-to-idea-2)
-* 古典Web项目转为Maven项目
+* [传统Web项目在IDEA的Project Structure](/2019/01/27/switch-to-idea-2)
+* [传统Web项目转为Gradle项目](/2019/08/03/switch-to-idea-2.5/)
 * Maven和Gradle项目在IDEA的Project Structure（待撰）
 
 # 切换到IDEA的理由
@@ -34,3 +34,6 @@ tags:
 
 # 差异
 Eclipse和IDEA的界面与操作方法有些区别。概念上的重大差异主要是“Project Structure”，即项目文件结构的管理，不过如果有人把项目配置好并提交版本控制之后，其他成员反倒不太需要关注这些东西，因此我会另外写一篇文章进行叙述。
+
+# 法律问题
+IDEA分免费的社区版（Community Edition）和收费的商业版（Ultimate Edition），前者不支持Web开发，只能选用商业版。商业版需要激活，大家往往会用注册码、注册机来进行破解。这当然是违法的，而且比起个人，公司更容易陷入诉讼（告赢了就是一大笔钱），因此有条件的话务必买正版。

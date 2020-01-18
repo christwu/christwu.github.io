@@ -1,11 +1,11 @@
 ---
 layout: post
-title: 从Eclipse切换到IDEA（二）：古典Web项目的Project Structure
+title: 从Eclipse切换到IDEA（二）：传统Web项目的Project Structure
 category: 教程
 tags: 
 - IDEA
 ---
-本文主要介绍如何将古典Web项目（不使用Maven、Gradle等构建工具，jar包等全部手工配置）从Eclipse转换到IDEA。主要内容为古典项目的Project Structure配置。
+本文主要介绍如何将传统Web项目（不使用Maven、Gradle等构建工具，jar包等全部手工配置）从Eclipse转换到IDEA。主要内容为传统项目的Project Structure配置。
 <!-- more -->
 
 # 关于IDEA中的Project Structure和Run Configuration
@@ -85,7 +85,7 @@ IDEA将目录分成五类（Mark as后面五个）。其中Sources表示需要�
 稍微提一下上图Eclipse里面的config，根据前面提到的文件结构，它并不是Java代码，在Eclipse里标记成Source Folder纯粹是为了便于查找。
 
 {% note info %}
-对于古典Web项目，Resources怎么标记都无所谓了，后面Artifacts配置正确就行。
+对于传统Web项目，Resources怎么标记都无所谓了，后面Artifacts配置正确就行。
 {% endnote %}
 
 ### Dependencies
@@ -262,5 +262,6 @@ Project Structure配置好之后，就可以准备启动。点击IDEA界面右�
 # 本系列目录
 * [为什么进行切换](/2018/12/12/switch-to-idea-0/)
 * [切换的基本操作](/2018/12/13/switch-to-idea-1/)
-* **古典Web项目在IDEA的Project Structure**
+* **传统Web项目在IDEA的Project Structure**
+* [传统Web项目转为Gradle项目](/2019/08/03/switch-to-idea-2.5/)
 * Maven和Gradle项目在IDEA的Project Structure（待撰）

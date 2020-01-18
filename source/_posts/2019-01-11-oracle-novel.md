@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS oggforward.tbl_eromanga (
 这一点比较关键，你需要先将小说下载下来，弄成TXT格式，然后编写一个导入程序，将其导入到数据库中。导入的时候需要注意字段长度和断行。建议在程序里面适当断行，不要一段话一口气写到底，这样查询的时候看起来方便。
 
 {% note warning %}
-注意文件字符编码！虽然实际上小说TXT用GB2312编码的情况更多，但是本文假设使用的是UTF-8。
+注意文件字符编码！下面程序默认文件采用GB2312/GBK编码。如果为UTF-8，需在命令行中手动传入编码。
 {% endnote %}
 
 ## Java程序
@@ -129,13 +129,17 @@ public class ImportUtils {
 
         // 获取参数
         if (args.length < 3) {
-            System.err.println("java ImportUtils <BOOK> <CHAPTER> <FILENAME>");
+            System.err.println("java ImportUtils <BOOK> <CHAPTER> <FILENAME> [UTF-8]");
             return;
         }
 
         String book = args[0];
         String chapter = args[1];
         String fileName = args[2];
+        String encoding = "GBK";
+        if (args.length > 3) {
+            encoding = args[3];
+        }
 
         try (Connection conn = DriverManager.getConnection(DB_CONNSTR, DB_USERNAME, DB_PASSWORD)) {
             // 可选 - 检查是否重复导入
@@ -158,7 +162,7 @@ public class ImportUtils {
             }
 
             conn.setAutoCommit(false);
-            try (Scanner scanner = new Scanner(new File(fileName));
+            try (Scanner scanner = new Scanner(new File(fileName), encoding);
                  PreparedStatement stmt = conn.prepareStatement(INSERT_SQL)) {
                 boolean isLastEmptyLine = false;
                 while (scanner.hasNextLine()) {
@@ -235,13 +239,17 @@ public class ImportUtils {
 
         // 获取参数
         if (args.length < 3) {
-            System.err.println("java ImportUtils <BOOK> <CHAPTER> <FILENAME>");
+            System.err.println("java ImportUtils <BOOK> <CHAPTER> <FILENAME> [UTF-8]");
             return;
         }
 
         String book = args[0];
         String chapter = args[1];
         String fileName = args[2];
+        String encoding = "GBK";
+        if (args.length > 3) {
+            encoding = args[3];
+        }
 
         try (Connection conn = DriverManager.getConnection(DB_CONNSTR, DB_USERNAME, DB_PASSWORD)) {
             // 可选 - 检查是否重复导入
@@ -264,7 +272,7 @@ public class ImportUtils {
             }
 
             conn.setAutoCommit(false);
-            try (Scanner scanner = new Scanner(new File(fileName));
+            try (Scanner scanner = new Scanner(new File(fileName), encoding);
                  PreparedStatement stmt = conn.prepareStatement(INSERT_SQL)) {
                 boolean isLastEmptyLine = false;
                 while (scanner.hasNextLine()) {
@@ -321,6 +329,9 @@ export CLASSPATH=.:mysql-connector-java-8.0.13.jar
 
 for i in `seq 1 5`; do
     java ImportUtils 5 1 5_$i.txt
+
+    # UTF-8编码则需要
+    # java ImportUtils 5 1 5_$i.txt UTF-8
 done
 ```
 

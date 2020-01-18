@@ -41,6 +41,10 @@ Phabricator的不足之处：
 建议在Phabricator的“Project”应用中建立“Project”，然后将项目成员设置为“Member”，以方便组织成员并控制内容可见性。添加代码库以及新建任务的时候有个字段叫做“Tags”，这个“Tags”便是“Project”。
 {% endnote %}
 
+{% note warning %}
+Phabricator安装非常复杂，建议使用现成的Docker容器，例如[bitnami版本](https://github.com/bitnami/bitnami-docker-phabricator)。
+{% endnote %}
+
 ## 导入代码库
 满足基本条件之后，需要在Phabricator中导入代码库才能开始进行审查。进入“Diffusion”应用，点击右上角“Create Repository”，在出现的画面中根据实际情况选择Git或SVN。新建完成后界面如下：
 
