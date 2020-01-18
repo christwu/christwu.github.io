@@ -21,17 +21,17 @@
   var CONFIG = {
     hostname: new URL('https://plusnan.me').hostname,
     root: '/',
-    scheme: 'Pisces',
+    scheme: 'Muse',
     version: '7.7.0',
     exturl: true,
-    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
-    copycode: {"enable":false,"show_result":false,"style":null},
+    sidebar: {"position":"right","display":"always"},
+    copycode: {"enable":true,"show_result":true},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
     fancybox: false,
     mediumzoom: false,
     lazyload: false,
-    pangu: false,
+    pangu: true,
     comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
     algolia: {
       appID: '',
@@ -54,7 +54,7 @@
 <meta property="og:site_name" content="infNaN">
 <meta property="og:description" content="本文以被各大学校学生做滥了的“学生信息管理系统”为例，讲述信息展示列表开发中的一些问题。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-01-18T17:12:10.810Z">
+<meta property="og:updated_time" content="2020-01-18T17:54:16.926Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="并不简单的基础开发工作（二）：信息展示列表">
 <meta name="twitter:description" content="本文以被各大学校学生做滥了的“学生信息管理系统”为例，讲述信息展示列表开发中的一些问题。">
@@ -185,7 +185,7 @@
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/myavatar.jpg">
       <meta itemprop="name" content="infNaN">
-      <meta itemprop="description" content="适量女装，有益身心">
+      <meta itemprop="description" content="多穿女装少踩坑">
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
@@ -210,7 +210,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-19 01:12:10" itemprop="dateModified" datetime="2020-01-19T01:12:10+08:00">2020-01-19</time>
+                <time title="修改时间：2020-01-19 01:54:16" itemprop="dateModified" datetime="2020-01-19T01:54:16+08:00">2020-01-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -225,6 +225,20 @@
             </span>
 
           
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2019/02/09/list-page/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/02/09/list-page/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -265,8 +279,8 @@
 <tr>
 <td>1</td>
 <td>1234…78</td>
-<td>张三</td>
-<td>男</td>
+<td>一花</td>
+<td>女</td>
 <td>汉族</td>
 <td>北京市</td>
 <td>西城区</td>
@@ -283,8 +297,8 @@
 <tr>
 <td>2</td>
 <td>1234…79</td>
-<td>李四</td>
-<td>男</td>
+<td>二乃</td>
+<td>女</td>
 <td>汉族</td>
 <td>上海市</td>
 <td>黄浦区</td>
@@ -301,7 +315,7 @@
 <tr>
 <td>3</td>
 <td>1234…80</td>
-<td>王五</td>
+<td>三玖</td>
 <td>女</td>
 <td>汉族</td>
 <td>广东省</td>
@@ -313,6 +327,42 @@
 <td>201901010103</td>
 <td>13012345680</td>
 <td>创业</td>
+<td>有效</td>
+<td><a class="btn" href="#"><i class="fa fa-check-square-o fa-fw"></i>查看</a> <a class="btn" href="#"><i class="fa fa-edit fa-fw"></i>编辑</a> <a class="btn" href="#"><i class="fa fa-close fa-fw"></i>删除</a></td>
+</tr>
+<tr>
+<td>4</td>
+<td>1234…81</td>
+<td>四叶</td>
+<td>女</td>
+<td>汉族</td>
+<td>浙江省</td>
+<td>杭州市</td>
+<td>西湖区</td>
+<td>19XX年X月X日</td>
+<td>计算机与软件工程学院</td>
+<td>软件1901</td>
+<td>201901010104</td>
+<td>13012345681</td>
+<td>未确定</td>
+<td>有效</td>
+<td><a class="btn" href="#"><i class="fa fa-check-square-o fa-fw"></i>查看</a> <a class="btn" href="#"><i class="fa fa-edit fa-fw"></i>编辑</a> <a class="btn" href="#"><i class="fa fa-close fa-fw"></i>删除</a></td>
+</tr>
+<tr>
+<td>5</td>
+<td>1234…82</td>
+<td>五月</td>
+<td>女</td>
+<td>汉族</td>
+<td>江苏省</td>
+<td>南京市</td>
+<td>鼓楼区</td>
+<td>19XX年X月X日</td>
+<td>计算机与软件工程学院</td>
+<td>软件1901</td>
+<td>201901010105</td>
+<td>13012345682</td>
+<td>未确定</td>
 <td>有效</td>
 <td><a class="btn" href="#"><i class="fa fa-check-square-o fa-fw"></i>查看</a> <a class="btn" href="#"><i class="fa fa-edit fa-fw"></i>编辑</a> <a class="btn" href="#"><i class="fa fa-close fa-fw"></i>删除</a></td>
 </tr>
@@ -411,6 +461,13 @@
 
           </div>
           
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -465,7 +522,7 @@
         <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="infNaN" src="/img/myavatar.jpg">
   <p class="site-author-name" itemprop="name">infNaN</p>
-  <div class="site-description" itemprop="description">适量女装，有益身心</div>
+  <div class="site-description" itemprop="description">多穿女装少踩坑</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
@@ -485,7 +542,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -530,7 +587,7 @@
   <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span>
+  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly9tdXNlLnRoZW1lLW5leHQub3Jn">NexT.Muse</span>
   </div>
 
         
@@ -548,8 +605,9 @@
 
   
   <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
 <script src="/js/utils.js"></script>
-<script src="/js/schemes/pisces.js"></script>
+<script src="/js/schemes/muse.js"></script>
 <script src="/js/next-boot.js"></script>
 
 
@@ -582,6 +640,37 @@
   
 
   
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://christ-wu-blog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "https://plusnan.me/2019/02/09/list-page/",
+            identifier: "2019/02/09/list-page/",
+            title: "并不简单的基础开发工作（二）：信息展示列表"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://christ-wu-blog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
 
 </body>
 </html>

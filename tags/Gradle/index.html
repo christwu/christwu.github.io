@@ -21,17 +21,17 @@
   var CONFIG = {
     hostname: new URL('https://plusnan.me').hostname,
     root: '/',
-    scheme: 'Pisces',
+    scheme: 'Muse',
     version: '7.7.0',
     exturl: true,
-    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
-    copycode: {"enable":false,"show_result":false,"style":null},
+    sidebar: {"position":"right","display":"always"},
+    copycode: {"enable":true,"show_result":true},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
     fancybox: false,
     mediumzoom: false,
     lazyload: false,
-    pangu: false,
+    pangu: true,
     comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
     algolia: {
       appID: '',
@@ -46,16 +46,16 @@
   };
 </script>
 
-  <meta name="description" content="适量女装，有益身心">
+  <meta name="description" content="多穿女装少踩坑">
 <meta property="og:type" content="website">
 <meta property="og:title" content="infNaN">
 <meta property="og:url" content="https://plusnan.me/tags/Gradle/index.html">
 <meta property="og:site_name" content="infNaN">
-<meta property="og:description" content="适量女装，有益身心">
+<meta property="og:description" content="多穿女装少踩坑">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="infNaN">
-<meta name="twitter:description" content="适量女装，有益身心">
+<meta name="twitter:description" content="多穿女装少踩坑">
 
 <link rel="canonical" href="https://plusnan.me/tags/Gradle/">
 
@@ -274,7 +274,7 @@
         <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="infNaN" src="/img/myavatar.jpg">
   <p class="site-author-name" itemprop="name">infNaN</p>
-  <div class="site-description" itemprop="description">适量女装，有益身心</div>
+  <div class="site-description" itemprop="description">多穿女装少踩坑</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
@@ -294,7 +294,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -339,7 +339,7 @@
   <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span>
+  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly9tdXNlLnRoZW1lLW5leHQub3Jn">NexT.Muse</span>
   </div>
 
         
@@ -357,8 +357,9 @@
 
   
   <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
 <script src="/js/utils.js"></script>
-<script src="/js/schemes/pisces.js"></script>
+<script src="/js/schemes/muse.js"></script>
 <script src="/js/next-boot.js"></script>
 
 
@@ -391,6 +392,17 @@
   
 
   
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://christ-wu-blog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
 
 </body>
 </html>
