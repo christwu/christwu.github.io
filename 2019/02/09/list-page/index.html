@@ -49,14 +49,14 @@
   <meta name="description" content="本文以被各大学校学生做滥了的“学生信息管理系统”为例，讲述信息展示列表开发中的一些问题。">
 <meta name="keywords" content="功能设计">
 <meta property="og:type" content="article">
-<meta property="og:title" content="并不简单的简单开发工作（二）：信息展示列表">
+<meta property="og:title" content="并不简单的基础开发工作（二）：信息展示列表">
 <meta property="og:url" content="https://plusnan.me/2019/02/09/list-page/index.html">
 <meta property="og:site_name" content="infNaN">
 <meta property="og:description" content="本文以被各大学校学生做滥了的“学生信息管理系统”为例，讲述信息展示列表开发中的一些问题。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-01-14T18:21:10.463Z">
+<meta property="og:updated_time" content="2020-01-18T17:12:10.810Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="并不简单的简单开发工作（二）：信息展示列表">
+<meta name="twitter:title" content="并不简单的基础开发工作（二）：信息展示列表">
 <meta name="twitter:description" content="本文以被各大学校学生做滥了的“学生信息管理系统”为例，讲述信息展示列表开发中的一些问题。">
 
 <link rel="canonical" href="https://plusnan.me/2019/02/09/list-page/">
@@ -71,7 +71,7 @@
   };
 </script>
 
-  <title>并不简单的简单开发工作（二）：信息展示列表 | infNaN</title>
+  <title>并不简单的基础开发工作（二）：信息展示列表 | infNaN</title>
   
 
 
@@ -193,7 +193,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          并不简单的简单开发工作（二）：信息展示列表
+          并不简单的基础开发工作（二）：信息展示列表
         </h1>
 
         <div class="post-meta">
@@ -210,7 +210,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-15 02:21:10" itemprop="dateModified" datetime="2020-01-15T02:21:10+08:00">2020-01-15</time>
+                <time title="修改时间：2020-01-19 01:12:10" itemprop="dateModified" datetime="2020-01-19T01:12:10+08:00">2020-01-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -341,14 +341,14 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> (</span><br><span class="line">    <span class="keyword">SELECT</span> s.*, s.ROWNUM rn <span class="keyword">FROM</span> (</span><br><span class="line">        <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">where</span> ...</span><br><span class="line">    ) s <span class="keyword">WHERE</span> <span class="keyword">rownum</span>&lt;=<span class="number">10000000</span>+<span class="number">10</span></span><br><span class="line">) <span class="keyword">WHERE</span> rn&gt;=<span class="number">10000000</span>;</span><br></pre></td></tr></table></figure>
 <p>的效率要比</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> <span class="keyword">ROWID</span> <span class="keyword">IN</span> (</span><br><span class="line">    <span class="keyword">SELECT</span> <span class="keyword">id</span> <span class="keyword">FROM</span> (</span><br><span class="line">        <span class="keyword">SELECT</span> s.ROWID <span class="keyword">id</span>, s.ROWNUM n <span class="keyword">FROM</span> (</span><br><span class="line">            <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> ...</span><br><span class="line">        ) s <span class="keyword">WHERE</span> <span class="keyword">rownum</span>&lt;=<span class="number">10000000</span>+<span class="number">10</span></span><br><span class="line">    ) <span class="keyword">WHERE</span> n&gt;=<span class="number">10000000</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<p>低一些。</p>
-<h3 id="反复查数据库"><a href="#反复查数据库" class="headerlink" title="反复查数据库"></a>反复查数据库</h3><p>出生地、民族等数据可能存放在数据库中，如果每次获取取值都查一遍数据库（特别是循环里面查数据库）会非常影响性能。因为字典数据变化并不频繁，建议做成缓存，一次性从数据库查好并缓存之后就直接从缓存里面取值。</p>
-<p>缓存会有缓存时效以及线程安全等问题，这里不再讨论。</p>
+<p>低一些，因此建议按后者查询。</p>
+<h3 id="反复查数据库"><a href="#反复查数据库" class="headerlink" title="反复查数据库"></a>反复查数据库</h3><p>出生地、民族等字典数据可能也存放在数据库中。如果每次获取取值都查一遍数据库（特别是循环里面查数据库）会非常影响性能。由于字典数据变化并不频繁，建议将此类数据做成缓存，一次性从数据库查好并缓存之后就直接从缓存里面取值。</p>
+<p>缓存会有缓存时效以及线程安全等问题，这里不再展开讨论。</p>
 <h3 id="模糊查询"><a href="#模糊查询" class="headerlink" title="模糊查询"></a>模糊查询</h3><p>模糊查询，特别是双“%”（<code>LIKE &#39;%字符%&#39;</code>）会影响性能，如果不能去掉模糊查询功能，那么要控制好条件，避免大幅度的表扫描。</p>
 <h2 id="越权访问"><a href="#越权访问" class="headerlink" title="越权访问"></a>越权访问</h2><p>假如查看的链接是“/students/view.do?id=10001”，那么将id=10001改成不属于你的10002，你能否看到数据呢？如果能，说明存在漏洞，应当在查数据时附上身份验证（例如在SQL加上是创建者本人的查询条件），确保用户只能看到自己的数据。</p>
 <h2 id="拒绝服务"><a href="#拒绝服务" class="headerlink" title="拒绝服务"></a>拒绝服务</h2><p>假如查询查出总共10000条数据（当然是把分页之后的数据合到一起），你能否通过修改请求的方式让每页展示10000条数据？如果能展示，而且性能开销还不小，那么别人也可以用类似的方法使系统变慢甚至瘫痪。</p>
-<p>你的查询耗时长吗？如果耗时比较长，而且SQL层面的优化已经做得很到位，那么建议再考虑按钮变灰、动画反馈（Loading…）和限制操作频率（例如禁止频繁操作或输入验证码）等措施，以免用户频繁提交影响系统整体性能。</p>
-<h2 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h2><p>老生常谈的问题，不再详细叙述。假如你在某个查询条件框输入<code>&#39; or &#39;1&#39;=&#39;1</code>却能查出很多数据，那么你要赶紧补漏洞了。</p>
+<p>你的查询耗时长吗？如果耗时比较长，而且SQL层面的优化已经做得很到位，无法再进一步提高效率，那么建议增加按钮变灰（点一下查询按钮之后就无法再点击，直到查询完成）、动画反馈（Loading…）和限制操作频率（例如禁止频繁操作，或要求先输入验证码再查询）等措施，以免用户频繁提交影响系统整体性能。</p>
+<h2 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h2><p>老生常谈的问题，不再详细讨论。假如你在某个查询条件框输入<code>&#39; or &#39;1&#39;=&#39;1</code>却能查出很多数据，那么你要赶紧补漏洞了。</p>
 <h2 id="未防止误操作"><a href="#未防止误操作" class="headerlink" title="未防止误操作"></a>未防止误操作</h2><p>删除是一个“有危险性”的操作，如果删除之后重建比较麻烦，那么当用户点击“删除”按钮时，系统最好不要直接执行删除，而是弹出一个提示框，让用户确认无误之后再删，以免用户误操作。提交工作单（提交成功之后就不能再修改内容了）之类的“重大”操作也是如此。</p>
 <h1 id="本系列目录"><a href="#本系列目录" class="headerlink" title="本系列目录"></a>本系列目录</h1><ol>
 <li><a href="/2019/02/08/login-page/">登录页面</a></li>
@@ -371,7 +371,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://plusnan.me/2019/02/09/list-page/" title="并不简单的简单开发工作（二）：信息展示列表">https://plusnan.me/2019/02/09/list-page/</a>
+    <a href="https://plusnan.me/2019/02/09/list-page/" title="并不简单的基础开发工作（二）：信息展示列表">https://plusnan.me/2019/02/09/list-page/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
@@ -391,8 +391,8 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2019/02/08/login-page/" rel="prev" title="并不简单的简单开发工作（一）：登录页面">
-      <i class="fa fa-chevron-left"></i> 并不简单的简单开发工作（一）：登录页面
+    <a href="/2019/02/08/login-page/" rel="prev" title="并不简单的基础开发工作（一）：登录页面">
+      <i class="fa fa-chevron-left"></i> 并不简单的基础开发工作（一）：登录页面
     </a></div>
       <div class="post-nav-item">
     <a href="/2019/04/06/manga-downloader/" rel="next" title="用Puppeteer扒漫画">
@@ -472,7 +472,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -485,7 +485,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-count">30</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

@@ -46,20 +46,19 @@
   };
 </script>
 
-  <meta name="description" content="这里是我个人的倡议，仅供参考。各项目应按照实际情况制定自己的操作规范，经常加强对新人的教育，以免把经文念得越来越歪。">
-<meta name="keywords" content="Java">
+  <meta name="description" content="道理大家都懂，其中的坑大家却不一定都清楚。 虽然在中国使用盗版软件是习以为常的事情，即使你去公安局自首说自己电脑上装了一堆破解版，警察叔叔也会直接把你轰回家，根本就不会把你抓起来。但是，给公司工作就是另一码事了——律师函警告！ 希望借本文给大家提个醒，挣钱不易，务必小心！">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java代码审查（三）：关于编程习惯的要求">
-<meta property="og:url" content="https://plusnan.me/2019/01/04/java-code-review-3/index.html">
+<meta property="og:title" content="风险提示：请使用正版！">
+<meta property="og:url" content="https://plusnan.me/2019/08/16/genius-software/index.html">
 <meta property="og:site_name" content="infNaN">
-<meta property="og:description" content="这里是我个人的倡议，仅供参考。各项目应按照实际情况制定自己的操作规范，经常加强对新人的教育，以免把经文念得越来越歪。">
+<meta property="og:description" content="道理大家都懂，其中的坑大家却不一定都清楚。 虽然在中国使用盗版软件是习以为常的事情，即使你去公安局自首说自己电脑上装了一堆破解版，警察叔叔也会直接把你轰回家，根本就不会把你抓起来。但是，给公司工作就是另一码事了——律师函警告！ 希望借本文给大家提个醒，挣钱不易，务必小心！">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-01-14T18:20:38.356Z">
+<meta property="og:updated_time" content="2020-01-18T17:07:15.279Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java代码审查（三）：关于编程习惯的要求">
-<meta name="twitter:description" content="这里是我个人的倡议，仅供参考。各项目应按照实际情况制定自己的操作规范，经常加强对新人的教育，以免把经文念得越来越歪。">
+<meta name="twitter:title" content="风险提示：请使用正版！">
+<meta name="twitter:description" content="道理大家都懂，其中的坑大家却不一定都清楚。 虽然在中国使用盗版软件是习以为常的事情，即使你去公安局自首说自己电脑上装了一堆破解版，警察叔叔也会直接把你轰回家，根本就不会把你抓起来。但是，给公司工作就是另一码事了——律师函警告！ 希望借本文给大家提个醒，挣钱不易，务必小心！">
 
-<link rel="canonical" href="https://plusnan.me/2019/01/04/java-code-review-3/">
+<link rel="canonical" href="https://plusnan.me/2019/08/16/genius-software/">
 
 
 <script id="page-configurations">
@@ -71,7 +70,7 @@
   };
 </script>
 
-  <title>Java代码审查（三）：关于编程习惯的要求 | infNaN</title>
+  <title>风险提示：请使用正版！ | infNaN</title>
   
 
 
@@ -180,7 +179,7 @@
   
   
   <article itemscope="" itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2019/01/04/java-code-review-3/">
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2019/08/16/genius-software/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/myavatar.jpg">
@@ -193,7 +192,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Java代码审查（三）：关于编程习惯的要求
+          风险提示：请使用正版！
         </h1>
 
         <div class="post-meta">
@@ -203,14 +202,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-01-04 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-04T00:00:00+08:00">2019-01-04</time>
+              <time title="创建时间：2019-08-16 00:00:00" itemprop="dateCreated datePublished" datetime="2019-08-16T00:00:00+08:00">2019-08-16</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-15 02:20:38" itemprop="dateModified" datetime="2020-01-15T02:20:38+08:00">2020-01-15</time>
+                <time title="修改时间：2020-01-19 01:07:15" itemprop="dateModified" datetime="2020-01-19T01:07:15+08:00">2020-01-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -235,92 +234,37 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>这里是我个人的倡议，仅供参考。各项目应按照实际情况制定自己的操作规范，经常加强对新人的教育，以免把经文念得越来越歪。<br><a id="more"></a></p>
-<h1 id="新来者"><a href="#新来者" class="headerlink" title="新来者"></a>新来者</h1><ul>
-<li>主动了解项目有哪些开发规范。<ul>
-<li>如果实际操作与开发规范已经不符，要敢于提出质疑，纠正错误操作或调整过时规范。</li>
+        <p>道理大家都懂，其中的坑大家却不一定都清楚。</p>
+<p>虽然在中国使用盗版软件是习以为常的事情，即使你去公安局自首说自己电脑上装了一堆破解版，警察叔叔也会直接把你轰回家，根本就不会把你抓起来。但是，给公司工作就是另一码事了——律师函警告！</p>
+<p>希望借本文给大家提个醒，挣钱不易，务必小心！<br><a id="more"></a></p>
+<h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><p>在公司上班，使用盗版可能会给自己和公司招来严重后果：</p>
+<h2 id="后门安全问题"><a href="#后门安全问题" class="headerlink" title="后门安全问题"></a>后门安全问题</h2><ul>
+<li>2012年1月31日，<span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRob21lLmNvbS9odG1sL2l0LzEwMDY4Lmh0bQ==" title="https://www.ithome.com/html/it/10068.htm">部分汉化版PuTTY、WinSCP、SSH Secure等软件存在后门<i class="fa fa-external-link"></i></span>。</li>
+<li>2015年，<span class="exturl" data-url="aHR0cHM6Ly93d3cuYW50aXkuY29tL3Jlc3BvbnNlL3hjb2RlZ2hvc3QuaHRtbA==" title="https://www.antiy.com/response/xcodeghost.html">XcodeGhost事件<i class="fa fa-external-link"></i></span>：中国网络环境问题，促进了恶意版本编程软件的传播。</li>
+<li>2016年11月，<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXFuaXUuY29tL3RocmVhdC1hbGVydC8yMTEzNi5odG1s" title="https://www.aqniu.com/threat-alert/21136.html">有人在CSDN等地散布含有勒索软件的PL/SQL Developer<i class="fa fa-external-link"></i></span>。</li>
 </ul>
-</li>
-<li>仿写是快速学习的一种方法，但是，仿写时候要动脑子，不要完全照抄已有代码，更不要照搬垃圾代码。</li>
-<li>除了完成任务，不要忘了界面美观、操作便利、性能高效、保证信息安全、代码规范清晰这类不会使自己涨工资但是能减少被诅咒次数的东西。</li>
-<li>如果不能保质保量地完成任务，一定要尽早吱声。如果拖到最后也做不出来，或者做到最后挖的坑比正面贡献还多，后果好不了。</li>
-<li>事后诸葛亮：不听取本文意见，最终结果可能是项目质量感人。</li>
+<h2 id="律师函警告"><a href="#律师函警告" class="headerlink" title="律师函警告"></a>律师函警告</h2><ul>
+<li><span class="exturl" data-url="aHR0cDovL2ZpbmFuY2Uuc2luYS5jb20uY24vY2hhbmppbmcvZ3NuZXdzLzIwMTQwODAxLzAxNTAxOTg3OTc4My5zaHRtbA==" title="http://finance.sina.com.cn/chanjing/gsnews/20140801/015019879783.shtml">公司遭到工商部门“突袭”检查盗版<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRob21lLmNvbS8wLzQxMi80NzYuaHRt" title="https://www.ithome.com/0/412/476.htm">2019年3月，某公司实习生使用盗版Photoshop和字体，使公司陷入诉讼和巨额赔偿<i class="fa fa-external-link"></i></span>。</li>
+<li>“版权流氓”苏州思杰马克丁：在网上散布假破解版，查到企业使用后发真律师函；国内代理价格高于官方渠道……被这家代理“污染”的软件列表可见<span class="exturl" data-url="aHR0cDovL3d3dy5tYWtlZGluZy5jb20vcHJvZHVjdHMuaHRtbA==" title="http://www.makeding.com/products.html">其官网介绍<i class="fa fa-external-link"></i></span>（注意其中有常用的Photoshop、TeamViewer、Xshell）。</li>
+<li><del>任天堂最强法务部、迪士尼最强法务部、蔡徐坤律师函警告</del></li>
 </ul>
-<h1 id="开发工作"><a href="#开发工作" class="headerlink" title="开发工作"></a>开发工作</h1><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ul>
-<li>新功能和数据库表结构的设计都要通过评审。</li>
-<li>搞清楚业务场景和业务逻辑再动手。</li>
-<li>把数据量估计好，以免产生正式环境运行过慢、页面展示爆炸等特效。</li>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><h2 id="破财消灾"><a href="#破财消灾" class="headerlink" title="破财消灾"></a>破财消灾</h2><p>从道理上讲，花钱买正版天经地义，权益遭到侵害，维权也天经地义。如果软件真的在用，其地位不可替代，那么当然应该去买正版（虽然公司不见得能同意花钱），否则吃官司赔钱也是活该。</p>
+<p>然而，有些厂商或代理发律师函或索要赔偿，目的更多的是为了讹钱。对于这类公司，可能事先买些正版授权，把钱给够，以后用多少盗版他们也会视而不见了。</p>
+<h2 id="使用免费-开源替代品"><a href="#使用免费-开源替代品" class="headerlink" title="使用免费/开源替代品"></a>使用免费/开源替代品</h2><p>钱不是白来的，实在不想花钱的话，也可以使用免费或开源替代品。</p>
+<p>不过需要注意的是，有些软件个人使用免费，商业使用收费。在安装之前，要先阅读许可协议，别看都不看就直接点同意，除非你确定对方厂商懒得管。</p>
+<h2 id="加强教育"><a href="#加强教育" class="headerlink" title="加强教育"></a>加强教育</h2><p>有新入职员工时，要及时提醒注意版权问题。特别要留意喜欢“折腾”的人，要么要求他们买正版，要么要求使用无版权风险的软件，要么要求放弃个人喜好，使用与开发团队一样的软件（别集体翻车就行）。</p>
+<p>除所用软件外，各种资料，例如程序代码、多媒体素材、字体等也要注意版权。要不然的话，即使躲过代理Photoshop的思杰马克丁，可能又会因应用登录页面的一张背景图片<span class="exturl" data-url="aHR0cDovL3d3dy54aW5odWFuZXQuY29tLzIwMTktMDQvMTIvY18xMjEwMTA3Mjg2Lmh0bQ==" title="http://www.xinhuanet.com/2019-04/12/c_1210107286.htm">让视觉中国找上门<i class="fa fa-external-link"></i></span>。</p>
+<p>即使是免费软件，也要到正规渠道下载，不要随便找“绿色版”、“汉化版”。谁知道里头有没有藏着删库（却让你跑不了路）的后门呢？</p>
+<h1 id="相关问题"><a href="#相关问题" class="headerlink" title="相关问题"></a>相关问题</h1><h2 id="树大招风"><a href="#树大招风" class="headerlink" title="树大招风"></a>树大招风</h2><p>除了使用盗版软件，抄袭别人成果也是有风险的：</p>
+<ul>
+<li>汉芯：<span class="exturl" data-url="aHR0cHM6Ly9uZXdzLm15ZHJpdmVycy5jb20vMS82MTYvNjE2NzM3Lmh0bQ==" title="https://news.mydrivers.com/1/616/616737.htm">被一家装修公司给“出卖”了<i class="fa fa-external-link"></i></span></li>
+<li>银河麒麟：<span class="exturl" data-url="aHR0cHM6Ly93d3cud2lsbGlhbWxvbmcuaW5mby9hcmNoaXZlcy81MDguaHRtbA==" title="https://www.williamlong.info/archives/508.html">改版FreeBSD<i class="fa fa-external-link"></i></span>。</li>
+<li>红芯浏览器：<span class="exturl" data-url="aHR0cHM6Ly93d3cudGhlcGFwZXIuY24vbmV3c0RldGFpbF9mb3J3YXJkXzIzNTUyMzk=" title="https://www.thepaper.cn/newsDetail_forward_2355239">换了壳的Chrome<i class="fa fa-external-link"></i></span></li>
 </ul>
-<h2 id="书写新代码"><a href="#书写新代码" class="headerlink" title="书写新代码"></a>书写新代码</h2><ul>
-<li>避免直接copy-paste。就算抄也要自己写一遍，过一下脑子。</li>
-<li>如果一段代码重复了两三遍甚至更多，那么应当改写成公共代码。<ul>
-<li>接上条，造新轮子之前，查一下有没有可以拿来用的现成的东西。</li>
-</ul>
-</li>
-<li>将Web（请求处理）、BO（业务逻辑）、DAO（数据持久）等层次与PO（持久对象）、VO（值对象）等领域区分好，例如不要在Web层或JSP页面写业务逻辑。</li>
-<li>代码和页面风格都要规范统一。</li>
-</ul>
-<h2 id="修改既有代码"><a href="#修改既有代码" class="headerlink" title="修改既有代码"></a>修改既有代码</h2><ul>
-<li>修改函数签名、函数实现、应用配置、接口签名等内容之前必须先检查引用情况。<ul>
-<li>修改公共方法和公共配置之前应仔细评估影响并加强测试。如果不清楚影响，那么要先咨询老员工再修改。</li>
-<li>设计和修改公共组件（包括公共函数、标签、模板、Filter等），除了正确实现功能，还必须更加关注运行效率、资源占用、线程安全性等问题。</li>
-</ul>
-</li>
-<li>如果发现待修改的代码比较诡异，修改之前建议先问问老员工有没有什么历史原因或者坑。</li>
-<li>即使是简单的修改也要进行测试，因为再有经验也有可能改出问题。</li>
-<li>及时清理出于备份目的留下的注释，以免造成混淆。如果后续有可能恢复，那么应当用注释说清情况。</li>
-</ul>
-<h2 id="提交"><a href="#提交" class="headerlink" title="提交"></a>提交</h2><ul>
-<li>提交代码之前完成功能自测。</li>
-<li>提交之前对代码进行一下美化，例如自动缩进、移除无用import等（需要事先统一标准）。</li>
-<li>提交之前必须检查待提交的Diff（差异）：<ul>
-<li>提交务必完整，不能出现编译错误，不能导致程序无法正常运行。</li>
-<li>不能完整提交就不要提交。</li>
-<li>不要有错别字、笔误和语病。</li>
-<li>不要把本地调试代码（例如alert(val)、屏蔽校验规则、写死测试数据之类的）提交上去。</li>
-</ul>
-</li>
-<li>提交时书写提交说明，例如实现了什么功能或解决了什么问题。</li>
-<li>注意提交频率，按活动一次性提交齐全，不要长期不提交，也不要改一个文件就提交一下。</li>
-</ul>
-<h1 id="代码细节"><a href="#代码细节" class="headerlink" title="代码细节"></a>代码细节</h1><h2 id="命名"><a href="#命名" class="headerlink" title="命名"></a>命名</h2><ul>
-<li>除了循环ijk那种一望而知的情况，要用有意义的英文名，而且不要用拼音简写，更不要拼音英语混写。</li>
-<li>保持命名一致，例如不要前面还在用“state”表示“状态”，后面就变成了用“status”表示状态。如果不知道如何一致，那么就看代码规范以及别人怎么写的。</li>
-<li>如果确实需要借用名称或借用字段，要把情况写清楚，以免造成混淆。</li>
-</ul>
-<h2 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h2><ul>
-<li>书写SQL要实地执行一下。</li>
-<li>要估计投入到生产环境之后会产生多少数据，以免效率过低甚至系统瘫痪。</li>
-<li>查询和关联时要留意是否一定能查到数据。不确定的话要与熟悉业务的人或DBA交流。</li>
-<li>书写复杂SQL要看执行计划，估算执行效率，必要时与DBA交流，以便在数据库层面进行优化调整。<ul>
-<li>如果顺便发现没有主键或索引，那么也要告诉DBA。</li>
-</ul>
-</li>
-<li>尽量以绑定变量形式书写SQL而非直接拼接，以提高语句解析效率。</li>
-<li>对于改造升级类的系统，注意要兼容历史数据。</li>
-</ul>
-<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><ul>
-<li>在业务代码处简单地解释业务规则。</li>
-<li>复杂逻辑、边界情况、HACK操作以及“装逼操作”要写注释说明。</li>
-<li>需求变更、业务逻辑修改等情况务必在相关代码中写注释说明，而且要标出在什么时间、因什么原因而修改，以便事后追溯。<ul>
-<li>接上条，如果预计以后还会发生变动，建议各关联代码都用唯一且相同的代码进行标记（例如CHANGE20190101），这样以后再改代码的时候容易搜索。</li>
-</ul>
-</li>
-<li>TODO的事情写上TODO四个字母并进行跟踪，已经完成以及不是TODO的事情不要写TODO。</li>
-</ul>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
-<li>关于报错：给用户展示正常人类能看懂的文字，而且让用户和开发者都能知道大概是哪方面错误以及如何处理。</li>
-<li>及时清理无效引用与变更。</li>
-<li>及时维护文档。如果不能及时维护，建议强迫自己改完文档再编码。</li>
-</ul>
-<h1 id="本系列目录"><a href="#本系列目录" class="headerlink" title="本系列目录"></a>本系列目录</h1><ol>
-<li><a href="/2019/01/02/java-code-review-1">代码审查问题</a></li>
-<li><a href="/2019/01/03/java-code-review-2">应用安全问题</a></li>
-<li><strong>关于编程习惯的要求</strong></li>
-<li><a href="/2019/02/06/java-code-review-4">使用Phabricator进行人工代码审查</a></li>
-<li>使用FindBugs和SonarQube等工具进行扫描</li>
-<li>……</li>
-</ol>
+<p>当然未经蔡徐坤本人同意就制作打篮球视频也是有风险的。</p>
+<h2 id="在中国没遭到迫害，出国之后却吃了牢饭"><a href="#在中国没遭到迫害，出国之后却吃了牢饭" class="headerlink" title="在中国没遭到迫害，出国之后却吃了牢饭"></a>在中国没遭到迫害，出国之后却吃了牢饭</h2><p>本文开头提到，你去公安局自首，警察会把你直接轰回家。然而，换成重视版权的国家，结局会沦为吃官司和吃牢饭。因此，如果你有机会去发达国家，无论是出游、出差还是出逃，建议稍微注意一下。</p>
+<p>不过，像非洲那类地方就无所谓了，比起挣多少钱或者用什么软件，你更需要担心自己能不能活着回国。</p>
 
     </div>
 
@@ -336,7 +280,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://plusnan.me/2019/01/04/java-code-review-3/" title="Java代码审查（三）：关于编程习惯的要求">https://plusnan.me/2019/01/04/java-code-review-3/</a>
+    <a href="https://plusnan.me/2019/08/16/genius-software/" title="风险提示：请使用正版！">https://plusnan.me/2019/08/16/genius-software/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
@@ -346,9 +290,6 @@
 
 
       <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/Java/" rel="tag"># Java</a>
-          </div>
 
         
 
@@ -356,13 +297,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2019/01/03/java-code-review-2/" rel="prev" title="Java代码审查（二）：应用安全问题">
-      <i class="fa fa-chevron-left"></i> Java代码审查（二）：应用安全问题
+    <a href="/2019/08/03/switch-to-idea-2.5/" rel="prev" title="从Eclipse切换到IDEA（2.5）：传统Web项目转为Gradle项目">
+      <i class="fa fa-chevron-left"></i> 从Eclipse切换到IDEA（2.5）：传统Web项目转为Gradle项目
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2019/01/11/oracle-novel/" rel="next" title="通过数据库“阅读器”在上班时间看小说">
-      通过数据库“阅读器”在上班时间看小说 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -422,7 +360,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#新来者"><span class="nav-number">1.</span> <span class="nav-text">新来者</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开发工作"><span class="nav-number">2.</span> <span class="nav-text">开发工作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">2.1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#书写新代码"><span class="nav-number">2.2.</span> <span class="nav-text">书写新代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改既有代码"><span class="nav-number">2.3.</span> <span class="nav-text">修改既有代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提交"><span class="nav-number">2.4.</span> <span class="nav-text">提交</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码细节"><span class="nav-number">3.</span> <span class="nav-text">代码细节</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#命名"><span class="nav-number">3.1.</span> <span class="nav-text">命名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL"><span class="nav-number">3.2.</span> <span class="nav-text">SQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注释"><span class="nav-number">3.3.</span> <span class="nav-text">注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">3.4.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#本系列目录"><span class="nav-number">4.</span> <span class="nav-text">本系列目录</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#案例"><span class="nav-number">1.</span> <span class="nav-text">案例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#后门安全问题"><span class="nav-number">1.1.</span> <span class="nav-text">后门安全问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#律师函警告"><span class="nav-number">1.2.</span> <span class="nav-text">律师函警告</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解决方案"><span class="nav-number">2.</span> <span class="nav-text">解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#破财消灾"><span class="nav-number">2.1.</span> <span class="nav-text">破财消灾</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用免费-开源替代品"><span class="nav-number">2.2.</span> <span class="nav-text">使用免费/开源替代品</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加强教育"><span class="nav-number">2.3.</span> <span class="nav-text">加强教育</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#相关问题"><span class="nav-number">3.</span> <span class="nav-text">相关问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#树大招风"><span class="nav-number">3.1.</span> <span class="nav-text">树大招风</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在中国没遭到迫害，出国之后却吃了牢饭"><span class="nav-number">3.2.</span> <span class="nav-text">在中国没遭到迫害，出国之后却吃了牢饭</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

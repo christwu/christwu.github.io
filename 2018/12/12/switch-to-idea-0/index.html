@@ -54,7 +54,7 @@
 <meta property="og:site_name" content="infNaN">
 <meta property="og:description" content="我们项目组之前一直使用Eclipse进行开发。对于我们项目而言，由于Eclipse存在现实的问题，我便开始研究IDEA的用法，并且试着将工作切换到IDEA上面，之后逐步地在项目组内推广使用IntelliJ IDEA。本系列文章面向Eclipse使用者，讲述IDEA的一些基本操作，以便平稳地进行切换。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-02-07T14:51:47.218Z">
+<meta property="og:updated_time" content="2020-01-18T16:36:51.388Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从Eclipse切换到IDEA">
 <meta name="twitter:description" content="我们项目组之前一直使用Eclipse进行开发。对于我们项目而言，由于Eclipse存在现实的问题，我便开始研究IDEA的用法，并且试着将工作切换到IDEA上面，之后逐步地在项目组内推广使用IntelliJ IDEA。本系列文章面向Eclipse使用者，讲述IDEA的一些基本操作，以便平稳地进行切换。">
@@ -210,7 +210,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-02-07 22:51:47" itemprop="dateModified" datetime="2019-02-07T22:51:47+08:00">2019-02-07</time>
+                <time title="修改时间：2020-01-19 00:36:51" itemprop="dateModified" datetime="2020-01-19T00:36:51+08:00">2020-01-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -239,8 +239,8 @@
 <h1 id="本系列内容"><a href="#本系列内容" class="headerlink" title="本系列内容"></a>本系列内容</h1><ul>
 <li><strong>为什么进行切换</strong></li>
 <li><a href="/2018/12/13/switch-to-idea-1/">切换的基本操作</a></li>
-<li><a href="/2019/01/27/switch-to-idea-2">古典Web项目在IDEA的Project Structure</a></li>
-<li>古典Web项目转为Maven项目</li>
+<li><a href="/2019/01/27/switch-to-idea-2">传统Web项目在IDEA的Project Structure</a></li>
+<li><a href="/2019/08/03/switch-to-idea-2.5/">传统Web项目转为Gradle项目</a></li>
 <li>Maven和Gradle项目在IDEA的Project Structure（待撰）</li>
 </ul>
 <h1 id="切换到IDEA的理由"><a href="#切换到IDEA的理由" class="headerlink" title="切换到IDEA的理由"></a>切换到IDEA的理由</h1><p>下面是我向同事推荐使用IDEA（商业版）的一些理由：</p>
@@ -259,6 +259,7 @@
 </ol>
 <p>当然，Eclipse的用户和插件也不少，对于爱搞配置的人来说应该也比较好用。</p>
 <h1 id="差异"><a href="#差异" class="headerlink" title="差异"></a>差异</h1><p>Eclipse和IDEA的界面与操作方法有些区别。概念上的重大差异主要是“Project Structure”，即项目文件结构的管理，不过如果有人把项目配置好并提交版本控制之后，其他成员反倒不太需要关注这些东西，因此我会另外写一篇文章进行叙述。</p>
+<h1 id="法律问题"><a href="#法律问题" class="headerlink" title="法律问题"></a>法律问题</h1><p>IDEA分免费的社区版（Community Edition）和收费的商业版（Ultimate Edition），前者不支持Web开发，只能选用商业版。商业版需要激活，大家往往会用注册码、注册机来进行破解。这当然是违法的，而且比起个人，公司更容易陷入诉讼（告赢了就是一大笔钱），因此有条件的话务必买正版。</p>
 
     </div>
 
@@ -360,7 +361,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#本系列内容"><span class="nav-number">1.</span> <span class="nav-text">本系列内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#切换到IDEA的理由"><span class="nav-number">2.</span> <span class="nav-text">切换到IDEA的理由</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#差异"><span class="nav-number">3.</span> <span class="nav-text">差异</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#本系列内容"><span class="nav-number">1.</span> <span class="nav-text">本系列内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#切换到IDEA的理由"><span class="nav-number">2.</span> <span class="nav-text">切换到IDEA的理由</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#差异"><span class="nav-number">3.</span> <span class="nav-text">差异</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#法律问题"><span class="nav-number">4.</span> <span class="nav-text">法律问题</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -375,7 +376,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -388,7 +389,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-count">30</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
