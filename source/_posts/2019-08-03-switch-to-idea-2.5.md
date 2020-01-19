@@ -144,7 +144,7 @@ gradle.properties
 
 考虑到国内网络情况，需要进行两种额外处理步骤（二选一）：
 1. 将gradle-5.4-all.zip分发给团队其他成员，让大家都按照上面方法手工安装Gradle。
-2. 上传到国内或公司内的服务器，例如 http://10.11.22.33:8088/gradle-5.4-all.zip，然后修改你项目中的 gradle/wrapper/gradle-wrapper.properties 文件，将 distributionUrl 修改成该地址。后续其他成员只要执行gradlew就会自动从这个URL下载Gradle。
+2. 上传到国内或公司内的服务器，例如`http://10.11.22.33:8088/gradle-5.4-all.zip`，然后修改你项目中的 gradle/wrapper/gradle-wrapper.properties 文件，将 distributionUrl 修改成该地址。后续其他成员只要执行gradlew就会自动从这个URL下载Gradle。
 
 假如需要代理才能访问网络，可在自己电脑 ~/.gradle/gradle.properties（C:\\Users\\xxx\\.gradle\\gradle.properties）中配置网络代理。
 
