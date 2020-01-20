@@ -1,2 +1,2 @@
-# christwu.github.io
+# infnan.github.io
 Blog
