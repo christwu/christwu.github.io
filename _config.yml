@@ -192,8 +192,8 @@ theme_config:
   social_icons:
     enable: true
 
-  highlight_theme: solarized
   codeblock:
+    highlight_theme: night
     copy_button:
       enable: true
       show_result: true
