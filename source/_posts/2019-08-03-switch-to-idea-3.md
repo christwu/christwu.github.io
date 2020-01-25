@@ -1,13 +1,11 @@
 ---
 layout: post
-title: 从Eclipse切换到IDEA（2.5）：传统Web项目转为Gradle项目
+title: 从Eclipse切换到IDEA（三）：传统Web项目转为Gradle项目
 category: 教程
 tags: 
 - Gradle
 ---
-在讲述如何用IDEA操作Maven/Gradle项目之前，我们先把[上一篇文章](/2019/01/27/switch-to-idea-2)提到的传统Web项目转为Gradle项目。
-
-转为Maven/Gradle可以带来很多好处，例如可以结合Jenkins实现自动化操作编译打包，从而提高部署效率，规避手工打包带来的实施风险。
+除了在IDEA手工配置项目，也可考虑将传统Web项目转为Gradle项目，以便简化项目依赖管理、实现标准化构建等，也便于后续结合Jenkins等进一步实现自动化。
 <!-- more -->
 
 # 项目目录结构
@@ -160,6 +158,8 @@ systemProp.https.proxyPort=1081
 ```
 org.gradle.jvmargs=-DsocksProxyHost=127.0.0.1 -DsocksProxyPort=1080
 ```
+
+配置代理之后，个别情况下会出现`Error 403 Forbidden`报错，这种情况说明仓库屏蔽了你的代理，你只能换梯子或换国内源了。
 
 ## 编写Gradle构建脚本
 
@@ -416,9 +416,11 @@ war {
 
 ## 按不同环境打包不同的配置文件（待补完）
 
+# 关于IDEA
+使用IDEA打开配置好的项目之后，IDEA会发现这是一个Gradle项目，并提示是否“Import”。点击屏幕右下角的“Enable Import”，并等Sync操作完成后，便可以直接在IDEA中执行Gradle任务。
+
 # 本系列目录
 * [为什么进行切换](/2018/12/12/switch-to-idea-0/)
 * [切换的基本操作](/2018/12/13/switch-to-idea-1/)
 * [传统Web项目在IDEA的Project Structure](/2019/01/27/switch-to-idea-2)
 * **传统Web项目转为Gradle项目**
-* Maven和Gradle项目在IDEA的Project Structure（待撰）

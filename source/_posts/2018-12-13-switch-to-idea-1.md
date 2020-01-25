@@ -148,5 +148,4 @@ IDEA Ultimate版内置了DataGrip插件。
 * [为什么进行切换](/2018/12/12/switch-to-idea-0/)
 * **切换的基本操作**
 * [传统Web项目在IDEA的Project Structure](/2019/01/27/switch-to-idea-2)
-* [传统Web项目转为Gradle项目](/2019/08/03/switch-to-idea-2.5/)
-* Maven和Gradle项目在IDEA的Project Structure（待撰）
+* [传统Web项目转为Gradle项目](/2019/08/03/switch-to-idea-3/)

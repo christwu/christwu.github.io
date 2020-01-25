@@ -263,5 +263,4 @@ Project Structure配置好之后，就可以准备启动。点击IDEA界面右�
 * [为什么进行切换](/2018/12/12/switch-to-idea-0/)
 * [切换的基本操作](/2018/12/13/switch-to-idea-1/)
 * **传统Web项目在IDEA的Project Structure**
-* [传统Web项目转为Gradle项目](/2019/08/03/switch-to-idea-2.5/)
-* Maven和Gradle项目在IDEA的Project Structure（待撰）
+* [传统Web项目转为Gradle项目](/2019/08/03/switch-to-idea-3/)

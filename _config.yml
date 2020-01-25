@@ -146,7 +146,7 @@ theme_config:
 
   disqus:
     enable: true
-    shortname: christ-wu-blog
+    shortname: plusnan
     count: true
   #disqusjs:
   #  enable: true
