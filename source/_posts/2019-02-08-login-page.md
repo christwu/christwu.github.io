@@ -90,5 +90,5 @@ SELECT count(1) FROM users WHERE username='admin' AND password='' or '1'='1';
 # 本系列目录
 1. **登录页面**
 2. [信息展示列表](/2019/02/09/list-page/)
-3. 信息维护页面
+3. [信息录入表单](/2019/09/21/edit-page/)
 4. 业务申办-审批流程
