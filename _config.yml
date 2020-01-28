@@ -189,6 +189,7 @@ theme_config:
   social:
     GitHub: https://github.com/infnan || github
     E-Mail: mailto:me@plusnan.me || envelope
+    RSS: /rss.xml || rss
   social_icons:
     enable: true
 
@@ -219,7 +220,8 @@ theme_config:
     mathjax:
       cdn: //cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML
 
-  google_analytics: UA-134391990-1
+  google_analytics: 
+    tracking_id: UA-134391990-1
 
 #theme: hexo-theme-indigo
 #theme_config:
