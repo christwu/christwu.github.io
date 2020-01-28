@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.8.0">
+<meta name="generator" content="Hexo 4.2.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -24,8 +24,8 @@
     scheme: 'Muse',
     version: '7.7.0',
     exturl: true,
-    sidebar: {"position":"right","display":"always"},
-    copycode: {"enable":true,"show_result":true},
+    sidebar: {"position":"right","display":"always","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
     fancybox: false,
@@ -42,22 +42,22 @@
     },
     localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: '',
-    motion: {"enable":false}
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
   <meta name="description" content="当然，由于不同项目用的东西大概会很不一样，所以本文仅供参考。">
-<meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java代码审查（一）：代码审查问题">
 <meta property="og:url" content="https://plusnan.me/2019/01/02/java-code-review-1/index.html">
 <meta property="og:site_name" content="infNaN">
 <meta property="og:description" content="当然，由于不同项目用的东西大概会很不一样，所以本文仅供参考。">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-01-14T18:20:26.824Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-01-01T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-01-14T18:20:26.824Z">
+<meta property="article:author" content="infNaN">
+<meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java代码审查（一）：代码审查问题">
-<meta name="twitter:description" content="当然，由于不同项目用的东西大概会很不一样，所以本文仅供参考。">
 
 <link rel="canonical" href="https://plusnan.me/2019/01/02/java-code-review-1/">
 
@@ -111,6 +111,7 @@
   </style>
 </noscript>
 
+<link rel="alternate" href="/rss.xml" title="infNaN" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -148,6 +149,11 @@
     <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
         <li class="menu-item menu-item-tags">
 
     <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
@@ -156,11 +162,6 @@
         <li class="menu-item menu-item-categories">
 
     <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
 
   </li>
   </ul>
@@ -188,16 +189,16 @@
       
   
   
-  <article itemscope="" itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://plusnan.me/2019/01/02/java-code-review-1/">
 
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/myavatar.jpg">
       <meta itemprop="name" content="infNaN">
       <meta itemprop="description" content="多穿女装少踩坑">
     </span>
 
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="infNaN">
     </span>
       <header class="post-header">
@@ -226,8 +227,8 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/项目开发经验/" itemprop="url" rel="index">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E7%BB%8F%E9%AA%8C/" itemprop="url" rel="index">
                     <span itemprop="name">项目开发经验</span>
                   </a>
                 </span>
@@ -322,13 +323,9 @@
 <li><p>打印日志：</p>
 <ul>
 <li>发生异常却未向用户反馈，仍然提示“成功”：实际上已经出错了，应当提示出来。如果确定对用户没有影响，可以忽略，那么应当在注释中明确指出来。</li>
-<li><p>报错信息缺少用户能看懂的语言：应当先提示用户能看得懂的内容，给出大概的错误原因和处理方法。</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">    setMessage(<span class="string">"保存成功！"</span>, MessageLevel.SUCCESS);</span><br><span class="line">&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">    setMessage(e.getMessage(), MessageLevel.ERROR); <span class="comment">// 错误：用户看不懂Exception的内容</span></span><br><span class="line">    logger.debug(<span class="string">"保存过程中发生内部错误"</span>, e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>日志级别与实际情况不一致：例如用error输出调试内容、用debug输出错误信息。</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">    setMessage(<span class="string">"保存成功！"</span>, MessageLevel.SUCCESS);</span><br><span class="line">&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">    setMessage(<span class="string">"保存过程中发生内部错误："</span> + e.getMessage() + <span class="string">"！"</span>, MessageLevel.ERROR);</span><br><span class="line">    logger.debug(<span class="string">"保存过程中发生内部错误"</span>, e);      <span class="comment">// 错误：应该是error</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>  如果系统在上线一段时间之后已经比较稳定，建议提高日志级别，以节约服务器空间和I/O资源消耗。</p>
-</li>
+<li>报错信息缺少用户能看懂的语言：应当先提示用户能看得懂的内容，给出大概的错误原因和处理方法。  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">    setMessage(<span class="string">"保存成功！"</span>, MessageLevel.SUCCESS);</span><br><span class="line">&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">    setMessage(e.getMessage(), MessageLevel.ERROR); <span class="comment">// 错误：用户看不懂Exception的内容</span></span><br><span class="line">    logger.debug(<span class="string">"保存过程中发生内部错误"</span>, e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>日志级别与实际情况不一致：例如用error输出调试内容、用debug输出错误信息。  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">    setMessage(<span class="string">"保存成功！"</span>, MessageLevel.SUCCESS);</span><br><span class="line">&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">    setMessage(<span class="string">"保存过程中发生内部错误："</span> + e.getMessage() + <span class="string">"！"</span>, MessageLevel.ERROR);</span><br><span class="line">    logger.debug(<span class="string">"保存过程中发生内部错误"</span>, e);      <span class="comment">// 错误：应该是error</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  如果系统在上线一段时间之后已经比较稳定，建议提高日志级别，以节约服务器空间和I/O资源消耗。</li>
 <li>屏幕提示和日志记录不一致：  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">    setMessage(<span class="string">"保存成功！"</span>, MessageLevel.SUCCESS);</span><br><span class="line">&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">    setMessage(<span class="string">"保存过程中发生内部错误："</span> + e.getMessage() + <span class="string">"！"</span>, MessageLevel.ERROR);</span><br><span class="line">    logger.error(<span class="string">"查询工作单信息出错"</span>, e);      <span class="comment">// 错误：与屏幕提示不一致，找日志时会产生困扰</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
@@ -357,11 +354,8 @@
 <li><p>事务</p>
 <ul>
 <li>该有事务的地方没加事务：对于一系列数据库修改操作而言，如果这些操作应当“共进退”，即要么全部执行完，要么出错之后能够全部恢复，那么应当加入事务控制。</li>
-<li><p>发生异常时未回滚事务：</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    conn.setAutoCommit(<span class="keyword">false</span>);</span><br><span class="line">    ...</span><br><span class="line">    conn.commit();</span><br><span class="line">&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">    <span class="comment">// 错误：此处应有conn.rollback();</span></span><br><span class="line">    ...</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>重复提交/回滚事务：已经commit/rollback之后又执行了commit/rollback。如果在开启事务之后调用了一些函数，但是未注意到函数里面也有事务控制，那么结果可能会出错。</p>
-</li>
+<li>发生异常时未回滚事务：  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    conn.setAutoCommit(<span class="keyword">false</span>);</span><br><span class="line">    ...</span><br><span class="line">    conn.commit();</span><br><span class="line">&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">    <span class="comment">// 错误：此处应有conn.rollback();</span></span><br><span class="line">    ...</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>重复提交/回滚事务：已经commit/rollback之后又执行了commit/rollback。如果在开启事务之后调用了一些函数，但是未注意到函数里面也有事务控制，那么结果可能会出错。</li>
 </ul>
 </li>
 <li><p>该加锁的地方没加锁：例如从流水号表取下一流水号</p>
@@ -370,28 +364,18 @@
 </li>
 </ul>
 <h1 id="SQL语句"><a href="#SQL语句" class="headerlink" title="SQL语句"></a>SQL语句</h1><ul>
-<li><p>SQL语法错误：例如引号不配对、括号不配对、数据类型不匹配，或者拼接的SQL缺空格、有多余AND和多余逗号等。</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">StringBuilder sql = <span class="keyword">new</span> StringBuilder(<span class="string">"SELECT ID,NAME FROM TAB WHERE"</span>);</span><br><span class="line"><span class="keyword">if</span> (StringUtils.isNotEmpty(cond1)) &#123;</span><br><span class="line">    <span class="comment">// 两个错误：一个是缺空格，另一个是在WHERE后面直接拼接AND了</span></span><br><span class="line">    sql.append(<span class="string">"AND cond1='"</span>).append(escapeSQL(cond1)).append(<span class="string">"'"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (StringUtils.isNotEmpty(cond2)) &#123;</span><br><span class="line">    sql.append(<span class="string">" AND cond2 IN ("</span>);</span><br><span class="line">    String[] arr = cond2.split(<span class="string">","</span>);</span><br><span class="line">    <span class="keyword">for</span> (String s: arr) &#123;</span><br><span class="line">        sql.append(<span class="string">"'"</span>).append(escapeSQL(s)).append(<span class="string">"',"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 错误：未处理最后一个多余的逗号</span></span><br><span class="line">    sql.append(<span class="string">")"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用SELECT *：应当写清字段名而非简单粗暴的*。</p>
-</li>
+<li>SQL语法错误：例如引号不配对、括号不配对、数据类型不匹配，或者拼接的SQL缺空格、有多余AND和多余逗号等。  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">StringBuilder sql = <span class="keyword">new</span> StringBuilder(<span class="string">"SELECT ID,NAME FROM TAB WHERE"</span>);</span><br><span class="line"><span class="keyword">if</span> (StringUtils.isNotEmpty(cond1)) &#123;</span><br><span class="line">    <span class="comment">// 两个错误：一个是缺空格，另一个是在WHERE后面直接拼接AND了</span></span><br><span class="line">    sql.append(<span class="string">"AND cond1='"</span>).append(escapeSQL(cond1)).append(<span class="string">"'"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (StringUtils.isNotEmpty(cond2)) &#123;</span><br><span class="line">    sql.append(<span class="string">" AND cond2 IN ("</span>);</span><br><span class="line">    String[] arr = cond2.split(<span class="string">","</span>);</span><br><span class="line">    <span class="keyword">for</span> (String s: arr) &#123;</span><br><span class="line">        sql.append(<span class="string">"'"</span>).append(escapeSQL(s)).append(<span class="string">"',"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 错误：未处理最后一个多余的逗号</span></span><br><span class="line">    sql.append(<span class="string">")"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>使用SELECT *：应当写清字段名而非简单粗暴的*。</li>
 <li>直接拼接SQL：未对用户输入进行处理，会导致SQL注入，应该用PreparedStatement或者使用转义函数对用户输入内容转义。<ul>
 <li>接上条，要避免重复转义。</li>
 </ul>
 </li>
-<li><p>对可空字段使用&lt;&gt;或NOT IN：应注意单独判断NULL值。</p>
-  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 假设FLAG是可空字段，那么以下都是有问题的</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">ID</span>, <span class="keyword">NAME</span> <span class="keyword">FROM</span> TAB <span class="keyword">WHERE</span> FLAG&lt;&gt;<span class="string">'1'</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">ID</span>, <span class="keyword">NAME</span> <span class="keyword">FROM</span> TAB <span class="keyword">WHERE</span> FLAG <span class="keyword">NOT</span> <span class="keyword">IN</span> (<span class="string">'1'</span>, <span class="string">'2'</span>);</span><br><span class="line"><span class="comment">-- 应修改成（下面只考虑NULL问题，不考虑效率问题）</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">ID</span>, <span class="keyword">NAME</span> <span class="keyword">FROM</span> TAB <span class="keyword">WHERE</span> FLAG&lt;&gt;<span class="string">'1'</span> <span class="keyword">OR</span> FLAG <span class="keyword">IS</span> <span class="literal">NULL</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">ID</span>, <span class="keyword">NAME</span> <span class="keyword">FROM</span> TAB <span class="keyword">WHERE</span> FLAG <span class="keyword">NOT</span> <span class="keyword">IN</span> (<span class="string">'1'</span>, <span class="string">'2'</span>) <span class="keyword">OR</span> FLAG <span class="keyword">IS</span> <span class="literal">NULL</span>;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>子查询返回多条记录：</p>
-  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">ID</span>, <span class="keyword">NAME</span> <span class="keyword">FROM</span> TAB <span class="keyword">WHERE</span> BUSINO=(<span class="keyword">SELECT</span> BUSINO <span class="keyword">FROM</span> APPL <span class="keyword">WHERE</span> ...);</span><br><span class="line"><span class="comment">-- 如果查询APPL会返回多条记录，那么会出错，因此需要调整子查询条件，保证至多返回一条记录，例如（Oracle）</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">ID</span>, <span class="keyword">NAME</span> <span class="keyword">FROM</span> TAB <span class="keyword">WHERE</span> BUSINO=(<span class="keyword">SELECT</span> BUSINO <span class="keyword">FROM</span> APPL <span class="keyword">WHERE</span> ... <span class="keyword">AND</span> <span class="keyword">ROWNUM</span>=<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>用==或&lt;&gt;判断NULL：应使用IS NULL或IS NOT NULL进行判断。</p>
-</li>
+<li>对可空字段使用&lt;&gt;或NOT IN：应注意单独判断NULL值。  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 假设FLAG是可空字段，那么以下都是有问题的</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">ID</span>, <span class="keyword">NAME</span> <span class="keyword">FROM</span> TAB <span class="keyword">WHERE</span> FLAG&lt;&gt;<span class="string">'1'</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">ID</span>, <span class="keyword">NAME</span> <span class="keyword">FROM</span> TAB <span class="keyword">WHERE</span> FLAG <span class="keyword">NOT</span> <span class="keyword">IN</span> (<span class="string">'1'</span>, <span class="string">'2'</span>);</span><br><span class="line"><span class="comment">-- 应修改成（下面只考虑NULL问题，不考虑效率问题）</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">ID</span>, <span class="keyword">NAME</span> <span class="keyword">FROM</span> TAB <span class="keyword">WHERE</span> FLAG&lt;&gt;<span class="string">'1'</span> <span class="keyword">OR</span> FLAG <span class="keyword">IS</span> <span class="literal">NULL</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">ID</span>, <span class="keyword">NAME</span> <span class="keyword">FROM</span> TAB <span class="keyword">WHERE</span> FLAG <span class="keyword">NOT</span> <span class="keyword">IN</span> (<span class="string">'1'</span>, <span class="string">'2'</span>) <span class="keyword">OR</span> FLAG <span class="keyword">IS</span> <span class="literal">NULL</span>;</span><br></pre></td></tr></table></figure></li>
+<li>子查询返回多条记录：  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">ID</span>, <span class="keyword">NAME</span> <span class="keyword">FROM</span> TAB <span class="keyword">WHERE</span> BUSINO=(<span class="keyword">SELECT</span> BUSINO <span class="keyword">FROM</span> APPL <span class="keyword">WHERE</span> ...);</span><br><span class="line"><span class="comment">-- 如果查询APPL会返回多条记录，那么会出错，因此需要调整子查询条件，保证至多返回一条记录，例如（Oracle）</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">ID</span>, <span class="keyword">NAME</span> <span class="keyword">FROM</span> TAB <span class="keyword">WHERE</span> BUSINO=(<span class="keyword">SELECT</span> BUSINO <span class="keyword">FROM</span> APPL <span class="keyword">WHERE</span> ... <span class="keyword">AND</span> <span class="keyword">ROWNUM</span>=<span class="number">1</span>);</span><br></pre></td></tr></table></figure></li>
+<li>用==或&lt;&gt;判断NULL：应使用IS NULL或IS NOT NULL进行判断。</li>
 <li>IN后面没有值，或者取值超过了1000个。</li>
-<li><p>参数校验不完整：假如HUGE_TABLE是张很大的表，对于下面代码而言，只要构造不含任何条件的请求，那么就可以把系统搞瘫痪。</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 绕过前台校验，不传任何条件，使程序直接查全表</span></span><br><span class="line">StringBuilder sql = <span class="keyword">new</span> StringBuilder(<span class="string">"SELECT NAME,DESCRIPTION FROM HUGE_TABLE WHERE 1=1"</span>);</span><br><span class="line"><span class="keyword">if</span> (StringUtils.isNotEmpty(cond1)) &#123;</span><br><span class="line">    sql.append(<span class="string">" AND COND1='"</span>).append(escapeSQL(cond1)).append(<span class="string">"'"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (StringUtils.isNotEmpty(cond2)) &#123;</span><br><span class="line">    sql.append(<span class="string">" AND COND2='"</span>).append(escapeSQL(cond2)).append(<span class="string">"'"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (StringUtils.isNotEmpty(cond3)) &#123;</span><br><span class="line">    sql.append(<span class="string">" AND COND3='"</span>).append(escapeSQL(cond3)).append(<span class="string">"'"</span>);</span><br><span class="line">&#125;</span><br><span class="line">PreparedStatement stmt = conn.prepareStatement(sql.toString());</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p>  另外两个例子：</p>
-<ul>
+<li>参数校验不完整：假如HUGE_TABLE是张很大的表，对于下面代码而言，只要构造不含任何条件的请求，那么就可以把系统搞瘫痪。  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 绕过前台校验，不传任何条件，使程序直接查全表</span></span><br><span class="line">StringBuilder sql = <span class="keyword">new</span> StringBuilder(<span class="string">"SELECT NAME,DESCRIPTION FROM HUGE_TABLE WHERE 1=1"</span>);</span><br><span class="line"><span class="keyword">if</span> (StringUtils.isNotEmpty(cond1)) &#123;</span><br><span class="line">    sql.append(<span class="string">" AND COND1='"</span>).append(escapeSQL(cond1)).append(<span class="string">"'"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (StringUtils.isNotEmpty(cond2)) &#123;</span><br><span class="line">    sql.append(<span class="string">" AND COND2='"</span>).append(escapeSQL(cond2)).append(<span class="string">"'"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (StringUtils.isNotEmpty(cond3)) &#123;</span><br><span class="line">    sql.append(<span class="string">" AND COND3='"</span>).append(escapeSQL(cond3)).append(<span class="string">"'"</span>);</span><br><span class="line">&#125;</span><br><span class="line">PreparedStatement stmt = conn.prepareStatement(sql.toString());</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+  另外两个例子：<ul>
 <li>如果分页程序未对每页最多记录数进行限制，那么用户可以让每页显示10000条记录，从而影响系统运行。</li>
 <li>如果参数作为UPDATE或DELETE的条件来使用，那么绕过校验会产生灾难性后果。</li>
 </ul>
@@ -534,13 +518,14 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#格式与美观问题"><span class="nav-number">1.</span> <span class="nav-text">格式与美观问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字符串操作"><span class="nav-number">2.</span> <span class="nav-text">字符串操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对象访问"><span class="nav-number">3.</span> <span class="nav-text">对象访问</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#异常处理"><span class="nav-number">4.</span> <span class="nav-text">异常处理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库操作"><span class="nav-number">5.</span> <span class="nav-text">数据库操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SQL语句"><span class="nav-number">6.</span> <span class="nav-text">SQL语句</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#页面"><span class="nav-number">7.</span> <span class="nav-text">页面</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML-JSP"><span class="nav-number">7.1.</span> <span class="nav-text">HTML/JSP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript"><span class="nav-number">7.2.</span> <span class="nav-text">JavaScript</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他"><span class="nav-number">8.</span> <span class="nav-text">其他</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#本系列目录"><span class="nav-number">9.</span> <span class="nav-text">本系列目录</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#格式与美观问题"><span class="nav-number">1.</span> <span class="nav-text">格式与美观问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字符串操作"><span class="nav-number">2.</span> <span class="nav-text">字符串操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对象访问"><span class="nav-number">3.</span> <span class="nav-text">对象访问</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#异常处理"><span class="nav-number">4.</span> <span class="nav-text">异常处理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库操作"><span class="nav-number">5.</span> <span class="nav-text">数据库操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SQL语句"><span class="nav-number">6.</span> <span class="nav-text">SQL语句</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#页面"><span class="nav-number">7.</span> <span class="nav-text">页面</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML-JSP"><span class="nav-number">7.1.</span> <span class="nav-text">HTML&#x2F;JSP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript"><span class="nav-number">7.2.</span> <span class="nav-text">JavaScript</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他"><span class="nav-number">8.</span> <span class="nav-text">其他</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#本系列目录"><span class="nav-number">9.</span> <span class="nav-text">本系列目录</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
       <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="infNaN" src="/img/myavatar.jpg">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="infNaN"
+      src="/img/myavatar.jpg">
   <p class="site-author-name" itemprop="name">infNaN</p>
   <div class="site-description" itemprop="description">多穿女装少踩坑</div>
 </div>
@@ -549,7 +534,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -562,7 +547,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -603,14 +588,14 @@
   &copy; 2018 – 
   <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
-    <i class="fa fa-"></i>
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">infNaN</span>
 </div>
-  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v4.2.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly9tdXNlLnRoZW1lLW5leHQub3Jn">NexT.Muse</span>
+  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly9tdXNlLnRoZW1lLW5leHQub3Jn">NexT.Muse</span> v7.7.0
   </div>
 
         
@@ -629,9 +614,15 @@
   
   <script src="/lib/anime.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+
 <script src="/js/utils.js"></script>
+
+
 <script src="/js/schemes/muse.js"></script>
+
+
 <script src="/js/next-boot.js"></script>
+
 
 
 
