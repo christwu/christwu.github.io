@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 实现一个简单粗暴的Java Web安全过滤器
-category: Java
+category: 教程
 tags:
 - Web 
 - 安全
