@@ -192,6 +192,7 @@
       
         <p>由于安全问题经常被忽视与无视，因此有必要专门指出一些常见的安全隐患以及预防措施。不过Web安全问题已是老生常谈，网上资料也非常丰富，故本文仅仅点到为止，不再详细解释。</p>
 <a id="more"></a>
+
 <h1 id="总体原则"><a href="#总体原则" class="headerlink" title="总体原则"></a>总体原则</h1><ul>
 <li>开发人员要了解各类攻击方式</li>
 <li>绝不信任用户输入，开发时要假设用户的输入存在各种攻击</li>
@@ -208,9 +209,9 @@
 </ul>
 <h2 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h2><ul>
 <li><p>示例：假如用以下SQL进行登录信息校验</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isValidLogin</span><span class="params">(String username, String password)</span> </span>&#123;</span><br><span class="line">    String sql = <span class="string">"SELECT 1 FROM users WHERE username='"</span> + username + <span class="string">"' AND password='"</span> + password + <span class="string">"'"</span>;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  
 <p>  那么登录时在密码中输入<code>&#39; or &#39;&#39;=&#39;</code>，SQL就会变成</p>
-  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="number">1</span> <span class="keyword">FROM</span> <span class="keyword">users</span> <span class="keyword">WHERE</span> username=<span class="string">'admin'</span> <span class="keyword">AND</span> <span class="keyword">password</span>=<span class="string">''</span> <span class="keyword">OR</span> <span class="string">''</span>=<span class="string">''</span></span><br></pre></td></tr></table></figure>
+  
 <p>  结果就会变成不知道密码也能直接进去了。</p>
 <p>  另外，假如密码输入的是<code>&#39;; drop table users; --</code>……</p>
 <ul>
@@ -312,7 +313,7 @@
 <li>示例4：正式环境忘记删除调试文件（例如.git、.svn、.DS_Store）</li>
 </ul>
 <h1 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h1><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cua2FuY2xvdWQuY24vd2l6YXJkZm9yY2VsL293YXNwLWNoZWF0LXNoZWV0LXpoLzEyMTk0Mw==" title="https://www.kancloud.cn/wizardforcel/owasp-cheat-sheet-zh/121943">WEB应用安全测试备忘单<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cua2FuY2xvdWQuY24vd2l6YXJkZm9yY2VsL293YXNwLWNoZWF0LXNoZWV0LXpoLzEyMTk0Mw==">WEB应用安全测试备忘单<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 <h1 id="本系列目录"><a href="#本系列目录" class="headerlink" title="本系列目录"></a>本系列目录</h1><ol>
 <li><a href="/2019/01/02/java-code-review-1">代码审查问题</a></li>

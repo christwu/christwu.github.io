@@ -187,25 +187,27 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>我们曾经使用源代码版本控制软件来组织文档，然而版本控制软件的长项是管理代码，而非管理文档。用作档案库还算凑合，但是管理和检索知识并不方便，因此考虑了一些文档软件。大家可根据实际需求选用不同的系统。<br><a id="more"></a></p>
+        <p>我们曾经使用源代码版本控制软件来组织文档，然而版本控制软件的长项是管理代码，而非管理文档。用作档案库还算凑合，但是管理和检索知识并不方便，因此考虑了一些文档软件。大家可根据实际需求选用不同的系统。</p>
+<a id="more"></a>
+
 <p>本文有很多系统需要自行搭建。从信息安全的角度讲，建议内部文档不要使用现成的服务，而是自行准备服务器，并做好安全防范措施。从操作的角度上将，建议使用Docker部署，操作便捷。</p>
 <h2 id="博客"><a href="#博客" class="headerlink" title="博客"></a>博客</h2><p>博客的特点是“流水账”，文章主题不固定，彼此之间关系也不紧密，访问也没有限制（当然你仍然可以在服务器上面进行限制），适合公开分享个人/项目经历以及经验教训之类的内容。</p>
 <h3 id="WordPress"><a href="#WordPress" class="headerlink" title="WordPress"></a>WordPress</h3><ul>
 <li>格式：富文本</li>
-<li>官网：<span class="exturl" data-url="aHR0cHM6Ly93b3JkcHJlc3Mub3Jn" title="https://wordpress.org">https://wordpress.org<i class="fa fa-external-link"></i></span>和<span class="exturl" data-url="aHR0cHM6Ly93b3JkcHJlc3MuY29t" title="https://wordpress.com">https://wordpress.com<i class="fa fa-external-link"></i></span>（前者是软件，后者是把软件搭好的现成服务）</li>
+<li>官网：<span class="exturl" data-url="aHR0cHM6Ly93b3JkcHJlc3Mub3Jn">https://wordpress.org<i class="fa fa-external-link-alt"></i></span>和<span class="exturl" data-url="aHR0cHM6Ly93b3JkcHJlc3MuY29t">https://wordpress.com<i class="fa fa-external-link-alt"></i></span>（前者是软件，后者是把软件搭好的现成服务）</li>
 <li>部署：需自行搭建</li>
 <li>最流行的博客系统，不需要再详细叙述。文档可以直接在系统里面维护和发布，操作非常便捷。</li>
 </ul>
 <h3 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h3><ul>
 <li>格式：Markdown</li>
-<li>官网：<span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv" title="https://hexo.io">https://hexo.io<i class="fa fa-external-link"></i></span></li>
+<li>官网：<span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">https://hexo.io<i class="fa fa-external-link-alt"></i></span></li>
 <li>部署：需自行搭建Web Server，或者放到GitHub Pages/GitLab Pages等里面。每次更改文档需要重新生成代码和部署。</li>
 <li>本博客就是用Hexo搭建的。但是，为了使博客运行，需要至少准备一个Web Server。想要玩得转的话，需要把源代码放在Git上面，还要需要配置CI，使用时还要先Git Pull再Git Push，对于大家来说实在太麻烦，不推荐。</li>
 </ul>
 <h2 id="维基和书籍类"><a href="#维基和书籍类" class="headerlink" title="维基和书籍类"></a>维基和书籍类</h2><p>这两类适合存放成体系的内容，检索起来也比较方便，可以用来建设知识库、资料库等。</p>
 <h3 id="MediaWiki"><a href="#MediaWiki" class="headerlink" title="MediaWiki"></a>MediaWiki</h3><ul>
 <li>格式：富文本（需使用MediaWiki语法）</li>
-<li>官网：<span class="exturl" data-url="aHR0cHM6Ly9tZWRpYXdpa2kub3Jn" title="https://mediawiki.org">https://mediawiki.org<i class="fa fa-external-link"></i></span></li>
+<li>官网：<span class="exturl" data-url="aHR0cHM6Ly9tZWRpYXdpa2kub3Jn">https://mediawiki.org<i class="fa fa-external-link-alt"></i></span></li>
 <li>部署：需自行搭建</li>
 <li>该软件最初就用于维基百科，适合构建百科类网站，组织知识零碎、有一定范围但各内容彼此之间关系不密切的内容。</li>
 <li>软件有三个值得注意的缺点：<ul>
@@ -217,36 +219,36 @@
 </ul>
 <h3 id="BookStack"><a href="#BookStack" class="headerlink" title="BookStack"></a>BookStack</h3><ul>
 <li>格式：富文本或Markdown，取决于网站设置</li>
-<li>官网：<span class="exturl" data-url="aHR0cHM6Ly9ib29rc3RhY2thcHAuY29t" title="https://bookstackapp.com">https://bookstackapp.com<i class="fa fa-external-link"></i></span></li>
+<li>官网：<span class="exturl" data-url="aHR0cHM6Ly9ib29rc3RhY2thcHAuY29t">https://bookstackapp.com<i class="fa fa-external-link-alt"></i></span></li>
 <li>部署：需自行搭建</li>
 <li>该软件适合存放成体系、内容彼此之间关联密切的内容，例如书籍、手册等。我们目前正在使用此软件管理资料库。</li>
 </ul>
 <h2 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h2><p>Evernote、OneNote、Notable等软件的重点是个人笔记，本文不再介绍。</p>
 <h3 id="Etherpad"><a href="#Etherpad" class="headerlink" title="Etherpad"></a>Etherpad</h3><ul>
 <li>类型：纯文本或富文本（取决于网站设置）</li>
-<li>官网：<span class="exturl" data-url="aHR0cHM6Ly9ldGhlcnBhZC5vcmc=" title="https://etherpad.org">https://etherpad.org<i class="fa fa-external-link"></i></span></li>
+<li>官网：<span class="exturl" data-url="aHR0cHM6Ly9ldGhlcnBhZC5vcmc=">https://etherpad.org<i class="fa fa-external-link-alt"></i></span></li>
 <li>部署：需自行搭建。个人建议直接放自己电脑上跑，需要的时候才启动。</li>
 <li>该软件适合多人同时编辑同一个文件，而且彼此之间可以看到谁在修改哪些内容，建议协作时使用。</li>
 </ul>
 <h2 id="粘贴箱类"><a href="#粘贴箱类" class="headerlink" title="粘贴箱类"></a>粘贴箱类</h2><p>粘贴箱类适合临时分享一些小东西。</p>
 <h3 id="Ubuntu-Pastebin"><a href="#Ubuntu-Pastebin" class="headerlink" title="Ubuntu Pastebin"></a>Ubuntu Pastebin</h3><ul>
 <li>类型：仅纯文本（代码）</li>
-<li>网站：<span class="exturl" data-url="aHR0cHM6Ly9wYXN0ZS51YnVudHUuY29t" title="https://paste.ubuntu.com">https://paste.ubuntu.com<i class="fa fa-external-link"></i></span></li>
+<li>网站：<span class="exturl" data-url="aHR0cHM6Ly9wYXN0ZS51YnVudHUuY29t">https://paste.ubuntu.com<i class="fa fa-external-link-alt"></i></span></li>
 <li>该网站适合临时分享一些文字或代码。想象一下用聊天软件给对方发东西时，是发一大坨代码（有时候系统可能还给自动转成表情符号）好看呢，还是发个小链接（网站顺便会给格式化一下）好看呢？</li>
 </ul>
 <h3 id="GitHub-Gist"><a href="#GitHub-Gist" class="headerlink" title="GitHub Gist"></a>GitHub Gist</h3><ul>
 <li>类型：一个或多个代码文件</li>
-<li>网站：<span class="exturl" data-url="aHR0cHM6Ly9naXN0LmdpdGh1Yi5jb20=" title="https://gist.github.com">https://gist.github.com<i class="fa fa-external-link"></i></span></li>
+<li>网站：<span class="exturl" data-url="aHR0cHM6Ly9naXN0LmdpdGh1Yi5jb20=">https://gist.github.com<i class="fa fa-external-link-alt"></i></span></li>
 <li>该网站适合分享一些零碎的代码片段，或者一些小到不值得开repo的程序。不过该网站已经被墙，所以分享时需要保证他人也能访问该网站。</li>
 </ul>
 <h3 id="img-vim-cn-com"><a href="#img-vim-cn-com" class="headerlink" title="img.vim-cn.com"></a>img.vim-cn.com</h3><ul>
 <li>类型：图片</li>
-<li>网站：<span class="exturl" data-url="aHR0cHM6Ly9pbWcudmltLWNuLmNvbS8=" title="https://img.vim-cn.com/">https://img.vim-cn.com/<i class="fa fa-external-link"></i></span></li>
+<li>网站：<span class="exturl" data-url="aHR0cHM6Ly9pbWcudmltLWNuLmNvbS8=">https://img.vim-cn.com/<i class="fa fa-external-link-alt"></i></span></li>
 <li>该网站可用于临时分享图片。如果处于不能或者不便发图的场合，可以先把图片传到这里，再去发图片的链接。</li>
 </ul>
 <h3 id="Firefox-Send"><a href="#Firefox-Send" class="headerlink" title="Firefox Send"></a>Firefox Send</h3><ul>
 <li>类型：文件</li>
-<li>网站：<span class="exturl" data-url="aHR0cHM6Ly9zZW5kLmZpcmVmb3guY29tLw==" title="https://send.firefox.com/">https://send.firefox.com/<i class="fa fa-external-link"></i></span></li>
+<li>网站：<span class="exturl" data-url="aHR0cHM6Ly9zZW5kLmZpcmVmb3guY29tLw==">https://send.firefox.com/<i class="fa fa-external-link-alt"></i></span></li>
 <li>该网站可用于临时分享文件。同样是发送成功之后取一个下载链接。</li>
 </ul>
 <h2 id="其他软件附带的功能"><a href="#其他软件附带的功能" class="headerlink" title="其他软件附带的功能"></a>其他软件附带的功能</h2><h3 id="GitHub-GitLab"><a href="#GitHub-GitLab" class="headerlink" title="GitHub/GitLab"></a>GitHub/GitLab</h3><ul>

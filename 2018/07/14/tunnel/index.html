@@ -245,10 +245,10 @@
 <li>由于中国人经常买这家服务器来翻墙，Vultr的服务器在国内访问效果并不太好，有时需要刷IP（买新机器然后删除旧机器）才能在国内连接上</li>
 </ul>
 <p>为了方便，新机器操作系统选择Ubuntu。启动完成之后，先在公司Ping一下，没问题的话就可以用PuTTY等软件建立连接了。输入Vultr网站上面给你提供的服务器IP（端口22）、用户名和密码，然后</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+
 
 <p>将其中的<code>GatewayPorts no</code>改成<code>yes</code>，没找到的话就在文件末尾追加一行，保存。然后</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart sshd</span><br></pre></td></tr></table></figure>
+
 
 <p>准备工作就做好了。</p>
 <div class="note warning">
@@ -300,12 +300,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2018/05/15/deployment/" rel="prev" title="Web应用部署注意事项">
-      <i class="fa fa-chevron-left"></i> Web应用部署注意事项
+    <a href="/2018/07/14/cross-company-debug/" rel="prev" title="接口设计与联调经验">
+      <i class="fa fa-chevron-left"></i> 接口设计与联调经验
     </a></div>
       <div class="post-nav-item">
-    <a href="/2018/07/14/cross-company-debug/" rel="next" title="接口设计与联调经验">
-      接口设计与联调经验 <i class="fa fa-chevron-right"></i>
+    <a href="/2018/07/15/to-new-employee/" rel="next" title="给校招新员工分享的一点人生的经验">
+      给校招新员工分享的一点人生的经验 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>

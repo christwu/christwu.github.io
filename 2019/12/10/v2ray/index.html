@@ -189,6 +189,7 @@
       
         <p>本文用于在紧急情况下快速部署应用，以解决燃眉之急，不过事后需要付钱，请谨慎决定。</p>
 <a id="more"></a>
+
 <h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><ol>
 <li>一个VPS服务器，可到<span class="exturl" data-url="aHR0cHM6Ly93d3cuZGlnaXRhbG9jZWFuLmNvbS8=">DigitalOcean<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly93d3cudnVsdHIuY29tLw==">Vultr<i class="fa fa-external-link-alt"></i></span>（支持国内支付方式）、<span class="exturl" data-url="aHR0cHM6Ly93d3cubGlub2RlLmNvbS8=">Linode<i class="fa fa-external-link-alt"></i></span>等网站购买。本文提到的这三个网站有一个好：按实际使用时间收费，而且IP被封的话还可以刷机器，不需要多花钱（与那些换一次IP就要好几美元的主机商比，多花几美分就相当于没花钱了）。</li>
 <li>一个固定域名，可到<span class="exturl" data-url="aHR0cHM6Ly93d3cubmFtZWNoZWFwLmNvbS8=">Namecheap<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly9nb2RhZGR5LmNvbS8=">GoDaddy<i class="fa fa-external-link-alt"></i></span>等网站购买。如果不嫌弃实名制，买<span class="exturl" data-url="aHR0cHM6Ly9kbnNwb2QuY2xvdWQudGVuY2VudC5jb20v">腾讯云<i class="fa fa-external-link-alt"></i></span>之类等国内域名也没问题，国内域名国外主机的话不需要备案。</li>
@@ -205,13 +206,26 @@
 <p>登录域名控制台，添加一条A记录，主机记录名称为<code>@</code>，IP为你所购买的服务器的IP。</p>
 <h1 id="服务器配置"><a href="#服务器配置" class="headerlink" title="服务器配置"></a>服务器配置</h1><h2 id="基本设置"><a href="#基本设置" class="headerlink" title="基本设置"></a>基本设置</h2><p>连接服务器（假设用root账号登录），输入以下命令安装Docker并配置BBR加速：</p>
 
-<h2 id="搭建V2Ray-ws-Web"><a href="#搭建V2Ray-ws-Web" class="headerlink" title="搭建V2Ray+ws+Web"></a>搭建V2Ray+ws+Web</h2><p>文件结构如下：<br></p>
+
+<h2 id="搭建V2Ray-ws-Web"><a href="#搭建V2Ray-ws-Web" class="headerlink" title="搭建V2Ray+ws+Web"></a>搭建V2Ray+ws+Web</h2><p>文件结构如下：</p>
+
+
 <p>文件内容如下：</p>
-<p><code>docker-compose.yml</code>：<br></p>
-<p><code>v2ray/config.json</code>：注意需要修改下面的id部分<br></p>
-<p><code>caddy/Caddyfile</code>：注意将域名修改成你自己购买的域名。<br></p>
-<p><code>caddy/html/index.html</code>：伪装用的，设置成什么内容都行。<br></p>
-<p>文件写好之后，在docker-compose.yml所在目录输入以下命令启动：<br></p>
+<p><code>docker-compose.yml</code>：</p>
+
+
+<p><code>v2ray/config.json</code>：注意需要修改下面的id部分</p>
+
+
+<p><code>caddy/Caddyfile</code>：注意将域名修改成你自己购买的域名。</p>
+
+
+<p><code>caddy/html/index.html</code>：伪装用的，设置成什么内容都行。</p>
+
+
+<p>文件写好之后，在docker-compose.yml所在目录输入以下命令启动：</p>
+
+
 <p>稍等片刻。在浏览器输入<code>https://the-shirt-is-nine-fifteen.com</code>，如果能看到Hello Google说明启动成功（进一步讲，如果能跳转到Google说明客户端配置成功）。</p>
 <h1 id="客户端配置"><a href="#客户端配置" class="headerlink" title="客户端配置"></a>客户端配置</h1><p>客户端下载（Windows）：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0Nlbm1yZXYvVjJSYXlXL3JlbGVhc2Vz">V2RayW<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tLzJkdXN0L3YycmF5Ti9yZWxlYXNlcw==">v2rayN<i class="fa fa-external-link-alt"></i></span></p>
 <p>客户端配置规则（请根据实际情况填写）：</p>
@@ -225,6 +239,7 @@
 <li>TLS的域名：<code>the-shirt-is-nine-fifteen.com</code></li>
 </ul>
 <p>使用原生V2Ray客户端时的config.json：注意修改域名和id中的说明文字</p>
+
 
 <p>启动客户端。有的客户端可自动设置系统代理。如需要手工设置，那么你需要将系统代理设置成HTTP代理，地址127.0.0.1，端口1080。</p>
 <h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
