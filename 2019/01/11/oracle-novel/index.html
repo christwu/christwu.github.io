@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 4.2.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -13,38 +13,9 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-
-<script id="hexo-configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    hostname: new URL('https://plusnan.me').hostname,
-    root: '/',
-    scheme: 'Muse',
-    version: '7.7.0',
-    exturl: true,
-    sidebar: {"position":"right","display":"always","padding":18,"offset":12,"onmobile":false},
-    copycode: {"enable":true,"show_result":true,"style":null},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
-    bookmark: {"enable":false,"color":"#222","save":"auto"},
-    fancybox: false,
-    mediumzoom: false,
-    lazyload: false,
-    pangu: true,
-    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
-    algolia: {
-      appID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: '',
-    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
-  };
-</script>
+<script id="hexo-configurations">var NexT=window.NexT||{},CONFIG={hostname:"plusnan.me",root:"/",scheme:"Muse",version:"7.8.0",exturl:!0,sidebar:{position:"right",display:"always",padding:18,offset:12,onmobile:!1},copycode:{enable:!0,show_result:!0,style:null},back2top:{enable:!0,sidebar:!1,scrollpercent:!1},bookmark:{enable:!1,color:"#222",save:"auto"},fancybox:!1,mediumzoom:!1,lazyload:!1,pangu:!0,comments:{style:"tabs",active:null,storage:!0,lazyload:!1,nav:null},algolia:{hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}},localsearch:{enable:!1,trigger:"auto",top_n_per_article:1,unescape:!1,preload:!1},motion:{enable:!1,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}}}</script>
 
   <meta name="description" content="上班时间看小说有很多种方式，例如直接拿手机看，在浏览器上面看，用小说阅读器看，拷到Word里面看，甚至拷到Eclipse里面看……然而，这几种方式看起来都比较显眼，就算放在Eclipse上面看起来也不太自然（方块字又多又密，而且没有语法高亮，一看就不像程序代码）。在此，本文针对软件开发和运维人员介绍一种可以大大方方在上班时间看小说而且不会引起怀疑的方法——在数据库客户端里面看小说。">
 <meta property="og:type" content="article">
@@ -66,26 +37,12 @@
 <link rel="canonical" href="https://plusnan.me/2019/01/11/oracle-novel/">
 
 
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome: false,
-    isPost: true
-  };
-</script>
+<script id="page-configurations">CONFIG.page={sidebar:"",isHome:!1,isPost:!0,lang:"zh-CN"}</script>
 
   <title>通过数据库“阅读器”在上班时间看小说 | infNaN</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134391990-1"></script>
-    <script>
-      if (CONFIG.hostname === location.hostname) {
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'UA-134391990-1');
-      }
-    </script>
+    <script>if(CONFIG.hostname===location.hostname){function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-134391990-1")}</script>
 
 
 
@@ -93,26 +50,7 @@
 
 
   <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
+  <style>.sidebar-inner,.use-motion .brand,.use-motion .collection-header,.use-motion .comments,.use-motion .menu-item,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header{opacity:initial}.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.use-motion .logo-line-before i{left:initial}.use-motion .logo-line-after i{right:initial}</style>
 </noscript>
 
 <link rel="alternate" href="/rss.xml" title="infNaN" type="application/atom+xml">
@@ -124,17 +62,6 @@
 
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
-  <div class="site-meta">
-
-    <div>
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">infNaN</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-  </div>
-
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏">
       <span class="toggle-line toggle-line-first"></span>
@@ -142,35 +69,53 @@
       <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">infNaN</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
 </div>
 
 
+
+
 <nav class="site-nav">
-  
-  <ul id="menu" class="menu">
+  <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
 
   </li>
   </ul>
-
 </nav>
+
+
+
+
 </div>
     </header>
 
@@ -186,14 +131,13 @@
         <div class="content-wrap">
           
 
-          <div class="content">
+          <div class="content post posts-expand">
             
 
-  <div class="posts-expand">
-      
+    
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://plusnan.me/2019/01/11/oracle-novel/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -213,7 +157,7 @@
         <div class="post-meta">
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
 
@@ -221,20 +165,18 @@
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
                 <time title="修改时间：2020-01-16 15:22:17" itemprop="dateModified" datetime="2020-01-16T15:22:17+08:00">2020-01-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
+                <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%97%B2%E8%B0%88/" itemprop="url" rel="index">
-                    <span itemprop="name">闲谈</span>
-                  </a>
+                  <a href="/categories/%E9%97%B2%E8%B0%88/" itemprop="url" rel="index"><span itemprop="name">闲谈</span></a>
                 </span>
             </span>
 
@@ -268,7 +210,7 @@
 <p>为了方便阅读，我对小说按照章节进行了分割，文件名格式类似5_1.txt。预处理完成后运行（备注：这里是Linux/macOS）：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Oracle</span></span><br><span class="line"><span class="built_in">export</span> CLASSPATH=.:ojdbc6.jar</span><br><span class="line"><span class="comment"># MySQL</span></span><br><span class="line"><span class="built_in">export</span> CLASSPATH=.:mysql-connector-java-8.0.13.jar</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> `seq 1 5`; <span class="keyword">do</span></span><br><span class="line">    java ImportUtils 5 1 5_<span class="variable">$i</span>.txt</span><br><span class="line"></span><br><span class="line">    <span class="comment"># UTF-8编码则需要</span></span><br><span class="line">    <span class="comment"># java ImportUtils 5 1 5_$i.txt UTF-8</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
 <h2 id="awk脚本（Linux服务器）"><a href="#awk脚本（Linux服务器）" class="headerlink" title="awk脚本（Linux服务器）"></a>awk脚本（Linux服务器）</h2><p>DBA们可能并没有在电脑上安装Java，不过没关系，我们也可以将小说上传到服务器上，通过下面的awk脚本生成SQL，然后通过sqlplus执行SQL，把将小说内容导入到数据库中：</p>
-<p>gen_sql.awk：<br><div class="tabs" id="awk"><ul class="nav-tabs"><li class="tab active"><a href="#awk-1">Oracle</a></li><li class="tab"><a href="#awk-2">MySQL</a></li></ul><div class="tab-content"><div class="tab-pane active" id="awk-1"><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">BEGIN</span> &#123;</span><br><span class="line">    INSERT_SQL = <span class="string">"INSERT INTO OGGFORWARD.TBL_EROMANGA (ID, BOOK, CHAPTER, TEXT) VALUES (SEQ_TBL_EROMANGA.NEXTVAL, '@1', '@2', '@3');"</span>;</span><br><span class="line">    <span class="keyword">if</span> (!LINE_WIDTH) &#123;</span><br><span class="line">        LINE_WIDTH = <span class="number">70</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!BOOK) &#123;</span><br><span class="line">        <span class="keyword">exit</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    print <span class="string">"SET AUTOCOMMIT OFF;"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 导入变量</span></span><br><span class="line">    gsub(<span class="regexp">/@1/</span>, BOOK, INSERT_SQL);</span><br><span class="line">    gsub(<span class="regexp">/@2/</span>, CHAPTER, INSERT_SQL);</span><br><span class="line"></span><br><span class="line">    <span class="comment"># awk会直接忽略空行</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    gsub(<span class="regexp">/'/</span>, <span class="string">"''"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">1</span>; i&lt;length; i+=LINE_WIDTH) &#123;</span><br><span class="line">        part = substr(<span class="variable">$0</span>, i, LINE_WIDTH);</span><br><span class="line">        line = INSERT_SQL;</span><br><span class="line">        gsub(<span class="regexp">/@3/</span>, part, line);</span><br><span class="line">        print line;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">END</span> &#123;</span><br><span class="line">    print <span class="string">"COMMIT;"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="awk-2"><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">BEGIN</span> &#123;</span><br><span class="line">    INSERT_SQL = <span class="string">"INSERT INTO oggforward.tbl_eromanga (book, chapter, text) VALUES ('@1', '@2', '@3');"</span>;</span><br><span class="line">    <span class="keyword">if</span> (!LINE_WIDTH) &#123;</span><br><span class="line">        LINE_WIDTH = <span class="number">70</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!BOOK) &#123;</span><br><span class="line">        <span class="keyword">exit</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    print <span class="string">"SET NAMES utf8;"</span>;</span><br><span class="line">    print <span class="string">"BEGIN;"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 导入变量</span></span><br><span class="line">    gsub(<span class="regexp">/@1/</span>, BOOK, INSERT_SQL);</span><br><span class="line">    gsub(<span class="regexp">/@2/</span>, CHAPTER, INSERT_SQL);</span><br><span class="line"></span><br><span class="line">    <span class="comment"># awk会直接忽略空行</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    gsub(<span class="regexp">/'/</span>, <span class="string">"''"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">1</span>; i&lt;length; i+=LINE_WIDTH) &#123;</span><br><span class="line">        part = substr(<span class="variable">$0</span>, i, LINE_WIDTH);</span><br><span class="line">        line = INSERT_SQL;</span><br><span class="line">        gsub(<span class="regexp">/@3/</span>, part, line);</span><br><span class="line">        print line;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">END</span> &#123;</span><br><span class="line">    print <span class="string">"COMMIT;"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div></div></p>
+<p>gen_sql.awk：<br></p><div class="tabs" id="awk"><ul class="nav-tabs"><li class="tab active"><a href="#awk-1">Oracle</a></li><li class="tab"><a href="#awk-2">MySQL</a></li></ul><div class="tab-content"><div class="tab-pane active" id="awk-1"><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">BEGIN</span> &#123;</span><br><span class="line">    INSERT_SQL = <span class="string">"INSERT INTO OGGFORWARD.TBL_EROMANGA (ID, BOOK, CHAPTER, TEXT) VALUES (SEQ_TBL_EROMANGA.NEXTVAL, '@1', '@2', '@3');"</span>;</span><br><span class="line">    <span class="keyword">if</span> (!LINE_WIDTH) &#123;</span><br><span class="line">        LINE_WIDTH = <span class="number">70</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!BOOK) &#123;</span><br><span class="line">        <span class="keyword">exit</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    print <span class="string">"SET AUTOCOMMIT OFF;"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 导入变量</span></span><br><span class="line">    gsub(<span class="regexp">/@1/</span>, BOOK, INSERT_SQL);</span><br><span class="line">    gsub(<span class="regexp">/@2/</span>, CHAPTER, INSERT_SQL);</span><br><span class="line"></span><br><span class="line">    <span class="comment"># awk会直接忽略空行</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    gsub(<span class="regexp">/'/</span>, <span class="string">"''"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">1</span>; i&lt;length; i+=LINE_WIDTH) &#123;</span><br><span class="line">        part = substr(<span class="variable">$0</span>, i, LINE_WIDTH);</span><br><span class="line">        line = INSERT_SQL;</span><br><span class="line">        gsub(<span class="regexp">/@3/</span>, part, line);</span><br><span class="line">        print line;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">END</span> &#123;</span><br><span class="line">    print <span class="string">"COMMIT;"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="awk-2"><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">BEGIN</span> &#123;</span><br><span class="line">    INSERT_SQL = <span class="string">"INSERT INTO oggforward.tbl_eromanga (book, chapter, text) VALUES ('@1', '@2', '@3');"</span>;</span><br><span class="line">    <span class="keyword">if</span> (!LINE_WIDTH) &#123;</span><br><span class="line">        LINE_WIDTH = <span class="number">70</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!BOOK) &#123;</span><br><span class="line">        <span class="keyword">exit</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    print <span class="string">"SET NAMES utf8;"</span>;</span><br><span class="line">    print <span class="string">"BEGIN;"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 导入变量</span></span><br><span class="line">    gsub(<span class="regexp">/@1/</span>, BOOK, INSERT_SQL);</span><br><span class="line">    gsub(<span class="regexp">/@2/</span>, CHAPTER, INSERT_SQL);</span><br><span class="line"></span><br><span class="line">    <span class="comment"># awk会直接忽略空行</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    gsub(<span class="regexp">/'/</span>, <span class="string">"''"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">1</span>; i&lt;length; i+=LINE_WIDTH) &#123;</span><br><span class="line">        part = substr(<span class="variable">$0</span>, i, LINE_WIDTH);</span><br><span class="line">        line = INSERT_SQL;</span><br><span class="line">        gsub(<span class="regexp">/@3/</span>, part, line);</span><br><span class="line">        print line;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">END</span> &#123;</span><br><span class="line">    print <span class="string">"COMMIT;"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div></div><p></p>
 <div class="note warning">
             <p>在macOS系统下面，awk的length和substr无法正确识别中文；在Linux系统下面则需要正确设置LANG环境变量才能识别中文，例如在命令前面加<code>LANG=zh_CN.UTF-8</code>。</p>
           </div>
@@ -278,7 +220,7 @@
             <p>这里需要再次注意文件字符编码，如果txt编码、LANG、NLS_LANG（Oracle）与数据库（Oracle）/表（MySQL）编码四者不一致也会乱码！</p><p>假如txt文件是UTF-8，数据库是GBK，可以先用<code>iconv -f utf8 -t gbk -c 1.txt &gt; 1_gbk.txt</code>对文件转码，然后<code>export LANG=zh_CN.GBK</code>设置awk编码。</p><p>另外也可以不改编码，管道到iconv：<code>awk ... | iconv -f utf8 -t gbk -c | sqlplus oggforward/eromanga</code></p>
           </div>
 <h2 id="如果连数据库也是Windows服务器"><a href="#如果连数据库也是Windows服务器" class="headerlink" title="如果连数据库也是Windows服务器"></a>如果连数据库也是Windows服务器</h2><p>Windows系统自带VBScript，一样能生成SQL然后执行。不会写VBScript也没关系，把小说扔到Excel里面然后用公式拼接出SQL语句也行。</p>
-<h1 id="开始阅读"><a href="#开始阅读" class="headerlink" title="开始阅读"></a>开始阅读</h1><p>用你平常用的数据库工具登录，然后<br><div class="tabs" id="query"><ul class="nav-tabs"><li class="tab active"><a href="#query-1">Oracle</a></li><li class="tab"><a href="#query-2">MySQL</a></li></ul><div class="tab-content"><div class="tab-pane active" id="query-1"><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 阅读</span></span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    <span class="keyword">ID</span>, BOOK, CHAPTER, <span class="built_in">TEXT</span>, IS_READ, ACCESS_TIME </span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    OGGFORWARD.TBL_EROMANGA E</span><br><span class="line"><span class="keyword">WHERE</span> E.BOOK = <span class="string">'1'</span> <span class="keyword">AND</span> E.CHAPTER = <span class="string">'1'</span>    <span class="comment">-- 例如：第1卷第一章</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> E.ID;</span><br><span class="line"><span class="comment">-- 阅读未看过的，加个WHERE条件IS_READ='0'</span></span><br><span class="line"><span class="comment">-- 标记已看过的部分</span></span><br><span class="line"><span class="keyword">UPDATE</span> OGGFORWARD.TBL_EROMANGA <span class="keyword">SET</span> IS_READ=<span class="string">'1'</span>, ACCESS_TIME=<span class="keyword">SYSDATE</span> <span class="keyword">WHERE</span> <span class="keyword">ID</span>&lt;你所看到的<span class="keyword">ID</span> <span class="keyword">AND</span> IS_READ=<span class="string">'0'</span>;</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="query-2"><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 阅读</span></span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    <span class="keyword">id</span>, book, chapter, <span class="built_in">text</span>, is_read, access_time </span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    oggforward.tbl_eromanga e</span><br><span class="line"><span class="keyword">WHERE</span> e.book = <span class="string">'1'</span> <span class="keyword">AND</span> e.chapter = <span class="string">'1'</span>    <span class="comment">-- 例如：第1卷第一章</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> e.id;</span><br><span class="line"><span class="comment">-- 阅读未看过的，加个WHERE条件IS_READ='0'</span></span><br><span class="line"><span class="comment">-- 标记已看过的部分</span></span><br><span class="line"><span class="keyword">UPDATE</span> oggforward.tbl_eromanga <span class="keyword">SET</span> is_read=<span class="string">'1'</span>, access_time=<span class="keyword">sysdate</span>() <span class="keyword">WHERE</span> <span class="keyword">id</span>&lt;你所看到的<span class="keyword">ID</span> <span class="keyword">AND</span> is_read=<span class="string">'0'</span>;</span><br></pre></td></tr></table></figure></div></div></div></p>
+<h1 id="开始阅读"><a href="#开始阅读" class="headerlink" title="开始阅读"></a>开始阅读</h1><p>用你平常用的数据库工具登录，然后<br></p><div class="tabs" id="query"><ul class="nav-tabs"><li class="tab active"><a href="#query-1">Oracle</a></li><li class="tab"><a href="#query-2">MySQL</a></li></ul><div class="tab-content"><div class="tab-pane active" id="query-1"><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 阅读</span></span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    <span class="keyword">ID</span>, BOOK, CHAPTER, <span class="built_in">TEXT</span>, IS_READ, ACCESS_TIME </span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    OGGFORWARD.TBL_EROMANGA E</span><br><span class="line"><span class="keyword">WHERE</span> E.BOOK = <span class="string">'1'</span> <span class="keyword">AND</span> E.CHAPTER = <span class="string">'1'</span>    <span class="comment">-- 例如：第1卷第一章</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> E.ID;</span><br><span class="line"><span class="comment">-- 阅读未看过的，加个WHERE条件IS_READ='0'</span></span><br><span class="line"><span class="comment">-- 标记已看过的部分</span></span><br><span class="line"><span class="keyword">UPDATE</span> OGGFORWARD.TBL_EROMANGA <span class="keyword">SET</span> IS_READ=<span class="string">'1'</span>, ACCESS_TIME=<span class="keyword">SYSDATE</span> <span class="keyword">WHERE</span> <span class="keyword">ID</span>&lt;你所看到的<span class="keyword">ID</span> <span class="keyword">AND</span> IS_READ=<span class="string">'0'</span>;</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="query-2"><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 阅读</span></span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    <span class="keyword">id</span>, book, chapter, <span class="built_in">text</span>, is_read, access_time </span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    oggforward.tbl_eromanga e</span><br><span class="line"><span class="keyword">WHERE</span> e.book = <span class="string">'1'</span> <span class="keyword">AND</span> e.chapter = <span class="string">'1'</span>    <span class="comment">-- 例如：第1卷第一章</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> e.id;</span><br><span class="line"><span class="comment">-- 阅读未看过的，加个WHERE条件IS_READ='0'</span></span><br><span class="line"><span class="comment">-- 标记已看过的部分</span></span><br><span class="line"><span class="keyword">UPDATE</span> oggforward.tbl_eromanga <span class="keyword">SET</span> is_read=<span class="string">'1'</span>, access_time=<span class="keyword">sysdate</span>() <span class="keyword">WHERE</span> <span class="keyword">id</span>&lt;你所看到的<span class="keyword">ID</span> <span class="keyword">AND</span> is_read=<span class="string">'0'</span>;</span><br></pre></td></tr></table></figure></div></div></div><p></p>
 <p>注意放一些有迷惑性的语句（相当于“老板键”），包装一下你的阅读器，例如：</p>
 <div class="tabs" id="normalsql"><ul class="nav-tabs"><li class="tab active"><a href="#normalsql-1">Oracle</a></li></ul><div class="tab-content"><div class="tab-pane active" id="normalsql-1"><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 查看锁表情况并生成解锁语句</span></span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    b.owner,b.object_name,c.sid,c.serial<span class="comment">#,a.locked_mode,c.username,c.osuser,c.machine,c.module,c.logon_time,</span></span><br><span class="line">    <span class="string">'ALTER SYSTEM KILL SESSION '''</span>||c.sid||<span class="string">','</span>||c.serial<span class="comment">#||''';' cmd,</span></span><br><span class="line">    s.sql_text</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    v$locked_object a,dba_objects b, v$<span class="keyword">session</span> c, v$<span class="keyword">sql</span> s</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">    b.object_id = a.object_id <span class="keyword">AND</span> a.session_id = c.sid <span class="keyword">AND</span> s.address = c.PREV_SQL_ADDR <span class="keyword">AND</span> s.hash_value = c.PREV_HASH_VALUE</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> c.logon_time;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查看连接数</span></span><br><span class="line"><span class="keyword">SELECT</span> machine, <span class="keyword">status</span>, <span class="keyword">count</span>(<span class="number">1</span>) <span class="keyword">FROM</span> v$<span class="keyword">session</span> <span class="keyword">GROUP</span> <span class="keyword">BY</span> machine, <span class="keyword">status</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">count</span>(<span class="number">1</span>) <span class="keyword">DESC</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查看表空间使用情况</span></span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    a.tablespace_name,</span><br><span class="line">    <span class="keyword">round</span>(total_bytes / <span class="number">1048576</span>, <span class="number">2</span>) total_mb,</span><br><span class="line">    <span class="keyword">round</span>((total_bytes - free_bytes) / <span class="number">1048576</span>, <span class="number">2</span>) used_mb,</span><br><span class="line">    <span class="keyword">round</span>(free_bytes / <span class="number">1048576</span>, <span class="number">2</span>) free_mb,</span><br><span class="line">    <span class="keyword">round</span>((<span class="number">1</span> - free_bytes / total_bytes) * <span class="number">100</span>, <span class="number">2</span>) used_ratio</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    (<span class="keyword">SELECT</span> tablespace_name, <span class="keyword">sum</span>(<span class="keyword">bytes</span>) free_bytes <span class="keyword">FROM</span> dba_free_space <span class="keyword">GROUP</span> <span class="keyword">BY</span> tablespace_name) a,</span><br><span class="line">    (<span class="keyword">SELECT</span> tablespace_name, <span class="keyword">sum</span>(<span class="keyword">bytes</span>) total_bytes <span class="keyword">FROM</span> dba_data_files <span class="keyword">GROUP</span> <span class="keyword">BY</span> tablespace_name) b</span><br><span class="line"><span class="keyword">WHERE</span> a.tablespace_name = b.tablespace_name</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> a.tablespace_name;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查看占资源的SQL</span></span><br><span class="line"><span class="comment">-- 最耗时的SQL</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> v$sqlstats <span class="keyword">ORDER</span> <span class="keyword">BY</span> elapsed_time <span class="keyword">DESC</span>;</span><br><span class="line"><span class="comment">-- 执行次数最多的SQL</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> v$sqlstats <span class="keyword">ORDER</span> <span class="keyword">BY</span> executions <span class="keyword">DESC</span>;</span><br><span class="line"><span class="comment">-- 读磁盘最多的SQL</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> v$sqlstats <span class="keyword">ORDER</span> <span class="keyword">BY</span> disk_reads <span class="keyword">DESC</span>;</span><br><span class="line"><span class="comment">-- 耗CPU最多的SQL</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> v$sqlstats <span class="keyword">ORDER</span> <span class="keyword">BY</span> buffer_gets <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure></div></div></div>
 <p>如果在IDEA等环境操作数据库，可以再打开一些平日工作用的程序代码。</p>
@@ -303,7 +245,7 @@
     <a href="https://plusnan.me/2019/01/11/oracle-novel/" title="通过数据库“阅读器”在上班时间看小说">https://plusnan.me/2019/01/11/oracle-novel/</a>
   </li>
   <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
   </li>
 </ul>
 </div>
@@ -337,7 +279,6 @@
   
   
 
-  </div>
 
 
           </div>
@@ -352,7 +293,7 @@
 
 <script>
   window.addEventListener('tabs:register', () => {
-    let activeClass = CONFIG.comments.activeClass;
+    let { activeClass } = CONFIG.comments;
     if (CONFIG.comments.storage) {
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
@@ -393,16 +334,15 @@
         </li>
       </ul>
 
-      <!--noindex-->
+      
       <div class="post-toc-wrap sidebar-panel">
           <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#建库"><span class="nav-number">1.</span> <span class="nav-text">建库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#导入小说"><span class="nav-number">2.</span> <span class="nav-text">导入小说</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java程序"><span class="nav-number">2.1.</span> <span class="nav-text">Java程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#awk脚本（Linux服务器）"><span class="nav-number">2.2.</span> <span class="nav-text">awk脚本（Linux服务器）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如果连数据库也是Windows服务器"><span class="nav-number">2.3.</span> <span class="nav-text">如果连数据库也是Windows服务器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开始阅读"><span class="nav-number">3.</span> <span class="nav-text">开始阅读</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#拓展"><span class="nav-number">4.</span> <span class="nav-text">拓展</span></a></li></ol></div>
       </div>
-      <!--/noindex-->
+      
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="infNaN"
-      src="/img/myavatar.jpg">
+    <img class="site-author-image" itemprop="image" alt="infNaN" src="/img/myavatar.jpg">
   <p class="site-author-name" itemprop="name">infNaN</p>
   <div class="site-description" itemprop="description">多穿女装少踩坑</div>
 </div>
@@ -411,7 +351,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">36</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -424,20 +364,20 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-count">31</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbg==" title="GitHub → https://github.com/infnan"><i class="fa fa-fw fa-github"></i>GitHub</span>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbg==" title="GitHub → https://github.com/infnan"><i class="github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me"><i class="envelope fa-fw"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="/rss.xml" title="RSS → /rss.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+        <a href="/rss.xml" title="RSS → /rss.xml"><i class="rss fa-fw"></i>RSS</a>
       </span>
   </div>
   <div class="cc-license motion-element" itemprop="license">
@@ -460,19 +400,18 @@
       <div class="footer-inner">
         
 
+        
+
 <div class="copyright">
   
   &copy; 2018 – 
   <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
-    <i class="fa fa-user"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">infNaN</span>
 </div>
-  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v4.2.0
-  </div>
-  <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly9tdXNlLnRoZW1lLW5leHQub3Jn">NexT.Muse</span> v7.7.0
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9tdXNlLnRoZW1lLW5leHQub3Jn">NexT.Muse</span> 强力驱动
   </div>
 
         
@@ -504,15 +443,7 @@
 
 
   
-  <script>
-    (function(){
-      var bp = document.createElement('script');
-      var curProtocol = window.location.protocol.split(':')[0];
-      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(bp, s);
-    })();
-  </script>
+  <script>!function(){var t=document.createElement("script"),e=window.location.protocol.split(":")[0];t.src="https"===e?"https://zz.bdstatic.com/linksubmit/push.js":"http://push.zhanzhang.baidu.com/push.js";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}()</script>
 
 
 
@@ -538,12 +469,12 @@
 NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
   NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
     window.dsqjs = new DisqusJS({
-      api: 'https://api.plusnan.me/disqus/' || 'https://disqus.com/api/',
-      apikey: 'sFepWzyVneUjG9XYJBAD5vGwBDuY2xvmf09d6cXO0aNxDrCPi9ZfjpAQ1B2UZ6Sg',
-      shortname: 'plusnan',
-      url: "https://plusnan.me/2019/01/11/oracle-novel/",
+      api       : 'https://api.plusnan.me/disqus/' || 'https://disqus.com/api/',
+      apikey    : 'sFepWzyVneUjG9XYJBAD5vGwBDuY2xvmf09d6cXO0aNxDrCPi9ZfjpAQ1B2UZ6Sg',
+      shortname : 'plusnan',
+      url       : "https://plusnan.me/2019/01/11/oracle-novel/",
       identifier: "2019/01/11/oracle-novel/",
-      title: "通过数据库“阅读器”在上班时间看小说",
+      title     : "通过数据库“阅读器”在上班时间看小说",
     });
   }, window.DisqusJS);
 });

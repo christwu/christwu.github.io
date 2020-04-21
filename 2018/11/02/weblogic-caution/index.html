@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 4.2.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -13,38 +13,9 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-
-<script id="hexo-configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    hostname: new URL('https://plusnan.me').hostname,
-    root: '/',
-    scheme: 'Muse',
-    version: '7.7.0',
-    exturl: true,
-    sidebar: {"position":"right","display":"always","padding":18,"offset":12,"onmobile":false},
-    copycode: {"enable":true,"show_result":true,"style":null},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
-    bookmark: {"enable":false,"color":"#222","save":"auto"},
-    fancybox: false,
-    mediumzoom: false,
-    lazyload: false,
-    pangu: true,
-    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
-    algolia: {
-      appID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: '',
-    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
-  };
-</script>
+<script id="hexo-configurations">var NexT=window.NexT||{},CONFIG={hostname:"plusnan.me",root:"/",scheme:"Muse",version:"7.8.0",exturl:!0,sidebar:{position:"right",display:"always",padding:18,offset:12,onmobile:!1},copycode:{enable:!0,show_result:!0,style:null},back2top:{enable:!0,sidebar:!1,scrollpercent:!1},bookmark:{enable:!1,color:"#222",save:"auto"},fancybox:!1,mediumzoom:!1,lazyload:!1,pangu:!0,comments:{style:"tabs",active:null,storage:!0,lazyload:!1,nav:null},algolia:{hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}},localsearch:{enable:!1,trigger:"auto",top_n_per_article:1,unescape:!1,preload:!1},motion:{enable:!1,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}}}</script>
 
   <meta name="description" content="本文记录我在部署WebLogic时遇到的各种坑。其中JDK为1.6，WebLogic版本11g。">
 <meta property="og:type" content="article">
@@ -62,26 +33,12 @@
 <link rel="canonical" href="https://plusnan.me/2018/11/02/weblogic-caution/">
 
 
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome: false,
-    isPost: true
-  };
-</script>
+<script id="page-configurations">CONFIG.page={sidebar:"",isHome:!1,isPost:!0,lang:"zh-CN"}</script>
 
   <title>WebLogic踩坑记录 | infNaN</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134391990-1"></script>
-    <script>
-      if (CONFIG.hostname === location.hostname) {
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'UA-134391990-1');
-      }
-    </script>
+    <script>if(CONFIG.hostname===location.hostname){function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-134391990-1")}</script>
 
 
 
@@ -89,26 +46,7 @@
 
 
   <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
+  <style>.sidebar-inner,.use-motion .brand,.use-motion .collection-header,.use-motion .comments,.use-motion .menu-item,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header{opacity:initial}.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.use-motion .logo-line-before i{left:initial}.use-motion .logo-line-after i{right:initial}</style>
 </noscript>
 
 <link rel="alternate" href="/rss.xml" title="infNaN" type="application/atom+xml">
@@ -120,17 +58,6 @@
 
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
-  <div class="site-meta">
-
-    <div>
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">infNaN</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-  </div>
-
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏">
       <span class="toggle-line toggle-line-first"></span>
@@ -138,35 +65,53 @@
       <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">infNaN</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
 </div>
 
 
+
+
 <nav class="site-nav">
-  
-  <ul id="menu" class="menu">
+  <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
 
   </li>
   </ul>
-
 </nav>
+
+
+
+
 </div>
     </header>
 
@@ -182,14 +127,13 @@
         <div class="content-wrap">
           
 
-          <div class="content">
+          <div class="content post posts-expand">
             
 
-  <div class="posts-expand">
-      
+    
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://plusnan.me/2018/11/02/weblogic-caution/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -209,7 +153,7 @@
         <div class="post-meta">
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
 
@@ -217,20 +161,18 @@
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
                 <time title="修改时间：2020-01-15 02:19:51" itemprop="dateModified" datetime="2020-01-15T02:19:51+08:00">2020-01-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
+                <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%B3%BB%E7%BB%9F%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index">
-                    <span itemprop="name">系统运维</span>
-                  </a>
+                  <a href="/categories/%E7%B3%BB%E7%BB%9F%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index"><span itemprop="name">系统运维</span></a>
                 </span>
             </span>
 
@@ -246,15 +188,7 @@
 
       
         <p>本文记录我在部署WebLogic时遇到的各种坑。其中JDK为1.6，WebLogic版本11g。<br><a id="more"></a></p>
-<style>
-#post-content table {
-    word-break: break-all;
-}
-
-code {
-    word-break: break-all;
-}
-</style>
+<style>#post-content table{word-break:break-all}code{word-break:break-all}</style>
 
 <h1 id="开发阶段"><a href="#开发阶段" class="headerlink" title="开发阶段"></a>开发阶段</h1><h2 id="准备测试区"><a href="#准备测试区" class="headerlink" title="准备测试区"></a>准备测试区</h2><p>务必准备一个和生产环境架构接近的测试环境，而且开发环境、测试环境和生产环境的JDK与中间件版本应该保持一致，如果条件不够，至少测试环境和生产环境要一致。开发时用某个版本JDK和Tomcat，部署到生产环境时用另一个版本的JDK和WebLogic，这样很容易遭遇意外。</p>
 <p>举一些例子，以下几个就属于Tomcat上面测不出来，挪到WebLogic上面就可能会暴露出来的错误，好在下表这些错误通过修改WebLogic服务器启动参数就能在一定程度上解决了：</p>
@@ -365,9 +299,9 @@ code {
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[ERROR][thread ] Could not start thread [ACTIVE] ExecuteThread: &#39;977&#39; for queue: &#39;weblogic.kernel.Default (self-tuning)&#39;. Resource temporarily unavailable</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Attempting to allocate 8192M bytes</span><br><span class="line"></span><br><span class="line">There is insufficient native memory for the Java</span><br><span class="line">Runtime Environment to continue.</span><br><span class="line"></span><br><span class="line">Possible reasons:</span><br><span class="line">  The system is out of physical RAM or swap space</span><br><span class="line">  In 32 bit mode, the process size limit was hit</span><br><span class="line"></span><br><span class="line">Possible solutions:</span><br><span class="line">  Reduce memory load on the system</span><br><span class="line">  Increase physical memory or swap space</span><br><span class="line">  Check if swap backing store is full</span><br><span class="line">  Use 64 bit Java on a 64 bit OS</span><br><span class="line">  Decrease Java heap size (-Xmx&#x2F;-Xms)</span><br><span class="line">  Decrease number of Java threads</span><br><span class="line">  Decrease Java thread stack sizes (-Xss)</span><br><span class="line">  Disable compressed references (-XXcompressedRefs&#x3D;false)</span><br><span class="line"></span><br><span class="line">java.lang.OutOfMemoryError: Resource temporarily unavailable in tsStartJavaThread (lifecycle.c:1097).</span><br></pre></td></tr></table></figure>
 <p>报错信息看起来像是内存不足，实际上不是内存不足，而是Linux系统默认情况下限制了最大线程数，需要进行修改。</p>
 <p>如果使用CentOS 6或RHEL6，可以按照以下方法进行修改：</p>
-<p>首先修改/etc/security/limits.conf，加入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">* hard nofile 1048576</span><br><span class="line">* soft nofile 1048576</span><br></pre></td></tr></table></figure></p>
-<p>然后修改/etc/security/limits.d/90-nproc.conf，加入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">weblogic   soft    nproc     655350</span><br></pre></td></tr></table></figure></p>
-<p>最后修改/etc/pam.d/login，加入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">session required &#x2F;lib64&#x2F;security&#x2F;pam_limits.so</span><br></pre></td></tr></table></figure></p>
+<p>首先修改/etc/security/limits.conf，加入<br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">* hard nofile 1048576</span><br><span class="line">* soft nofile 1048576</span><br></pre></td></tr></table></figure><p></p>
+<p>然后修改/etc/security/limits.d/90-nproc.conf，加入<br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">weblogic   soft    nproc     655350</span><br></pre></td></tr></table></figure><p></p>
+<p>最后修改/etc/pam.d/login，加入<br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">session required &#x2F;lib64&#x2F;security&#x2F;pam_limits.so</span><br></pre></td></tr></table></figure><p></p>
 <p>修改完成后不要马上退出shell，要开个新窗口测试各账号能否登进去。如果登不进去（例如提示could not open session），说明参数改得太大，需要适当往小调。</p>
 <p>另外如果线程数改大了，内存也应当适当调大，因为每个线程都会占一些内存空间。</p>
 <h2 id="启动报错“Assertion-ia-addressID’-failed”"><a href="#启动报错“Assertion-ia-addressID’-failed”" class="headerlink" title="启动报错“Assertion `ia_addressID’ failed”"></a>启动报错“Assertion `ia_addressID’ failed”</h2><p>如果提示<code>java: Net.c:229: Java_com_bea_wcp_sctp_Net_initIDs: Assertion \</code>ia_addressID’ failed.<code>，可尝试删除</code>/u01/Oracle/Middleware/wlserver_10.3/sip/server/native/linux/x86_64/libsctpwrapper.so`文件。</p>
@@ -419,7 +353,7 @@ code {
     <a href="https://plusnan.me/2018/11/02/weblogic-caution/" title="WebLogic踩坑记录">https://plusnan.me/2018/11/02/weblogic-caution/</a>
   </li>
   <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
   </li>
 </ul>
 </div>
@@ -451,7 +385,6 @@ code {
   
   
 
-  </div>
 
 
           </div>
@@ -466,7 +399,7 @@ code {
 
 <script>
   window.addEventListener('tabs:register', () => {
-    let activeClass = CONFIG.comments.activeClass;
+    let { activeClass } = CONFIG.comments;
     if (CONFIG.comments.storage) {
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
@@ -507,16 +440,15 @@ code {
         </li>
       </ul>
 
-      <!--noindex-->
+      
       <div class="post-toc-wrap sidebar-panel">
           <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#开发阶段"><span class="nav-number">1.</span> <span class="nav-text">开发阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备测试区"><span class="nav-number">1.1.</span> <span class="nav-text">准备测试区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路径问题"><span class="nav-number">1.2.</span> <span class="nav-text">路径问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据源名称"><span class="nav-number">1.3.</span> <span class="nav-text">数据源名称</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集群Session丢失问题"><span class="nav-number">1.4.</span> <span class="nav-text">集群Session丢失问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#访问HTTPS网站的问题"><span class="nav-number">1.5.</span> <span class="nav-text">访问HTTPS网站的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cacerts"><span class="nav-number">1.5.1.</span> <span class="nav-text">cacerts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导证书"><span class="nav-number">1.5.2.</span> <span class="nav-text">导证书</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#大文件不要打到WAR包中"><span class="nav-number">1.6.</span> <span class="nav-text">大文件不要打到WAR包中</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#部署阶段"><span class="nav-number">2.</span> <span class="nav-text">部署阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统时间"><span class="nav-number">2.1.</span> <span class="nav-text">操作系统时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主机名与hosts"><span class="nav-number">2.2.</span> <span class="nav-text">主机名与hosts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#避免放多套Java-WebLogic"><span class="nav-number">2.3.</span> <span class="nav-text">避免放多套Java&#x2F;WebLogic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防火墙配置"><span class="nav-number">2.4.</span> <span class="nav-text">防火墙配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不要给控制台配置成HTTPS"><span class="nav-number">2.5.</span> <span class="nav-text">不要给控制台配置成HTTPS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进行网络策略测试"><span class="nav-number">2.6.</span> <span class="nav-text">进行网络策略测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改java-security"><span class="nav-number">2.7.</span> <span class="nav-text">修改java.security</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如果通过控制台启动服务器时起不来"><span class="nav-number">2.8.</span> <span class="nav-text">如果通过控制台启动服务器时起不来</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法一：重新设置证书"><span class="nav-number">2.8.1.</span> <span class="nav-text">方法一：重新设置证书</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法二：不使用SSL"><span class="nav-number">2.8.2.</span> <span class="nav-text">方法二：不使用SSL</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组建集群"><span class="nav-number">2.9.</span> <span class="nav-text">组建集群</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#服务器监听地址不要写成0-0-0-0"><span class="nav-number">2.9.1.</span> <span class="nav-text">服务器监听地址不要写成0.0.0.0</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩大内存"><span class="nav-number">2.10.</span> <span class="nav-text">扩大内存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#增加线程数"><span class="nav-number">2.11.</span> <span class="nav-text">增加线程数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动报错“Assertion-ia-addressID’-failed”"><span class="nav-number">2.12.</span> <span class="nav-text">启动报错“Assertion &#96;ia_addressID’ failed”</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运维阶段"><span class="nav-number">3.</span> <span class="nav-text">运维阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#应用升级"><span class="nav-number">3.1.</span> <span class="nav-text">应用升级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重启服务器"><span class="nav-number">3.2.</span> <span class="nav-text">重启服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打补丁"><span class="nav-number">3.3.</span> <span class="nav-text">打补丁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搬家"><span class="nav-number">3.4.</span> <span class="nav-text">搬家</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#改密码"><span class="nav-number">3.5.</span> <span class="nav-text">改密码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#WebLogic控制台密码"><span class="nav-number">3.5.1.</span> <span class="nav-text">WebLogic控制台密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库-数据源密码"><span class="nav-number">3.5.2.</span> <span class="nav-text">数据库&#x2F;数据源密码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#监控"><span class="nav-number">3.6.</span> <span class="nav-text">监控</span></a></li></ol></li></ol></div>
       </div>
-      <!--/noindex-->
+      
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="infNaN"
-      src="/img/myavatar.jpg">
+    <img class="site-author-image" itemprop="image" alt="infNaN" src="/img/myavatar.jpg">
   <p class="site-author-name" itemprop="name">infNaN</p>
   <div class="site-description" itemprop="description">多穿女装少踩坑</div>
 </div>
@@ -525,7 +457,7 @@ code {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">36</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -538,20 +470,20 @@ code {
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-count">31</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbg==" title="GitHub → https://github.com/infnan"><i class="fa fa-fw fa-github"></i>GitHub</span>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbg==" title="GitHub → https://github.com/infnan"><i class="github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me"><i class="envelope fa-fw"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="/rss.xml" title="RSS → /rss.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+        <a href="/rss.xml" title="RSS → /rss.xml"><i class="rss fa-fw"></i>RSS</a>
       </span>
   </div>
   <div class="cc-license motion-element" itemprop="license">
@@ -574,19 +506,18 @@ code {
       <div class="footer-inner">
         
 
+        
+
 <div class="copyright">
   
   &copy; 2018 – 
   <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
-    <i class="fa fa-user"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">infNaN</span>
 </div>
-  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v4.2.0
-  </div>
-  <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly9tdXNlLnRoZW1lLW5leHQub3Jn">NexT.Muse</span> v7.7.0
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9tdXNlLnRoZW1lLW5leHQub3Jn">NexT.Muse</span> 强力驱动
   </div>
 
         
@@ -618,15 +549,7 @@ code {
 
 
   
-  <script>
-    (function(){
-      var bp = document.createElement('script');
-      var curProtocol = window.location.protocol.split(':')[0];
-      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(bp, s);
-    })();
-  </script>
+  <script>!function(){var t=document.createElement("script"),e=window.location.protocol.split(":")[0];t.src="https"===e?"https://zz.bdstatic.com/linksubmit/push.js":"http://push.zhanzhang.baidu.com/push.js";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}()</script>
 
 
 
@@ -652,12 +575,12 @@ code {
 NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
   NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
     window.dsqjs = new DisqusJS({
-      api: 'https://api.plusnan.me/disqus/' || 'https://disqus.com/api/',
-      apikey: 'sFepWzyVneUjG9XYJBAD5vGwBDuY2xvmf09d6cXO0aNxDrCPi9ZfjpAQ1B2UZ6Sg',
-      shortname: 'plusnan',
-      url: "https://plusnan.me/2018/11/02/weblogic-caution/",
+      api       : 'https://api.plusnan.me/disqus/' || 'https://disqus.com/api/',
+      apikey    : 'sFepWzyVneUjG9XYJBAD5vGwBDuY2xvmf09d6cXO0aNxDrCPi9ZfjpAQ1B2UZ6Sg',
+      shortname : 'plusnan',
+      url       : "https://plusnan.me/2018/11/02/weblogic-caution/",
       identifier: "2018/11/02/weblogic-caution/",
-      title: "WebLogic踩坑记录",
+      title     : "WebLogic踩坑记录",
     });
   }, window.DisqusJS);
 });
