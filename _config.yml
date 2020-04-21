@@ -99,20 +99,20 @@ archive_generator:
   daily: false
 
 html_minifier:
-  enable: false
-  collapseWhitespace: false
+  enable: true
+  collapseWhitespace: true
   removeEmptyAttributes: false
 js_minifier:
-  enable: false
+  enable: true
   mangle: true
-  output:
-  compress:
   exclude: 
     - '*.min.js'
+    - '**/themes/**/*.js'
 css_minifier:
-  enable: false
+  enable: true
   exclude: 
     - '*.min.css'
+    - '**/themes/**'
 image_minifier: 
   enable: true
   interlaced: false
@@ -222,90 +222,6 @@ theme_config:
 
   google_analytics: 
     tracking_id: UA-134391990-1
-
-#theme: hexo-theme-indigo
-#theme_config:
-#  # 添加新菜单项遵循以下规则
-#  # menu:
-#  #  link:               fontawesome图标，省略前缀，本主题前缀为 icon-，必须
-#  #    text: About       菜单显示的文字，如果省略即默认与图标一致，首字母会转大写
-#  #    url: /about       链接，绝对或相对路径，必须。
-#  #    target: _blank    是否跳出，省略则在当前页面打开
-#  menu:
-#    home:
-#      text: 主页
-#      url: /
-#    archives:
-#      text: 存档
-#      url: /archives
-#    tags:
-#      text: 标签
-#      url: /tags
-#    th-list:
-#      text: 分类
-#      url: /categories
-#    github:
-#      text: GitHub
-#      url: https://github.com/infnan
-#      target: _blank
-#    rss:
-#      text: RSS
-#      url: /rss.xml
-#      target: _blank
-#
-#  # 你的头像url
-#  avatar: /img/myavatar.jpg
-#  # avatar link
-#  avatar_link: /
-#
-#  # email
-#  email: 'me@plusnan.me'
-#
-#  # 设置 Android L Chrome 浏览器状态栏颜色
-#  color: '#3F51B5'
-#
-#  # 页面标题
-#  tags_title: 标签
-#  archives_title: 存档
-#  categories_title: 分类
-#
-#  # 文章截断
-#  excerpt_render: true
-#  #excerpt_length: 200
-#  excerpt_link: 阅读全文...
-#  mathjax: true
-#  archive_yearly: true
-#
-#  # 是否显示文章最后更新时间
-#  show_last_updated: true
-#
-#  # 是否开启分享
-#  share: true
-#
-#  # 是否开启打赏，关闭 reward: false
-#  reward: false
-#
-#  # 文章页留言内容，hexo中所有变量及辅助函数等均可调用，具体请查阅 hexo.io
-#  postMessage: ''
-#
-#  # 以下评论插件开启一个即可
-#  # 是否开启 disqus
-#  disqus_shortname: christ-wus-blog
-#  # 版权起始年份
-#  since_year: 2018
-#
-#  # 用户页面中作者相关的描述性文字，如不需要设为 false
-#  about: false
-#
-#  # “不蒜子”访问量统计，详见 http://ibruce.info/2015/04/04/busuanzi/
-#  visit_counter: false
-#
-#  # 动态定义title
-#  title_change: false
-#
-#  # 设置为 true 发布后将使用 unpkg cdn 最新的主题样式
-#  # 如果想让你的自定义样式生效，把此项设为 false
-#  cdn: false
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
