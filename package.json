@@ -24,8 +24,13 @@
     "hexo-server": "^1.0.0"
   },
   "scripts": {
-    "server": "hexo s",
-    "predeploy": "hexo g",
-    "deploy": "hexo d"
+    "server": "hexo --config=_config.tmp.yml server",
+    "preserver": "hexo clean && node tools/preview.js",
+    "postserver": "rm _config.tmp.yml",
+    "deploy": "hexo d",
+    "predeploy": "hexo clean && hexo g"
+  },
+  "devDependencies": {
+    "js-yaml": "^3.13.1"
   }
 }

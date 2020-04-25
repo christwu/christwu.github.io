@@ -102,17 +102,20 @@ html_minifier:
   enable: true
   collapseWhitespace: true
   removeEmptyAttributes: false
+  exclude: 
+    - '**/themes/**/*.swig'
+    - '**/source/**/*.md'
 js_minifier:
   enable: true
   mangle: true
   exclude: 
     - '*.min.js'
-    - '**/themes/**/*.js'
+    - '**/themes/**/*'
 css_minifier:
   enable: true
   exclude: 
     - '*.min.css'
-    - '**/themes/**'
+    - '**/themes/**/*'
 image_minifier: 
   enable: true
   interlaced: false
@@ -144,6 +147,8 @@ theme_config:
   fancybox: false
   pangu: true
 
+  darkmode: true
+
   #disqus:
   #  enable: true
   #  shortname: plusnan
@@ -160,10 +165,10 @@ theme_config:
     shortname: plusnan
 
   menu:
-    home: / || home
-    tags: /tags/ || tags
-    categories: /categories/ || th
-    archives: /archives/ || archive
+    home: / || fa fa-home
+    tags: /tags/ || fa fa-tags
+    categories: /categories/ || fa fa-th
+    archives: /archives/ || fa fa-archive
   footer:
     since: 2018
     powered:
