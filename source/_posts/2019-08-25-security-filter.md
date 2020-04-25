@@ -160,7 +160,7 @@ if (!intercept && referer != null) {
     String domain = referer.replaceAll("^https?:\\/\\/(.*?)\\/.*", "$1").toLowerCase();
     if (!hostWhiteList.contains(domain)) {
         intercept = true;
-        message = "检测到跨站请求攻击，请检查操作是否正常！";
+        message = "检测到未经授权的访问，请从官方网站登录系统，并检查操作是否正常！";
     }
 }
 ```
@@ -174,7 +174,7 @@ if (!intercept && referer != null) {
 String host = httpRequest.getHeader("Host");
 if (!intercept && host != null && !hostWhiteList.contains(host.toLowerCase())) {
     intercept = true;
-    message = "检测到Host头攻击【" + host + "】，请检查网址是否正确并重新登录系统！";
+    message = "检测到未授权访问，请重新从官方网站登录系统！";
 }
 ```
 
@@ -501,7 +501,7 @@ public class SecurityFilter implements Filter {
         String host = httpRequest.getHeader("Host");
         if (!intercept && host != null && !config.getHostWhiteList().contains(host.toLowerCase())) {
             intercept = true;
-            message = "检测到Host头攻击【" + host + "】，请检查网址是否正确并重新登录系统！";
+            message = "检测到未授权访问，请重新从官方网站登录系统！";
         }
 
         // Referer拦截
@@ -515,13 +515,13 @@ public class SecurityFilter implements Filter {
                 String domain = referer.replaceAll("^https?:\\/\\/(.*?)\\/.*", "$1").toLowerCase();
                 if (!config.getHostWhiteList().contains(domain)) {
                     intercept = true;
-                    message = "检测到跨站请求攻击，请检查操作是否正常！";
+                    message = "检测到未经授权的访问，请从官方网站登录系统，并检查操作是否正常！";
                 }
             } else {
                 // 要求POST请求中包含Referer，防止非法提交表单
                 if ("POST".equals(httpRequest.getMethod())) {
                     intercept = true;
-                    message = "检测到跨站请求攻击，请检查操作是否正常！";
+                    message = "检测到未经授权的访问，请从官方网站登录系统，并检查操作是否正常！";
                 }
             }
         }
