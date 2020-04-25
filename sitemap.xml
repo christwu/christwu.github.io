@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://plusnan.me/2020/02/05/archive/</loc>
+    
+    <lastmod>2020-04-25T04:44:15.137Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://plusnan.me/2018/11/02/weblogic-caution/</loc>
+    
+    <lastmod>2020-04-23T03:32:44.409Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://plusnan.me/2020/01/22/logger/</loc>
     
-    <lastmod>2020-04-22T15:30:08.893Z</lastmod>
+    <lastmod>2020-04-23T03:28:05.291Z</lastmod>
     
   </url>
   
@@ -194,13 +208,6 @@
     <loc>https://plusnan.me/2018/12/20/deploy-checklist/</loc>
     
     <lastmod>2020-01-14T18:20:05.704Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://plusnan.me/2018/11/02/weblogic-caution/</loc>
-    
-    <lastmod>2020-01-14T18:19:51.333Z</lastmod>
     
   </url>
   
