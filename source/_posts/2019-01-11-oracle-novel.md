@@ -14,8 +14,7 @@ tags:
 # 建库
 如果开发团队管得不严，那么使用团队正在使用的数据库就行，反正领导和人力部门又不可能专门登数据库去看你搞了什么东西。为了避免与其他同事产生误会，建议创建小说专用账号，例如OGGFORWARD（用这个名词也要小心，别让DBA误会）：
 
-{% tabs 创建账号 %}
-<!-- tab Oracle -->
+Oracle范例：
 ```sql
 -- 建立OGG传输专用账号
 CREATE USER OGGFORWARD IDENTIFIED BY eromanga;
@@ -28,9 +27,8 @@ BEGIN
     END LOOP;
 END;
 ```
-<!-- endtab -->
 
-<!-- tab MySQL -->
+MySQL范例：
 ```sql
 -- 建立数据库
 CREATE DATABASE oggforward DEFAULT CHARSET utf8;
@@ -39,15 +37,12 @@ CREATE USER oggforward@'%' IDENTIFIED BY 'eromanga';
 -- 赋权
 GRANT ALL PRIVILEGES ON oggforward.* TO oggforward@'%';
 ```
-<!-- endtab -->
-{% endtabs %}
 
 以上只是些普通的DBA操作，看起来没什么值得怀疑的。若你连DBA权限都没有，那么就需要自己搭数据库或者想办法骗DBA给你开个账号了。
 
 接下来用OGGFORWARD登录，建立表结构：
 
-{% tabs 建立表结构 %}
-<!-- tab Oracle -->
+Oracle范例：
 ```sql
 -- 《情色漫畫老師》（中国大陆译作《埃罗芒阿老师》）
 CREATE SEQUENCE OGGFORWARD.SEQ_TBL_EROMANGA START WITH 1 INCREMENT BY 1 NOMAXVALUE;
@@ -61,8 +56,8 @@ CREATE TABLE OGGFORWARD.TBL_EROMANGA (
     ACCESS_TIME DATE                -- 阅读时间
 );
 ```
-<!-- endtab -->
 
+MySQL范例：
 <!-- tab MySQL -->
 ```sql
 -- 《情色漫畫老師》（中国大陆译作《埃罗芒阿老师》）
@@ -76,8 +71,6 @@ CREATE TABLE IF NOT EXISTS oggforward.tbl_eromanga (
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ```
-<!-- endtab -->
-{% endtabs %}
 
 毕竟是你自己看的，怎么建都无所谓，但是应该要有ID（便于定位和排序），要区分出是哪本小说，另外也可以加一些伪装用的字段，显得像是在操作自己项目中的表一样。
 
@@ -91,8 +84,7 @@ CREATE TABLE IF NOT EXISTS oggforward.tbl_eromanga (
 ## Java程序
 ImportUtils.java：
 
-{% tabs Java %}
-<!-- tab Oracle -->
+Oracle版本：
 ```java
 import java.io.File;
 import java.io.IOException;
@@ -200,9 +192,8 @@ public class ImportUtils {
     }
 }
 ```
-<!-- endtab -->
 
-<!-- tab MySQL -->
+MySQL版本：
 ```java
 import java.io.File;
 import java.io.IOException;
@@ -310,8 +301,6 @@ public class ImportUtils {
     }
 }
 ```
-<!-- endtab -->
-{% endtabs %}
 
 运行之前需要下载JDBC驱动（[Oracle](https://www.oracle.com/technetwork/database/application-development/jdbc/downloads/index.html)、[MySQL](https://dev.mysql.com/downloads/connector/j/8.0.html)）。如果不使用Eclipse或IDEA等IDE，可以用以下命令编译：
 
@@ -339,8 +328,8 @@ done
 DBA们可能并没有在电脑上安装Java，不过没关系，我们也可以将小说上传到服务器上，通过下面的awk脚本生成SQL，然后通过sqlplus执行SQL，把将小说内容导入到数据库中：
 
 gen_sql.awk：
-{% tabs awk %}
-<!-- tab Oracle -->
+
+Oracle版本：
 ```awk
 BEGIN {
     INSERT_SQL = "INSERT INTO OGGFORWARD.TBL_EROMANGA (ID, BOOK, CHAPTER, TEXT) VALUES (SEQ_TBL_EROMANGA.NEXTVAL, '@1', '@2', '@3');";
@@ -375,9 +364,8 @@ END {
     print "COMMIT;";
 }
 ```
-<!-- endtab -->
 
-<!-- tab MySQL -->
+MySQL版本：
 ```awk
 BEGIN {
     INSERT_SQL = "INSERT INTO oggforward.tbl_eromanga (book, chapter, text) VALUES ('@1', '@2', '@3');";
@@ -413,8 +401,6 @@ END {
     print "COMMIT;";
 }
 ```
-<!-- endtab -->
-{% endtabs %}
 
 {% note warning %}
 在macOS系统下面，awk的length和substr无法正确识别中文；在Linux系统下面则需要正确设置LANG环境变量才能识别中文，例如在命令前面加`LANG=zh_CN.UTF-8`。
@@ -422,23 +408,15 @@ END {
 
 假如小说文件名是5_1.txt至5_5.txt，那么导入时可以：
 
-{% tabs import %}
-<!-- tab Oracle -->
 ```bash
 for i in `seq 1 5`; do
-    awk -v BOOK=5 -v CHAPTER=$i -f gen_sql.awk 5_$i.txt | sqlplus oggforward/eromanga
-done
-```
-<!-- endtab -->
+    # Oracle
+    awk -v BOOK=5 -v CHAPTER=$i -f gen_sql.awk 5_$i.txt | sqlplus oggforward/eromanga@你的数据库
 
-<!-- tab MySQL -->
-```bash
-for i in `seq 1 5`; do
+    # MySQL
     awk -v BOOK=5 -v CHAPTER=$i -f gen_sql.awk 5_$i.txt | mysql -u oggforward -h 0.0.0.0 -peromanga
 done
 ```
-<!-- endtab -->
-{% endtabs %}
 
 {% note warning %}
 这里需要再次注意文件字符编码，如果txt编码、LANG、NLS_LANG（Oracle）与数据库（Oracle）/表（MySQL）编码四者不一致也会乱码！
@@ -453,8 +431,8 @@ Windows系统自带VBScript，一样能生成SQL然后执行。不会写VBScript
 
 # 开始阅读
 用你平常用的数据库工具登录，然后
-{% tabs query %}
-<!-- tab Oracle -->
+
+Oracle：
 ```sql
 -- 阅读
 SELECT
@@ -467,9 +445,8 @@ ORDER BY E.ID;
 -- 标记已看过的部分
 UPDATE OGGFORWARD.TBL_EROMANGA SET IS_READ='1', ACCESS_TIME=SYSDATE WHERE ID<你所看到的ID AND IS_READ='0';
 ```
-<!-- endtab -->
 
-<!-- tab MySQL -->
+MySQL：
 ```sql
 -- 阅读
 SELECT
@@ -482,14 +459,12 @@ ORDER BY e.id;
 -- 标记已看过的部分
 UPDATE oggforward.tbl_eromanga SET is_read='1', access_time=sysdate() WHERE id<你所看到的ID AND is_read='0';
 ```
-<!-- endtab -->
-{% endtabs %}
 
 注意放一些有迷惑性的语句（相当于“老板键”），包装一下你的阅读器，例如：
 
-{% tabs normalsql %}
-<!-- tab Oracle -->
 ```sql
+-- Oracle
+
 -- 查看锁表情况并生成解锁语句
 SELECT
     b.owner,b.object_name,c.sid,c.serial#,a.locked_mode,c.username,c.osuser,c.machine,c.module,c.logon_time,
@@ -527,8 +502,6 @@ SELECT * FROM v$sqlstats ORDER BY disk_reads DESC;
 -- 耗CPU最多的SQL
 SELECT * FROM v$sqlstats ORDER BY buffer_gets DESC;
 ```
-<!-- endtab -->
-{% endtabs %}
 
 如果在IDEA等环境操作数据库，可以再打开一些平日工作用的程序代码。
 
