@@ -102,6 +102,8 @@ html_minifier:
   enable: true
   collapseWhitespace: true
   removeEmptyAttributes: false
+  ignoreCustomComments: 
+    - '!!js/regexp /^\s*more/'
   exclude: 
     - '**/themes/**/*.swig'
     - '**/source/**/*.md'
