@@ -28,7 +28,7 @@
 <meta property="og:description" content="部署Web应用是一项细活：它的配置和操作通常涉及各方面，而且要求准确无误。平时注意配置管理，工作认真负责，方可保证应用正常上线运行。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2018-05-14T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-01-14T18:19:14.456Z">
+<meta property="article:modified_time" content="2020-05-04T02:52:49.370Z">
 <meta property="article:author" content="infNaN">
 <meta property="article:tag" content="Web">
 <meta property="article:tag" content="项目实施">
@@ -202,7 +202,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-15 02:19:14" itemprop="dateModified" datetime="2020-01-15T02:19:14+08:00">2020-01-15</time>
+                <time title="修改时间：2020-05-04 10:52:49" itemprop="dateModified" datetime="2020-05-04T10:52:49+08:00">2020-05-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -248,8 +248,9 @@
 <li>系统设置，包括防火墙、参数设定等。</li>
 </ol>
 <p>操作生产环境之前，最好找个类似的测试环境进行测试，了解如何处理意外情况（例如断电、死机、系统慢等）。</p>
-<p>如果预计需要频繁部署，建议写部署脚本。</p>
-<h1 id="部署中"><a href="#部署中" class="headerlink" title="部署中"></a>部署中</h1><h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><p>部署数据库时应注意：</p>
+<p>如果预计需要频繁部署，建议写部署脚本，配置Jenkins。</p>
+<h1 id="部署中"><a href="#部署中" class="headerlink" title="部署中"></a>部署中</h1><p>每次正式升级之前一定要打基线，从基线取代码，打整包，生产环境配置文件用事先预备好的备份覆盖升级包，不要单独换文件！换文件升级，有第一次，就会有第二次。越是换文件，后面就越不敢打整包，几个星期以后，全世界就没有人知道生产环境与本地代码有什么区别了。</p>
+<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><p>部署数据库时应注意：</p>
 <ol>
 <li>确保数据库软件已正确安装和启动；</li>
 <li>表空间、账号密码正确；</li>
@@ -395,14 +396,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-count">40</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">

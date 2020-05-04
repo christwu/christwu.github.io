@@ -2,16 +2,65 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://plusnan.me/2019/01/11/oracle-novel/</loc>
+    <loc>https://plusnan.me/2020/03/02/quick-replace-file/</loc>
     
-    <lastmod>2020-04-27T05:37:26.289Z</lastmod>
+    <lastmod>2020-05-04T04:09:54.329Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://plusnan.me/2018/05/15/deployment/</loc>
+    
+    <lastmod>2020-05-04T02:52:49.370Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://plusnan.me/2018/11/02/weblogic-caution/</loc>
+    
+    <lastmod>2020-05-04T00:55:47.318Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://plusnan.me/2020/02/20/how-to-write-document/</loc>
     
-    <lastmod>2020-04-27T02:11:26.907Z</lastmod>
+    <lastmod>2020-05-03T15:14:33.021Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://plusnan.me/2019/01/11/oracle-novel/</loc>
+    
+    <lastmod>2020-05-03T14:52:48.409Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://plusnan.me/2018/12/14/install-windows-on-macbook-pro-2018/</loc>
+    
+    <lastmod>2020-05-03T14:50:40.183Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://plusnan.me/2019/11/17/add-ipv6-support/</loc>
+    
+    <lastmod>2020-05-03T14:24:06.857Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://plusnan.me/2019/11/16/http-to-https/</loc>
+    
+    <lastmod>2020-05-03T14:24:02.679Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://plusnan.me/2019/10/07/waf/</loc>
+    
+    <lastmod>2020-05-03T14:23:55.177Z</lastmod>
     
   </url>
   
@@ -33,13 +82,6 @@
     <loc>https://plusnan.me/2020/02/05/archive/</loc>
     
     <lastmod>2020-04-25T04:44:15.137Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://plusnan.me/2018/11/02/weblogic-caution/</loc>
-    
-    <lastmod>2020-04-23T03:32:44.409Z</lastmod>
     
   </url>
   
@@ -103,27 +145,6 @@
     <loc>https://plusnan.me/2019/09/21/edit-page/</loc>
     
     <lastmod>2020-01-30T13:08:38.111Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://plusnan.me/2019/11/16/http-to-https/</loc>
-    
-    <lastmod>2020-01-30T13:01:04.875Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://plusnan.me/2019/11/17/add-ipv6-support/</loc>
-    
-    <lastmod>2020-01-30T07:56:35.199Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://plusnan.me/2019/10/07/waf/</loc>
-    
-    <lastmod>2020-01-28T16:10:11.277Z</lastmod>
     
   </url>
   
@@ -226,13 +247,6 @@
   </url>
   
   <url>
-    <loc>https://plusnan.me/2018/05/15/deployment/</loc>
-    
-    <lastmod>2020-01-14T18:19:14.456Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://plusnan.me/2019/06/03/wechat-bot/</loc>
     
     <lastmod>2020-01-14T18:15:06.675Z</lastmod>
@@ -243,13 +257,6 @@
     <loc>https://plusnan.me/2019/04/06/manga-downloader/</loc>
     
     <lastmod>2020-01-14T16:47:11.565Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://plusnan.me/2018/12/14/install-windows-on-macbook-pro-2018/</loc>
-    
-    <lastmod>2020-01-10T16:59:01.358Z</lastmod>
     
   </url>
   
