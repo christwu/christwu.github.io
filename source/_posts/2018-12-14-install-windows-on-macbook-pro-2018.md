@@ -6,7 +6,7 @@ tags:
 - Mac
 - Boot Camp
 ---
-几个月前在苹果商店购买了新版的MacBook Pro，为了玩个游戏，准备安装Windows系统，然而发现通过系统的Boot Camp（启动转换助理）进行安装根本无法成功。经过一番折腾，得出一个结论：只能手工制作安装盘，以手工方式安装Windows 10。
+几个月前在苹果商店购买了新版的MacBook Pro，为了玩个游戏（例如GTA5），准备安装Windows系统，然而发现通过系统的Boot Camp（启动转换助理）进行安装根本无法成功。经过一番折腾，得出一个结论：只能手工制作安装盘，以手工方式安装Windows 10。
 <!-- more -->
 
 # 坑的要点
@@ -17,10 +17,11 @@ tags:
 
 # 避免踩坑的操作步骤
 1. 做好以下准备：
-    * U盘：注意文件系统要FAT32的
+    * U盘：注意文件系统要FAT32的，所以尽量不要用移动硬盘
     * USB键盘、USB鼠标（至少要预备个鼠标）
-    * USB转接线
+    * USB转接线（建议用那个死贵死贵要一百多块钱才能买一个的官方转接线）
     * 下载Windows 10 64位安装盘（可以去[msdn.itellyou.cn](http://msdn.itellyou.cn)下载），将安装盘映像当作压缩包解压到U盘上——因为MacBook也是EFI启动，所以解压就足够了，不需要特意找刻录软件去刻录
+    * 给Windows多划些空间。现代游戏动不动就几十个G，而Windows系统本身再占三四十G，不划到100GB根本不够用。游戏种类再多些的话，就要变成Mac只留100GB了。
 2. 按住Command+R开机，进入Recovery模式，完成以下操作：
     * [在磁盘工具给Windows分区、格式化](https://support.apple.com/zh-cn/guide/disk-utility/dskutl14027/mac)。注意两点，第一是记住磁盘容量以免在安装时错误地格式化，第二是尽量把容量计算好，因为调整容量非常麻烦，而且很可能要删分区。
     * [关闭安全启动](https://support.apple.com/zh-cn/HT208330)
@@ -48,7 +49,7 @@ tags:
 1. 准备工作：
     * Windows安装U盘，其中已经预备好Boot Camp的“Windows支持软件”。
     * 转接线
-    * USB键盘和鼠标
+    * USB键盘和鼠标（这次要敲命令所以一定要准备好键盘）
 2. 按住Command+R开机，进入Recovery模式。
 3. 进入磁盘工具，确认Windows安装盘的位置（例如/dev/disk0s2）以及Mac系统盘的名称（例如Macintosh HD）。如果还是拿不准的话，可以在终端里用“diskutil info /dev/disk0s2”这种命令来确认。
 4. 退出磁盘工具，进入终端。假如Mac系统盘叫做Macintosh HD，Windows系统盘是/dev/disk0s2，那么需要输入以下命令进行备份：
@@ -56,15 +57,15 @@ tags:
     cd "/Volumes/Macintosh HD"
     dd if=/dev/disk0s2 of=backup.img bs=1m
     ```
-5. 完成后重新进入磁盘工具，删除Windows分区，重新调整分区，不需要格式化。
-6. 重启，从U盘启动Windows安装程序，接上鼠标，在Windows安装程序界面上进行格式化，因为Windows比我们清楚要把多少空间划出来用作系统保留分区。
-7. 回到Recovery模式，确认新分区的位置是disk几s几（例如disk0s4）。
+5. 完成后重新进入磁盘工具，删除Windows分区，重新调整分区，不要格式化。Windows分区格式化工作交给Windows来做。
+6. 重启，从U盘启动Windows安装程序，接上鼠标，在Windows安装程序界面上进行格式化。
+7. 回到Mac的Recovery模式，确认新分区的位置是disk几s几（例如disk0s4）。
 8. 重新进入终端，恢复映像：
     ```
     cd "/Volumes/Macintosh HD"
     dd if=backup.img of=/dev/disk0s4 bs=1m
     ```
-9. 这时候Windows应该可以重新进入了，但是dd并非那种专业Windows分区备份还原软件，所以Windows分区的容量和剩余空间还是错的，需要修正。再次用Windows安装盘启动，接上键盘和鼠标，这次按Shift+F10进入命令提示符，然后输入diskpart，进入分区工具。
+9. 这时候Windows应该可以重新进入了。但是，dd并非那种专业Windows分区备份还原软件，所以Windows分区的容量和剩余空间还是错的，需要修正。再次用Windows安装盘启动，接上键盘和鼠标，这次按Shift+F10进入命令提示符，然后输入diskpart，进入分区工具。
 10. 在diskpart里输入以下命令（注意命令中的“0”和“4”要根据实际情况填写）：
     ```
     list disk
@@ -76,4 +77,7 @@ tags:
 11. 检查两个系统能否正常启动。如果没问题就可以删掉苹果系统里的/backup.img了。
 
 # 后续（2019年）
-实际上大多数ISO是可以借助Boot Camp安装的，可以去[MSDN I Tell You](https://msdn.itellyou.cn/)多试几个版本，总有一个能用的。
+实际上大多数ISO是可以借助Boot Camp安装的，可以去[MSDN I Tell You](https://msdn.itellyou.cn/)多试几个版本，总有一个能用的。如果版本比较老，装好之后再去Windows Update里头做个升级就行了。
+
+# 后续二（2020年）
+Parallels Desktop 15优化了苹果电脑显卡支持。对于MacBook Pro来说，只要不是特别现代的游戏，虚拟机也能带得动了。例如本人试验，在虚拟机里（Windows 10，分配6GB内存），2019年发布的DOA6把电脑像挖矿一样卡崩了，同年发布的AI少女卡成了幻灯片，而2012年的CSGO就没有什么大毛病。

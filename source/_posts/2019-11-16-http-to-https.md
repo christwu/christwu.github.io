@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 基于第三方CDN的HTTPS改造实施方案
-category: 运维
+category: 系统运维
 tags:
 - CDN
 - HTTPS

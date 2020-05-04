@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 资料/知识分享软件或网站推荐
+title: 文档/知识库软件推荐
 category: 闲谈
 tags:
   - 文档管理

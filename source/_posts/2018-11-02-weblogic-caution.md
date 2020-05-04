@@ -28,6 +28,13 @@ code {
 | 生成图片						| java.awt.HeadlessException		| -Djava.awt.headless=true
 | 访问HTTPS网站					| javax.net.ssl.SSLHandshakeException: sun.security.validator.ValidatorException: No trusted certificate found exception | -DUseSunHttpHandler=true
 | Apache CXF提供WebService服务	| javax.xml.ws.soap.SOAPFaultException: Cannot create a secure XMLInputFactory | -Dorg.apache.cxf.stax.allowInsecureParser=1
+| 启动报错，提示无法加载config.xml | `Server failed. Reason: [Management:141266]Parsing Failure in config.xml: failed to find method MethodName` | -Dweblogic.configuration.schemaValidationEnabled=false
+
+## JDK版本冲突（待撰）
+TODO
+
+## JAR包冲突（待撰）
+TODO
 
 ## 路径问题
 假设程序部署在服务器的`/home/weblogic/project`中，WebLogic安装在`/u01/Oracle/Middleware`下面，而且程序会动态生成文件，实际上文件会放在类似于`/u01/Oracle/Middleware/user_projects/domains/base_domain/servers/app_server1/stage/project`的对应位置中，而且激活更新时候文件会丢失，需要重新生成。
@@ -35,7 +42,7 @@ code {
 避免使用中文文件名和中文路径，以免因字符编码问题导致部署或升级失败。举个例子，如果文件里有中文名，打包并解压之后文件名变成了乱码，那么更新的时候WebLogic会提示`Error occurred while downloading files from admin server for deployment request "xxx,xxx,xxx". Underlying error is: "null"`。
 
 ## 数据源名称
-假如JNDI数据源名称为dataSource，在Tomcat中运行时，需要写成`java:comp/env/dataSource`，但是在WebLogic中运行时要把“java:comp/env/”去掉，直接写成dataSource。
+假如JNDI数据源名称为dataSource，在Tomcat中运行时，需要写成`java:comp/env/dataSource`，但是在WebLogic中运行时要把`java:comp/env/`去掉，直接写成dataSource。
 
 ## 集群Session丢失问题
 生产环境通常会架设集群，通过负载均衡进行访问。如果负载均衡未按照Cookie进行分配，或者分配策略不完全正确，那么这样的话很可能会存在串Session的问题，例如登录成功之后进的是节点1，稍微做点操作后默默地跳到了节点3，导致会话丢失，系统提示重新登录。因为平时开发不会去使用负载均衡，所以可能注意不到这个问题。
@@ -43,13 +50,9 @@ code {
 这个问题可以通过以下几种方法解决：
 1. 正确地配置负载均衡，保证同一会话（JSESSIONID）的流量只分配到同一节点上；
 2. 使用WebLogic的“会话复制”功能（这个比较正统）；
-3. 通过Redis等实现会话共享（比较复杂，而且WebLogic不是没有相关功能，不推荐）。
+3. 通过Redis等实现会话共享（比较复杂）。
 
 会话复制的操作方法可以用Google搜索。
-
-{% note info %}
-由于我们项目比较特殊，所以使用的方法和以上三种均不相同：用户认证和会话控制由集成在上游的系统管理，请求通过上游的反向代理传过来，用户信息保存在特定HTTP Header中，而我们自己项目内的用户验证在Filter中进行，一旦Session丢掉可以直接根据Header信息重建。
-{% endnote %}
 
 ## 访问HTTPS网站的问题
 如果程序涉及访问HTTPS网站（包括接口），那么JDK最低要1.7。其实并不是说JDK1.6不行，而是碰到问题的话会非常麻烦，解决起来不如升JDK靠谱。
@@ -115,7 +118,7 @@ HTTPS证书通常需要花钱，所以开发阶段多会考虑自行签发证书
 3. 操作系统时间要正确，不管用北京、南京、东京还是西京的时间，别和地球时间差太多。
 
 ## 大文件不要打到WAR包中
-如果网站提供了软件、视频等体积较大文件的下载，尽量不要把它们打到应用的WAR包中。如果WAR包解压后总大小超过1GB，WebLogic部署会失败。
+如果网站提供了软件、视频等体积较大文件的下载，尽量不要把它们打到应用的WAR包中。部署大文件容易导致超时（`Timed out while activating`），而且如果WAR包解压之后体积太大的话，WebLogic部署会失败。
 
 建议将此类额外下载文件放到专门的文件服务器中。
 
@@ -201,8 +204,8 @@ java IpTest 10.15.2.9 1521
 
 涉及HTTPS时建议再对HTTPS网站做个访问测试，具体程序见前文。
 
-## 修改java.security
-Java 6存在一个关于随机数的bug，如果不Hack，在Linux系统下面WebLogic建域和启动时需要等待很长时间，因此建议装完Java之后立刻去修改java.security。
+## 修改java.security（JDK6）
+Java 6存在一个关于随机数的bug，如果不Hack，在Linux系统下面WebLogic建域和启动时需要卡很长时间，因此建议装完Java之后立刻去修改java.security。
 
 假设$JAVA_HOME为`/opt/jdk1.6.0_145`，也就是说JDK装在了这个地方，那么需要修改`$JAVA_HOME/jre/lib/security/java.security`文件，找到
 
@@ -328,12 +331,12 @@ weblogic   soft    nproc     655350
 session required /lib64/security/pam_limits.so
 ```
 
-修改完成后不要马上退出shell，要开个新窗口测试各账号能否登进去。如果登不进去（例如提示could not open session），说明参数改得太大，需要适当往小调。
+修改完成后不要马上退出shell，要开个新窗口测试各账号能否登进去。如果登不进去（例如提示`could not open session`），说明参数改得太大，需要适当往小调。
 
 另外如果线程数改大了，内存也应当适当调大，因为每个线程都会占一些内存空间。
 
 ## 启动报错“Assertion `ia_addressID' failed”
-如果提示`java: Net.c:229: Java_com_bea_wcp_sctp_Net_initIDs: Assertion \`ia_addressID' failed.`，可尝试删除`/u01/Oracle/Middleware/wlserver_10.3/sip/server/native/linux/x86_64/libsctpwrapper.so`文件。
+如果提示`java: Net.c:229: Java_com_bea_wcp_sctp_Net_initIDs: Assertion 'ia_addressID' failed.`，可尝试删除`/u01/Oracle/Middleware/wlserver_10.3/sip/server/native/linux/x86_64/libsctpwrapper.so`文件。
 
 # 运维阶段
 
@@ -368,14 +371,14 @@ session required /lib64/security/pam_limits.so
 4. 启动完成后确认“部署”里面各应用是否启动。
 
 ## 打补丁
-WebLogic打补丁速度比较慢，在打补丁过程中你需要干等，所以要多留一些操作时间。
+WebLogic打补丁速度比较慢，在打补丁过程中你需要干等，所以要多留一些操作时间。建议白天操作，晚上就可以少加班了。
 
-安装补丁之前，需要检查bsu.sh文件（例如`/u01/Oracle/Middleware/utils/bsu/bsu.sh`），将其中的最大内存Xmx改大些，例如-Xmx2048m。因为打补丁实在太慢，等了半天出来的却是java.lang.OutOfMemoryError的话实在太憋屈。
+安装补丁之前，必须先检查bsu.sh文件（例如`/u01/Oracle/Middleware/utils/bsu/bsu.sh`），将其中的最大内存Xmx改大些，例如-Xmx2048m。因为打补丁实在太慢，等了半天出来的却是java.lang.OutOfMemoryError的话实在太憋屈。
 
-打补丁对业务影响不大，可以随时操作，但是打完之后需要彻底重启WebLogic才能生效。
+打补丁对业务影响不大，可以随时操作，但是打完之后需要彻底重启WebLogic才能生效。AdminServer也要重启，否则后面容易碰到莫名其妙的问题。
 
-## 搬家
-尽量不要搬家，因为WebLogic安装和建域之后会产生很多已经写好了路径的配置文件。Middleware目录中有个registry.dat，此文件记录了WebLogic的安装情况，而且已经加密，如果贸然搬家会在升级等方面遇到麻烦。实在需要的话还是建立软链接比较好。
+## 搬家/迁移
+尽量不要搬家，因为WebLogic安装和建域之后会产生很多已经写好了路径的配置文件。Middleware目录中有个registry.dat，此文件记录了WebLogic的安装情况，而且已经加密，如果贸然搬家会在升级等方面遇到麻烦。确实要进行迁移的话，新服务器WebLogic路径务必与旧服务器相同，想不同就去建立软链接。
 
 ## 改密码
 ### WebLogic控制台密码
@@ -394,3 +397,63 @@ WebLogic打补丁速度比较慢，在打补丁过程中你需要干等，所以
 建议在服务器上面安装专门的监控软件。像我们项目组那种服务器由用户管理，应用由项目组自行运维的情况，更要有自己的监控程序，这样在出现问题时也好及时定位，以免一塌糊涂。
 
 目前我们项目组自己写了一个监控脚本，在繁忙时期每隔10分钟、空闲时期每隔半小时把WebLogic控制台的一些常用指标记录到日志文件中（通过cron控制），[代码见此](https://github.com/infnan/scripts/blob/master/部署和运维/WebLogic-monitor.sh)。
+
+## 莫名其妙白页（加载JSP页面时提示ClassNotFoundException）
+系统运行一段时间之后，有用户反馈系统部分页面莫名其妙白页，没有任何内容，也没有错误信息。
+
+查日志，发现报错信息类似：
+```
+<Jan 1, 2019 1:23:45 PM CST> <Error> <HTTP> <BEA-101249> <[ServletContext@1302345678[app:appname module:appname path:/appname spec-version:null]]: Servlet
+class jsp_servlet._somepackage.__somejsppage for servlet /somepackage/somejsppage.jsp could not be loaded because the requested cl
+ass was not found in the classpath /u01/Oracle/Middleware/user_projects/domains/app_domain/servers/app_server1/stage/appname/appname/WEB-INF/classes:/u01
+/app/Oracle/Middleware/user_projects/domains/app_domain/servers/app_server1/stage/appname/appname/WEB-INF/lib/……（一大堆jar包的文件名）:/u01/Oracle/Middleware/user_projects/domains/app_domain/servers/app_server1/tmp/_WL_user/appname/wekfjq.
+java.lang.ClassNotFoundException: jsp_servlet._somepackage.__somejsppage.>
+javax.servlet.ServletException: [HTTP:101249][ServletContext@1302345678[app:appname module:appname path:/appname spec-version:null]]: Servlet class jsp_servlet._somepackage.__somejsppage for servlet /somepackage/somejsppage.jsp could not be loaded because the requested class was not found in the classpath .
+java.lang.ClassNotFoundException: jsp_servlet._somepackage.__somejsppage.
+        at weblogic.servlet.internal.ServletStubImpl.prepareServlet(ServletStubImpl.java:551)
+        at weblogic.servlet.jsp.JspStub.prepareServlet(JspStub.java:283)
+        at weblogic.servlet.jsp.JspStub.prepareServlet(JspStub.java:218)
+        at weblogic.servlet.internal.ServletStubImpl.execute(ServletStubImpl.java:244)
+        at weblogic.servlet.internal.TailFilter.doFilter(TailFilter.java:26)
+        at weblogic.servlet.internal.FilterChainImpl.doFilter(FilterChainImpl.java:60)
+        at com.xxx.xxx.xxx.XXXXXFilter.doFilter(XXXXXFilter.java:123)
+        at weblogic.servlet.internal.FilterChainImpl.doFilter(FilterChainImpl.java:60)
+        at weblogic.servlet.internal.RequestDispatcherImpl.invokeServlet(RequestDispatcherImpl.java:527)
+        at weblogic.servlet.internal.RequestDispatcherImpl.forward(RequestDispatcherImpl.java:253)
+        ......（与我们应用完全无关的堆栈）
+        at weblogic.servlet.internal.FilterChainImpl.doFilter(FilterChainImpl.java:60)
+        at weblogic.servlet.internal.RequestEventsFilter.doFilter(RequestEventsFilter.java:27)
+        at weblogic.servlet.internal.FilterChainImpl.doFilter(FilterChainImpl.java:60)
+        at weblogic.servlet.internal.WebAppServletContext$ServletInvocationAction.wrapRun(WebAppServletContext.java:3748)
+        at weblogic.servlet.internal.WebAppServletContext$ServletInvocationAction.run(WebAppServletContext.java:3714)
+        at weblogic.security.acl.internal.AuthenticatedSubject.doAs(AuthenticatedSubject.java:321)
+        at weblogic.security.service.SecurityManager.runAs(SecurityManager.java:120)
+        at weblogic.servlet.internal.WebAppServletContext.securedExecute(WebAppServletContext.java:2283)
+        at weblogic.servlet.internal.WebAppServletContext.execute(WebAppServletContext.java:2182)
+        at weblogic.servlet.internal.ServletRequestImpl.run(ServletRequestImpl.java:1499)
+        at weblogic.work.ExecuteThread.execute(ExecuteThread.java:263)
+        at weblogic.work.ExecuteThread.run(ExecuteThread.java:221)
+```
+
+因为我们的JSP页面是正常的，程序也未进行改动，最初认为是WebLogic内部错误，重启了WebLogic。重启之后，页面能够正常显示，然而过一段时间之后还是莫名其妙白页，而且本来已经变好的页面也坏掉了。重新部署应用、重新建域，甚至重装WebLogic之后仍然白页。
+
+后来在WEB-INF目录放了一个weblogic.xml，内容如下
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<weblogic-web-app xmlns="http://xmlns.oracle.com/weblogic/weblogic-web-app" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/ejb-jar_3_0.xsd http://xmlns.oracle.com/weblogic/weblogic-web-app http://xmlns.oracle.com/weblogic/weblogic-web-app/1.2/weblogic-web-app.xsd">
+  <context-root>appname</context-root>
+  <jsp-descriptor>
+    <keepgenerated>false</keepgenerated>
+    <precompile>true</precompile>
+    <precompile-continue>true</precompile-continue>
+    <page-check-seconds>-1</page-check-seconds>
+    <verbose>false</verbose>
+    <debug>false</debug>
+  </jsp-descriptor>
+  <container-descriptor>
+    <servlet-reload-check-secs>-1</servlet-reload-check-secs>
+  </container-descriptor>
+</weblogic-web-app>
+```
+
+要求WebLogic对JSP预编译。重新部署之后，莫名其妙白页的问题解决了。
