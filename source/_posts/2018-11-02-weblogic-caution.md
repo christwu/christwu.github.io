@@ -5,7 +5,7 @@ category: 系统运维
 tags:
 - WebLogic
 ---
-本文记录我在部署WebLogic时遇到的各种坑。其中JDK为1.6，WebLogic版本11g。
+本文记录我在部署WebLogic时遇到的各种坑。其中JDK为1.6，WebLogic版本11g（10.3.6）。
 <!-- more -->
 <style>
 #post-content table {
@@ -20,7 +20,7 @@ code {
 # 开发阶段
 ## 准备测试区
 务必准备一个和生产环境架构接近的测试环境，而且开发环境、测试环境和生产环境的JDK与中间件版本应该保持一致，如果条件不够，至少测试环境和生产环境要一致。开发时用某个版本JDK和Tomcat，部署到生产环境时用另一个版本的JDK和WebLogic，这样很容易遭遇意外。
-
+    
 举一些例子，以下几个就属于Tomcat上面测不出来，挪到WebLogic上面就可能会暴露出来的错误，好在下表这些错误通过修改WebLogic服务器启动参数就能在一定程度上解决了：
 
 | 场景							| 错误信息							| 启动参数
@@ -30,8 +30,17 @@ code {
 | Apache CXF提供WebService服务	| javax.xml.ws.soap.SOAPFaultException: Cannot create a secure XMLInputFactory | -Dorg.apache.cxf.stax.allowInsecureParser=1
 | 启动报错，提示无法加载config.xml | `Server failed. Reason: [Management:141266]Parsing Failure in config.xml: failed to find method MethodName` | -Dweblogic.configuration.schemaValidationEnabled=false
 
-## JDK版本冲突（待撰）
-TODO
+如何修改WebLogic的启动参数？
+* AdminServer启动参数：找到类似于`/u01/Oracle/Middleware/user_projects/domains/base_domain/bin/setDomainEnv.sh`的文件，找到倒数第一个`JAVA_OPTIONS=...`，在它的后面追加参数。
+* 修改其他节点的启动参数：进入WebLogic控制台，点击服务器→你的服务器（例如app_server1）→配置→服务器启动，然后往下翻，找到“参数”项。
+
+## JDK版本
+如需使用JDK8或更高版本，需要更换新版WebLogic，将版本升级至12.1.3或以上。
+
+如需升级至JDK7：
+
+* 需排查程序代码，改写所有涉及`sun.*`包的程序，否则升级后会报错。
+* 安装完成后，需要进入WebLogic安装目录的`modules`目录中，将`javax.annotation_1.0.0.0_1-0.jar`、`javax.xml.bind_2.1.1.jar`、`javax.xml.ws_2.1.1.jar`三个文件拷到`$JAVA_HOME/jre/lib/endorsed`中（如果没有此目录，新建一个即可）。
 
 ## JAR包冲突（待撰）
 TODO
@@ -205,7 +214,7 @@ java IpTest 10.15.2.9 1521
 涉及HTTPS时建议再对HTTPS网站做个访问测试，具体程序见前文。
 
 ## 修改java.security（JDK6）
-Java 6存在一个关于随机数的bug，如果不Hack，在Linux系统下面WebLogic建域和启动时需要卡很长时间，因此建议装完Java之后立刻去修改java.security。
+Java 6存在一个关于随机数的bug，如果不Hack，在Linux系统下面WebLogic建域和启动时会特别慢，需要卡很长时间（15分钟左右），因此建议装完Java之后立刻去修改java.security。
 
 假设$JAVA_HOME为`/opt/jdk1.6.0_145`，也就是说JDK装在了这个地方，那么需要修改`$JAVA_HOME/jre/lib/security/java.security`文件，找到
 
