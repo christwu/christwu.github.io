@@ -1,0 +1,8 @@
+{
+    "pasteImage.basePath": "${projectRoot}/source",
+    "pasteImage.path": "${projectRoot}/source/img/${currentFileNameWithoutExt}",
+    "pasteImage.forceUnixStyleSeparator": true,
+    "pasteImage.prefix": "/",
+    "pasteImage.showFilePathConfirmInputBox": true,
+    "live2D.use": false,
+}
