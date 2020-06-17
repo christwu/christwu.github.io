@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"plusnan.me","root":"/","scheme":"Muse","version":"7.8.0","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="本文借助Wireshark抓包软件，研究这样一个问题：含有中文的各类HTTP请求，从浏览器【发送】出去之后、被Tomcat等中间件接收之前，它的内部用了什么编码呢？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web应用中文乱码实验（二）：HTTP Request中文编码测试">
+<meta property="og:url" content="https://plusnan.me/2020/03/21/luanma-2/index.html">
+<meta property="og:site_name" content="infNaN">
+<meta property="og:description" content="本文借助Wireshark抓包软件，研究这样一个问题：含有中文的各类HTTP请求，从浏览器【发送】出去之后、被Tomcat等中间件接收之前，它的内部用了什么编码呢？">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/wireshark-1.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/wireshark-2.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/get-1.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/get-1-data.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/get-2.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/get-2-data.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/get-3.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/get-3-data.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/get-2.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/get-2-data.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/post-1.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/post-1-data.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/get-4.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/get-4-data.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/post-2.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/post-2-data.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/post-3.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/post-3-data.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/post-4.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/post-4-data.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/ajax-1.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/ajax-1-data.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/ajax-2.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/ajax-2-data.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/ajax-3.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/ajax-3-data.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/ajax-2.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/ajax-2-data.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/ajax-4.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/ajax-4-data.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/ajax-5.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/ajax-6.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/curl-1.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/curl-1-data.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/curl-2.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/curl-2-data.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/curl-3.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/curl-3-data.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/postman-1.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/postman-2.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/postman-3.png">
+<meta property="og:image" content="https://plusnan.me/img/2020-03-21-luanma-2/postman-4.png">
+<meta property="article:published_time" content="2020-03-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-06-17T09:27:51.964Z">
+<meta property="article:author" content="infNaN">
+<meta property="article:tag" content="乱码">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://plusnan.me/img/2020-03-21-luanma-2/wireshark-1.png">
+
+<link rel="canonical" href="https://plusnan.me/2020/03/21/luanma-2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Web应用中文乱码实验（二）：HTTP Request中文编码测试 | infNaN</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134391990-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-134391990-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/rss.xml" title="infNaN" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">infNaN</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2020/03/21/luanma-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/myavatar.jpg">
+      <meta itemprop="name" content="infNaN">
+      <meta itemprop="description" content="多穿女装少踩坑">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="infNaN">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Web应用中文乱码实验（二）：HTTP Request中文编码测试
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-21 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-21T00:00:00+08:00">2020-03-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-17 17:27:51" itemprop="dateModified" datetime="2020-06-17T17:27:51+08:00">2020-06-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%97%B2%E8%B0%88/" itemprop="url" rel="index"><span itemprop="name">闲谈</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本文借助Wireshark抓包软件，研究这样一个问题：含有中文的各类HTTP请求，从浏览器【发送】出去之后、被Tomcat等中间件接收之前，它的内部用了什么编码呢？</p>
+<a id="more"></a>
+
+<h1 id="约定"><a href="#约定" class="headerlink" title="约定"></a>约定</h1><p>为便于讨论，本文作出以下约定：</p>
+<ul>
+<li>GBK：忽略GB2312、GBK、GB18030等中国编码的内部差异，统一使用GBK表示。假设Windows系统默认使用GBK编码。</li>
+<li>现代浏览器：指除了IE以外的、版本不太老的其他浏览器，例如Chrome、Firefox、Safari，以及用了Chromium等内核的国产浏览器。国产浏览器通常是双内核，其IE内核模式则排除在外。</li>
+<li>IE：默认包含国产浏览器的IE内核模式。有特殊说明的除外。</li>
+<li>Linux：本文使用Mac系统进行测试，并假设Mac与Linux一样，而且实际上结论就是一样的。</li>
+</ul>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><h2 id="简易HTTP-Server"><a href="#简易HTTP-Server" class="headerlink" title="简易HTTP Server"></a>简易HTTP Server</h2><p>为了排除Java与Tomcat的各种干扰，我们用另一种语言——Node.js来实现一个简易的HTTP Server。在Node.js中字符串内部以UTF-8编码存储（备注：这句话不正确，实际上和Java一样也是UTF-16），而且本文所用的express也会默认让Content-Type使用UTF-8：</p>
+<p>server.js：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Buffer = <span class="built_in">require</span>(<span class="string">'buffer'</span>).Buffer;</span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">const</span> bodyParser = <span class="built_in">require</span>(<span class="string">'body-parser'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = express();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 让express不对用户传入参数作任何解析</span></span><br><span class="line">app.use(bodyParser.text(&#123; <span class="attr">type</span>: <span class="string">'*/*'</span> &#125;));</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> object2str = <span class="function">(<span class="params">obj</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> output = [];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> obj === <span class="string">'object'</span> &amp;&amp; obj) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> obj) &#123;</span><br><span class="line">            <span class="keyword">if</span> (obj[key]) &#123;</span><br><span class="line">                <span class="keyword">let</span> value = obj[key].toString();</span><br><span class="line">                <span class="keyword">let</span> keyBuffer = Buffer.from(key);</span><br><span class="line">                <span class="keyword">let</span> valueBuffer = Buffer.from(value);</span><br><span class="line"></span><br><span class="line">                output.push(<span class="string">`<span class="subst">$&#123;key&#125;</span> = <span class="subst">$&#123;value&#125;</span>`</span>);</span><br><span class="line">                output.push(<span class="string">`\t<span class="subst">$&#123;keyBuffer.toString(<span class="string">'hex'</span>)&#125;</span> = <span class="subst">$&#123;valueBuffer.toString(<span class="string">'hex'</span>)&#125;</span>`</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> obj === <span class="string">'string'</span>) &#123;</span><br><span class="line">        output.push(obj);</span><br><span class="line">        output.push(<span class="string">'\n'</span>);</span><br><span class="line">        output.push(Buffer.from(obj).toString(<span class="string">'hex'</span>)); </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> output.join(<span class="string">'\n'</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> handler = <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    res.header(&#123;</span><br><span class="line">        <span class="string">'Content-Type'</span>: <span class="string">'text/plain'</span></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> output = [];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将用户传入的参数原样输出</span></span><br><span class="line">    output.push(<span class="string">`<span class="subst">$&#123;req.method&#125;</span> <span class="subst">$&#123;req.originalUrl&#125;</span>`</span>);</span><br><span class="line">    output.push(<span class="string">''</span>);</span><br><span class="line"></span><br><span class="line">    output.push(<span class="string">'Query:'</span>);</span><br><span class="line">    output.push(object2str(req.query));</span><br><span class="line">    output.push(<span class="string">''</span>);</span><br><span class="line"></span><br><span class="line">    output.push(<span class="string">'Params:'</span>);</span><br><span class="line">    output.push(object2str(req.params));</span><br><span class="line">    output.push(<span class="string">''</span>);</span><br><span class="line"></span><br><span class="line">    output.push(<span class="string">'Body:'</span>);</span><br><span class="line">    output.push(object2str(req.body));</span><br><span class="line">    output.push(<span class="string">''</span>);</span><br><span class="line"></span><br><span class="line">    res.send(output.join(<span class="string">'\n'</span>));</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> createForm = <span class="function">(<span class="params">encoding</span>) =&gt;</span> <span class="string">`</span></span><br><span class="line"><span class="string">&lt;html&gt;</span></span><br><span class="line"><span class="string">    &lt;head&gt;</span></span><br><span class="line"><span class="string">        &lt;meta charset="<span class="subst">$&#123;encoding&#125;</span>" /&gt;</span></span><br><span class="line"><span class="string">        &lt;title&gt;TEST&lt;/title&gt;</span></span><br><span class="line"><span class="string">        &lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">    &lt;/head&gt;</span></span><br><span class="line"><span class="string">    &lt;body&gt;</span></span><br><span class="line"><span class="string">        &lt;h2&gt;GET Form&lt;/h2&gt;</span></span><br><span class="line"><span class="string">        &lt;form action="/get" method="GET"&gt;</span></span><br><span class="line"><span class="string">            Name: &lt;input type="text" name="name"&gt;</span></span><br><span class="line"><span class="string">            &lt;input type="submit"&gt;</span></span><br><span class="line"><span class="string">        &lt;/form&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        &lt;h2&gt;POST Form&lt;/h2&gt;</span></span><br><span class="line"><span class="string">        &lt;form action="/post" method="POST"&gt;</span></span><br><span class="line"><span class="string">            Name: &lt;input type="text" name="name"&gt;</span></span><br><span class="line"><span class="string">            &lt;input type="submit"&gt;</span></span><br><span class="line"><span class="string">        &lt;/form&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        &lt;h2&gt;POST Form (multipart/form-data)&lt;/h2&gt;</span></span><br><span class="line"><span class="string">        &lt;form action="/post" method="POST" enctype="multipart/form-data"&gt;</span></span><br><span class="line"><span class="string">            Name: &lt;input type="text" name="name"&gt;</span></span><br><span class="line"><span class="string">            &lt;input type="submit"&gt;</span></span><br><span class="line"><span class="string">        &lt;/form&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        &lt;h2&gt;Ajax Form&lt;/h2&gt;</span></span><br><span class="line"><span class="string">        Name: &lt;input type="text" id="text"&gt;</span></span><br><span class="line"><span class="string">        &lt;button type="button" onclick="ajaxTest('get')"&gt;Ajax GET&lt;/button&gt;</span></span><br><span class="line"><span class="string">        &lt;button type="button" onclick="ajaxTest('post')"&gt;Ajax POST&lt;/button&gt;</span></span><br><span class="line"><span class="string">        &lt;button type="button" onclick="ajaxTest2()"&gt;Ajax GET 2&lt;/button&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        &lt;script&gt;</span></span><br><span class="line"><span class="string">            function ajaxTest(type) &#123;</span></span><br><span class="line"><span class="string">                $.ajax(&#123;</span></span><br><span class="line"><span class="string">                    url: '/' + type,</span></span><br><span class="line"><span class="string">                    type: type,</span></span><br><span class="line"><span class="string">                    data: &#123;</span></span><br><span class="line"><span class="string">                        name: $('#text').val()</span></span><br><span class="line"><span class="string">                    &#125;,</span></span><br><span class="line"><span class="string">                    success: function (data) &#123;</span></span><br><span class="line"><span class="string">                        alert(data);</span></span><br><span class="line"><span class="string">                    &#125;</span></span><br><span class="line"><span class="string">                &#125;);</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            function ajaxTest2() &#123;</span></span><br><span class="line"><span class="string">                var text = $('#text').val();</span></span><br><span class="line"><span class="string">                $.ajax(&#123;</span></span><br><span class="line"><span class="string">                    url: '/get/' + text + '?name=' + text,</span></span><br><span class="line"><span class="string">                    type: 'get',</span></span><br><span class="line"><span class="string">                    success: function (data) &#123;</span></span><br><span class="line"><span class="string">                        alert(data);</span></span><br><span class="line"><span class="string">                    &#125;</span></span><br><span class="line"><span class="string">                &#125;);</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &lt;/script&gt;</span></span><br><span class="line"><span class="string">    &lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">'/'</span>, handler);</span><br><span class="line">app.get(<span class="string">'/get'</span>, handler);</span><br><span class="line">app.get(<span class="string">'/get/:name'</span>, handler);</span><br><span class="line">app.post(<span class="string">'/post'</span>, handler);</span><br><span class="line">app.post(<span class="string">'/post/:name'</span>, handler);</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">'/form/utf-8'</span>, (req, res) =&gt; &#123;</span><br><span class="line">    <span class="comment">// 框架会自动追加 charset=utf-8</span></span><br><span class="line">    res.send(createForm(<span class="string">'utf-8'</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">'/form/gbk'</span>, (req, res) =&gt; &#123;</span><br><span class="line">    res.header(&#123;</span><br><span class="line">        <span class="string">'Content-Type'</span>: <span class="string">'text/html; charset=gbk'</span></span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">// 必须send一个Buffer，不能send一个string，否则框架会按UTF-8处理</span></span><br><span class="line">    res.send(Buffer.from(createForm(<span class="string">'gbk'</span>)));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">8000</span>, () =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`Listening at http://0.0.0.0:8000... Press Ctrl+C to stop.`</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>使用npm安装express与body-parser。准备完毕后，使用<code>node server.js</code>运行服务器。</p>
+<p>该HTTP Server功能如下：</p>
+<ul>
+<li><code>/get</code>：显示GET请求参数</li>
+<li><code>/post</code>：显示POST请求内容</li>
+<li><code>/get/xxx</code>：重复get后面的内容</li>
+<li><code>/post/xxx</code>：重复post后面的内容</li>
+<li><code>/form/gbk</code>：显示一个以GBK编码展示的表单，系统入口</li>
+<li><code>/form/utf-8</code>：显示一个以UTF-8编码展示的表单，系统入口</li>
+</ul>
+<h2 id="识别字符编码"><a href="#识别字符编码" class="headerlink" title="识别字符编码"></a>识别字符编码</h2><p><code>中文</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">UTF-8：</span><br><span class="line">e4 b8 ad e6 96 87</span><br><span class="line">-------- --------</span><br><span class="line">   中       文</span><br><span class="line"></span><br><span class="line">GBK：</span><br><span class="line">d6 d0 ce c4</span><br><span class="line">----- -----</span><br><span class="line">  中    文</span><br></pre></td></tr></table></figure>
+
+<h2 id="Wireshark"><a href="#Wireshark" class="headerlink" title="Wireshark"></a>Wireshark</h2><p>Wireshark是一款支持多种协议的抓包软件。使用该软件抓包时，我们可以看到数据包的二进制信息，从而判断请求用了哪种编码。</p>
+<p>安装并启动Wireshark，可看到选择设备的窗口：</p>
+<p><img src="/img/2020-03-21-luanma-2/wireshark-1.png" alt=""></p>
+<p>双击某个网卡，程序就会捕获经过某个网卡的各类网络流量。由于访问的是本机运行的HTTP Server，我们需要双击“Loopback”。</p>
+<p>进入捕获界面，在过滤条件中输入<code>http</code>，即可过滤出本机访问本机的HTTP流量：</p>
+<p><img src="/img/2020-03-21-luanma-2/wireshark-2.png" alt=""></p>
+<p>本次测试使用两个操作系统，一个是Mac（本机），另一个是Windows（虚拟机），选择Capture的网卡时，均选择“Loopback”。</p>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>我们测试以下几种情形：</p>
+<ul>
+<li>GET请求：<ul>
+<li>在浏览器地址栏直接输入URL、查询参数</li>
+<li>在UTF-8/GBK编码页面通过&lt;form&gt;输入查询参数</li>
+</ul>
+</li>
+<li>POST请求：在UTF-8/GBK编码页面通过&lt;form&gt;输入参数</li>
+<li>使用jQuery的$.ajax发送GET/POST请求</li>
+</ul>
+<p>测试环境：</p>
+<ul>
+<li>操作系统：Linux/Mac、Windows</li>
+<li>浏览器：IE8、IE11、新版Chrome（版本&gt;70）、旧版Chrome（版本49）、新版Firefox（版本&gt;70）、旧版Firefox（版本&lt;20）、360浏览器（版本12，Windows）</li>
+<li>其他软件：curl、Postman</li>
+</ul>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>测试结论如下。除IE外，其他浏览器不受操作系统影响。</p>
+<h2 id="GET请求，直接输入URL"><a href="#GET请求，直接输入URL" class="headerlink" title="GET请求，直接输入URL"></a>GET请求，直接输入URL</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> http :&#x2F;&#x2F; 127.0.0.1:8000 &#x2F; get &#x2F; 中文 ? name &#x3D; 中文</span><br><span class="line"> -----------------------------------   -----------</span><br><span class="line">                 URL                     请求参数</span><br><span class="line"></span><br><span class="line">%E4%B8%AD%E6%96%87 -&gt; URL Encoded（按UTF-8编码）</span><br><span class="line">%D6%D0%CE%C4 -&gt; URL Encoded（按GBK编码）</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>测试环境</th>
+<th>URL编码</th>
+<th>请求参数编码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>现代浏览器</td>
+<td>UTF-8, URL encoded</td>
+<td>UTF-8, URL encoded</td>
+</tr>
+<tr>
+<td>IE（排除国产浏览器）</td>
+<td>UTF-8, URL encoded</td>
+<td>跟随系统（GBK），未进行URL encode*</td>
+</tr>
+<tr>
+<td>360浏览器兼容模式</td>
+<td>UTF-8, URL encoded</td>
+<td>UTF-8, URL encoded</td>
+</tr>
+</tbody></table>
+<p><small>* 这是系统默认情况。用户可以在“Internet选项”的“高级”标签中勾选“发送（非）Intranet URL 的 UTF-8 查询字符串”设置，让IE在发送请求参数时也采用UTF-8编码。</small></p>
+<h2 id="lt-form-gt-表单提交"><a href="#lt-form-gt-表单提交" class="headerlink" title="&lt;form&gt;表单提交"></a>&lt;form&gt;表单提交</h2><table>
+<thead>
+<tr>
+<th>测试环境</th>
+<th>GET</th>
+<th>POST，默认情况（application/x-www-form-urlencoded）</th>
+<th>POST，multipart/form-data</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>所有测试环境</td>
+<td>遵循页面编码（Content-Type），URL encoded</td>
+<td>遵循页面编码（Content-Type），URL encoded</td>
+<td>遵循页面编码（Content-Type），但不进行URL encode</td>
+</tr>
+</tbody></table>
+<p>以上均不受操作系统影响。由于与页面编码一致，通常不会遇到坑。</p>
+<h2 id="jQuery的-ajax"><a href="#jQuery的-ajax" class="headerlink" title="jQuery的$.ajax"></a>jQuery的$.ajax</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 中文①：在URL中使用中文</span></span><br><span class="line"><span class="comment">// 中文②：直接在url参数中拼接中文的查询参数</span></span><br><span class="line"><span class="comment">// 中文③：在data参数中使用中文</span></span><br><span class="line">$.ajax(&#123;</span><br><span class="line">    url: <span class="string">'/get/中文①'</span> + <span class="string">'?name='</span> + <span class="string">'中文②'</span>,</span><br><span class="line">    data: <span class="string">'中文③'</span>,</span><br><span class="line">    ...</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>测试环境</th>
+<th>中文①</th>
+<th>中文②</th>
+<th>中文③</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>现代浏览器（旧版本火狐除外）</td>
+<td>UTF-8, URL encoded</td>
+<td>跟随页面Content-Type，URL encoded</td>
+<td>UTF-8, URL encoded</td>
+</tr>
+<tr>
+<td>旧版本火狐</td>
+<td>UTF-8, URL encoded</td>
+<td>UTF-8, URL encoded</td>
+<td>UTF-8, URL encoded</td>
+</tr>
+<tr>
+<td>IE</td>
+<td>UTF-8, URL encoded</td>
+<td>跟随系统（GBK），未进行URL编码*</td>
+<td>UTF-8, URL encoded</td>
+</tr>
+</tbody></table>
+<p><small>* 这是系统默认情况。用户可以在“Internet选项”的“高级”标签中勾选“发送（非）Intranet URL 的 UTF-8 查询字符串”设置，让IE在发送请求参数时也采用UTF-8编码。</small></p>
+<p>由上表可以得知，应当避免在“中文②”位置上面拼接查询参数。躲掉这个坑之后，$.ajax总是UTF-8编码。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>应避免在URL上面拼接中文字符。</li>
+<li>全面使用UTF-8，可避免编码转换引发的问题。</li>
+<li>如果全面使用GBK，应注意到：某些场景下，浏览器会将字符串以UTF-8编码进行URL encode然后再发送到服务器上。服务器方面需留意URL decode与编码转换的问题。</li>
+</ul>
+<h1 id="部分测试截图"><a href="#部分测试截图" class="headerlink" title="部分测试截图"></a>部分测试截图</h1><h2 id="GET请求，直接输入URL-1"><a href="#GET请求，直接输入URL-1" class="headerlink" title="GET请求，直接输入URL"></a>GET请求，直接输入URL</h2><p><code>http://127.0.0.1:8000/get/中文</code></p>
+<p><img src="/img/2020-03-21-luanma-2/get-1.png" alt=""></p>
+<p><img src="/img/2020-03-21-luanma-2/get-1-data.png" alt=""></p>
+<p>按UTF-8进行了URL encode。</p>
+<p>&nbsp;</p>
+<p><code>http://127.0.0.1:8000/get?name=中文</code>（现代浏览器）</p>
+<p><img src="/img/2020-03-21-luanma-2/get-2.png" alt=""></p>
+<p><img src="/img/2020-03-21-luanma-2/get-2-data.png" alt=""></p>
+<p>同样按UTF-8进行了URL encode。</p>
+<p>&nbsp;</p>
+<p><code>http://127.0.0.1:8000/get?name=中文</code>（IE）</p>
+<p><img src="/img/2020-03-21-luanma-2/get-3.png" alt=""></p>
+<p><img src="/img/2020-03-21-luanma-2/get-3-data.png" alt=""></p>
+<p>IE未对“中文”二字进行URL encode，直接以GBK编码原文发送出去了。</p>
+<p>&nbsp;</p>
+<h2 id="提交-lt-form-gt-表单（通常情况）"><a href="#提交-lt-form-gt-表单（通常情况）" class="headerlink" title="提交&lt;form&gt;表单（通常情况）"></a>提交&lt;form&gt;表单（通常情况）</h2><h3 id="UTF-8页面"><a href="#UTF-8页面" class="headerlink" title="UTF-8页面"></a>UTF-8页面</h3><p>UTF-8表单：<code>http://127.0.0.1:8000/form/utf-8</code></p>
+<p>在GET区输入“中文”二字并提交：</p>
+<p><img src="/img/2020-03-21-luanma-2/get-2.png" alt=""></p>
+<p><img src="/img/2020-03-21-luanma-2/get-2-data.png" alt=""></p>
+<p>与直接输入网址是一致的。</p>
+<p>&nbsp;</p>
+<p>在POST区输入“中文”二字并提交：</p>
+<p><img src="/img/2020-03-21-luanma-2/post-1.png" alt=""></p>
+<p><img src="/img/2020-03-21-luanma-2/post-1-data.png" alt=""></p>
+<p>浏览器也进行了URL encode。</p>
+<p>&nbsp;</p>
+<h3 id="GBK页面"><a href="#GBK页面" class="headerlink" title="GBK页面"></a>GBK页面</h3><p>切换到GBK表单：<code>http://127.0.0.1:8000/form/gbk</code></p>
+<p>在GET区输入“中文”二字并提交：</p>
+<p><img src="/img/2020-03-21-luanma-2/get-4.png" alt=""></p>
+<p><img src="/img/2020-03-21-luanma-2/get-4-data.png" alt=""></p>
+<p>浏览器按GBK编码进行了URL encode，与直接输入网址的现象不同了。</p>
+<p>&nbsp;</p>
+<p>在POST区输入“中文”二字并提交：</p>
+<p><img src="/img/2020-03-21-luanma-2/post-2.png" alt=""></p>
+<p><img src="/img/2020-03-21-luanma-2/post-2-data.png" alt=""></p>
+<p>浏览器也按GBK编码进行了URL encode。</p>
+<p>&nbsp;</p>
+<h2 id="提交-lt-form-gt-表单（multipart-form-data）"><a href="#提交-lt-form-gt-表单（multipart-form-data）" class="headerlink" title="提交&lt;form&gt;表单（multipart/form-data）"></a>提交&lt;form&gt;表单（multipart/form-data）</h2><p>UTF-8表单：<code>http://127.0.0.1:8000/form/utf-8</code></p>
+<p><img src="/img/2020-03-21-luanma-2/post-3.png" alt=""></p>
+<p><img src="/img/2020-03-21-luanma-2/post-3-data.png" alt=""></p>
+<p>&nbsp;</p>
+<p>切换到GBK表单：<code>http://127.0.0.1:8000/form/gbk</code></p>
+<p><img src="/img/2020-03-21-luanma-2/post-4.png" alt=""></p>
+<p><img src="/img/2020-03-21-luanma-2/post-4-data.png" alt=""></p>
+<p>都是原封不动地将文字发出去了。</p>
+<p>&nbsp;</p>
+<h2 id="ajax"><a href="#ajax" class="headerlink" title="$.ajax"></a>$.ajax</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 中文①：在URL中使用中文</span></span><br><span class="line"><span class="comment">// 中文②：直接在url参数中拼接中文的查询参数</span></span><br><span class="line"><span class="comment">// 中文③：在data参数中使用中文</span></span><br><span class="line">$.ajax(&#123;</span><br><span class="line">    url: <span class="string">'/get/中文①'</span> + <span class="string">'?name='</span> + <span class="string">'中文②'</span>,</span><br><span class="line">    data: <span class="string">'中文③'</span>,</span><br><span class="line">    ...</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="中文①与中文②（Ajax-Get-2按钮）"><a href="#中文①与中文②（Ajax-Get-2按钮）" class="headerlink" title="中文①与中文②（Ajax Get 2按钮）"></a>中文①与中文②（Ajax Get 2按钮）</h3><h4 id="UTF-8"><a href="#UTF-8" class="headerlink" title="UTF-8"></a>UTF-8</h4><p><img src="/img/2020-03-21-luanma-2/ajax-1.png" alt=""></p>
+<p><img src="/img/2020-03-21-luanma-2/ajax-1-data.png" alt=""></p>
+<p>均按UTF-8进行了URL encode。</p>
+<p>&nbsp;</p>
+<p>换成IE浏览器时：</p>
+<p><img src="/img/2020-03-21-luanma-2/ajax-2.png" alt=""></p>
+<p><img src="/img/2020-03-21-luanma-2/ajax-2-data.png" alt=""></p>
+<p>后面的请求参数并不是UTF-8，而是GBK，并且未进行URL encode。</p>
+<p>&nbsp;</p>
+<h4 id="GBK"><a href="#GBK" class="headerlink" title="GBK"></a>GBK</h4><p><img src="/img/2020-03-21-luanma-2/ajax-3.png" alt=""></p>
+<p><img src="/img/2020-03-21-luanma-2/ajax-3-data.png" alt=""></p>
+<p>URL仍然是UTF-8 + URL encode，而请求参数是GBK + URL encode。</p>
+<p>&nbsp;</p>
+<p>换成IE浏览器时：</p>
+<p><img src="/img/2020-03-21-luanma-2/ajax-2.png" alt=""></p>
+<p><img src="/img/2020-03-21-luanma-2/ajax-2-data.png" alt=""></p>
+<p>和上面UTF-8表单一样，后面的请求参数是未经过URL encode的GBK。</p>
+<p>&nbsp;</p>
+<p>对于旧版本的Firefox浏览器：</p>
+<p><img src="/img/2020-03-21-luanma-2/ajax-4.png" alt=""></p>
+<p><img src="/img/2020-03-21-luanma-2/ajax-4-data.png" alt=""></p>
+<p>即使页面编码是GBK，URL和请求参数仍然都是UTF-8 + URL encode。</p>
+<p>&nbsp;</p>
+<h3 id="中文③（Ajax-GET与Ajax-POST按钮）"><a href="#中文③（Ajax-GET与Ajax-POST按钮）" class="headerlink" title="中文③（Ajax GET与Ajax POST按钮）"></a>中文③（Ajax GET与Ajax POST按钮）</h3><p><img src="/img/2020-03-21-luanma-2/ajax-5.png" alt=""></p>
+<p><img src="/img/2020-03-21-luanma-2/ajax-6.png" alt=""></p>
+<p>无论页面是UTF-8还是GBK，ajax发送出去的都是UTF-8 + URL encode。IE也是如此。</p>
+<p>&nbsp;</p>
+<h2 id="其他工具"><a href="#其他工具" class="headerlink" title="其他工具"></a>其他工具</h2><h3 id="curl"><a href="#curl" class="headerlink" title="curl"></a>curl</h3><p>shell编码：UTF-8</p>
+<p><code>curl http://127.0.0.1:8000/get/中文</code></p>
+<p><img src="/img/2020-03-21-luanma-2/curl-1.png" alt=""></p>
+<p><img src="/img/2020-03-21-luanma-2/curl-1-data.png" alt=""></p>
+<p>&nbsp;</p>
+<p><code>curl &#39;http://127.0.0.1:8000/get?name=中文&#39;</code></p>
+<p><img src="/img/2020-03-21-luanma-2/curl-2.png" alt=""></p>
+<p><img src="/img/2020-03-21-luanma-2/curl-2-data.png" alt=""></p>
+<p>&nbsp;</p>
+<p><code>curl -X POST -d &#39;name=中文&#39; http://127.0.0.1:8000/post</code></p>
+<p><img src="/img/2020-03-21-luanma-2/curl-3.png" alt=""></p>
+<p><img src="/img/2020-03-21-luanma-2/curl-3-data.png" alt=""></p>
+<p>现象：curl把汉字原封不动地发送给了服务器，但由于汉字不符合RFC 1738的URL字符的规范，服务器程序无法正确处理。</p>
+<p>&nbsp;</p>
+<h3 id="Postman"><a href="#Postman" class="headerlink" title="Postman"></a>Postman</h3><p>我们再看一下接口调试软件Postman是按哪种编码处理的：</p>
+<p><code>GET http://127.0.0.1:8000/get/中文</code></p>
+<p><img src="/img/2020-03-21-luanma-2/postman-1.png" alt=""></p>
+<p>&nbsp;</p>
+<p><code>GET http://127.0.0.1:8000/get?name=中文</code></p>
+<p><img src="/img/2020-03-21-luanma-2/postman-2.png" alt=""></p>
+<p>&nbsp;</p>
+<p><code>POST http://127.0.0.1:8000/post</code> (application/x-www-form-urlencoded)</p>
+<p><img src="/img/2020-03-21-luanma-2/postman-3.png" alt=""></p>
+<p>&nbsp;</p>
+<p><code>POST http://127.0.0.1:8000/post</code> (application/json)</p>
+<p><img src="/img/2020-03-21-luanma-2/postman-4.png" alt=""></p>
+<p>现象：无论Mac还是Windows，Postman均按UTF-8处理了。以multipart/form-data、application/json等形式发送时，不会也不应该进行URL encode。</p>
+<p>&nbsp;</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucnVhbnlpZmVuZy5jb20vYmxvZy8yMDEwLzAyL3VybF9lbmNvZGluZy5odG1s">关于URL编码<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuaWJtLmNvbS9kZXZlbG9wZXJ3b3Jrcy9jbi93ZWIvd2EtbG8tZWNvZGluZy1yZXNwb25zZS1wcm9ibGVtL2luZGV4Lmh0bWw=">深入分析 web 请求响应中的编码问题<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+<h1 id="本系列文章"><a href="#本系列文章" class="headerlink" title="本系列文章"></a>本系列文章</h1><ul>
+<li><a href="/2020/03/15/luanma-1/">乱码现象概述</a></li>
+<li><strong>HTTP Request中文编码测试</strong><ul>
+<li>如何通过Ajax传递中文内容</li>
+</ul>
+</li>
+<li>Tomcat中文编码测试</li>
+<li>MySQL中文编码测试</li>
+<li>补救措施</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>infNaN
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://plusnan.me/2020/03/21/luanma-2/" title="Web应用中文乱码实验（二）：HTTP Request中文编码测试">https://plusnan.me/2020/03/21/luanma-2/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E4%B9%B1%E7%A0%81/" rel="tag"># 乱码</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/15/luanma-1/" rel="prev" title="Web应用中文乱码实验（一）：乱码现象概述">
+      <i class="fa fa-chevron-left"></i> Web应用中文乱码实验（一）：乱码现象概述
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/01/osu-on-mbp/" rel="next" title="在macOS Catalina系统运行osu!">
+      在macOS Catalina系统运行osu! <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#约定"><span class="nav-number">1.</span> <span class="nav-text">约定</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#准备工作"><span class="nav-number">2.</span> <span class="nav-text">准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简易HTTP-Server"><span class="nav-number">2.1.</span> <span class="nav-text">简易HTTP Server</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#识别字符编码"><span class="nav-number">2.2.</span> <span class="nav-text">识别字符编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Wireshark"><span class="nav-number">2.3.</span> <span class="nav-text">Wireshark</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#测试"><span class="nav-number">3.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结论"><span class="nav-number">4.</span> <span class="nav-text">结论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GET请求，直接输入URL"><span class="nav-number">4.1.</span> <span class="nav-text">GET请求，直接输入URL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lt-form-gt-表单提交"><span class="nav-number">4.2.</span> <span class="nav-text">&lt;form&gt;表单提交</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery的-ajax"><span class="nav-number">4.3.</span> <span class="nav-text">jQuery的$.ajax</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#部分测试截图"><span class="nav-number">6.</span> <span class="nav-text">部分测试截图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GET请求，直接输入URL-1"><span class="nav-number">6.1.</span> <span class="nav-text">GET请求，直接输入URL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提交-lt-form-gt-表单（通常情况）"><span class="nav-number">6.2.</span> <span class="nav-text">提交&lt;form&gt;表单（通常情况）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UTF-8页面"><span class="nav-number">6.2.1.</span> <span class="nav-text">UTF-8页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GBK页面"><span class="nav-number">6.2.2.</span> <span class="nav-text">GBK页面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提交-lt-form-gt-表单（multipart-form-data）"><span class="nav-number">6.3.</span> <span class="nav-text">提交&lt;form&gt;表单（multipart&#x2F;form-data）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ajax"><span class="nav-number">6.4.</span> <span class="nav-text">$.ajax</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#中文①与中文②（Ajax-Get-2按钮）"><span class="nav-number">6.4.1.</span> <span class="nav-text">中文①与中文②（Ajax Get 2按钮）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#UTF-8"><span class="nav-number">6.4.1.1.</span> <span class="nav-text">UTF-8</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GBK"><span class="nav-number">6.4.1.2.</span> <span class="nav-text">GBK</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中文③（Ajax-GET与Ajax-POST按钮）"><span class="nav-number">6.4.2.</span> <span class="nav-text">中文③（Ajax GET与Ajax POST按钮）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他工具"><span class="nav-number">6.5.</span> <span class="nav-text">其他工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#curl"><span class="nav-number">6.5.1.</span> <span class="nav-text">curl</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Postman"><span class="nav-number">6.5.2.</span> <span class="nav-text">Postman</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">7.</span> <span class="nav-text">参考资料</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#本系列文章"><span class="nav-number">8.</span> <span class="nav-text">本系列文章</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="infNaN"
+      src="/img/myavatar.jpg">
+  <p class="site-author-name" itemprop="name">infNaN</p>
+  <div class="site-description" itemprop="description">多穿女装少踩坑</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbg==" title="GitHub → https://github.com/infnan"><i class="github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/rss.xml" title="RSS → /rss.xml"><i class="rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">infNaN</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9tdXNlLnRoZW1lLW5leHQub3Jn">NexT.Muse</span> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : 'https://api.plusnan.me/disqus/' || 'https://disqus.com/api/',
+      apikey    : 'sFepWzyVneUjG9XYJBAD5vGwBDuY2xvmf09d6cXO0aNxDrCPi9ZfjpAQ1B2UZ6Sg',
+      shortname : 'plusnan',
+      url       : "https://plusnan.me/2020/03/21/luanma-2/",
+      identifier: "2020/03/21/luanma-2/",
+      title     : "Web应用中文乱码实验（二）：HTTP Request中文编码测试",
+    });
+  }, window.DisqusJS);
+});
+</script>
+
+</body>
+</html>
