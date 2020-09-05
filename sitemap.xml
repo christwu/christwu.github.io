@@ -2,9 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://plusnan.me/2020/08/16/resume-filtering/</loc>
+    
+    <lastmod>2020-09-05T19:42:38.864Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://plusnan.me/2020/08/29/bad-resume/</loc>
     
-    <lastmod>2020-08-29T08:07:36.445Z</lastmod>
+    <lastmod>2020-09-05T18:52:00.544Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://plusnan.me/2019/06/01/apple-id/</loc>
+    
+    <lastmod>2020-08-30T02:16:01.694Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://plusnan.me/2020/05/01/osu-on-mbp/</loc>
+    
+    <lastmod>2020-08-29T14:21:58.979Z</lastmod>
     
   </url>
   
@@ -30,23 +51,9 @@
   </url>
   
   <url>
-    <loc>https://plusnan.me/2020/04/05/luanma-3/</loc>
-    
-    <lastmod>2020-06-21T06:20:59.278Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://plusnan.me/2019/02/06/java-code-review-4/</loc>
     
     <lastmod>2020-06-21T02:33:56.228Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://plusnan.me/2020/04/06/luanma-3.5/</loc>
-    
-    <lastmod>2020-06-21T02:32:51.312Z</lastmod>
     
   </url>
   
@@ -68,13 +75,6 @@
     <loc>https://plusnan.me/2019/11/25/activex-helper/</loc>
     
     <lastmod>2020-06-19T00:34:13.012Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://plusnan.me/2020/05/01/osu-on-mbp/</loc>
-    
-    <lastmod>2020-06-17T13:09:06.382Z</lastmod>
     
   </url>
   
@@ -201,13 +201,6 @@
     <loc>https://plusnan.me/2018/07/14/cross-company-debug/</loc>
     
     <lastmod>2020-04-21T13:12:37.722Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://plusnan.me/2019/06/01/apple-id/</loc>
-    
-    <lastmod>2020-03-02T13:54:46.086Z</lastmod>
     
   </url>
   
