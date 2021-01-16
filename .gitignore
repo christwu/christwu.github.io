@@ -7,4 +7,6 @@ public/
 .deploy*/
 source/_drafts/
 
+.history/
+
 _config.tmp.yml

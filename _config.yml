@@ -32,7 +32,8 @@ skip_render:
 new_post_name: :year-:month-:day-:title.md # File name of new posts
 default_layout: post
 titlecase: false # Transform title into titlecase
-external_link: true # Open external links in new tab
+external_link: 
+  enable: true # Open external links in new tab
 filename_case: 0
 render_drafts: false
 post_asset_folder: false
@@ -98,34 +99,6 @@ archive_generator:
   monthly: false
   daily: false
 
-html_minifier:
-  enable: true
-  collapseWhitespace: true
-  removeEmptyAttributes: false
-  ignoreCustomComments: 
-    - '!!js/regexp /^\s*more/'
-  exclude: 
-    - '**/themes/**/*.swig'
-    - '**/source/**/*.md'
-js_minifier:
-  enable: true
-  mangle: true
-  exclude: 
-    - '*.min.js'
-    - '**/themes/**/*'
-css_minifier:
-  enable: true
-  exclude: 
-    - '*.min.css'
-    - '**/themes/**/*'
-image_minifier: 
-  enable: true
-  interlaced: false
-  multipass: false
-  optimizationLevel: 2
-  pngquant: false
-  progressive: false
-
 #disqus_proxy:
 #  shortname: christ-wu-blog
 #  username: proxy
@@ -151,12 +124,23 @@ theme_config:
 
   darkmode: true
 
+  gitalk:
+    enable: true
+    github_id: infnan
+    repo: infnan.github.io
+    client_id: 67600d122bef1671bee9
+    client_secret: e61cb1649d584b128b694aacd0e860ea9f41ed3c
+    admin_user: infnan
+    distraction_free_mode: true
+    language: zh-CN
+    labels: Gitalk
+
   #disqus:
   #  enable: true
   #  shortname: plusnan
   #  count: true
   disqusjs:
-    enable: true
+    enable: false
     # API Endpoint of Disqus API (https://disqus.com/api/)
     # leave api empty if you are able to connect to Disqus API
     # otherwise you need a reverse proxy for Disqus API
@@ -207,7 +191,6 @@ theme_config:
       show_result: true
 
   exturl: true
-  baidu_push: true
   font:
     enable: false
   note:
@@ -219,13 +202,6 @@ theme_config:
   custom_file_path:
     variable: source/_data/variables.styl
     style: source/_data/styles.styl
-
-  math:
-    enable: true
-    per_page: true
-    engine: mathjax
-    mathjax:
-      cdn: //cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML
 
   google_analytics: 
     tracking_id: UA-134391990-1
