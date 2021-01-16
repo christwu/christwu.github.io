@@ -203,7 +203,7 @@ function readCardNew() {
         $('#readCardButton').prop('disabled', false);
     } else {
         $.ajax({
-            url: 'http://127.0.0.1:12345/idcard/check',
+            url: 'http://localhost:12345/idcard/check',
             dataType: 'jsonp',
             timeout: 500,
             cache: false,
@@ -213,7 +213,7 @@ function readCardNew() {
                     $('#readCardButton').prop('disabled', false);
                 } else {
                     $.ajax({
-                        url: 'http://127.0.0.1:12345/idcard/read',
+                        url: 'http://localhost:12345/idcard/read',
                         dataType: 'jsonp',
                         cache: false,
                         success: function (data2) {
@@ -251,7 +251,7 @@ function readCardNew() {
 ## 关于HTTPS
 在决定开发之前，还需要特别留意一个问题：业务系统若进行HTTPS改造，“小助手”将完全失效，因为浏览器会拒绝HTTPS网站访问HTTP网站。这是浏览器的安全特性，JavaScript脚本无法干预此行为。
 
-一种解决思路是为“localhost”签发自签名证书，让“小助手”也使用HTTPS服务，并要求用户将该证书添加到系统信任中（注意Firefox有自己的证书库，因此Firefox要单独安装）。
+这样的话，需要为“localhost”签发（自签名）证书，让“小助手”也使用HTTPS服务，并要求用户（或通过安装程序自动地）将该证书添加到系统信任中。注意，除了操作系统证书库，Firefox也有自己的证书库，因此Firefox浏览器要另外添加信任。
 
 # 进一步思考
 从上面代码可以看出，控件读取的身份证号是明文，用户可通过浏览器控制台等途径篡改数据，带来安全隐患，而且这个漏洞无法在前端与控件层面补救。但是，如果全面改用“小助手”，便可在“小助手”一端“动手脚”，用可逆算法加密身份证信息，传到服务器之后才进行解密，从而防止用户在浏览器非法录入信息或篡改数据。

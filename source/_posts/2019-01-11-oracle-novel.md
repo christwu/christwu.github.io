@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 通过数据库“阅读器”在上班时间看小说
-category: 闲谈
+category: 工作日记
 tags:
 - Oracle
 - MySQL
