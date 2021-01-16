@@ -361,27 +361,6 @@
 
   
   <url>
-    <loc>https://plusnan.me/tags/Oracle/</loc>
-    <lastmod>2021-01-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://plusnan.me/tags/%E4%B9%B1%E7%A0%81/</loc>
-    <lastmod>2021-01-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://plusnan.me/tags/%E6%8B%9B%E8%81%98/</loc>
-    <lastmod>2021-01-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://plusnan.me/tags/Web/</loc>
     <lastmod>2021-01-16</lastmod>
     <changefreq>daily</changefreq>
@@ -459,13 +438,6 @@
   </url>
   
   <url>
-    <loc>https://plusnan.me/tags/awk/</loc>
-    <lastmod>2021-01-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://plusnan.me/tags/Phabricator/</loc>
     <lastmod>2021-01-16</lastmod>
     <changefreq>daily</changefreq>
@@ -480,6 +452,13 @@
   </url>
   
   <url>
+    <loc>https://plusnan.me/tags/awk/</loc>
+    <lastmod>2021-01-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://plusnan.me/tags/%E7%88%AC%E8%99%AB/</loc>
     <lastmod>2021-01-16</lastmod>
     <changefreq>daily</changefreq>
@@ -488,6 +467,13 @@
   
   <url>
     <loc>https://plusnan.me/tags/Puppeteer/</loc>
+    <lastmod>2021-01-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://plusnan.me/tags/Oracle/</loc>
     <lastmod>2021-01-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -585,6 +571,13 @@
   </url>
   
   <url>
+    <loc>https://plusnan.me/tags/%E4%B9%B1%E7%A0%81/</loc>
+    <lastmod>2021-01-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://plusnan.me/tags/wine/</loc>
     <lastmod>2021-01-16</lastmod>
     <changefreq>daily</changefreq>
@@ -593,6 +586,13 @@
   
   <url>
     <loc>https://plusnan.me/tags/osu/</loc>
+    <lastmod>2021-01-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://plusnan.me/tags/%E6%8B%9B%E8%81%98/</loc>
     <lastmod>2021-01-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -643,7 +643,7 @@
 
   
   <url>
-    <loc>https://plusnan.me/categories/%E9%97%B2%E8%B0%88/</loc>
+    <loc>https://plusnan.me/categories/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E7%BB%8F%E9%AA%8C/</loc>
     <lastmod>2021-01-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -671,7 +671,7 @@
   </url>
   
   <url>
-    <loc>https://plusnan.me/categories/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E7%BB%8F%E9%AA%8C/</loc>
+    <loc>https://plusnan.me/categories/%E9%97%B2%E8%B0%88/</loc>
     <lastmod>2021-01-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
