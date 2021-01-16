@@ -99,6 +99,34 @@ archive_generator:
   monthly: false
   daily: false
 
+html_minifier:
+  enable: true
+  collapseWhitespace: true
+  removeEmptyAttributes: false
+  ignoreCustomComments: 
+    - !!js/regexp /^\s*more/
+  exclude: 
+    - '**/themes/**/*.swig'
+    - '**/source/**/*.md'
+js_minifier:
+  enable: true
+  mangle: true
+  exclude: 
+    - '*.min.js'
+    - '**/themes/**/*'
+css_minifier:
+  enable: true
+  exclude: 
+    - '*.min.css'
+    - '**/themes/**/*'
+image_minifier: 
+  enable: true
+  interlaced: false
+  multipass: false
+  optimizationLevel: 2
+  pngquant: false
+  progressive: false
+
 #disqus_proxy:
 #  shortname: christ-wu-blog
 #  username: proxy
