@@ -1250,7 +1250,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #cca263;
+  background: #ac60fa;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2474,4 +2474,7 @@ article.post div.post-body span.exturl:hover {
   content: "#### ";
   color: #ccc;
   opacity: 0.75;
+}
+span[lang="ja"] {
+  font-family: "Lucida", "Meiryo", sans-serif;
 }
